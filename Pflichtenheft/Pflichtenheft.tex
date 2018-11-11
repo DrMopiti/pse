@@ -8,6 +8,7 @@ pdftitle={PSE Pflichtenheft}, %
 bookmarks=true,%
 }
 \usepackage{csquotes} % provides \enquote{} macro for "quotes"
+\usepackage{enumitem}
 
 
 \title{PSE Pflichtenheft}
@@ -27,7 +28,27 @@ bookmarks=true,%
 \section{Funktionelle Anforderungen}
 \subsection{Client}
 \subsection{Server}
+
 \section{Produktdaten}
+
+\subsection{Userdaten}
+\begin{description}
+	
+\item[PD1010] Von jedem Nutzer ist ein eindeutiger Nutzername zu speichern.
+\item[PD1020] Zusätzlich kann von jedem Nutzer die Email-Adresse, ein Passwort 	und weitere Daten von Authentifikations Providern gespeichert werden.
+\item [PD1030] Für jeden Nutzer werden Statistiken über Siege/Niederlagen gespeichert.
+
+\end{description}
+
+\subsection{Spieldaten}
+\begin{description}
+	
+\item[PD2010] Für jedes Spiel werden die Nutzernamen der beiden Spieler gespeichert.
+\item[PD2020] Der Spielverlauf wird eindeutig abgespeichert.
+\item[PD2030] Gegebenenfalls wird die Start Uhrzeit und die Dauer des Spiels gespeichert.
+
+\end{description}
+
 \section{Nichtfunktionale Anforderungen}
 \section{Globale Testfälle}
 \section{Systemmodelle}
