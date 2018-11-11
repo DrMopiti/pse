@@ -77,5 +77,104 @@ bookmarks=true,%
 \end{description}
 \section{Globale Testfälle}
 \section{Systemmodelle}
+\subsection{Szenarien}
+\begin{enumerate}
+ 
+    \item
+	\begin{description}
+	\item[Zustand:] Die App ist geschlossen.
+	\item[Aktion:] Die App wird erstmalig geöffnet.
+	\item[Reaktion:] Es erscheint ein Fenster zur Eingabe eines Spielernamens.  \\	
+	\end{description}
+	
+	\item
+	\begin{description}
+	\item[Zustand:] Die App ist geschlossen.
+	\item[Aktion:] Die App wird zum wiederholten Mal geöffnet.
+	\item[Reaktion:] Es erscheint das Hauptmenü und der Benutzer ist unter seinem Spielernamen eingeloggt. \\
+	\end{description}
+	
+	\item
+	\begin{description}
+	\item[Zustand:] Die App befindet sich im Hauptmenü.
+	\item[Aktion:] Der Benutzer klickt auf den Button Statistiken.
+	\item[Reaktion:] Es öffnet sich eine Accountübersicht mit allen gespeicherten Statistiken.  \\
+	\end{description}
+	
+	\item
+	\begin{description}
+	\item[Zustand:] Die App befindet sich im Hauptmenü.
+	\item[Aktion:] Der Benutzer klickt auf den Button Spiel suchen.
+	\item[Reaktion:] Der Benutzer kommt in eine Warteschlange für suchende Spieler.  \\
+	\end{description}
+	
+	\item
+	\begin{description}
+	\item[Zustand:] Die App befindet sich im Hauptmenü.
+	\item[Aktion:] Der Benutzer klickt auf den Button Spieler suchen.
+	\item[Reaktion:] Es erscheint eine Spielerübersicht mit Suchmöglichkeit.  \\
+	\end{description}
+	
+	\item
+	\begin{description}
+	\item[Zustand:] Die App befindet sich im Hauptmenü.
+	\item[Aktion:] Der Benutzer klickt auf den Button Rangliste.
+	\item[Reaktion:] Die Top 10 Spieler werden nach Elozahl sortiert aufgelistet.  \\
+	\end{description}
+	
+	\item
+	\begin{description}
+	\item[Zustand:] Die App befindet sich im Spielersuchmenü.
+	\item[Aktion:] Der Benutzer klickt auf einen anderen Spieler.
+	\item[Reaktion:] Es erscheint eine Accountübersicht des Spielers mit Möglichkeit zur Herausforderung.  \\
+	\end{description}
+	
+	\item 
+	\begin{description}
+	\item[Zustand:] Ein Spiel ist am laufen.
+	\item[Aktion:] Der Benutzer klickt auf eine eigene Figur.
+	\item[Reaktion:] Es werden alle möglichen Zugfelder markiert.  \\
+	\end{description}
+	
+	\item
+	\begin{description}
+	\item[Zustand:] Eine Figur wurde angeklickt.
+	\item[Aktion:] Der Benutzer klickt auf ein markiertes Feld.
+	\item[Reaktion:] Die Figur wird gezogen und die Daten an den Server gesendet.  \\
+	\end{description}
+	
+	\item
+	\begin{description}
+	\item[Zustand:] Ein Spiel ist am laufen.
+	\item[Aktion:] Es wird ein Zug ausgeführt, welcher einen Spieler Matt oder Patt setzt.
+	\item[Reaktion:] Es erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert, das Spiel wird beendet und abgespeichert.  \\
+	\end{description}
+	
+	\item
+	\begin{description}
+	\item[Zustand:] Ein Spiel ist am laufen.
+	\item[Aktion:] Ein Spieler klickt auf Aufgeben.
+	\item[Reaktion:] Es erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert, das Spiel wird beendet und abgespeichert.  \\
+	\end{description}
+	
+	\item
+	\begin{description}
+	\item[Zustand:] Ein Spiel ist am laufen.
+	\item[Aktion:] Ein Spieler bietet Remis an.
+	\item[Reaktion:] Der andere Spieler erhält eine Benachrichtigung mit Auswahlmöglichkeit.  \\
+	\end{description}
+	
+	\item
+	\begin{description}
+	\item[Zustand:] Remis wurde angeboten.
+	\item[Aktion:] Der Spieler klickt auf Annehmen.
+	\item[Reaktion:] Es erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert, das Spiel wird beendet und abgespeichert.  \\
+	\end{description}
+	
+	
+	
+	
+\end{enumerate}
+\subsection{Anwendungsfälle}
 
 \end{document}
