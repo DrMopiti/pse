@@ -43,9 +43,61 @@ bookmarks=true,%
 		\item Eine App für Mobilgeräte mit Android Betriebssystem.
 		\item Ein Server zur Verwaltung von Partien und Spielsuche.		
 	\end{description}
-\section{Funktionelle Anforderungen}
-\subsection{Client}
-\subsection{Server}
+	\section{Funktionelle Anforderungen}
+\subsection{Benutzerfunktionen}
+\begin{description}
+	\item[F1010] \textbf{\textit{Registrieren: }} Ein beliebiger Android benutzer kann sich über die Start Seite des Applications registrieren lassen. Für die Registrierung im System sind folgende Angaben erforderlich: 
+	\begin{itemize}
+		\item eindeutige Benutzername
+		\item gewünschte Passwort(muss mindestens 5 zeichen haben und davon 1 sonderzeichen)
+		\item eigene eMail-Adresse
+	\end{itemize}
+	Der Registriervorgang wird nur dann erfolgreich abgeschlossen falls eMail-Adresse und der Benutzername im System jeweils eindeutig sind. Nach der erfolgreichen Registriervorgang bekommt der Benutzer per eMail seine Benutzername und Passwort.
+	\item[F1020] \textbf{\textit{Anmelden: }} Nur nach dem bereits erfolgreichem Registrieren kann sich der Benutzer über die Start Seite anmelden. Dafür braucht der Nutzer:
+	\begin{itemize}
+		\item sein Benutzername
+		\item sein Passwort
+	\end{itemize}  
+	\item[F1030] \textbf{\textit{Abmelden: }} Der Benutzer, der bereits angemeldet ist, kann sich wieder vom System abmelden.
+	\item[F1040] \textbf{\textit{Gast: }} Der Benutzer, der sich nicht anmelden würde kann als Gastspieler den Spiel beitreten. Dafür muss er über die Start Seite Gast Knopfe drücken. Dann bekommt er vom System einen eindeutigen Benutzername. % muss noch füllen
+	\item[F1050] \textbf{\textit{Passwort anfordern: }} Falls der registrierte Benutzer sein Passwort oder Benutzername vergessen hat ,so kann er die über die Start Seite anfordern. Dafür muss er in entsprechendem Feld seine eMail Adresse angeben. Dann bekommt er seiner Benutzername und seine Passwort per eMail automatisch zugeschickt.
+	\item[F1060] \textbf{\textit{Passwort ändern: }}
+	Der angemeldete Benutzer kann sein Passwort ändern. Dafür muss er sein aktuelles Passwort angeben und dann zweimal das neue Passwort, wobei sich diese Angaben nicht unterscheiden dürfen. Nach erfolgreiche Änderung des Passworts bekommt der Benutzer sein neues Pass per eMail.
+	
+	
+\end{description}
+
+
+
+\subsection{Initialisierung}
+\begin{description}
+	\item[F2010] Der Benutzer kann neue Spiele erzeugen ohne dabei einen anderen Spieler als Gegner angeben zu müssen. Ein anderen Spieler kann von diesem Spieler erzeugte Spiel unter dem Menüpunkt \textbf{Spiele} annehmen.
+	\item[F2020] \textbf{\textit{Aufnahme eines Spieles: }} Der Benutzer kann schon eröffnete Spiele aufnehmen.
+	\item[F2030] \textbf{\textit{Herausforderung: }} Der Benutzer kann unter Angabe eines gültigen Benutzernamens einen anderen Benutzer zum Spiel herausfordern oder nach dem ein Spiel zu Ende gekommen ist, können beide Spielern den anderen Spieler wieder auf dem Selben Bildschirm herausfordern.
+	\item [F2040] \textbf{\textit{Akzeptieren einer Herausforderung: }} Der Benutzer kann Herausforderung zum Spiel \textbf{F0130} annehmen.
+	\item [F2050] \textbf{\textit{Ablehnung einer Herausforderung: }} Der Benutzer kann Herausforderung zum Spiel \textbf{F0130} ablehnen.
+	\item [F2060] \textbf{\textit{Statistiken: }} Jeder Benutzer, der im System angemeldet ist kann sich seine Statistiken :
+	\begin{itemize}
+		\item Wie viele Spiele gespielt wurden
+		\item Wie viele mal gewonnen wurde
+		\item Wie viele mal verloren wurde
+		\item Wie viele Spiele Unentschieden geblieben sind
+	\end{itemize}
+	\item[F2070] \textbf{\textit{Freundschaftsanfragen senden: }}
+	Ein bereits angemeldete Benutzer kann Freundschaftsanfragen senden indem er nur den Benutzername der jeweiligen Person angeben muss.
+	\item[F2080] \textbf{\textit{Freundschaftsanfrage annehmen }} Ein bereits angemeldete Benutzer kann Freundschaftsanfragen annehmen.
+	\item[F2090] \textbf{\textit{Freundschaftsanfrage ablehnen }} Ein bereits angemeldete Benutzer kann Freundschaftsanfragen ablehnen.
+	
+\end{description}
+
+\subsection{Spielverlauf} 
+\begin{description}
+	\item[F3010]\textbf{\textit{Bewegungsmöglichkeiten: }}Der Benutzer kann während des Spiels falls er dran ist, einen Zug seiner Wahl unter Beibehaltung der Schach Spielregeln ziehen.
+	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Der Benutzer, der gerade am Zug ist, kann gemäß der Spielregeln Unentschieden bieten.
+	\item[F3030] \textbf{\textit{Unentschieden annehmen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F0220}, das Angebot akzeptieren.
+	\item[F3040] \textbf{\textit{Unentschieden ablehnen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F0220}, das Angebot ablehnen.
+	\item[F3050]\textbf{\textit{Nachrichtenaustausch: }} Die Benutzer können dazwischen Nachrichten austauschen.
+\end{description}
 
 \section{Produktdaten}
 
@@ -75,7 +127,30 @@ bookmarks=true,%
 	\item[NF30] Die Übermittlung einzelner Züge darf nicht länger als 2 Sekunden dauern.
 	
 \end{description}
-\section{Globale Testfälle}
+	\section{Globale Testfälle}
+\begin{description}
+	\item[T1010] Ein Android Nutzer laden die Applikation und registriert sich im System \textbf{F1010}
+	\item[T1020] Ein bereits registrierter Nutzer meldet sich mit seinen Benutzernamen und seiner Passwort in der Applikation an \textbf{F1020}
+	\item[T1030] Ein bereits registrierter Nutzer meldet sich vom System ab \textbf{F1030}
+	\item[T1040] Ein Gastspieler bekommt vom System einen eindeutigen Benutzername \textbf{F1040}
+	\item[T1050] Ein bereits registrierter Benutzer fordert seine Passwort \textbf{F1050}
+	\item[T1060] Ein bereits registrierter Benutzer ändert seine Passwort \textbf{F1060}
+	\item[T2010] Benutzer erzeugt einen neuen Spiel \textbf{F2010}
+	\item[T2020] Benutzer nimmt schon eröffnet Spiel auf \textbf{F2020}
+	\item[T2030] Benutzer fordert unter Angabe eines gültigen Benutzernamens einen anderen Benutzer auf \textbf{F2030}
+	\item[T2040] Benutzer nimmt die Herausforderung an \textbf{F2040}
+	\item[T2050] Benutzer lehnt die Herausforderung ab \textbf{F2050}
+	\item[T2060] Benutzer guckt seine Statistiken an \textbf{F2060}
+	\item[T2070] Benutzer sendet eine Freundschaftsanfrage \textbf{F2070}
+	\item[T2080] Benutzer akzeptiert die Freundschaftsanfrage \textbf{F2080}
+	\item[T2090] Benutzer lehnt die Freundschaftsanfrage ab \textbf{F2090}
+	\item[T3010] Benutzer macht irgendeinen Zug seiner Wahl, wobei die Schachregeln beibehalten werden müssen \textbf{F3010}
+	\item[T3020] Benutzer bietet einen Remis an, vorausgesetzt er am Zug ist \textbf{F3020}
+	\item[T3030] Benutzer akzeptiert Remis \textbf{F3030}
+	\item[T3040] Benutzer lehnt Remis ab \textbf{F3040}
+	\item[T3050] Benutzer tauschen Nachrichten aus \textbf{F3050}
+	
+\end{description}
 \section{Systemmodelle}
 \subsection{Szenarien}
 \begin{enumerate}
