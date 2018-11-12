@@ -21,7 +21,7 @@ bookmarks=true,%
 	\end{titlepage}
 \section{Einleitung}
 \section{Zielbestimmung}
-Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen gegeneinader Schach spielen können. Spieler sollen durch eine Spierlersuche andere Gegener finden und können sich in einer Ranliste vergleichen. 
+Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen gegeneinander Schach spielen können. Spieler sollen durch eine Spierlersuche andere Gegener finden und können sich in einer Rangliste vergleichen. 
 \subsection{Musskriterien}
 \begin{itemize}[nosep]
 \item Alle Spieleregeln müssen implementiert werden.
@@ -159,20 +159,20 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 	\item[T1040] Ein Gastspieler bekommt vom System einen eindeutigen Benutzername \textbf{F1040}
 	\item[T1050] Ein bereits registrierter Benutzer fordert seine Passwort \textbf{F1050}
 	\item[T1060] Ein bereits registrierter Benutzer ändert seine Passwort \textbf{F1060}
-	\item[T2010] Benutzer erzeugt einen neuen Spiel \textbf{F2010}
-	\item[T2020] Benutzer nimmt schon eröffnet Spiel auf \textbf{F2020}
-	\item[T2030] Benutzer fordert unter Angabe eines gültigen Benutzernamens einen anderen Benutzer auf \textbf{F2030}
-	\item[T2040] Benutzer nimmt die Herausforderung an \textbf{F2040}
-	\item[T2050] Benutzer lehnt die Herausforderung ab \textbf{F2050}
-	\item[T2060] Benutzer guckt seine Statistiken an \textbf{F2060}
-	\item[T2070] Benutzer sendet eine Freundschaftsanfrage \textbf{F2070}
-	\item[T2080] Benutzer akzeptiert die Freundschaftsanfrage \textbf{F2080}
-	\item[T2090] Benutzer lehnt die Freundschaftsanfrage ab \textbf{F2090}
-	\item[T3010] Benutzer macht irgendeinen Zug seiner Wahl, wobei die Schachregeln beibehalten werden müssen \textbf{F3010}
-	\item[T3020] Benutzer bietet einen Remis an, vorausgesetzt er am Zug ist \textbf{F3020}
-	\item[T3030] Benutzer akzeptiert Remis \textbf{F3030}
-	\item[T3040] Benutzer lehnt Remis ab \textbf{F3040}
-	\item[T3050] Benutzer tauschen Nachrichten aus \textbf{F3050}
+	\item[T2010] Der Benutzer erzeugt ein neues Spiel \textbf{F2010}
+	\item[T2020] Der Benutzer führt ein schon eröffnetes Spiel fort \textbf{F2020}
+	\item[T2030] Der Benutzer fordert unter Angabe eines gültigen Benutzernamens einen anderen Benutzer heraus \textbf{F2030}
+	\item[T2040] Der Benutzer nimmt die Herausforderung an \textbf{F2040}
+	\item[T2050] Der Benutzer lehnt die Herausforderung ab \textbf{F2050}
+	\item[T2060] Der Benutzer schaut seine Statistiken an \textbf{F2060}
+	\item[T2070] Der Benutzer sendet eine Freundschaftsanfrage \textbf{F2070}
+	\item[T2080] Der Benutzer akzeptiert die Freundschaftsanfrage \textbf{F2080}
+	\item[T2090] Der Benutzer lehnt die Freundschaftsanfrage ab \textbf{F2090}
+	\item[T3010] Der Benutzer macht irgendeinen Zug seiner Wahl, wobei die Schachregeln eingehalten werden müssen \textbf{F3010}
+	\item[T3020] Der Benutzer bietet ein Remis an, vorausgesetzt er ist am Zug \textbf{F3020}
+	\item[T3030] Der Benutzer akzeptiert ein Remis \textbf{F3030}
+	\item[T3040] Der Benutzer lehnt ein Remis ab \textbf{F3040}
+	\item[T3050] Der Benutzer tauschen Nachrichten aus \textbf{F3050}
 	
 \end{description}
 \section{Systemmodelle}
@@ -196,28 +196,28 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 	\item
 	\begin{description}
 	\item[Zustand:] Die App befindet sich im Hauptmenü.
-	\item[Aktion:] Der Benutzer klickt auf den Button "Statistiken".
+	\item[Aktion:] Der Benutzer klickt auf den Button \glqq Statistiken\grqq.
 	\item[Reaktion:] Es öffnet sich eine Accountübersicht mit allen gespeicherten Statistiken.  \\
 	\end{description}
 	
 	\item
 	\begin{description}
 	\item[Zustand:] Die App befindet sich im Hauptmenü.
-	\item[Aktion:] Der Benutzer klickt auf den Button "Spiel suchen".
+	\item[Aktion:] Der Benutzer klickt auf den Button \glqq Spiel suchen\grqq.
 	\item[Reaktion:] Der Benutzer kommt in eine Warteschlange für suchende Spieler.  \\
 	\end{description}
 	
 	\item
 	\begin{description}
 	\item[Zustand:] Die App befindet sich im Hauptmenü.
-	\item[Aktion:] Der Benutzer klickt auf den Button "Spieler suchen".
+	\item[Aktion:] Der Benutzer klickt auf den Button \glqq Spieler suchen\grqq.
 	\item[Reaktion:] Es erscheint eine Spielerübersicht mit Suchmöglichkeit.  \\
 	\end{description}
 	
 	\item
 	\begin{description}
 	\item[Zustand:] Die App befindet sich im Hauptmenü.
-	\item[Aktion:] Der Benutzer klickt auf den Button "Rangliste".
+	\item[Aktion:] Der Benutzer klickt auf den Button \glqq Rangliste\grqq.
 	\item[Reaktion:] Die Top 10 Spieler werden nach Elozahl sortiert aufgelistet.  \\
 	\end{description}
 	
@@ -260,7 +260,7 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 	\item
 	\begin{description}
 	\item[Zustand:] Ein Spiel ist am laufen.
-	\item[Aktion:] Ein Spieler klickt auf den Button "Aufgeben".
+	\item[Aktion:] Ein Spieler klickt auf den Button \glqq Aufgeben\grqq.
 	\item[Reaktion:] Es erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert, das Spiel wird beendet und abgespeichert.  \\
 	\end{description}
 	
@@ -274,14 +274,14 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 	\item
 	\begin{description}
 	\item[Zustand:] Remis wurde angeboten.
-	\item[Aktion:] Der Spieler klickt auf den Button "Annehmen".
+	\item[Aktion:] Der Spieler klickt auf den Button \glqq Annehmen\grqq.
 	\item[Reaktion:] Es erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert, das Spiel wird beendet und abgespeichert.  \\
 	\end{description}
 	
 	\item
 	\begin{description}
 	\item[Zustand:] Remis wurde angeboten.
-	\item[Aktion:] Der Spieler klickt auf den Button "Ablehnen".
+	\item[Aktion:] Der Spieler klickt auf den Button \glqq Ablehnen\grqq.
 	\item[Reaktion:] Die Benachrichtigung schließt sich, der andere Spieler erhält eine Mitteilung.  \\
 	\end{description}
 	
