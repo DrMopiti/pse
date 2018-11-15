@@ -5,6 +5,7 @@
 \usepackage[german]{babel} % german hyphenation, quotes, etc 
 \usepackage{hyperref} % detailed hyperlink/pdf configuration
 \usepackage{graphicx}
+\usepackage{titlepages}
 \usepackage[toc]{glossaries}
 \hypersetup{ % ‘texdoc hyperref‘ for options 
 pdftitle={PSE Pflichtenheft}, %
@@ -43,19 +44,33 @@ bookmarks=true,%
 	name={Spieler},
 	description={Ein Nutzer der App}
 }
+
+\newglossaryentry{Elo}
+{
+	name={Elo},
+	description={Wertung, die die Spielstärke beschreibt. Siehe https://de.wikipedia.org/wiki/Elo-Zahl}
+}
+
+\newglossaryentry{Schachmatt}
+{
+	name={Schachmatt},
+	description={Der König steht im Schach und es gibt keinen regelkonformen Zug der das Schachgebot aufhebt. https://de.wikipedia.org/wiki/Schachmatt}
+}
 \makeglossaries
 
-\title{PSE Pflichtenheft}
-\author{Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev, Florian Weber}
+\title\large{PSE Pflichtenheft}
+\author\textit{Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev, Florian Weber}
 \begin{document}
 	\begin{titlepage}
-	\maketitle	
+	\maketitle
+	\newpage	
 	\tableofcontents
+	\pagebreak
 	
 	\end{titlepage}
 \section{Einleitung}
 \section{Zielbestimmung}
-Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen gegeneinander Schach spielen können. Spieler sollen durch eine Spierlersuche andere Gegener finden und können sich in einer Rangliste vergleichen. 
+Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen gegeneinander \gls{Schach} spielen können. Spieler sollen durch eine Spielersuche andere Gegner finden und können sich in einer Rangliste vergleichen. 
 \subsection{Musskriterien}
 \begin{itemize}[nosep]
 \item Alle \gls{Schachregeln} müssen implementiert werden.
@@ -70,7 +85,7 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 \item Der \gls{Spieler} kann ein Spiel nach dem beenden speichern.
 \item Der \gls{Spieler} kann eine Bedenkzeit einstellen.
 \item \gls{Spieler} können einen Chat mit dem entsprechenden Gegner führen.
-\item Es soll ein Leaderboard oder ein Elosystem geben.
+\item Es soll ein Leaderboard oder ein \gls{Elo}system geben.
 \item Die Anmeldung kann mit Facebook oder Google getätigt werden.
 \item Es können zwei \gls{Spieler} auf einem Gerät gleichzeitig spielen.
 \item Es soll einen Revanche-Button geben.
@@ -211,6 +226,13 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 \end{description}
 \section{Systemmodelle}
 \subsection{Szenarien}
+Szenario 1:
+Max Mustermann möchte eine Runde Schach in seiner Mittagspause spielen. Er holt sein Smartphone aus der Tasche und klickt auf das Appsymbol.
+Die App öffnet sich und er befindet sich im Hauptmenü. Nun klickt er auf "Spiel suchen" und bekommt die Meldung, dass er nun der Spielsuche hinzugefügt wurde.
+Nach kurzer Zeit bekommt er einen Gegner zugewiesen und die Partie beginnt. Herr Mustermann hat die Farbe Weiß zugewiesen bekommen und sein Gegner Schwarz.
+Max Mustermann macht seinen Zug. Als nächstes zieht sein Gegner. Nun ist er wieder am Zug. Beide ziehen nun immer abwechselnd. Nach 35 Zügen hat Herr Mustermann
+seinen Gegner Schachmatt gesetzt. Die Partie ist somit beendet und Max Mustermann bekommt die Meldung, dass er gewonnen hat.
+\subsection{Anwendungsfälle}
 \begin{enumerate}
  
     \item
