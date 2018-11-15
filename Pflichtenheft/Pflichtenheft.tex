@@ -1,9 +1,11 @@
 \documentclass[parskip=full]{scrartcl}
 \usepackage[utf8]{inputenc} % use utf8 file encoding for TeX sources 
+
 \usepackage[T1]{fontenc} % avoid garbled Unicode text in pdf 
 \usepackage[german]{babel} % german hyphenation, quotes, etc 
 \usepackage{hyperref} % detailed hyperlink/pdf configuration
 \usepackage{graphicx}
+\usepackage[toc]{glossaries}
 \hypersetup{ % ‘texdoc hyperref‘ for options 
 pdftitle={PSE Pflichtenheft}, %
 bookmarks=true,%
@@ -11,6 +13,37 @@ bookmarks=true,%
 \usepackage{csquotes} % provides \enquote{} macro for "quotes"
 \usepackage{enumitem}
 
+\newglossaryentry{Schachregeln}
+{
+	name=Schachregeln,
+	description={Schachregeln die gültige Züge und das Ende des Spiels definieren. Siehe https://de.wikipedia.org/wiki/Schach#Spielregeln für mehr Informationen}
+}
+
+\newglossaryentry{Schach}
+{
+	name=Schach,
+	description={Das Brettspiel Schach}
+}
+
+\newglossaryentry{Schachfiguren}
+{
+	name=Schachfigur,
+	description={Die Spielsteine auf einem Schachbrett}
+	plural=Schachfiguren
+}
+
+\newglossaryentry{Schachbrett}
+{		
+	name=Schachbrett,
+	description={Das Spielbrett. Es ist quadratisch, zweifarbig und besteht aus 64 quadratischen Kacheln. Diese besitzen alle dieselbe Größe und sind in waagrechter und senkrechter Richtung abwechselnd eingefärbt.}
+}
+
+\newglossaryentry{Spieler}
+{
+	name={Spieler},
+	description={Ein Nutzer der App}
+}
+\makeglossaries
 
 \title{PSE Pflichtenheft}
 \author{Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev, Florian Weber}
@@ -25,23 +58,23 @@ bookmarks=true,%
 Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen gegeneinander Schach spielen können. Spieler sollen durch eine Spierlersuche andere Gegener finden und können sich in einer Rangliste vergleichen. 
 \subsection{Musskriterien}
 \begin{itemize}[nosep]
-\item Alle Spieleregeln müssen implementiert werden.
-\item Der Spieler muss gemäß den Spielreglen spielen.
+\item Alle \gls{Schachregeln} müssen implementiert werden.
+\item Der \gls{Spieler} muss gemäß den \gls{Schachregeln} spielen.
 \item Es muss eine Spielersuche geben.
-\item Es muss eine GUI exestieren.
-\item Es müssen die Schachfiguren angetippt und bewegt werden.
+\item Es muss eine GUI existieren.
+\item Es müssen die \glspl{Schachfiguren} angetippt und bewegt werden.
 \end{itemize}
 \subsection{Wunschkritierien}
 \begin{itemize}[nosep]
-\item Es soll einnen Account/Gastzugang geben.
-\item Der Spieler kann ein Spiel nach dem beenden speichern.
-\item Der Spieler kann eine Bedenkzeit einstellen.
-\item Spieler könenn einen Chat mit dem entrpechenden Gegner führen.
+\item Es soll einen Account/Gastzugang geben.
+\item Der \gls{Spieler} kann ein Spiel nach dem beenden speichern.
+\item Der \gls{Spieler} kann eine Bedenkzeit einstellen.
+\item \gls{Spieler} können einen Chat mit dem entsprechenden Gegner führen.
 \item Es soll ein Leaderboard oder ein Elosystem geben.
 \item Die Anmeldung kann mit Facebook oder Google getätigt werden.
-\item Es können zwei Spieler auf einem Gerät gleichzeitig spielen.
+\item Es können zwei \gls{Spieler} auf einem Gerät gleichzeitig spielen.
 \item Es soll einen Revanche-Button geben.
-\item Es soll verschiede Spielvarianten geben.
+\item Es soll verschiedene Spielvarianten geben.
 \end{itemize}
 \subsection{Abgrenzkriterien}
 \begin{itemize}[nosep]
@@ -71,10 +104,10 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 	\section{Funktionelle Anforderungen}
 \subsection{Benutzerfunktionen}
 \begin{description}
-	\item[F1010] \textbf{\textit{Registrieren: }} Ein beliebiger Android benutzer kann sich über die Start Seite des Applications registrieren lassen. Für die Registrierung im System sind folgende Angaben erforderlich: 
+	\item[F1010] \textbf{\textit{Registrieren: }} Ein beliebiger Android Nutzer kann sich über die Start Seite der App registrieren lassen. Für die Registrierung im System sind folgende Angaben erforderlich: 
 	\begin{itemize}
 		\item eindeutige Benutzername
-		\item gewünschte Passwort(muss mindestens 5 zeichen haben und davon 1 sonderzeichen)
+		\item gewünschtes Passwort (muss mindestens 5 Zeichen haben und davon 1 Sonderzeichen)
 		\item eigene eMail-Adresse
 	\end{itemize}
 	Der Registriervorgang wird nur dann erfolgreich abgeschlossen falls eMail-Adresse und der Benutzername im System jeweils eindeutig sind. Nach der erfolgreichen Registriervorgang bekommt der Benutzer per eMail seine Benutzername und Passwort.
