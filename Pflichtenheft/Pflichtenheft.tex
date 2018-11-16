@@ -5,8 +5,8 @@
 \usepackage[german]{babel} % german hyphenation, quotes, etc 
 \usepackage{hyperref} % detailed hyperlink/pdf configuration
 \usepackage{graphicx}
-\usepackage{titlepages}
 \usepackage[toc]{glossaries}
+\usepackage{caption}
 \hypersetup{ % ‘texdoc hyperref‘ for options 
 pdftitle={PSE Pflichtenheft}, %
 bookmarks=true,%
@@ -17,7 +17,7 @@ bookmarks=true,%
 \newglossaryentry{Schachregeln}
 {
 	name=Schachregeln,
-	description={Schachregeln die gültige Züge und das Ende des Spiels definieren. Siehe https://de.wikipedia.org/wiki/Schach#Spielregeln für mehr Informationen}
+	description={Schachregeln die gültige Züge und das Ende des Spiels definieren. https://de.wikipedia.org/wiki/Schach\#Spielregeln }
 }
 
 \newglossaryentry{Schach}
@@ -26,7 +26,7 @@ bookmarks=true,%
 	description={Das Brettspiel Schach}
 }
 
-\newglossaryentry{Schachfiguren}
+\newglossaryentry{Schachfigur}
 {
 	name=Schachfigur,
 	description={Die Spielsteine auf einem Schachbrett}
@@ -42,13 +42,13 @@ bookmarks=true,%
 \newglossaryentry{Spieler}
 {
 	name={Spieler},
-	description={Ein Nutzer der App}
+	description={Ein Nutzer der App.}
 }
 
 \newglossaryentry{Elo}
 {
 	name={Elo},
-	description={Wertung, die die Spielstärke beschreibt. Siehe https://de.wikipedia.org/wiki/Elo-Zahl}
+	description={Wertung, die die Spielstärke beschreibt. https://de.wikipedia.org/wiki/Elo-Zahl}
 }
 
 \newglossaryentry{Schachmatt}
@@ -56,13 +56,18 @@ bookmarks=true,%
 	name={Schachmatt},
 	description={Der König steht im Schach und es gibt keinen regelkonformen Zug der das Schachgebot aufhebt. https://de.wikipedia.org/wiki/Schachmatt}
 }
+\newglossaryentry{Android}
+{
+	name={Android},
+	description={Ein Betriebssystem für mobile Geräte.}
+}
 \makeglossaries
+\title{PSE Pflichtenheft}
+\author{Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev, Florian Weber}
 
-\title\large{PSE Pflichtenheft}
-\author\textit{Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev, Florian Weber}
 \begin{document}
 	\begin{titlepage}
-	\maketitle
+	\maketitle	
 	\newpage	
 	\tableofcontents
 	\pagebreak
@@ -77,7 +82,7 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 \item Der \gls{Spieler} muss gemäß den \gls{Schachregeln} spielen.
 \item Es muss eine Spielersuche geben.
 \item Es muss eine GUI existieren.
-\item Es müssen die \glspl{Schachfiguren} angetippt und bewegt werden.
+\item Es müssen die \glspl{Schachfigur} angetippt und bewegt werden.
 \end{itemize}
 \subsection{Wunschkritierien}
 \begin{itemize}[nosep]
@@ -99,11 +104,11 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 \section{Produkteinsatz}
 	\subsection{Anwendungsbereich}
 		
-			Privatpersonen sollen in der Lage sein mit anderen Personen Schach zu spielen. Die Anwendung soll dies schnell und einfach ermöglichen.	
+			Privatpersonen sollen in der Lage sein mit anderen Personen \gls{Schach} zu spielen. Die Anwendung soll dies schnell und einfach ermöglichen.	
 		
 	\subsection{Zielgruppe}
 		
-			Die Anwendung richtet sich an Personen, die unterwegs eine Partie Schach spielen möchten.
+			Die Anwendung richtet sich an Personen, die unterwegs eine Partie \gls{Schach} spielen möchten.
 		
 	\subsection{Betriebsbedingungen}
 		\begin{description}
@@ -113,13 +118,13 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 		\end{description}
 \section{Produktumgebung}
 	\begin{description}
-		\item Eine App für Mobilgeräte mit Android Betriebssystem.
+		\item Eine App für Mobilgeräte mit \gls{Android} Betriebssystem.
 		\item Ein Server zur Verwaltung von Partien und Spielsuche.		
 	\end{description}
-	\section{Funktionelle Anforderungen}
+\section{Funktionelle Anforderungen}
 \subsection{Benutzerfunktionen}
 \begin{description}
-	\item[F1010] \textbf{\textit{Registrieren: }} Ein beliebiger Android Nutzer kann sich über die Start Seite der App registrieren lassen. Für die Registrierung im System sind folgende Angaben erforderlich: 
+	\item[F1010] \textbf{\textit{Registrieren: }} Ein beliebiger  \gls{Android} Nutzer kann sich über die Start Seite der App registrieren lassen. Für die Registrierung im System sind folgende Angaben erforderlich: 
 	\begin{itemize}
 		\item eindeutige Benutzername
 		\item gewünschtes Passwort (muss mindestens 5 Zeichen haben und davon 1 Sonderzeichen)
@@ -144,7 +149,7 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 
 \subsection{Initialisierung}
 \begin{description}
-	\item[F2010] Der Benutzer kann neue Spiele erzeugen ohne dabei einen anderen Spieler als Gegner angeben zu müssen. Ein anderen Spieler kann von diesem Spieler erzeugte Spiel unter dem Menüpunkt \textbf{Spiele} annehmen.
+	\item[F2010] Der Benutzer kann neue Spiele erzeugen ohne dabei einen anderen \gls{Spieler} als Gegner angeben zu müssen. Ein anderen Spieler kann von diesem Spieler erzeugte Spiel unter dem Menüpunkt \textbf{Spiele} annehmen.
 	\item[F2020] \textbf{\textit{Aufnahme eines Spieles: }} Der Benutzer kann schon eröffnete Spiele aufnehmen.
 	\item[F2030] \textbf{\textit{Herausforderung: }} Der Benutzer kann unter Angabe eines gültigen Benutzernamens einen anderen Benutzer zum Spiel herausfordern oder nach dem ein Spiel zu Ende gekommen ist, können beide Spielern den anderen Spieler wieder auf dem Selben Bildschirm herausfordern.
 	\item [F2040] \textbf{\textit{Akzeptieren einer Herausforderung: }} Der Benutzer kann Herausforderung zum Spiel \textbf{F0130} annehmen.
@@ -200,7 +205,7 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 	\item[NF30] Die Übermittlung einzelner Züge darf nicht länger als 2 Sekunden dauern.
 	
 \end{description}
-	\section{Globale Testfälle}
+\section{Globale Testfälle}
 \begin{description}
 	\item[T1010] Ein Android Nutzer laden die Applikation und registriert sich im System \textbf{F1010}
 	\item[T1020] Ein bereits registrierter Nutzer meldet sich mit seinen Benutzernamen und seiner Passwort in der Applikation an \textbf{F1020}
@@ -229,11 +234,11 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 Szenario 1:
 Max Mustermann möchte eine Runde Schach in seiner Mittagspause spielen. Er holt sein Smartphone aus der Tasche und klickt auf das Appsymbol.
 Die App öffnet sich und er befindet sich im Hauptmenü. Nun klickt er auf "Spiel suchen" und bekommt die Meldung, dass er nun der Spielsuche hinzugefügt wurde.
-Nach kurzer Zeit bekommt er einen Gegner zugewiesen und die Partie beginnt.
+Nach kurzer Zeit bekommt er einen Gegner zugewiesen und die Partie beginnt. Vor ihm erscheint das \gls{Schachbrett} in seiner Ausgangspositon.
 
-Herr Mustermann hat die Farbe Weiß zugewiesen bekommen und sein Gegner Schwarz.
+Herr Mustermann hat die Farbe Weiß zugewiesen bekommen und sein Gegner Schwarz. Er wählt einen Bauern an und bekommt seine möglichen Züge mit dieser \gls{Schachfigur} angezeigt.
 Max Mustermann macht seinen Zug. Als nächstes zieht sein Gegner. Nun ist er wieder am Zug. Beide ziehen nun immer abwechselnd. Nach 35 Zügen hat Herr Mustermann
-seinen Gegner Schachmatt gesetzt. Die Partie ist somit beendet und Max Mustermann bekommt die Meldung, dass er gewonnen hat.
+seinen Gegner \gls{Schachmatt} gesetzt. Die Partie ist somit beendet und Max Mustermann bekommt die Meldung, dass er gewonnen hat.
 \subsection{Anwendungsfälle}
 \begin{enumerate}
  
@@ -303,7 +308,7 @@ seinen Gegner Schachmatt gesetzt. Die Partie ist somit beendet und Max Musterman
 	
 	\item
 	\begin{description}
-	\item[Zustand:] Eine Figur wurde angeklickt.
+	\item[Zustand:] Eine \gls{Schachfigur} wurde angeklickt.
 	\item[Aktion:] Der Benutzer klickt auf ein markiertes Feld.
 	\item[Reaktion:] Die Figur wird gezogen und die Daten an den Server gesendet.  \\
 	\end{description}
@@ -342,21 +347,17 @@ seinen Gegner Schachmatt gesetzt. Die Partie ist somit beendet und Max Musterman
 	\item[Aktion:] Der Spieler klickt auf den Button \glqq Ablehnen\grqq.
 	\item[Reaktion:] Die Benachrichtigung schließt sich, der andere Spieler erhält eine Mitteilung.  \\
 	\end{description}
-	
-	
-	
-	
-\end{enumerate}
-\subsection{Anwendungsfälle}
-\begin{enumerate}
-\item \textbf{Remis anbieten}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.7\linewidth]{Remis}
-	\caption[Remis anbieten]{}
-	\caption{}
-	\label{fig:remis}
-\end{figure}
 
+
+
+\subsection{Anwendungsfalldiagramme} 
+		\begin{minipage}{\linewidth}
+			\centering
+			\includegraphics[width=1\linewidth]{Remis}
+			\label{fig:remis}
+			\captionof{figure}{Remis anbieten}
+		\end{minipage}
 \end{enumerate}
+\section{Glossar}
+\printglossaries
 \end{document}
