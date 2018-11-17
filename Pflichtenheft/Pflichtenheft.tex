@@ -14,6 +14,8 @@ bookmarks=true,%
 \usepackage{csquotes} % provides \enquote{} macro for "quotes"
 \usepackage{enumitem}
 
+\makenoidxglossaries
+
 \newglossaryentry{Schachregeln}
 {
 	name=Schachregeln,
@@ -36,7 +38,20 @@ bookmarks=true,%
 \newglossaryentry{Schachbrett}
 {		
 	name=Schachbrett,
-	description={Das Spielbrett. Es ist quadratisch, zweifarbig und besteht aus 64 quadratischen Kacheln. Diese besitzen alle dieselbe Größe und sind in waagrechter und senkrechter Richtung abwechselnd eingefärbt.}
+	description={Das Spielbrett. Es ist quadratisch, zweifarbig und besteht aus 64 quadratischen Kacheln. Diese besitzen alle dieselbe Größe und sind in waagrechter und senkrechter Richtung abwechselnd eingefärbt.},
+	plural=Schachbretter
+}
+
+\newglossaryentry{Ausgangsposition} 
+{
+	name=Ausgangsposition,
+	description={Vorgeschriebene Startposition aller Spielfiguren zu Beginn jeder Schachpartie}
+}
+
+\newglossaryentry{Remis}
+{
+	name=Remis,
+	description={Der unentschiedene Ausgang einer Schachpartie, entweder durch Einigung beider Spieler oder durch Erreichen einer Stellung oder Zugfolge, welche ein Unentschieden erzwingt.}
 }
 
 \newglossaryentry{Spieler}
@@ -59,9 +74,9 @@ bookmarks=true,%
 \newglossaryentry{Android}
 {
 	name={Android},
-	description={Ein Betriebssystem für mobile Geräte.}
+	description={Ein Betriebssystem für mobile Geräte}
 }
-\makeglossaries
+
 \title{PSE Pflichtenheft}
 \author{Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev, Florian Weber}
 
@@ -231,14 +246,20 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 \end{description}
 \section{Systemmodelle}
 \subsection{Szenarien}
-Szenario 1:
+\underline{\textbf{Szenario 1:}}
 Max Mustermann möchte eine Runde Schach in seiner Mittagspause spielen. Er holt sein Smartphone aus der Tasche und klickt auf das Appsymbol.
-Die App öffnet sich und er befindet sich im Hauptmenü. Nun klickt er auf "Spiel suchen" und bekommt die Meldung, dass er nun der Spielsuche hinzugefügt wurde.
-Nach kurzer Zeit bekommt er einen Gegner zugewiesen und die Partie beginnt. Vor ihm erscheint das \gls{Schachbrett} in seiner Ausgangspositon.
+Die App öffnet sich und er befindet sich im Hauptmenü. Nun klickt er auf \glqq Spiel suchen\grqq und bekommt die Meldung, dass er nun der Spielsuche hinzugefügt wurde.
+Nach kurzer Zeit bekommt er einen Gegner zugewiesen und die Partie beginnt. Vor ihm erscheint das \gls{Schachbrett} in seiner \gls{Ausgangsposition}.
 
 Herr Mustermann hat die Farbe Weiß zugewiesen bekommen und sein Gegner Schwarz. Er wählt einen Bauern an und bekommt seine möglichen Züge mit dieser \gls{Schachfigur} angezeigt.
 Max Mustermann macht seinen Zug. Als nächstes zieht sein Gegner. Nun ist er wieder am Zug. Beide ziehen nun immer abwechselnd. Nach 35 Zügen hat Herr Mustermann
 seinen Gegner \gls{Schachmatt} gesetzt. Die Partie ist somit beendet und Max Mustermann bekommt die Meldung, dass er gewonnen hat.
+
+\underline{\textbf{Szenario 2:}}
+Magnus und Fabiano wollen in ihrer Freizeit gegeneinander Schach spielen, haben aber gerade kein Schachbrett zur Hand. Beide öffnen auf ihren \gls{Android}-Gerät ihre Schachapp, und Magnus klickt auf den Button \glqq Spieler suchen\grqq. Es öffnet sich eine Spielerübersicht mit einer Suchleiste, in welcher er den Spielernamen von Fabiano eingibt. In der Spielerübersicht erscheint Fabianos Profil, welches Magnus anklickt. Daraufhin öffnet sich Fabianos Profilübersicht mit seinen Statistiken. Auf Fabianos Profil betätigt Magnus den Button \glqq Herausfordern\grqq. Fabiano erhält daraufhin eine Mitteilung, dass er von Magnus herausgefordert wurde, und hat die Möglichkeit, diese anzunehmen oder abzulehnen. Er klickt auf \glqq Annehmen\grqq und beiden Spielern öffnet sich ein \gls{Schachbrett} in \gls{Ausgangsposition}.
+
+Magnus erhält die schwarzen Figuren, Fabiano die weißen. Nach 115 Zügen ist die Stellung immer noch ausgeglichen und Fabiano bietet deshalb ein \gls{Remis} an. Magnus erhält eine Benachrichtigung mit der Möglichkeit, das \gls{Remis} anzunehmen oder abzulehnen. Auch er sieht in der Stellung keine Gewinnmöglichkeit und klickt deshalb auf \glqq Akzeptieren\grqq. Das Spiel wird beendet und abgespeichert, beide Spieler erhalten eine Mitteilung und ihre Statistiken werden aktualisiert.
+
 \subsection{Anwendungsfälle}
 \begin{enumerate}
  
@@ -358,6 +379,8 @@ seinen Gegner \gls{Schachmatt} gesetzt. Die Partie ist somit beendet und Max Mus
 			\captionof{figure}{Remis anbieten}
 		\end{minipage}
 \end{enumerate}
-\section{Glossar}
-\printglossaries
+
+\glsaddall 
+\printnoidxglossaries
+
 \end{document}
