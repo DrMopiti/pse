@@ -14,10 +14,13 @@ bookmarks=true,%
 \usepackage{csquotes} % provides \enquote{} macro for "quotes"
 \usepackage{enumitem}
 
+
+
+
 \newglossaryentry{Schachregeln}
 {
 	name=Schachregeln,
-	description={Schachregeln die gültige Züge und das Ende des Spiels definieren. https://de.wikipedia.org/wiki/Schach\#Spielregeln }
+	description={Schachregeln die gültige Züge und das Ende des Spiels definieren. https://de.wikipedia.org/wiki/Schach\#Spielregeln}
 }
 
 \newglossaryentry{Schach}
@@ -29,20 +32,20 @@ bookmarks=true,%
 \newglossaryentry{Schachfigur}
 {
 	name=Schachfigur,
-	description={Die Spielsteine auf einem Schachbrett}
+	description={Die Spielsteine auf einem Schachbrett},
 	plural=Schachfiguren
 }
 
 \newglossaryentry{Schachbrett}
 {		
 	name=Schachbrett,
-	description={Das Spielbrett. Es ist quadratisch, zweifarbig und besteht aus 64 quadratischen Kacheln. Diese besitzen alle dieselbe Größe und sind in waagrechter und senkrechter Richtung abwechselnd eingefärbt.}
+	description={Das Spielbrett. Es ist quadratisch, zweifarbig und besteht aus 64 quadratischen Kacheln. Diese besitzen alle dieselbe Größe und sind in waagrechter und senkrechter Richtung abwechselnd eingefärbt}
 }
 
 \newglossaryentry{Spieler}
 {
 	name={Spieler},
-	description={Ein Nutzer der App.}
+	description={Ein Nutzer der App}
 }
 
 \newglossaryentry{Elo}
@@ -59,15 +62,20 @@ bookmarks=true,%
 \newglossaryentry{Android}
 {
 	name={Android},
-	description={Ein Betriebssystem für mobile Geräte.}
+	description={Ein Betriebssystem für mobile Geräte}
 }
+\newacronym{GUI}{GUI}{Graphical User Interface}
 \makeglossaries
-\title{PSE Pflichtenheft}
-\author{Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev, Florian Weber}
+
 
 \begin{document}
 	\begin{titlepage}
-	\maketitle	
+		\centering
+		\vspace*{0.14\textheight}
+		{\Large PSE}\\[\baselineskip]
+		{\Huge PFLICHTENHEFT}\\[\baselineskip]\par
+		{\LARGE Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev, Florian Weber}\par
+	
 	\newpage	
 	\tableofcontents
 	\pagebreak
@@ -81,7 +89,7 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 \item Alle \gls{Schachregeln} müssen implementiert werden.
 \item Der \gls{Spieler} muss gemäß den \gls{Schachregeln} spielen.
 \item Es muss eine Spielersuche geben.
-\item Es muss eine GUI existieren.
+\item Es muss eine \gls{GUI} existieren.
 \item Es müssen die \glspl{Schachfigur} angetippt und bewegt werden.
 \end{itemize}
 \subsection{Wunschkritierien}
@@ -104,11 +112,11 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 \section{Produkteinsatz}
 	\subsection{Anwendungsbereich}
 		
-			Privatpersonen sollen in der Lage sein mit anderen Personen \gls{Schach} zu spielen. Die Anwendung soll dies schnell und einfach ermöglichen.	
+			Privatpersonen sollen in der Lage sein mit anderen Personen \gls{Schach} zu spielen. Die Anwendung soll dies schnell, einfach und mobil ermöglichen.	
 		
 	\subsection{Zielgruppe}
 		
-			Die Anwendung richtet sich an Personen, die unterwegs eine Partie \gls{Schach} spielen möchten.
+			Die Anwendung richtet sich an Personen mit einem Android Mobiltelefon, die unterwegs eine Partie \gls{Schach} spielen möchten.
 		
 	\subsection{Betriebsbedingungen}
 		\begin{description}
@@ -118,7 +126,7 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 		\end{description}
 \section{Produktumgebung}
 	\begin{description}
-		\item Eine App für Mobilgeräte mit \gls{Android} Betriebssystem.
+		\item Eine App für Mobilgeräte mit \gls{Android} Betriebssystem ab Version 4.4.
 		\item Ein Server zur Verwaltung von Partien und Spielsuche.		
 	\end{description}
 \section{Funktionelle Anforderungen}
@@ -244,14 +252,14 @@ seinen Gegner \gls{Schachmatt} gesetzt. Die Partie ist somit beendet und Max Mus
  
     \item
 	\begin{description}
-	\item[Zustand:] Die App ist geschlossen.
+	\item[Zustand:] Die App ist geschlossen und beendet.
 	\item[Aktion:] Die App wird erstmalig geöffnet.
 	\item[Reaktion:] Es erscheint ein Fenster zur Eingabe eines Spielernamens.  \\	
 	\end{description}
 	
 	\item
 	\begin{description}
-	\item[Zustand:] Die App ist geschlossen.
+	\item[Zustand:] Die App ist geschlossen und beendet.
 	\item[Aktion:] Die App wird zum wiederholten Mal geöffnet.
 	\item[Reaktion:] Es erscheint das Hauptmenü und der Benutzer ist unter seinem Spielernamen eingeloggt. \\
 	\end{description}
@@ -293,14 +301,14 @@ seinen Gegner \gls{Schachmatt} gesetzt. Die Partie ist somit beendet und Max Mus
 	
 	\item 
 	\begin{description}
-	\item[Zustand:] Ein Spiel ist am laufen.
+	\item[Zustand:] Ein Spiel ist am laufen und der Nutzer ist am Zug.
 	\item[Aktion:] Der Benutzer klickt auf eine eigene Figur.
 	\item[Reaktion:] Es werden alle möglichen Zugfelder markiert.  \\
 	\end{description}
 	
 	\item 
 	\begin{description}
-	\item[Zustand:] Ein Spiel ist am laufen.
+	\item[Zustand:] Ein Spiel ist am laufen und der Nutzer ist am Zug.
 	\item[Aktion:] Der Benutzer klickt auf eine gegnerische Figur oder ein leeres Feld.
 	\item[Reaktion:] Nichts passiert.  \\
 	\end{description}
