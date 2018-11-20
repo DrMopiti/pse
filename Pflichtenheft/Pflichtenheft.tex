@@ -17,7 +17,7 @@ bookmarks=true,%
 
 
 
-
+\makenoidxglossaries
 \newglossaryentry{Schachregeln}
 {
 	name=Schachregeln,
@@ -79,7 +79,7 @@ bookmarks=true,%
 	description={Ein Betriebssystem für mobile Geräte}
 }
 \newacronym{GUI}{GUI}{Graphical User Interface}
-\makeglossaries
+
 
 
 \begin{document}
@@ -204,22 +204,89 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 
 \section{Produktdaten}
 
-\subsection{Userdaten}
+\subsection{System-Daten auf mobilen Geräten}
 \begin{description}
 	
-\item[PD1010] Von jedem Nutzer ist ein eindeutiger Nutzername zu speichern.
-\item[PD1020] Zusätzlich kann von jedem Nutzer die Email-Adresse, ein Passwort 	und weitere Daten von Authentifikations Providern gespeichert werden.
-\item [PD1030] Für jeden Nutzer werden Statistiken über Siege/Niederlagen gespeichert.
+	\item[PD1010] Die Einstellungen
+	\begin{description}
+	\item Die Einstellungen beinhalten:
+		
+
+	\begin{itemize}
+		\item Benutzername
+		\item Verbindungsdaten vom Server
+		\item Sonstige Einstellungen
+	\end{itemize}
+\end{description}
+	
+	
+%\item[PD1010] Von jedem Nutzer ist ein eindeutiger Nutzername zu speichern.
+%\item[PD1020] Zusätzlich kann von jedem Nutzer die Email-Adresse, ein Passwort 	%und weitere Daten von Authentifikations Providern gespeichert werden.
+%\item [PD1030] Für jeden Nutzer werden Statistiken über Siege/Niederlagen %gespeichert.
+%
 
 \end{description}
 
-\subsection{Spieldaten}
+
+
 \begin{description}
 	
-\item[PD2010] Für jedes Spiel werden die Nutzernamen der beiden Spieler gespeichert.
-\item[PD2020] Der Spielverlauf wird eindeutig abgespeichert.
-\item[PD2030] Gegebenenfalls wird die Start Uhrzeit und die Dauer des Spiels gespeichert.
+	\item[PD1020] Spieldaten von der aktuell laufender Partie
+		\begin{description}
+	\item Zu den Spieldaten gehört:
+		\begin{itemize}
+		\item Partiekennung
+		\item Aktuelle Zustand vom Schachbrett	
+	\end{itemize}
 
+	
+	\end{description}	
+\end{description}
+
+
+\subsection{System-Daten auf zentralem Server}
+\begin{description}
+	
+\item[PD2010] Server-Einstellungen
+\item[PD2020] Partie-Informationen
+\begin{description} 
+	\item Für jede Partie wird folgendes gespeichert:
+	\begin{itemize}
+		\item Partiekennung
+		\item Benutzername beider Spieler
+		\item Aktueller Zustand des Schachbrettes
+		\item Alle bisherigen Züge
+	\end{itemize}
+
+\end{description}
+\end{description}
+
+\subsection{Benutzer-Daten auf mobilen Geräten}
+\begin{description}
+\item[PD3010]  Benutzerinformationen
+\begin{description} 
+	\item Folgende Daten werden über jeden Benutzer gespeichert:
+	\begin{itemize}
+		\item Benutzername
+		\item Eigene Spielstatistiken
+	\end{itemize}
+	
+\end{description}
+\end{description}
+
+\subsection{Benutzer-Daten auf zentralem Server}
+\begin{description}
+	\item[PD4010]  Benutzerinformationen
+	\begin{description} 
+		\item Folgende Daten werden über jeden Benutzer gespeichert:
+		\begin{itemize}
+			\item Benutzername
+			\item eMail-Adresse
+			\item Passwort
+			\item Spielstatistiken
+		\end{itemize}
+		\item Zusätzlich wird eine globales Leaderboard über die besten Spieler gespeichert.
+	\end{description}
 \end{description}
 
 \section{Nichtfunktionale Anforderungen}
@@ -394,6 +461,6 @@ Magnus behauptet, er wäre ein besserer Spieler als Fabiano. Dieser zweifelt das
 \end{enumerate}
 
 \glsaddall 
-\printglossaries
+\printnoidxglossaries
 
 \end{document}
