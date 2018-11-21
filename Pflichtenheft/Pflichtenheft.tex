@@ -106,11 +106,30 @@ bookmarks=true,%
 Es soll eine App angeboten werden mit der Personen gegeneinander \gls{Schach} spielen können. \gls{Spieler} sollen durch eine Spielersuche andere Gegner finden und können sich in einer Rangliste vergleichen. 
 \subsection{Musskriterien}
 \begin{description}
-\item[KM1010] Alle \gls{Schachregeln} müssen implementiert werden.
-\item[KM1020] Der \gls{Spieler} muss gemäß den \gls{Schachregeln} spielen.
-\item[KM1030] Es muss eine Spielersuche geben.
-\item[KM1040] Es muss eine \gls{GUI} existieren.
-\item[KM1050] Es müssen die \glspl{Schachfigur} angetippt und bewegt werden.
+\item[KM1010] \textbf{\gls{Schachregeln}}
+\begin{itemize}
+	Alle Schachregeln sollen implementiert werden.
+	Das Spielende soll definiert sein.	
+\end{itemize}
+\item[KM1020] \textbf{Einhaltung der \gls{Schachregeln}}
+\begin{itemize}
+	\item Der Nutzer soll nur gültige Züge, die den \gls{Schachregeln} entprechen ausführen können.
+\end{itemize}
+\item[KM1030] \textbf{Spielersuche}
+\begin{itemize}
+	\item Es soll dem Spieler möglich sein mit anderen Spielern zu spielen un zwar:
+	\begin{itemize}
+		\item Gegen einen zufälligen Gegner
+		\item Gegen eine bestimmten Spieler, der mithilfe einer Suchfunktion bestimmt wird.
+	\end{itemize}
+\end{itemize}
+\item[KM1040] Es muss ein \gls{GUI} existieren.
+\item[KM1050] \textbf{\glspl{Schachfigur} bewegen}
+\begin{itemize}
+	\item Es muss möglich sein jede seiner Figuren anzutippen und damit auszuwählen.
+	\item Für eine ausgewählte \gls{Schachfigur} müssen mögliche Züge angezeigt werden.
+	\item Es soll nur möglich sein gültige Züge auszuführen.
+\end{itemize}
 \end{description}
 
 \subsection{Wunschkritierien}
