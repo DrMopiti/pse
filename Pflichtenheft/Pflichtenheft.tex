@@ -56,6 +56,12 @@ bookmarks=true,%
 	description={Der unentschiedene Ausgang einer Schachpartie, entweder durch Einigung beider Spieler oder durch Erreichen einer Stellung oder Zugfolge, welche ein Unentschieden erzwingt}
 }
 
+\newglossaryentry{Revanche}
+{
+	name=Revanche,
+	description={Spiel, das dem Verlierer einer vorangegangene Partie die Chance gewährt, die Niederlage wieder wett zu machen, hier auch für den Gewinner möglich}
+}
+
 \newglossaryentry{Spieler}
 {
 	name={Spieler},
@@ -354,12 +360,12 @@ Max Mustermann macht seinen Zug. Als nächstes zieht sein Gegner. Nun ist er wie
 seinen Gegner \gls{Schachmatt} gesetzt. Die Partie ist somit beendet und Max Mustermann bekommt die Meldung, dass er gewonnen hat.
 
 \textbf{Szenario 2: \glqq Spiele gegen einen Freund\grqq} \\
-Magnus und Fabiano wollen in ihrer Freizeit gegeneinander Schach spielen, haben aber gerade kein Schachbrett zur Hand. Beide öffnen auf ihren \gls{Android}-Gerät ihre Schach-App, und Magnus klickt auf den Button \glqq Spieler suchen\grqq. Es öffnet sich eine Spielerübersicht mit einer Suchleiste, in welcher er den Spielernamen von Fabiano eingibt. In der Spielerübersicht erscheint Fabianos Profil, welches Magnus anklickt. Daraufhin öffnet sich Fabianos Profilübersicht mit seinen Statistiken. Auf Fabianos Profil betätigt Magnus den Button \glqq Herausfordern\grqq. Fabiano erhält daraufhin eine Mitteilung, dass er von Magnus herausgefordert wurde, und hat die Möglichkeit, diese anzunehmen oder abzulehnen. Er klickt auf \glqq Annehmen\grqq und beiden Spielern öffnet sich ein \gls{Schachbrett} in \gls{Ausgangsposition}.
+Magnus und Fabiano wollen in ihrer Freizeit gegeneinander Schach spielen, haben aber gerade kein Schachbrett zur Hand. Beide öffnen auf ihren \gls{Android}-Gerät ihre Schach-App, und Magnus klickt auf den Button \glqq Spieler suchen\grqq. Es öffnet sich eine Spielerübersicht mit einer Suchleiste, in welcher er den Spielernamen von Fabiano eingibt. In der Spielerübersicht erscheint Fabianos Profil, welches Magnus anklickt. Daraufhin öffnet sich Fabianos Profilübersicht mit seinen Statistiken. Auf Fabianos Profil betätigt Magnus den Button \glqq Herausfordern\grqq, und es erscheint ein Auswahlfenster. Magnus wählt als Bedenkzeit 2 Stunden und die zufällige Farbenverteilung. Fabiano erhält daraufhin eine Mitteilung, dass er von Magnus zu einem Spiel mit Bedenkzeit 2h herausgefordert wurde, und hat die Möglichkeit, dieses anzunehmen oder abzulehnen. Er klickt auf \glqq Annehmen\grqq und beiden Spielern öffnet sich ein \gls{Schachbrett} in \gls{Ausgangsposition}.
 
-Magnus erhält die schwarzen Figuren, Fabiano die weißen. Nach 115 Zügen ist die Stellung immer noch ausgeglichen und Fabiano bietet deshalb ein \gls{Remis} an. Magnus erhält eine Benachrichtigung mit der Möglichkeit, das \gls{Remis} anzunehmen oder abzulehnen. Auch er sieht in der Stellung keine Gewinnmöglichkeit und klickt deshalb auf \glqq Akzeptieren\grqq. Das Spiel wird beendet und abgespeichert, beide Spieler erhalten eine Mitteilung und ihre Statistiken werden aktualisiert.
+Magnus bekommt die schwarzen Figuren zugeteilt, Fabiano die weißen. Nach 115 Zügen ist die Stellung immer noch ausgeglichen und Fabiano klickt auf \glqq Remis anbieten\grqq. Magnus erhält eine Benachrichtigung mit der Möglichkeit, das \gls{Remis} anzunehmen oder abzulehnen. Auch er sieht in der Stellung keine Gewinnmöglichkeit und klickt deshalb auf \glqq Akzeptieren\grqq. Das Spiel wird beendet und die Statistiken beider Spieler werden aktualisiert. Beide Spieler erhalten eine Mitteilung mit der Möglichkeit, eine \gls{Revanche} zu fordern und das Spiel abzuspeichern. Da Magnus das Spiel gerne noch einmal ansehen möchte, klickt er auf \glqq Spiel speichern\grqq und erhält eine Textdatei mit der Notation der Partie auf sein \gls{Smartphone}.
 
 \textbf{Szenario 3: \glqq Statistiken einsehen\grqq} \\
-Magnus behauptet, er wäre ein besserer Spieler als Fabiano. Dieser zweifelt das an, und bittet Magnus, dessen Statistiken mit seinen zu vergleichen. Beide klicken im Hauptmenü ihrer Schach-App auf \glqq Statistiken\grqq. Sie können nun jeweils ihre Anzahl an gespielten, gewonnenen, remisierten und verlorenen Spielen, sowie ihre \gls{Elo}zahl einsehen. Beide kommen zu dem Schluss, dass Magnus bessere Werte vorzuweisen hat.
+Magnus behauptet, er wäre ein besserer Spieler als Fabiano. Dieser zweifelt das an, und bittet Magnus, dessen Statistiken mit seinen zu vergleichen. Beide öffnen ihre Schachapp und sind direkt mit ihrem Account angemeldet, da sie dies vorher eingestellt haben. Anschließend klicken sie im Hauptmenü ihrer Schach-App auf \glqq Statistiken\grqq. Sie können nun jeweils ihre Anzahl an gespielten, gewonnenen, remisierten und verlorenen Spielen, sowie ihre \gls{Elo}zahl einsehen. Beide kommen zu dem Schluss, dass Magnus bessere Werte vorzuweisen hat.
 \pagebreak
 \subsection{Anwendungsfälle}
 \begin{enumerate}
@@ -474,10 +480,10 @@ Magnus behauptet, er wäre ein besserer Spieler als Fabiano. Dieser zweifelt das
 
 \subsection{Anwendungsfalldiagramme} 
 		\begin{minipage}{\linewidth}
-			\centering
-			\includegraphics[width=1\linewidth]{Remis}
-			\label{fig:remis}
-			\captionof{figure}{Remis anbieten}
+		%	\centering
+		%	\includegraphics[width=1\linewidth]{Remis}
+		%	\label{fig:remis}
+		%		\captionof{figure}{Remis anbieten}
 		\end{minipage}
 \end{enumerate}
 
