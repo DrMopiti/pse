@@ -17,7 +17,7 @@ bookmarks=true,%
 
 
 
-\makenoidxglossaries
+\makeglossaries
 \newglossaryentry{Schachregeln}
 {
 	name=Schachregeln,
@@ -59,7 +59,7 @@ bookmarks=true,%
 \newglossaryentry{Spieler}
 {
 	name={Spieler},
-	description={Ein Nutzer der App}
+	description={Ein Nutzer der App},
 }
 
 \newglossaryentry{Elo}
@@ -76,7 +76,13 @@ bookmarks=true,%
 \newglossaryentry{Android}
 {
 	name={Android},
-	description={Ein Betriebssystem für mobile Geräte}
+	description={Ein Betriebssystem für mobile Geräte wie Smartphones, Tablets und auch Fernseher}
+}
+\newglossaryentry{Smartphone}
+{
+	name={Smartphone},
+	description={Ein Mobiltelefon mit umfangreichen Computer-Funktionalitäten},
+	plural = Smartphones
 }
 \newacronym{GUI}{GUI}{Graphical User Interface}
 
@@ -85,7 +91,7 @@ bookmarks=true,%
 \begin{document}
 	\begin{titlepage}
 		\centering
-		\vspace*{0.14\textheight}
+		\vspace*{0.2\textheight}
 		{\Large PSE}\\[\baselineskip]
 		{\Huge PFLICHTENHEFT}\\[\baselineskip]\par
 		{\LARGE Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev, Florian Weber}\par
@@ -97,13 +103,13 @@ bookmarks=true,%
 	\end{titlepage}
 \section{Einleitung}
 \section{Zielbestimmung}
-Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen gegeneinander \gls{Schach} spielen können. Spieler sollen durch eine Spielersuche andere Gegner finden und können sich in einer Rangliste vergleichen. 
+Es soll eine App angeboten werden mit der Personen gegeneinander \gls{Schach} spielen können. \gls{Spieler} sollen durch eine Spielersuche andere Gegner finden und können sich in einer Rangliste vergleichen. 
 \subsection{Musskriterien}
 \begin{description}
 \item[KM1010] Alle \gls{Schachregeln} müssen implementiert werden.
 \item[KM1020] Der \gls{Spieler} muss gemäß den \gls{Schachregeln} spielen.
 \item[KM1030] Es muss eine Spielersuche geben.
-\item[KM1040] Es muss eine GUI existieren.
+\item[KM1040] Es muss eine \gls{GUI} existieren.
 \item[KM1050] Es müssen die \glspl{Schachfigur} angetippt und bewegt werden.
 \end{description}
 
@@ -124,8 +130,9 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 \item[KA1010] Es soll keine selbstspielende Schach-Engine implementiert werden.
 \item[KA1020] Die Spieler können Züge nicht zurücknehmen.
 \item[KA1030] Bei der Spielsuche soll es keine Möglichkeit zur Modifikation des Spielmodus geben.
-\item[KA1040] Spiele von anderen Spielern können nicht live verfolgt werden.
+\item[KA1040] Spiele von anderen \gls{Spieler}n können nicht live verfolgt werden.
 \end{description}
+\newpage
 \section{Produkteinsatz}
 	\subsection{Anwendungsbereich}
 		
@@ -141,11 +148,23 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 			\item Es sollen alle Versionen ab Android 4.4 unterstützt werden.
 			\item Der Server soll Wartungsfrei laufen.	
 		\end{description}
+	\newpage
 \section{Produktumgebung}
-	\begin{description}
-		\item Eine App für Mobilgeräte mit \gls{Android} Betriebssystem ab Version 4.4.
-		\item Ein Server zur Verwaltung von Partien und Spielsuche.		
-	\end{description}
+	\subsection{Software}
+		\begin{description}
+			\item Eine App für Mobilgeräte mit \gls{Android} Betriebssystem ab Version 4.4.
+			\item Ein Java Server zur Verwaltung von Partien und Spielsuche.		
+		\end{description}
+	\subsection{Hardware}
+		\begin{description}			
+			\item Ein Internetfähiges \gls{Smartphone} mit:
+			\begin{itemize}
+			\item \gls{Android} Betriebssystem
+			\item Touchscreen
+			\end{itemize}
+		\item Ein virtueller Computer
+		\end{description}
+\pagebreak		 
 \section{Funktionelle Anforderungen}
 \subsection{Benutzerfunktionen}
 \begin{description}
@@ -174,7 +193,7 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 
 \subsection{Initialisierung}
 \begin{description}
-	\item[F2010] Der Benutzer kann neue Spiele erzeugen ohne dabei einen anderen \gls{Spieler} als Gegner angeben zu müssen. Ein anderen Spieler kann von diesem Spieler erzeugte Spiel unter dem Menüpunkt \textbf{Spiele} annehmen.
+	\item[F2010] Der Benutzer kann neue Spiele erzeugen ohne dabei einen anderen \gls{Spieler} als Gegner angeben zu müssen. Ein anderer \gls{Spieler}kann von diesem \gls{Spieler} erzeugte Spiel unter dem Menüpunkt \textbf{Spiele} annehmen.
 	\item[F2020] \textbf{\textit{Aufnahme eines Spieles: }} Der Benutzer kann schon eröffnete Spiele aufnehmen.
 	\item[F2030] \textbf{\textit{Herausforderung: }} Der Benutzer kann unter Angabe eines gültigen Benutzernamens einen anderen Benutzer zum Spiel herausfordern oder nach dem ein Spiel zu Ende gekommen ist, können beide Spielern den anderen Spieler wieder auf dem Selben Bildschirm herausfordern.
 	\item [F2040] \textbf{\textit{Akzeptieren einer Herausforderung: }} Der Benutzer kann Herausforderung zum Spiel \textbf{F0130} annehmen.
@@ -184,7 +203,7 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 		\item Wie viele Spiele gespielt wurden
 		\item Wie viele mal gewonnen wurde
 		\item Wie viele mal verloren wurde
-		\item Wie viele Spiele Unentschieden geblieben sind
+		\item Wie viele Spiele Unentschieden ausgegangen sind
 	\end{itemize}
 	\item[F2070] \textbf{\textit{Freundschaftsanfragen senden: }}
 	Ein bereits angemeldete Benutzer kann Freundschaftsanfragen senden indem er nur den Benutzername der jeweiligen Person angeben muss.
@@ -201,7 +220,7 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 	\item[F3040] \textbf{\textit{Unentschieden ablehnen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F0220}, das Angebot ablehnen.
 	\item[F3050]\textbf{\textit{Nachrichtenaustausch: }} Die Benutzer können dazwischen Nachrichten austauschen.
 \end{description}
-
+\newpage
 \section{Produktdaten}
 
 \subsection{System-Daten auf mobilen Geräten}
@@ -236,7 +255,7 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 	\item Zu den Spieldaten gehört:
 		\begin{itemize}
 		\item Partiekennung
-		\item Aktuelle Zustand vom Schachbrett	
+		\item Aktueller Zustand des Schachbretts	
 	\end{itemize}
 
 	
@@ -253,7 +272,7 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 	\item Für jede Partie wird folgendes gespeichert:
 	\begin{itemize}
 		\item Partiekennung
-		\item Benutzername beider Spieler
+		\item Benutzername beider \gls{Spieler}
 		\item Aktueller Zustand des Schachbrettes
 		\item Alle bisherigen Züge
 	\end{itemize}
@@ -285,10 +304,10 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 			\item Passwort
 			\item Spielstatistiken
 		\end{itemize}
-		\item Zusätzlich wird eine globales Leaderboard über die besten Spieler gespeichert.
+		\item Zusätzlich wird eine globales Leaderboard über die besten \gls{Spieler} gespeichert.
 	\end{description}
 \end{description}
-
+\newpage
 \section{Nichtfunktionale Anforderungen}
 \begin{description}
 	
@@ -297,6 +316,7 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 	\item[NF30] Die Übermittlung einzelner Züge darf nicht länger als 2 Sekunden dauern.
 	
 \end{description}
+\newpage
 \section{Globale Testfälle}
 \begin{description}
 	\item[T1010] Ein Android Nutzer laden die Applikation und registriert sich im System \textbf{F1010}
@@ -321,11 +341,12 @@ Es soll ein Produkt namens .... als eine App angeboten werden mit der Personen g
 	\item[T3050] Der Benutzer tauschen Nachrichten aus \textbf{F3050}
 	
 \end{description}
+\pagebreak
 \section{Systemmodelle}
 \subsection{Szenarien}
 \textbf{Szenario 1: \glqq Spiele gegen zufälligen Spieler\grqq} \\
 Max Mustermann möchte eine Runde Schach in seiner Mittagspause spielen. Er holt sein Smartphone aus der Tasche und klickt auf das Appsymbol.
-Die App öffnet sich und er befindet sich im Hauptmenü. Nun klickt er auf \glqq Spiel suchen\grqq und bekommt die Meldung, dass er nun der Spielsuche hinzugefügt wurde.
+Die App öffnet sich und er befindet sich im Hauptmenü. Da keiner seiner Kollgegen Zeit hat, möchte er gegen eine zufälligen Gegner spielen. Nun klickt er auf \glqq Spiel suchen\grqq und bekommt die Meldung, dass er nun der Spielsuche hinzugefügt wurde.
 Nach kurzer Zeit bekommt er einen Gegner zugewiesen und die Partie beginnt. Vor ihm erscheint das \gls{Schachbrett} in seiner \gls{Ausgangsposition}.
 
 Herr Mustermann hat die Farbe Weiß zugewiesen bekommen und sein Gegner Schwarz. Er wählt einen Bauern an und bekommt seine möglichen Züge mit dieser \gls{Schachfigur} angezeigt.
@@ -339,7 +360,7 @@ Magnus erhält die schwarzen Figuren, Fabiano die weißen. Nach 115 Zügen ist d
 
 \textbf{Szenario 3: \glqq Statistiken einsehen\grqq} \\
 Magnus behauptet, er wäre ein besserer Spieler als Fabiano. Dieser zweifelt das an, und bittet Magnus, dessen Statistiken mit seinen zu vergleichen. Beide klicken im Hauptmenü ihrer Schach-App auf \glqq Statistiken\grqq. Sie können nun jeweils ihre Anzahl an gespielten, gewonnenen, remisierten und verlorenen Spielen, sowie ihre \gls{Elo}zahl einsehen. Beide kommen zu dem Schluss, dass Magnus bessere Werte vorzuweisen hat.
-
+\pagebreak
 \subsection{Anwendungsfälle}
 \begin{enumerate}
  
@@ -461,6 +482,6 @@ Magnus behauptet, er wäre ein besserer Spieler als Fabiano. Dieser zweifelt das
 \end{enumerate}
 
 \glsaddall 
-\printnoidxglossaries
+\printglossaries
 
 \end{document}
