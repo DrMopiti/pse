@@ -199,7 +199,7 @@ Es soll eine App angeboten werden mit der Personen gegeneinander \gls{Schach} sp
 
 \subsection{Initialisierung}
 \begin{description}
-	\item[F2010] Der Benutzer kann neue Spiele erzeugen ohne dabei einen anderen \gls{Spieler} als Gegner angeben zu müssen. Ein anderer \gls{Spieler}kann von diesem \gls{Spieler} erzeugte Spiel unter dem Menüpunkt \textbf{Spiele} annehmen.
+	\hypertarget{F2010}{\item[F2010]} Der Benutzer kann neue Spiele erzeugen ohne dabei einen anderen \gls{Spieler} als Gegner angeben zu müssen. Ein anderen Spieler kann von diesem Spieler erzeugte Spiel unter dem Menüpunkt \textbf{Spiele} annehmen.
 	\item[F2020] \textbf{\textit{Aufnahme eines Spieles: }} Der Benutzer kann schon eröffnete Spiele aufnehmen.
 	\item[F2030] \textbf{\textit{Herausforderung: }} Der Benutzer kann unter Angabe eines gültigen Benutzernamens einen anderen Benutzer zum Spiel herausfordern oder nach dem ein Spiel zu Ende gekommen ist, können beide Spielern den anderen Spieler wieder auf dem Selben Bildschirm herausfordern.
 	\item [F2040] \textbf{\textit{Akzeptieren einer Herausforderung: }} Der Benutzer kann Herausforderung zum Spiel \textbf{F0130} annehmen.
@@ -220,7 +220,7 @@ Es soll eine App angeboten werden mit der Personen gegeneinander \gls{Schach} sp
 
 \subsection{Spielverlauf} 
 \begin{description}
-	\item[F3010]\textbf{\textit{Bewegungsmöglichkeiten: }}Der Benutzer kann während des Spiels falls er dran ist, einen Zug seiner Wahl unter Beibehaltung der Schach Spielregeln ziehen.
+	\hypertarget{F3010}{\item[F3010]}\textbf{\textit{Bewegungsmöglichkeiten: }}Der Benutzer kann während des Spiels falls er dran ist, einen Zug seiner Wahl unter Beibehaltung der Schach Spielregeln ziehen.
 	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Der Benutzer, der gerade am Zug ist, kann gemäß der Spielregeln Unentschieden bieten.
 	\item[F3030] \textbf{\textit{Unentschieden annehmen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F0220}, das Angebot akzeptieren.
 	\item[F3040] \textbf{\textit{Unentschieden ablehnen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F0220}, das Angebot ablehnen.
@@ -243,12 +243,7 @@ Es soll eine App angeboten werden mit der Personen gegeneinander \gls{Schach} sp
 		\item Sonstige Einstellungen
 	\end{itemize}
 \end{description}
-	
-	
-%\item[PD1010] Von jedem Nutzer ist ein eindeutiger Nutzername zu speichern.
-%\item[PD1020] Zusätzlich kann von jedem Nutzer die Email-Adresse, ein Passwort 	%und weitere Daten von Authentifikations Providern gespeichert werden.
-%\item [PD1030] Für jeden Nutzer werden Statistiken über Siege/Niederlagen %gespeichert.
-%
+
 
 \end{description}
 
@@ -317,10 +312,10 @@ Es soll eine App angeboten werden mit der Personen gegeneinander \gls{Schach} sp
 \section{Nichtfunktionale Anforderungen}
 \begin{description}
 	
-	\item[NF10] Der Erstellungsprozess einer neuen Partie darf nicht länger als 20 Sekunden dauern.
-	\item[NF20] Die Überprüfung auf Gültigkeit eines Zuges darf nicht länger als 2 Sekunden dauern.
-	\item[NF30] Die Übermittlung einzelner Züge darf nicht länger als 2 Sekunden dauern.
-	
+\item[NF1010] Der Erstellungsprozess \hyperlink{F2010}{\textbf{F2010}} einer neuen Partie darf nicht länger als 5 Sekunden dauern.
+\item[NF1020] Die Ermittlung \hyperlink{F3010}{\textbf{F3010}} an möglichen gültigen Zügen darf nicht länger als 0,1 Sekunden dauern.
+\item[NF1030] Die Weiterleitung und Überprüfung einzelner Züge soll auf dem Server nicht länger als 2 Sekunden dauern.
+
 \end{description}
 \newpage
 \section{Globale Testfälle}
@@ -352,12 +347,13 @@ Es soll eine App angeboten werden mit der Personen gegeneinander \gls{Schach} sp
 \subsection{Szenarien}
 \textbf{Szenario 1: \glqq Spiele gegen zufälligen Spieler\grqq} \\
 Max Mustermann möchte eine Runde Schach in seiner Mittagspause spielen. Er holt sein Smartphone aus der Tasche und klickt auf das Appsymbol.
-Die App öffnet sich und er befindet sich im Hauptmenü. Da keiner seiner Kollgegen Zeit hat, möchte er gegen eine zufälligen Gegner spielen. Nun klickt er auf \glqq Spiel suchen\grqq und bekommt die Meldung, dass er nun der Spielsuche hinzugefügt wurde.
+Da er die App noch nie verwendet hat muss er sich zuerst anmelden. Nachdem er dies getan hat befindet er sich im Hauptmenü.
+Da keiner seiner Kollegen Zeit hat, möchte er gegen eine zufälligen Gegner spielen. Nun klickt er auf \glqq Spiel suchen\grqq und bekommt die Meldung, dass er nun der Spielsuche hinzugefügt wurde.
 Nach kurzer Zeit bekommt er einen Gegner zugewiesen und die Partie beginnt. Vor ihm erscheint das \gls{Schachbrett} in seiner \gls{Ausgangsposition}.
 
 Herr Mustermann hat die Farbe Weiß zugewiesen bekommen und sein Gegner Schwarz. Er wählt einen Bauern an und bekommt seine möglichen Züge mit dieser \gls{Schachfigur} angezeigt.
 Max Mustermann macht seinen Zug. Als nächstes zieht sein Gegner. Nun ist er wieder am Zug. Beide ziehen nun immer abwechselnd. Nach 35 Zügen hat Herr Mustermann
-seinen Gegner \gls{Schachmatt} gesetzt. Die Partie ist somit beendet und Max Mustermann bekommt die Meldung, dass er gewonnen hat.
+seinen Gegner \gls{Schachmatt} gesetzt. Die Partie ist somit beendet und Max Mustermann bekommt die Meldung, dass er gewonnen hat. Ihm steht nun zur Auswahl ob er eine Revanche anbieten möchte, die Partie auf seinem Gerät speichern will, oder einfach nur ins Hauptmenü möchte. Er klickt auf den Button \glqq Zum Hauptmenü\grqq und wird zum Hauptmenü weitergeleitet.
 
 \textbf{Szenario 2: \glqq Spiele gegen einen Freund\grqq} \\
 Magnus und Fabiano wollen in ihrer Freizeit gegeneinander Schach spielen, haben aber gerade kein Schachbrett zur Hand. Beide öffnen auf ihren \gls{Android}-Gerät ihre Schach-App, und Magnus klickt auf den Button \glqq Spieler suchen\grqq. Es öffnet sich eine Spielerübersicht mit einer Suchleiste, in welcher er den Spielernamen von Fabiano eingibt. In der Spielerübersicht erscheint Fabianos Profil, welches Magnus anklickt. Daraufhin öffnet sich Fabianos Profilübersicht mit seinen Statistiken. Auf Fabianos Profil betätigt Magnus den Button \glqq Herausfordern\grqq, und es erscheint ein Auswahlfenster. Magnus wählt als Bedenkzeit 2 Stunden und die zufällige Farbenverteilung. Fabiano erhält daraufhin eine Mitteilung, dass er von Magnus zu einem Spiel mit Bedenkzeit 2h herausgefordert wurde, und hat die Möglichkeit, dieses anzunehmen oder abzulehnen. Er klickt auf \glqq Annehmen\grqq und beiden Spielern öffnet sich ein \gls{Schachbrett} in \gls{Ausgangsposition}.
