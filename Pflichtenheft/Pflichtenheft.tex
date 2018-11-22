@@ -246,6 +246,21 @@ Es soll eine App angeboten werden mit der Personen gegeneinander \gls{Schach} sp
 	\item[F3050]\textbf{\textit{Nachrichtenaustausch: }} Die Benutzer können dazwischen Nachrichten austauschen.
 \end{description}
 \newpage
+\section{Nichtfunktionale Anforderungen}
+\begin{description}
+	
+	\item[NF1010] Das starten der App soll auf aktuellen Geräten maximal 3 Sekunden dauern. 
+	\item[NF1020] Der Erstellungsprozess \hyperlink{F2010}{\textbf{F2010}} einer neuen Partie darf nicht länger als 5 Sekunden dauern.
+	\item[NF1030] Die Ermittlung \hyperlink{F3010}{\textbf{F3010}} an möglichen gültigen Zügen darf nicht länger als 0,1 Sekunden dauern.
+	\item[NF1040] Die Weiterleitung und Überprüfung einzelner Züge soll auf dem Server nicht länger als 2 Sekunden dauern.
+	\item[NF1050]Bei Übertragungen zwischen zwei Geräten sollen keine Pakete unbemerkt verloren gehen.
+	\item[NF1060] Nachrichten/Spielzüge sollen unverändert am Empfänger eintreffen. Sollten Änderungen vorgenommen worden sein, soll dies vom Empfänger erkannt werden können.
+	\item[NF1070] Der Server soll wartungsfrei und ohne Neustarts auskommen.
+
+	
+\end{description}
+
+\newpage
 \section{Produktdaten}
 
 \subsection{System-Daten auf mobilen Geräten}
@@ -328,15 +343,7 @@ Es soll eine App angeboten werden mit der Personen gegeneinander \gls{Schach} sp
 	\end{description}
 \end{description}
 \newpage
-\section{Nichtfunktionale Anforderungen}
-\begin{description}
-	
-\item[NF1010] Der Erstellungsprozess \hyperlink{F2010}{\textbf{F2010}} einer neuen Partie darf nicht länger als 5 Sekunden dauern.
-\item[NF1020] Die Ermittlung \hyperlink{F3010}{\textbf{F3010}} an möglichen gültigen Zügen darf nicht länger als 0,1 Sekunden dauern.
-\item[NF1030] Die Weiterleitung und Überprüfung einzelner Züge soll auf dem Server nicht länger als 2 Sekunden dauern.
 
-\end{description}
-\newpage
 \section{Globale Testfälle}
 \begin{description}
 	\item[T1010] Ein Android Nutzer laden die Applikation und registriert sich im System \textbf{F1010}
@@ -495,13 +502,13 @@ Magnus behauptet, er wäre ein besserer Spieler als Fabiano. Dieser zweifelt das
 
 \subsection{Anwendungsfalldiagramme} 
 		\begin{minipage}{\linewidth}
-		%	\centering
-		%	\includegraphics[width=1\linewidth]{Remis}
-		%	\label{fig:remis}
-		%		\captionof{figure}{Remis anbieten}
+			\centering
+			\includegraphics[width=1\linewidth]{Remis}
+			\label{fig:remis}
+				\captionof{figure}{Remis anbieten}
 		\end{minipage}
 \end{enumerate}
-
+\pagebreak
 \glsaddall 
 \printglossaries
 
