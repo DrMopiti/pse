@@ -64,29 +64,42 @@ bookmarks=true,%
 
 \newglossaryentry{Spieler}
 {
-	name={Spieler},
+	name=Spieler,
 	description={Ein Nutzer der App},
 }
 
 \newglossaryentry{Elo}
 {
-	name={Elo},
-	description={Wertung, die die Spielstärke beschreibt. \href{{https://de.wikipedia.org/wiki/Elo-Zahl}{https://de.wikipedia.org/wiki/Elo-Zahl}}}
+	name=Elo,
+	description={Wertung, die die Spielstärke beschreibt. \href{https://de.wikipedia.org/wiki/Elo-Zahl}{https://de.wikipedia.org/wiki/Elo-Zahl}}
 }
 
 \newglossaryentry{Schachmatt}
 {
-	name={Schachmatt},
+	name=Schachmatt,
 	description={Der König steht im Schach und es gibt keinen regelkonformen Zug der das Schachgebot aufhebt. \href{https://de.wikipedia.org/wiki/Schachmatt}{https://de.wikipedia.org/wiki/Schachmatt}}
 }
+
+\newglossaryentry{algebraischer Notation}
+{
+	name=algebraischer Notation,
+	description={Notation zur eindeutigen Dokumentation des Verlaufs einer Schachpartie. 	\href{https://de.wikipedia.org/wiki/Schachnotation}{https://de.wikipedia.org/wiki/Schachnotation}}
+}
+
+\newglossaryentry{Bedenkzeit} 
+{
+	name=Bedenkzeit,
+	description={Maximale Zeit die einem Spieler für eine Schachpartie zur Verfügung steht. Es wird immer nur die Bedenkzeit des aktuell zu ziehenden Spielers dekrementiert. Bei Ablaufen seiner Bedenkzeit verliert der Spieler die Partie.}
+}
+	
 \newglossaryentry{Android}
 {
-	name={Android},
+	name=Android,
 	description={Ein Betriebssystem für mobile Geräte wie Smartphones, Tablets und auch Fernseher}
 }
 \newglossaryentry{Smartphone}
 {
-	name={Smartphone},
+	name=Smartphone,
 	description={Ein Mobiltelefon mit umfangreichen Computer-Funktionalitäten},
 	plural = Smartphones
 }
@@ -119,29 +132,29 @@ bookmarks=true,%
 	\end{titlepage}
 \section{Zielbestimmung}
 
-Schach ist weltweit bekannt und hat eine tiefe kulturelle Bedeutung über viele Jahre hinweg erlangt. Dadurch ist es zu einer Sportart geworden die viele begeistert.
-Deshalb soll im Rahmen der Praxis der Softwareentwicklung eine Schach-App entwickelt werden, die es ermöglicht zu jeder Zeit Schach zu spielen.
+\gls{Schach} ist weltweit bekannt und hat über viele Jahre hinweg eine tiefe kulturelle Bedeutung erlangt. Dadurch ist es zu einer Sportart geworden, die viele begeistert.
+Deshalb soll im Rahmen der Praxis der Softwareentwicklung eine \gls{Schach}-App entwickelt werden, die es ermöglicht zu jeder Zeit Schach zu spielen.
 Spieler sollen Gegner durch eine Spielersuche finden. Außerdem können sie sich in einer Rangliste vergleichen und es wird eine Statistik über jeden Spieler geführt.
-Das Spiel soll somit ein Schachspiel simulieren, wo man gegeneinander spielen kann trotz weiter Entfernungen ohne gegenüber zu sitzen.
-Letztendlich kann man durch öfters spielen der Simulation bessere Spielfähigkeiten erlangen oder sich mit anderen Spielern vergleichen und gegen seine Freunde spielen.
+Die App soll somit ein \gls{Schach}spiel simulieren, wo man trotz weiter Entfernungen gegeneinander spielen kann, ohne sich gegenüber zu sitzen.
+Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen, sich mit anderen Spielern vergleichen und gegen seine Freunde spielen.
 
 \subsection{Musskriterien}
 \begin{description}
 \item[KM1010] \textbf{\textit{\gls{Schachregeln}}}
 \begin{itemize}
-	\item Alle Schachregeln sollen implementiert werden.
+	\item Alle \gls{Schachregeln} sollen implementiert werden.
 	\item Das Spielende soll definiert sein.	
 \end{itemize}
 \item[KM1020] \textbf{\textit{Einhaltung der \gls{Schachregeln}}}
 \begin{itemize}
-	\item Der Nutzer soll nur gültige Züge, die den \gls{Schachregeln} entprechen ausführen können.
+	\item Der Nutzer soll nur gültige Züge, die den \gls{Schachregeln} entsprechen, ausführen können.
 \end{itemize}
 \item[KM1030] \textbf{\textit{Spielersuche}}
 \begin{itemize}
-	\item Es soll dem Spieler möglich sein mit anderen Spielern zu spielen un zwar:
+	\item Es soll dem Spieler möglich sein mit anderen Spielern zu spielen und zwar:
 	\begin{itemize}
 		\item Gegen einen zufälligen Gegner
-		\item Gegen eine bestimmten Spieler, der mithilfe einer Suchfunktion bestimmt wird.
+		\item Gegen einen bestimmten Spieler, der mithilfe einer Suchfunktion bestimmt wird.
 	\end{itemize}
 \end{itemize}
 \item[KM1040] \textbf{\textit{\gls{GUI}}}
@@ -150,79 +163,79 @@ Letztendlich kann man durch öfters spielen der Simulation bessere Spielfähigke
 	\begin{itemize}		
 		\item Login Seite: Hier soll sich der Nutzer mit Hilfe eines externen Kontos anmelden können.
 		
-		\item Hauptmenü: Hier soll der Nutzer in der Lage sein, Spiele zu starten und seine Statistiken aufzurufen.
+		\item Hauptmenü: Hier soll der Nutzer dazu in der Lage sein, Spiele zu starten und seine Statistiken aufzurufen.
 		
 		\item Statistik Seite: Der Nutzer kann seine Spielstatistiken einsehen.
 		
-		\item Schachbrett: Hier kann der Nutzer seine Züge durchführen.
+		\item Schachbrett: Hier kann der Nutzer in einer Partie seine Züge durchführen.
 		
-		\item und diversen Meldungen an den Spieler
+		\item Diverse Meldungen an den Spieler
 	\end{itemize}
 \end{itemize}
 \item[KM1050] \textbf{\textit{\glspl{Schachfigur} bewegen}}
 \begin{itemize}
-	\item Es muss möglich sein jede seiner Figuren anzutippen und damit auszuwählen.
+	\item Es muss möglich sein, jede seiner Figuren anzutippen und damit auszuwählen.
 	\item Für eine ausgewählte \gls{Schachfigur} müssen mögliche Züge angezeigt werden.
-	\item Es soll nur möglich sein gültige Züge auszuführen.
+	\item Nur gültige Züge sollen ausgeführt werden können.
 \end{itemize}
 \end{description}
 
 \subsection{Wunschkritierien}
 \begin{description}
 
-	\item[KW1010] \textbf{Account/Gastzugang}
+	\item[KW1010] \textbf{\textit{Account/Gastzugang}}
 	\begin{itemize}
-		\item Das Erstellen eines Accounts mit wählbarem und eindeutigen Benutzername soll 		möglich sein
-		\item Außerdem soll es die Möglichkeit geben, ohne Accounterstellung mittels eines 		Gastkontos zu spielen. Der Name wird automatisch vergeben
-		\item Gastkonten werden nach dem Schließen der App nicht gespeichert und nicht in 			der Spielerliste angezeigt
+		\item Das Erstellen eines Accounts mit wählbarem und eindeutigen Benutzername soll 		möglich sein.
+		\item Außerdem soll es die Möglichkeit geben, ohne Accounterstellung mittels eines 		Gastkontos zu spielen. Der Name wird automatisch vergeben.
+		\item Gastkonten werden nach dem Schließen der App nicht gespeichert und nicht in 			der Spielerliste angezeigt.
 	\end{itemize}
 	
-	\item[KW1020] \textbf{Spiel speichern}
+	\item[KW1020] \textbf{\textit{Spiel speichern}}
 	\begin{itemize}
-		\item Beide Spieler sollen ein Spiel nach Beenden der Partie speichern können
-		\item Es soll eine Textdatei mit dem Partieverlauf in algebraischer Notation erzeugt und auf dem Mobilgerät abgespeichert werden
-		\item Benutzer können die Textdatei öffnen und die Partie auf einem Brett nachspielen
+		\item Beide Spieler sollen ein Spiel nach Beenden der Partie speichern können.
+		\item Es soll eine Textdatei mit dem Partieverlauf in \gls{algebraischer Notation} erzeugt und auf dem Mobilgerät abgespeichert werden.
+		\item Benutzer können die Textdatei öffnen und die Partie auf einem Brett nachspielen.
 	\end{itemize}
 	
-	\item[KW1030] \textbf{Einstellbare Bedenkzeit und Spielfarbe}
+	\item[KW1030] \textbf{\textit{Einstellbare Bedenkzeit und Spielfarbe}}
 	\begin{itemize}
-		\item Beide Spieler einer Partie sollen eine maximale Bedenkzeit haben
-		\item Beim Herausfordern eines zuvor gewählten Spielers soll die Bedenkzeit sowie die gewünschte Spielfarbe einstellbar sein
-		\item Zur Wahl der Bedenkzeit soll eine Liste mit möglichen Zeiten erscheinen
-		\item Bei der Farbwahl soll zwischen Weiß, Schwarz und zufällig gewählt werden 				können
+		\item Beide Spieler einer Partie sollen eine maximale Bedenkzeit haben.
+		\item Beim Herausfordern eines zuvor gewählten Spielers soll die Bedenkzeit sowie die gewünschte Spielfarbe einstellbar sein.
+		\item Zur Wahl der Bedenkzeit soll eine Liste mit möglichen Zeiten erscheinen.
+		\item Bei der Farbwahl soll zwischen Weiß, Schwarz und zufällig gewählt werden				können.
 	\end{itemize}
 	
 	\item[KW1040] 
-	\begin{itemize} \textbf{Spielerchat}
+	\begin{itemize} \textbf{\textit{Spielerchat}}
 		\item \gls{Spieler} können einen Chat mit dem entsprechenden Gegner führen.
-		\item Dazu soll es während einer Partie ein Chatsymbol geben, welches ein Chatfenster öffnet
-		\item Dort können Nachrichten an den Gegner verschickt werden können, sowie Spielmeldungen erscheinen
+		\item Dazu soll es während einer Partie ein Chatsymbol geben, welches ein Chatfenster öffnet.
+		\item Dort können Nachrichten an den Gegner verschickt werden können, sowie Spielmeldungen erscheinen.
 	\end{itemize}
 	
-	\item[KW1050] \textbf{\gls{Elo}system und Rangliste}
+	\item[KW1050] \textbf{\textit{\gls{Elo}system und Rangliste}}
 	\begin{itemize}
-	\item Es soll für jeden Spieler eine \gls{Elo}zahl zur Messung der Spielerstärke existieren
-	\item Nach jeder Partie sollen die Werte beider Spieler entsprechend einer Formel aktualisiert werden
-	\item Es soll eine Rangliste existieren, in welcher alle Spieler anhand ihrer \gls{Elo}zahl in absteigender Reihenfolge gelistet werden 
+	\item Es soll für jeden Spieler eine \gls{Elo}zahl zur Messung der Spielerstärke existieren.
+	\item Nach jeder Partie sollen die Werte beider Spieler entsprechend einer Formel aktualisiert werden.
+	\item Es soll eine Rangliste existieren, in welcher alle Spieler anhand ihrer \gls{Elo}zahl in absteigender Reihenfolge gelistet werden .
 	\end{itemize}
 	
-	\item[KW1060] \textbf{Anmeldung mit Facebook oder Google}
+	\item[KW1060] \textbf{\textit{Anmeldung mit Facebook oder Google}}
 	\begin{itemize}
-	\item Benutzer sollen die Möglichkeit haben, sich mit ihrem Google bzw. Facebook-Konto anzumelden
-	\item Der Account ist dann mit dem jeweiligen Konto verknüpft
+	\item Benutzer sollen die Möglichkeit haben, sich mit ihrem Google bzw. Facebook-Konto anzumelden.
+	\item Der Account ist dann mit dem jeweiligen Konto verknüpft.
 	\end{itemize}
 	
-	\item[KW1070] \textbf{Zwei Spieler auf einem Gerät}
+	\item[KW1070] \textbf{\textit{Zwei Spieler auf einem Gerät}}
 	\begin{itemize}
-	\item Spieler sollen die Möglichkeit haben, zu zweit auf einem Gerät gegeneinander zu spielen
-	\item Die schwarzen Figursymbole sollen zur besseren Benutzbarkeit auf den Kopf gedreht sein  
+	\item Spieler sollen die Möglichkeit haben, zu zweit auf einem Gerät gegeneinander zu spielen.
+	\item Die Symbole der schwarzen Figuren sollen zur besseren Benutzbarkeit auf den Kopf gedreht sein.
 	\end{itemize}
 	
-	\item[KW1080] \textbf{Revanche-Button}
+	\item[KW1080] \textbf{\textit{\gls{Revanche}-Button}}
 	\begin{itemize}
-	\item Nach Beenden einer Partie sollen beide Spieler die Möglichkeit haben, einen Rückkampf zu fordern
-	\item Akzeptiert der Gegner die Herausforderung, so soll eine neue Partie gestartet werden
-	\item Die Spieler sollen bei der Revanche die jeweils andersfarbigen Spielfiguren zugeteilt bekommen wie bei der vorherigen Partie
+	\item Nach Beenden einer Partie sollen beide Spieler die Möglichkeit haben, einen Rückkampf zu fordern.
+	\item Akzeptiert der Gegner die Herausforderung, so soll eine neue Partie gestartet werden.
+	\item Die Spieler sollen bei der Revanche die jeweils andersfarbigen Spielfiguren zugeteilt bekommen wie bei der vorherigen Partie, die \gls{Bedenkzeit} soll dieselbe sein.
 	\end{itemize}
 	
 \end{description}
@@ -232,9 +245,9 @@ Letztendlich kann man durch öfters spielen der Simulation bessere Spielfähigke
 \item[KA1020] \textbf{\textit{Zurücknahme:}} Die Spieler können Züge nicht zurücknehmen.
 \item[KA1030] \textbf{\textit{Spielmodi:}} Bei der Spielsuche soll es keine Möglichkeit zur Modifikation des Spielmodus geben.
 \item[KA1040] \textbf{\textit{Fremde Partien:}} Spiele von anderen \gls{Spieler}n können nicht live verfolgt werden.
-\item[KA1050] \textbf{\textit{Partien einlesen:}} Es soll nicht möglich sein andere Partien einzulesen.
-\item[KA1060] \textbf{\textit{Mehrere Partien:}} Es ist nicht machbar mehrere Partien gleichzeitig zu spielen.
-\item[KA1070] \textbf{\textit{Zeit:}} Der Spieler ist nicht in der Lage seinem Gegner mehr Zeit zu gewähren.
+\item[KA1050] \textbf{\textit{Partien einlesen:}} Es soll nicht möglich sein, andere Partien einzulesen.
+\item[KA1060] \textbf{\textit{Mehrere Partien:}} Es ist nicht machbar, mehrere Partien gleichzeitig zu spielen.
+\item[KA1070] \textbf{\textit{\gls{Bedenkzeit}:}} Der Spieler ist nicht dazu in der Lage, seinem Gegner mehr \gls{Bedenkzeit} zu gewähren.
 \end{description}
 \newpage
 \section{Produkteinsatz}
@@ -250,7 +263,7 @@ Letztendlich kann man durch öfters spielen der Simulation bessere Spielfähigke
 		\begin{description}
 			\item Die Anwendung soll täglich 24 Stunden verfügbar sein.
 			\item Es sollen alle Versionen ab Android 4.4 unterstützt werden.
-			\item Der Server soll Wartungsfrei laufen.	
+			\item Der Server soll wartungsfrei laufen.	
 		\end{description}
 	\newpage
 \section{Produktumgebung}
