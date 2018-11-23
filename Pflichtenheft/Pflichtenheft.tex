@@ -71,13 +71,13 @@ bookmarks=true,%
 \newglossaryentry{Elo}
 {
 	name={Elo},
-	description={Wertung, die die Spielstärke beschreibt. https://de.wikipedia.org/wiki/Elo-Zahl}
+	description={Wertung, die die Spielstärke beschreibt. \href{{https://de.wikipedia.org/wiki/Elo-Zahl}{https://de.wikipedia.org/wiki/Elo-Zahl}}}
 }
 
 \newglossaryentry{Schachmatt}
 {
 	name={Schachmatt},
-	description={Der König steht im Schach und es gibt keinen regelkonformen Zug der das Schachgebot aufhebt. https://de.wikipedia.org/wiki/Schachmatt}
+	description={Der König steht im Schach und es gibt keinen regelkonformen Zug der das Schachgebot aufhebt. \href{https://de.wikipedia.org/wiki/Schachmatt}{https://de.wikipedia.org/wiki/Schachmatt}}
 }
 \newglossaryentry{Android}
 {
@@ -89,6 +89,16 @@ bookmarks=true,%
 	name={Smartphone},
 	description={Ein Mobiltelefon mit umfangreichen Computer-Funktionalitäten},
 	plural = Smartphones
+}
+\newglossaryentry{Graphical User Interface}
+{
+	name={Graphical User Interface},
+	description={Deutsch: Graphische Benutzeroberfläche}
+}
+\newglossaryentry{Schach-Engine}
+{
+	name={Schach-Engine},
+	description={Ein Computer Programm zur Berechnung von möglichen Zügen \href{https://de.wikipedia.org/wiki/Schachprogramm}{https://de.wikipedia.org/wiki/Schachprogramm}}
 }
 \newacronym{GUI}{GUI}{Graphical User Interface}
 
@@ -117,16 +127,16 @@ Letztendlich kann man durch öfters spielen der Simulation bessere Spielfähigke
 
 \subsection{Musskriterien}
 \begin{description}
-\item[KM1010] \textbf{\gls{Schachregeln}}
+\item[KM1010] \textbf{\textit{\gls{Schachregeln}}}
 \begin{itemize}
-	Alle Schachregeln sollen implementiert werden.
+	\item Alle Schachregeln sollen implementiert werden.
 	Das Spielende soll definiert sein.	
 \end{itemize}
-\item[KM1020] \textbf{Einhaltung der \gls{Schachregeln}}
+\item[KM1020] \textbf{\textit{Einhaltung der \gls{Schachregeln}}}
 \begin{itemize}
 	\item Der Nutzer soll nur gültige Züge, die den \gls{Schachregeln} entprechen ausführen können.
 \end{itemize}
-\item[KM1030] \textbf{Spielersuche}
+\item[KM1030] \textbf{\textit{Spielersuche}}
 \begin{itemize}
 	\item Es soll dem Spieler möglich sein mit anderen Spielern zu spielen un zwar:
 	\begin{itemize}
@@ -134,8 +144,22 @@ Letztendlich kann man durch öfters spielen der Simulation bessere Spielfähigke
 		\item Gegen eine bestimmten Spieler, der mithilfe einer Suchfunktion bestimmt wird.
 	\end{itemize}
 \end{itemize}
-\item[KM1040] Es muss ein \gls{GUI} existieren.
-\item[KM1050] \textbf{\glspl{Schachfigur} bewegen}
+\item[KM1040] \textbf{\textit{\gls{GUI}}}
+\begin{itemize}
+	\item Die Oberfläche besteht aus:
+	\begin{itemize}		
+		\item Login Seite: Hier soll sich der Nutzer mit Hilfe eines externen Kontos anmelden können.
+		
+		\item Hauptmenü: Hier soll der Nutzer in der Lage sein, Spiele zu starten und seine Statistiken aufzurufen.
+		
+		\item Statistik Seite: Der Nutzer kann seine Spielstatistiken einsehen.
+		
+		\item Schachbrett: Hier kann der Nutzer seine Züge durchführen.
+		
+		\item und diversen Meldungen an den Spieler
+	\end{itemize}
+\end{itemize}
+\item[KM1050] \textbf{\textit{\glspl{Schachfigur} bewegen}}
 \begin{itemize}
 	\item Es muss möglich sein jede seiner Figuren anzutippen und damit auszuwählen.
 	\item Für eine ausgewählte \gls{Schachfigur} müssen mögliche Züge angezeigt werden.
@@ -157,10 +181,13 @@ Letztendlich kann man durch öfters spielen der Simulation bessere Spielfähigke
 \end{description}
 \subsection{Abgrenzkriterien}
 \begin{description}
-\item[KA1010] Es soll keine selbstspielende Schach-Engine implementiert werden.
+\item[KA1010] Es soll keine selbst spielende \gls{Schach-Engine} implementiert werden.
 \item[KA1020] Die Spieler können Züge nicht zurücknehmen.
 \item[KA1030] Bei der Spielsuche soll es keine Möglichkeit zur Modifikation des Spielmodus geben.
 \item[KA1040] Spiele von anderen \gls{Spieler}n können nicht live verfolgt werden.
+\item[KA1050] Es soll nicht möglich sein andere Partien einzulesen.
+\item[KA1060] Es ist nicht machbar mehrere Partien gleichzeitig zu spielen.
+\item[KA1070] Der Spieler ist nicht in der Lage seinem Gegener mehr Zeit zu gewähren.
 \end{description}
 \newpage
 \section{Produkteinsatz}
@@ -170,7 +197,7 @@ Letztendlich kann man durch öfters spielen der Simulation bessere Spielfähigke
 		
 	\subsection{Zielgruppe}
 		
-			Die Anwendung richtet sich an Personen mit einem Android Mobiltelefon, die unterwegs eine Partie \gls{Schach} spielen möchten.
+			Die Anwendung richtet sich an Personen mit einem Android \gls{Smartphone}, die unterwegs eine Partie \gls{Schach} spielen möchten.
 		
 	\subsection{Betriebsbedingungen}
 		\begin{description}
