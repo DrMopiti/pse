@@ -130,7 +130,7 @@ Letztendlich kann man durch öfters spielen der Simulation bessere Spielfähigke
 \item[KM1010] \textbf{\textit{\gls{Schachregeln}}}
 \begin{itemize}
 	\item Alle Schachregeln sollen implementiert werden.
-	Das Spielende soll definiert sein.	
+	\item Das Spielende soll definiert sein.	
 \end{itemize}
 \item[KM1020] \textbf{\textit{Einhaltung der \gls{Schachregeln}}}
 \begin{itemize}
@@ -169,15 +169,62 @@ Letztendlich kann man durch öfters spielen der Simulation bessere Spielfähigke
 
 \subsection{Wunschkritierien}
 \begin{description}
-\item[KW1010] Es soll einen Account/Gastzugang geben.
-\item[KW1020] Der \gls{Spieler} kann ein Spiel nach dem beenden speichern.
-\item[KW1030] Der \gls{Spieler} kann eine Bedenkzeit einstellen.
-\item[KW1040] \gls{Spieler} können einen Chat mit dem entsprechenden Gegner führen.
-\item[KW1050] Es soll ein Leaderboard oder ein \gls{Elo}system geben.
-\item[KW1060] Die Anmeldung kann mit Facebook oder Google getätigt werden.
-\item[KW1070] Es können zwei \gls{Spieler} auf einem Gerät gleichzeitig spielen.
-\item[KW1080] Es soll einen Revanche-Button geben.
-\item[KW1090] Es soll verschiedene Spielvarianten geben.
+
+	\item[KW1010] \textbf{Account/Gastzugang}
+	\begin{itemize}
+		\item Das Erstellen eines Accounts mit wählbarem und eindeutigen Benutzername soll 		möglich sein
+		\item Außerdem soll es die Möglichkeit geben, ohne Accounterstellung mittels eines 		Gastkontos zu spielen. Der Name wird automatisch vergeben
+		\item Gastkonten werden nach dem Schließen der App nicht gespeichert und nicht in 			der Spielerliste angezeigt
+	\end{itemize}
+	
+	\item[KW1020] \textbf{Spiel speichern}
+	\begin{itemize}
+		\item Beide Spieler sollen ein Spiel nach Beenden der Partie speichern können
+		\item Es soll eine Textdatei mit dem Partieverlauf in algebraischer Notation erzeugt und auf dem Mobilgerät abgespeichert werden
+		\item Benutzer können die Textdatei öffnen und die Partie auf einem Brett nachspielen
+	\end{itemize}
+	
+	\item[KW1030] \textbf{Einstellbare Bedenkzeit und Spielfarbe}
+	\begin{itemize}
+		\item Beide Spieler einer Partie sollen eine maximale Bedenkzeit haben
+		\item Beim Herausfordern eines zuvor gewählten Spielers soll die Bedenkzeit sowie die gewünschte Spielfarbe einstellbar sein
+		\item Zur Wahl der Bedenkzeit soll eine Liste mit möglichen Zeiten erscheinen
+		\item Bei der Farbwahl soll zwischen Weiß, Schwarz und zufällig gewählt werden 				können
+	\end{itemize}
+	
+	\item[KW1040] 
+	\begin{itemize} \textbf{Spielerchat}
+		\item \gls{Spieler} können einen Chat mit dem entsprechenden Gegner führen.
+		\item Dazu soll es während einer Partie ein Chatsymbol geben, welches ein Chatfenster öffnet
+		\item Dort können Nachrichten an den Gegner verschickt werden können, sowie Spielmeldungen erscheinen
+	\end{itemize}
+	
+	\item[KW1050] \textbf{\gls{Elo}system und Rangliste}
+	\begin{itemize}
+	\item Es soll für jeden Spieler eine \gls{Elo}zahl zur Messung der Spielerstärke existieren
+	\item Nach jeder Partie sollen die Werte beider Spieler entsprechend einer Formel aktualisiert werden
+	\item Es soll eine Rangliste existieren, in welcher alle Spieler anhand ihrer \gls{Elo}zahl in absteigender Reihenfolge gelistet werden 
+	\end{itemize}
+	
+	\item[KW1060] \textbf{Anmeldung mit Facebook oder Google}
+	\begin{itemize}
+	\item Benutzer sollen die Möglichkeit haben, sich mit ihrem Google bzw. Facebook-Konto anzumelden
+	\item Der Account ist dann mit dem jeweiligen Konto verknüpft
+	\end{itemize}
+	
+	\item[KW1070] \textbf{Zwei Spieler auf einem Gerät}
+	\begin{itemize}
+	\item Spieler sollen die Möglichkeit haben, zu zweit auf einem Gerät gegeneinander zu spielen
+	\item Die schwarzen Figursymbole sollen zur besseren Benutzbarkeit auf den Kopf gedreht sein  
+	\end{itemize}
+	
+	\item[KW1080] \textbf{Revanche-Button}
+	\begin{itemize}
+	\item Nach Beenden einer Partie sollen beide Spieler die Möglichkeit haben, einen Rückkampf zu fordern
+	\item Akzeptiert der Gegner die Herausforderung, so soll eine neue Partie gestartet werden
+	\item Die Spieler sollen bei der Revanche die jeweils andersfarbigen Spielfiguren zugeteilt bekommen wie bei der vorherigen Partie
+	\end{itemize}
+	
 \end{description}
 \subsection{Abgrenzkriterien}
 \begin{description}
