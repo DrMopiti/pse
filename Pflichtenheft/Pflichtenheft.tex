@@ -100,6 +100,12 @@ bookmarks=true,%
 	name={Schach-Engine},
 	description={Ein Computer Programm zur Berechnung von möglichen Zügen \href{https://de.wikipedia.org/wiki/Schachprogramm}{https://de.wikipedia.org/wiki/Schachprogramm}}
 }
+\newglossaryentry{Patt}{
+	name={Patt},
+	description={Patt im Schach tritt auf ,falls am Zug befindlichen Spieler keine Zugmöglichkeit zur Verfügung steht, sein König sich jedoch nicht im Schach befindet}
+}
+\newglossaryentry{tote Stellung}{name={tote Stellung},description={Tote Stellung liegt vor ,falls eine Stellung entstanden ist, in welcher keiner der Spieler den gegnerischen König mit irgendeiner Folge von regelgemäßen Zügen mattsetzen kann. Eine solche Stellung heißt „tote Stellung“. Zumeist hat hierbei keiner der beiden Spieler genug Figuren übrig, um den anderen Spieler mattsetzen zu können (z. B. König gegen König, König gegen König und Springer, König gegen König und Läufer). Es gibt auch Fälle, in denen etwa aufgrund einer verkeilten Bauernstruktur keiner der Spieler gewinnen kann.}}
+
 \newacronym{GUI}{GUI}{Graphical User Interface}
 
 
@@ -272,57 +278,74 @@ Letztendlich kann man durch öfters spielen der Simulation bessere Spielfähigke
 \section{Funktionelle Anforderungen}
 \subsection{Benutzerfunktionen}
 \begin{description}
-	\item[F1010] \textbf{\textit{Registrieren: }} Ein beliebiger  \gls{Android} Nutzer kann sich über die Start Seite der App registrieren lassen. Für die Registrierung im System sind folgende Angaben erforderlich: 
+	\item[F1010] \textbf{\textit{Anmelden: }} Ein \gls{Android} Nutzer der auch einen Google Account besitzt, kann sich auf der Hauptseite des Apps erfolgreich anmelden. Für die Anmeldung im System sind folgende Angaben erforderlich:
 	\begin{itemize}
-		\item eindeutige Benutzername
-		\item gewünschtes Passwort (muss mindestens 5 Zeichen haben und davon 1 Sonderzeichen)
-		\item eigene eMail-Adresse
-	\end{itemize}
-	Der Registriervorgang wird nur dann erfolgreich abgeschlossen falls eMail-Adresse und der Benutzername im System jeweils eindeutig sind. Nach der erfolgreichen Registriervorgang bekommt der Benutzer per eMail seine Benutzername und Passwort.
-	\item[F1020] \textbf{\textit{Anmelden: }} Nur nach dem bereits erfolgreichem Registrieren kann sich der Benutzer über die Start Seite anmelden. Dafür braucht der Nutzer:
-	\begin{itemize}
-		\item sein Benutzername
-		\item sein Passwort
+		\item eMail Adresse, die mit Google Konto in Verbindung steht
+		\item Google Konto Passwort 
 	\end{itemize}  
-	\item[F1030] \textbf{\textit{Abmelden: }} Der Benutzer, der bereits angemeldet ist, kann sich wieder vom System abmelden.
-	\item[F1040] \textbf{\textit{Gast: }} Der Benutzer, der sich nicht anmelden würde kann als Gastspieler den Spiel beitreten. Dafür muss er über die Start Seite Gast Knopfe drücken. Dann bekommt er vom System einen eindeutigen Benutzername. % muss noch füllen
-	\item[F1050] \textbf{\textit{Passwort anfordern: }} Falls der registrierte Benutzer sein Passwort oder Benutzername vergessen hat ,so kann er die über die Start Seite anfordern. Dafür muss er in entsprechendem Feld seine eMail Adresse angeben. Dann bekommt er seiner Benutzername und seine Passwort per eMail automatisch zugeschickt.
-	\item[F1060] \textbf{\textit{Passwort ändern: }}
-	Der angemeldete Benutzer kann sein Passwort ändern. Dafür muss er sein aktuelles Passwort angeben und dann zweimal das neue Passwort, wobei sich diese Angaben nicht unterscheiden dürfen. Nach erfolgreiche Änderung des Passworts bekommt der Benutzer sein neues Pass per eMail.
+	\item[F1020] \textbf{\textit{Gastzugang: }} Der Benutzer der keinen Google Account besitzt kann sich als Gast im System anmelden. Bei der Anmeldung bekommt er einen eindeutigen Benutzernamen vom System. 
+	\item[F1030] \textbf{\textit{Abmelden: }} Der Benutzer, der sich bereits mit Google Account angemeldet hat, kann sich wieder vom System abmelden.
 	
-	
-\end{description}
-
-
-
-\subsection{Initialisierung}
-\begin{description}
-	\hypertarget{F2010}{\item[F2010]} Der Benutzer kann neue Spiele erzeugen ohne dabei einen anderen \gls{Spieler} als Gegner angeben zu müssen. Ein anderen Spieler kann von diesem Spieler erzeugte Spiel unter dem Menüpunkt \textbf{Spiele} annehmen.
-	\item[F2020] \textbf{\textit{Aufnahme eines Spieles: }} Der Benutzer kann schon eröffnete Spiele aufnehmen.
-	\item[F2030] \textbf{\textit{Herausforderung: }} Der Benutzer kann unter Angabe eines gültigen Benutzernamens einen anderen Benutzer zum Spiel herausfordern oder nach dem ein Spiel zu Ende gekommen ist, können beide Spielern den anderen Spieler wieder auf dem Selben Bildschirm herausfordern.
-	\item [F2040] \textbf{\textit{Akzeptieren einer Herausforderung: }} Der Benutzer kann Herausforderung zum Spiel \textbf{F0130} annehmen.
-	\item [F2050] \textbf{\textit{Ablehnung einer Herausforderung: }} Der Benutzer kann Herausforderung zum Spiel \textbf{F0130} ablehnen.
-	\item [F2060] \textbf{\textit{Statistiken: }} Jeder Benutzer, der im System angemeldet ist kann sich seine Statistiken :
+	\item [F1040] \textbf{\textit{Anzeige des eigenen, persönlichen Profils: }}  Der Benutzer kann sich sein persönliches Profil anzeigen lassen. Dabei sieht er seine Statistiken:
 	\begin{itemize}
 		\item Wie viele Spiele gespielt wurden
 		\item Wie viele mal gewonnen wurde
 		\item Wie viele mal verloren wurde
-		\item Wie viele Spiele Unentschieden ausgegangen sind
+		\item Wie viele Spiele Unentschieden geblieben sind
+		\item Elo-Zahl
+		
 	\end{itemize}
-	\item[F2070] \textbf{\textit{Freundschaftsanfragen senden: }}
-	Ein bereits angemeldete Benutzer kann Freundschaftsanfragen senden indem er nur den Benutzername der jeweiligen Person angeben muss.
-	\item[F2080] \textbf{\textit{Freundschaftsanfrage annehmen }} Ein bereits angemeldete Benutzer kann Freundschaftsanfragen annehmen.
-	\item[F2090] \textbf{\textit{Freundschaftsanfrage ablehnen }} Ein bereits angemeldete Benutzer kann Freundschaftsanfragen ablehnen.
+	\item[F1050] \textbf{\textit{Suche nach Benutzern: }} Der Benutzer kann mit der Suchfunktion nach anderen Benutzern des Systems anhand einer Benutzernamen suchen.
+	
+	\item[F1060]  \textbf{\textit{Anzeigen der persönlichen Profile anderer Benutzer: }}
+	Der Benutzer kann sich von anderen Benutzern die persönlichen Profile anzeigen lassen wobei er Benutzername und die Statistiken sieht und die andere Benutzer können genauso sein Profil anzeigen lassen.
+	
+	\item[F1070] \textbf{\textit{Multiplayer auf einem Gerät: }}  Mit einer Multiplayer Funktion können zwei Spieler auf einem Gerät gegeneinander spielen
+	
+	\item[F1080] \textbf{\textit{Chatten: }} Spieler können während des Spiels miteinander 
+	
 	
 \end{description}
 
+
+\subsection{Initialisierung}
+\begin{description}
+	\hypertarget{F2010}{\item[F2010]}\textbf{\textit{Eröffnung 	eines Spieles: }} Der Benutzer kann neue Spiele erzeugen ohne dabei einen anderen Benutzer als Gegner angeben zu müssen. Dann bekommt er vom System einen Gegner der auch genauso ein Spiel eröffnet hat.Die Farbe ist zufällig und es steht eine feste Zeitgrenze von 15 Minuten für jeden Spieler.
+	\item[F2020] \textbf{\textit{Spieleinstellungen bestimmen: }} Bei der Herausforderung einer bestimmten Person zum Spiel \textbf{\textit{F2050}} kann der Herausforderer
+	Spieleinstellungen aufstellen:
+	\begin{enumerate}
+		\item Zeit
+		\item Farbe
+	\end{enumerate}
+	\item[F2030] \textbf{\textit{Herausfordern: }} Nachdem ein entsprechender Gegner ausgesucht wurde \textbf{\textit{F1050}} kann der Benutzer ihn zum Spiel herausfordern.
+	\item [F2040] \textbf{\textit{Akzeptieren einer Herausforderung: }} Der Benutzer kann Herausforderung zum Spiel \textbf{F2030} annehmen.
+	\item [F2050] \textbf{\textit{Ablehnung einer Herausforderung: }} Der Benutzer kann Herausforderung zum Spiel \textbf{F2030} ablehnen.
+	
+	
+	
+	
+\end{description}
+
+
 \subsection{Spielverlauf} 
 \begin{description}
-	\hypertarget{F3010}{\item[F3010]}\textbf{\textit{Bewegungsmöglichkeiten: }}Der Benutzer kann während des Spiels falls er dran ist, einen Zug seiner Wahl unter Beibehaltung der Schach Spielregeln ziehen.
-	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Der Benutzer, der gerade am Zug ist, kann gemäß der Spielregeln Unentschieden bieten.
-	\item[F3030] \textbf{\textit{Unentschieden annehmen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F0220}, das Angebot akzeptieren.
-	\item[F3040] \textbf{\textit{Unentschieden ablehnen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F0220}, das Angebot ablehnen.
-	\item[F3050]\textbf{\textit{Nachrichtenaustausch: }} Die Benutzer können dazwischen Nachrichten austauschen.
+	\item[F3010]\textbf{\textit{Bewegungsmöglichkeiten: }}Der Benutzer kann während des Spiels falls er dran ist, einen Zug seiner Wahl unter Beibehaltung der Schach Spielregeln ziehen.
+	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Ein Spieler, der Remis anbieten möchte, tut dies, nachdem er einen Zug auf dem Schachbrett ausgeführt und bevor es seine Uhr angehalten und die des Gegners in Gang gesetzt hat.
+	\item[F3030] \textbf{\textit{Remis annehmen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F3020}, das Angebot annehmen.
+	
+	\item[F3040] \textbf{\textit{Remis ablehnen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F3020}, das Angebot ablehnen.
+	
+	\item[F3050] \textbf{\textit{Unentschieden bleiben: }}
+	Ein Spiel bleibt Unentschieden falls eine von beiden Spielern Remis angeboten hat und der andere Spieler den Angebot angenommen hat oder es nach Schachregeln ein Remis Situation auftritt:
+	\begin{enumerate}
+		\item Falls es \gls{Patt} vorliegt
+		\item Falls uns eine \gls{tote Stellung} vorliegt
+		\item Wenn eine identische Stellung mit gleichen Zugmöglichkeiten und demselben Spieler am Zug mindestens zum dritten Mal auf dem Schachbrett entstanden ist 
+	\end{enumerate}
+	
+	\item[F3060] \textbf{\textit{Aufgeben: }} Während des Spiels kann jeder Spieler jederzeit aufgeben.
+	\item[F3070] \textbf{\textit{Spiel enden: }} Spiel endet falls eine von beiden Benutzern den anderen Schachmatt gesetzt hat oder eine von Unentschieden Situationen auftritt \textbf{\textit{F3050}}.
+	\item[F3080] \textbf{\textit{Rückkampf anbieten: }} Nachdem ein Spiel zu Ende gekommen ist, muss jeder Spieler den anderen Spieler einen Rückkampf anbieten zu können.
 \end{description}
 \newpage
 \section{Nichtfunktionale Anforderungen}
