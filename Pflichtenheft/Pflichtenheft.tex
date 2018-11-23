@@ -340,7 +340,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 
 \subsection{Spielverlauf} 
 \begin{description}
-	\item[F3010]\textbf{\textit{Bewegungsmöglichkeiten: }}Der Benutzer kann während des Spiels, falls er dran ist, einen Zug seiner Wahl unter Beibehaltung der Schach Spielregeln ausführen.
+	\hypertarget{F3010}{\item[F3010]}\textbf{\textit{Bewegungsmöglichkeiten: }} Der Benutzer kann während des Spiels, falls er dran ist, einen Zug seiner Wahl unter Beibehaltung der Schach Spielregeln ausführen.
 	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Ein Spieler, der Remis anbieten möchte, tut dies, nachdem er einen Zug auf dem Schachbrett ausgeführt und nachdem seine Uhr angehalten und die des Gegners sich in Gang gesetzt hat.
 	\item[F3030] \textbf{\textit{Remis annehmen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F3020}, das Angebot annehmen.
 	
@@ -362,13 +362,13 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 \section{Nichtfunktionale Anforderungen}
 \begin{description}
 	
-	\item[NF1010] Das Starten der App soll auf aktuellen Geräten maximal 3 Sekunden dauern. 
-	\item[NF1020] Der Erstellungsprozess \hyperlink{F2010}{\textbf{F2010}} einer neuen Partie darf nicht länger als 5 Sekunden dauern.
-	\item[NF1030] Die Ermittlung \hyperlink{F3010}{\textbf{F3010}} an möglichen gültigen Zügen darf nicht länger als 0,1 Sekunden dauern.
-	\item[NF1040] Die Weiterleitung und Überprüfung einzelner Züge soll auf dem Server nicht länger als 2 Sekunden dauern.
-	\item[NF1050]Bei Übertragungen zwischen zwei Geräten sollen keine Pakete unbemerkt verloren gehen.
-	\item[NF1060] Nachrichten/Spielzüge sollen unverändert am Empfänger eintreffen. Sollten Änderungen vorgenommen worden sein, soll dies vom Empfänger erkannt werden können.
-	\item[NF1070] Der Server soll wartungsfrei und ohne Neustarts auskommen.
+	\item[NF1010] \textbf{\textit{Start der App: }} Das Starten der App soll auf aktuellen Geräten maximal 3 Sekunden dauern. 
+	\item[NF1020] \textbf{\textit{Spiel Erstellung: }} Der Erstellungsprozess \hyperlink{F2010}{\textbf{F2010}} einer neuen Partie darf nicht länger als 5 Sekunden dauern.
+	\item[NF1030] \textbf{\textit{Ermittlung von Spielzügen: }} Die Ermittlung \hyperlink{F3010}{\textbf{F3010}} an möglichen gültigen Zügen darf nicht länger als 0,1 Sekunden dauern.
+	\item[NF1040] \textbf{\textit{Weiterleitung von Nachrichten: }} Die Weiterleitung und Überprüfung einzelner Züge soll auf dem Server nicht länger als 2 Sekunden dauern.
+	\item[NF1050] \textbf{\textit{Verlust von Paketen: }} Bei Übertragungen zwischen zwei Geräten sollen keine Pakete unbemerkt verloren gehen.
+	\item[NF1060] \textbf{\textit{Manipulation von Nachrichten: }} Nachrichten/Spielzüge sollen unverändert am Empfänger eintreffen. Sollten Änderungen vorgenommen worden sein, soll dies vom Empfänger erkannt werden können.
+	\item[NF1070] \textbf{\textit{Wartung: }} Der Server soll wartungsfrei und ohne Neustarts auskommen.
 
 	
 \end{description}
