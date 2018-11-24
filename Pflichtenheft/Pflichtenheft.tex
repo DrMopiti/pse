@@ -22,7 +22,7 @@ bookmarks=true,%
 \newglossaryentry{Schachregeln}
 {
 	name=Schachregeln,
-	description={Schachregeln die gültige Züge und das Ende des Spiels definieren. \href{https://de.wikipedia.org/wiki/Schach\#Spielregeln}{https://de.wikipedia.org/wiki/Schach\#Spielregeln}}
+	description={Regeln die die gültige Züge und das Ende eines Schachspiels definieren. \href{https://de.wikipedia.org/wiki/Schach\#Spielregeln}{https://de.wikipedia.org/wiki/Schach\#Spielregeln}}
 }
 
 \newglossaryentry{Schach}
@@ -112,7 +112,7 @@ bookmarks=true,%
 \newglossaryentry{Schach-Engine}
 {
 	name={Schach-Engine},
-	description={Ein Computer Programm zur Berechnung von möglichen Zügen \href{https://de.wikipedia.org/wiki/Schachprogramm}{https://de.wikipedia.org/wiki/Schachprogramm}}
+	description={Ein Computer Programm zur Berechnung von guten bzw. optimalen Zügen \href{https://de.wikipedia.org/wiki/Schachprogramm}{https://de.wikipedia.org/wiki/Schachprogramm}}
 }
 \newglossaryentry{Patt}
 {
@@ -287,7 +287,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 		\end{description}
 	\subsection{Hardware}
 		\begin{description}			
-			\item Ein Internetfähiges \gls{Smartphone} mit:
+			\item Ein internetfähiges \gls{Smartphone} mit:
 			\begin{itemize}
 			\item \gls{Android} Betriebssystem
 			\item Touchscreen
@@ -300,8 +300,8 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 \begin{description}
 	\item[F1010] \textbf{\textit{Anmelden: }} Ein \gls{Android} Nutzer der auch einen Google Account besitzt, kann sich auf der Hauptseite der App erfolgreich anmelden. Für die Anmeldung im System sind folgende Angaben erforderlich:
 	\begin{itemize}
-		\item e-Mail Adresse, die mit Google Konto in Verbindung steht
-		\item Google Konto Passwort 
+		\item e-Mail Adresse, die mit dem Google Konto in Verbindung steht
+		\item Passwort des Google Kontos
 	\end{itemize}  
 	\item[F1020] \textbf{\textit{Gastzugang: }} Benutzer die keinen Google Account besitzen, können sich als Gast im System anmelden. Bei der Anmeldung wird ihnen ein eindeutiger Benutzername vom System zugewiesen. 
 	\item[F1030] \textbf{\textit{Abmelden: }} Benutzer, die sich bereits mit ihrem Google Account angemeldet haben, können sich wieder vom System abmelden.
@@ -326,7 +326,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 
 \subsection{Initialisierung}
 \begin{description}
-	\hypertarget{F2010}{\item[F2010]}\textbf{\textit{Eröffnung 	eines Spieles: }} Der Benutzer kann Spiele suchen, ohne dabei einen anderen Benutzer als Gegner angeben zu müssen. Dann bekommt er vom System einen Gegner zugewiesen, der auch genauso ein Spiel gesucht hat. Die Farbe ist zufällig und es steht eine feste \gls{Bedenkzeit} von 15 Minuten für jeden Spieler.
+	\hypertarget{F2010}{\item[F2010]}\textbf{\textit{Eröffnung 	eines Spieles: }} Der Benutzer kann Spiele suchen, ohne dabei einen anderen Benutzer als Gegner angeben zu müssen. Dann bekommt er vom System einen Gegner zugewiesen, der auch genauso ein Spiel gesucht hat. Die Farbe ist zufällig und es gibt eine feste \gls{Bedenkzeit} von 15 Minuten für jeden Spieler.
 	
 	\item[F2020] \textbf{\textit{Herausfordern: }} Nachdem ein entsprechender Gegner ausgesucht wurde \textbf{\textit{F1050}} kann der Benutzer ihn zum Spiel herausfordern.
 	\item [F2030] \textbf{\textit{Akzeptieren einer Herausforderung: }} Der Benutzer kann die Herausforderung zum Spiel \textbf{F2030} annehmen.
@@ -335,7 +335,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\item[F2050] \textbf{\textit{Spieleinstellungen bestimmen: }} Bei der Herausforderung einer bestimmten Person zum Spiel \textbf{\textit{F2020}} kann der Herausforderer folgende
 	Spieleinstellungen aufstellen:
 	\begin{enumerate}
-		\item Zeit
+		\item \gls{Bedenkzeit}
 		\item Farbe
 	\end{enumerate}
 	
@@ -346,21 +346,21 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 
 \subsection{Spielverlauf} 
 \begin{description}
-	\item[F3010]\textbf{\textit{Schachfiguren bewegen: }}Der Benutzer kann während des Spiels, falls er dran ist, einen Zug seiner Wahl unter Beibehaltung der Schach Spielregeln ausführen wobei alle erlaubte Züge den Benutzer angezeigt werden.
-	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Ein Spieler, der Remis anbieten möchte, tut dies, nachdem er einen Zug auf dem Schachbrett ausgeführt und nachdem seine Uhr angehalten und die des Gegners sich in Gang gesetzt hat.
+	\item[F3010]\textbf{\textit{Schachfiguren bewegen: }}Der Benutzer kann während des Spiels, falls er dran ist, einen Zug seiner Wahl unter Beibehaltung der \gls{Schachregeln} ausführen, wobei alle erlaubte Züge dem Benutzer angezeigt werden.
+	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Ein Spieler der Remis anbieten möchte, tut dies, nachdem er einen Zug auf dem Schachbrett ausgeführt und nachdem seine Uhr angehalten und die des Gegners sich in Gang gesetzt hat.
 	\item[F3030] \textbf{\textit{Remis annehmen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F3020}, das Angebot annehmen.
 	
 	\item[F3040] \textbf{\textit{Remis ablehnen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F3020}, das Angebot ablehnen.
 	
 	\item[F3050] \textbf{\textit{Aufgeben: }} Während des Spiels kann jeder Spieler jederzeit aufgeben.
-	\item[F3060] \textbf{\textit{Spiel enden: }} Ein Spiel endet, falls einer von beiden Spielern den anderen Schachmatt gesetzt hat, oder eine von unten gezählten Remis Situation auftritt:
-	\begin{enumerate}
+	\item[F3060] \textbf{\textit{Spiel beenden: }} Ein Spiel endet, falls einer von beiden Spielern den anderen Schachmatt gesetzt hat, ein Spieler aufgegeben hat, oder eine von unten gezählten Remis Situation auftritt:
+	\begin{enumerate}	    
 		\item Falls einer von beiden Spielern Remis angeboten und der andere Spieler das Angebot angenommen hat
 		\item Falls ein \gls{Patt} auftritt
 		\item Falls eine \gls{tote Stellung} vorliegt
 		\item Wenn eine identische Stellung mit gleichen Zugmöglichkeiten und demselben Spieler am Zug mindestens zum dritten Mal auf dem Schachbrett entstanden ist 
 	\end{enumerate}
-	\item[F3070] \textbf{\textit{Rückkampf anbieten: }} Nachdem ein Spiel zu Ende gekommen ist, muss jeder Spieler den anderen Spieler einen Rückkampf anbieten zu können.		
+	\item[F3070] \textbf{\textit{Rückkampf anbieten: }} Nachdem ein Spiel zu Ende gekommen ist, muss jeder Spieler den anderen Spieler einen Rückkampf anbieten können.		
 	\item[F3080] \textbf{\textit{Multiplayer auf einem Gerät: }}  Mit einer Multiplayer Funktion können zwei Spieler auf einem Gerät gegeneinander spielen.
 \end{description}
 \newpage
@@ -385,7 +385,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 \subsection{System-Daten auf mobilen Geräten}
 \begin{description}
 	
-	\item[PD1010] \textbf{\textit{Die Einstellungen}}
+	\item[PD1010] \textbf{\textit{Einstellungen}}
 	\begin{description}
 	\item Die Einstellungen beinhalten:
 		
@@ -404,12 +404,13 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 
 \begin{description}
 	
-	\item[PD1020] \textbf{\textit{Spieldaten von der aktuell laufender Partie}}
+	\item[PD1020] \textbf{\textit{Spieldaten der aktuell laufenden Partie}}
 		\begin{description}
 	\item Zu den Spieldaten gehört:
 		\begin{itemize}
 		\item Partiekennung
 		\item Aktueller Zustand des Schachbretts	
+		\item zu ziehende Farbe
 	\end{itemize}
 
 	
@@ -428,6 +429,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 		\item Partiekennung
 		\item Benutzername beider \gls{Spieler}
 		\item Aktueller Zustand des Schachbrettes
+		\item zu ziehende Farbe
 		\item Alle bisherigen Züge
 	\end{itemize}
 
@@ -458,7 +460,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 			\item Sonstige Informationen von Login Providern
 			\item Spielstatistiken
 		\end{itemize}
-		\item Zusätzlich wird eine globales Rangliste über die besten \gls{Spieler} gespeichert.
+		\item Zusätzlich wird eine globale Rangliste über die besten \gls{Spieler} gespeichert.
 	\end{description}
 \end{description}
 \newpage
@@ -493,7 +495,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1020] \textbf{\textit{Google Login: }} Nach dem drücken auf den Knopf "Anmeldung mit Google" öffnet sich das Fenster für den Login.
+			\item[G1020] \textbf{\textit{Google Login: }} Nach dem Drücken auf den Knopf \glqq Anmeldung mit Google\grqq\ öffnet sich das Fenster für den Login.
 		\end{description}
 	\end{minipage}
 \end{figure}
@@ -510,10 +512,12 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1030] \textbf{\textit{Hauptmenü: }} Nach dem man sich angemeldet hat, erscheint das Hauptmenü mit den Buttons:
-			Sofortspiel: Spiel gegen einen zufälligen Gegner.
-			Spielersuche: Man kann einen Spieler mit seinem Spiernamen suchen und herausfordern.
-			Rangliste/Statistik.
+			\item[G1030] \textbf{\textit{Hauptmenü: }} Nachdem man sich angemeldet hat, erscheint das Hauptmenü mit den Buttons:
+			\begin{itemize}			
+			\item Sofortspiel: Spiele gegen einen zufälligen Gegner.
+			\item Spielersuche: Man kann einen Spieler mit seinem Spiernamen suchen und herausfordern.
+			\item Rangliste/Statistik.
+			\end{itemize}
 		\end{description}
 	\end{minipage}
 
@@ -528,7 +532,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1040] \textbf{\textit{Spielbrett: }} Bei einem Spiel werden nach der Wahl einer Figur die möglichen Züge angezeigt. Außerdem gibt es zwei Buttons Unentschieden und Aufgeben.
+			\item[G1040] \textbf{\textit{Spielbrett: }} Bei einem Spiel werden nach der Wahl einer Figur die möglichen Züge angezeigt. Außerdem gibt es die Buttons \glqq Unentschieden \grqq\ und \glqq Aufgeben \grqq.
 		\end{description}
 	\end{minipage}
 \end{figure}
@@ -545,7 +549,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1050] \textbf{\textit{Sieg: }} Wenn man eine Partie gewonnen hat erscheint ein Fenster mit der Meldung, dass man gewonnen hat und mit den zusätzlichen Knöpfen: Menü, Speichern und noch ein Spiel.
+			\item[G1050] \textbf{\textit{Sieg: }} Wenn man eine Partie gewonnen hat, erscheint ein Fenster mit der Meldung, dass man gewonnen hat und mit den zusätzlichen Knöpfen: \glqq Menü\grqq, \glqq Speichern\grqq\ und \glqq Noch ein Spiel?\grqq.
 		\end{description}
 	\end{minipage}
 
@@ -560,7 +564,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1060] \textbf{\textit{Aufgeben: }} Wenn man auf den Aufgeben Button drückt, erscheint ein Fenster, ob man wirklich aufhören möchte mit den Buttons: Ja und Nein.
+			\item[G1060] \textbf{\textit{Aufgeben: }} Wenn man auf den Button \glqq Aufgeben\grqq\  drückt, erscheint ein Fenster, ob man wirklich aufhören möchte mit den Buttons: \glqq Ja\grqq\ und \glqq Nein\grqq.
 		\end{description}
 	\end{minipage}
 \end{figure}
@@ -592,7 +596,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1080] \textbf{\textit{Spielersuche: }} Wenn man auf den Button Spielersuche im Menü [G1030] drückt, kann man mit einer Suchleiste Freunde suchen und gegen sie spielen.
+			\item[G1080] \textbf{\textit{Spielersuche: }} Wenn man auf den Button \glqq Spielersuche\grqq\ im Menü [G1030] drückt, kann man mit einer Suchleiste Freunde suchen und gegen sie spielen.
 		\end{description}
 	\end{minipage}
 \end{figure}
@@ -609,7 +613,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1090] \textbf{\textit{Freunde Herausfordern: }} Nach dem man bei der Spielersuche einen Freund gefunden und angewählt hat, öffnet sich die Statistik zu diesem Freund. Danach kann man ihn herausfordern.
+			\item[G1090] \textbf{\textit{Freunde Herausfordern: }} Nachdem man bei der Spielersuche einen Freund gefunden und angewählt hat, öffnet sich die Statistik zu diesem Freund. Danach kann man ihn herausfordern.
 		\end{description}
 	\end{minipage}
 
@@ -624,7 +628,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1110]\textbf{\textit{Spieleinstellung: }} Nachdem man auf den Button Herausfordern gedrückt hat, erscheint ein Fenster mit der Einstellung für die Farben, weiß, schwarz oder zufällig, und die Einstellung für die Zeit in Minuten.
+			\item[G1110]\textbf{\textit{Spieleinstellung: }} Nachdem man auf den Button \glqq Herausfordern\grqq\ gedrückt hat, erscheint ein Fenster mit der Einstellung für die Farben, weiß, schwarz oder zufällig, und die Einstellung für die Zeit in Minuten.
 		\end{description}
 	\end{minipage}
 \end{figure}
@@ -641,7 +645,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1120] \textbf{\textit{Rangliste: }} Wenn man auf den Button Rangliste/Statistik im Menü [G1030] drückt, erscheint die Rangliste der Nutzer aufgelistet in einer Tabelle mit den jeweiligen Punkten.
+			\item[G1120] \textbf{\textit{Rangliste: }} Wenn man auf den Button \glqq Rangliste/Statistik\grqq\ im Menü [G1030] drückt, erscheint die Rangliste der Nutzer aufgelistet in einer Tabelle mit den jeweiligen Punkten.
 		\end{description}
 	\end{minipage}
 
@@ -669,16 +673,16 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] App ist geschlossen
-			\item[Aktion] Benutzer öffnet App 
-			\item[Reaktion] Es öffnet sich die Startseite des App-s und Anmeldemöglichkeit mit Google Account  ist in der oberen Mitte
+			\item[Stand] App ist geschlossen und wurde noch nicht geöffnet.
+			\item[Aktion] Benutzer öffnet App .
+			\item[Reaktion] Es öffnet sich die Startseite der App und die Anmeldemöglichkeit mit Google Account  ist in der oberen Mitte.
 		\end{description} 
 		\item 
 		\begin{description}
-			\item[Stand] Benutzer befindet sich auf der Hauptseite des App-s
-			\item[Aktion] Benutzer drückt auf dem Knopf \textit{\textbf{Anmelden}} an und gibt seine Google Kennung  \textit{\textbf{mustermann@gmail.com }}als  eMail Adresse und \textit{\textbf{max1980!}} als Passwort ein.
+			\item[Stand] Benutzer befindet sich auf der Hauptseite der App.
+			\item[Aktion] Benutzer drückt auf den Knopf \textit{\textbf{Anmelden}} und gibt seine Google Kennung  \textit{\textbf{mustermann@gmail.com }}als  e-Mail Adresse und \textit{\textbf{max1980!}} als Passwort ein.
 			\item[Reaktion]
-			Falls Benutzer mit solcher eMail Adresse nicht existiert oder Passwort eingetippt war, dann bekommt Benutzer eine entsprechende Fehlermeldung. Bei erfolgreicher Anmeldung wird der Benutzer  automatisch zu einer neue Seite umgeleitet wo er Spiele erzeugen, seine Statistiken angucken oder anhand Benutzername einen Spieler suchen kann.
+			Falls ein Benutzer mit solcher e-Mail Adresse nicht existiert oder ein falsches Passwort eingetippt war, bekommt der Benutzer eine entsprechende Fehlermeldung. Bei erfolgreicher Anmeldung wird der Benutzer  automatisch zu einer neue Seite umgeleitet, wo er Spiele erzeugen, seine Statistiken einsehen oder anhand des Benutzernamens einen Spieler suchen kann.
 		\end{description}
 		
 	\end{enumerate}
@@ -687,8 +691,8 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] App ist offen und Benutzer befindet sich auf der Hauptseite des App-s
-			\item[Aktion] Benutzer drückt auf \textbf{\textit{Gastspiel}} Knopf, was sich auf untere Mitte der Hauptseite befindet.
+			\item[Stand] App ist offen und Benutzer befindet sich auf der Hauptseite der App.
+			\item[Aktion] Benutzer drückt auf den Knopf \textbf{\textit{Gastspiel}}, welcher sich in der unteren Mitte der Hauptseite befindet.
 			\item[Reaktion] Benutzer befindet sich auf der Seite wo er Spiele erzeugen kann.
 		\end{description} 
 		
@@ -697,8 +701,8 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] Benutzer ist angemeldet und befindet sich auf der Hauptseite des Apps 
-			\item[Aktion] Benutzer drückt auf \textbf{\textit{Abmelden}} Knopf
+			\item[Stand] Benutzer ist angemeldet und befindet sich auf der Hauptseite der App.
+			\item[Aktion] Benutzer drückt auf den Knopf \textbf{\textit{Abmelden}}.
 			\item[Reaktion] Benutzer befindet sich auf der Hauptseite und kann sich wieder anmelden oder als Gastspiel den Spiel betreten.
 		\end{description}
 	\end{enumerate}
@@ -707,9 +711,9 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] Benutzer hat sich schon angemeldet und befindet sich auf der Seite wo er Spiele erzeugen , Spieler suchen und seine Daten angucken kann
-			\item[Aktion] Benutzer drückt auf den Knopf \textbf{\textit{Spielerdaten}}
-			\item[Reaktion] Es öffnet sich eine neue Seite wo Benutzer seine Statistiken sieht
+			\item[Stand] Benutzer hat sich schon angemeldet und befindet sich auf der Seite wo er Spiele erzeugen , Spieler suchen und seine Daten einsehen kann.
+			\item[Aktion] Benutzer drückt auf den Knopf \textbf{\textit{Spielerdaten}}.
+			\item[Reaktion] Es öffnet sich eine neue Seite wo der Benutzer seine Statistiken sieht.
 		\end{description}
 	\end{enumerate}
 	
@@ -717,9 +721,9 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] Benutzer Befindet sich auf der Seite wo er anhand Benutzernamen andere Benutzer finden kann
-			\item[Aktion] Benutzer gibt \textbf{\textit{mustermann }} ein
-			\item[Reaktion] Falls \textbf{\textit{mustermann }} noch nicht im System vorhanden ist dann bekommt Benutzer eine entsprechende Meldung, ansonsten öffnet sich eine neue Seite wo Benutzer den anderen Benutzer herausfordern und seine Daten angucken kann.
+			\item[Stand] Benutzer befindet sich auf der Seite wo er anhand des Benutzernamens andere Benutzer finden kann.
+			\item[Aktion] Benutzer gibt \textbf{\textit{mustermann }}ein.
+			\item[Reaktion] Falls \textbf{\textit{mustermann }}noch nicht im System vorhanden ist, bekommt der Benutzer eine entsprechende Meldung, ansonsten öffnet sich eine neue Seite, wo der Benutzer den anderen Benutzer herausfordern und seine Daten ansehen kann.
 		\end{description}
 	\end{enumerate}
 	
@@ -727,9 +731,9 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] App ist offen 
-			\item[Aktion] Benutzer drückt auf dem Knopf Multiplayer 
-			\item[Reaktion] Es öffnet sich ein neues Spielbrett wo zwei Spieler auf einem Gerät gegenseitig Spielen können
+			\item[Stand] Die App ist offen.
+			\item[Aktion] Der Benutzer drückt auf dem Knopf \textbf{\textit{Multiplayer}}.
+			\item[Reaktion] Es öffnet sich ein neues Spielbrett wo zwei Spieler auf einem Gerät gegeneinander spielen können.
 		\end{description}
 	\end{enumerate}
 	
@@ -737,9 +741,9 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] Benutzer befindet sich auf der Seite wo er Spiele erzeugen kann
-			\item[Aktion] Benutzer klickt auf den Button \textbf{\textit{SofortSpiel}} 
-			\item[Reaktion] Entweder wartet der Benutzer bis auf ein andere Benutzer genauso einen Spiel erzeugt (dann fängt das Spiel zwischen zwei Benutzern an) oder kann der Benutzer den Warteprozess jederzeit abbrechen.
+			\item[Stand] Der Benutzer befindet sich auf der Seite wo er Spiele erzeugen kann.
+			\item[Aktion] Der Benutzer klickt auf den Button \textbf{\textit{SofortSpiel}}. 
+			\item[Reaktion] Entweder wartet der Benutzer bis ein anderer Benutzer genauso einen Spiel erzeugt (dann fängt das Spiel zwischen zwei Benutzern an) oder der Benutzer bricht den Warteprozess ab.
 		\end{description}
 	\end{enumerate}
 	
@@ -747,9 +751,9 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] App ist offen und der Benutzer will einen anderen Benutzer der gerade online ist und sich in keinem Spiel befindet, zum Spiel herausfordern
-			\item[Aktion] Benutzer klickt auf den Button \textbf{\textit{Herausfordern }} und wählt gewünschte Farbe und Zeitgrenze
-			\item[Reaktion] Herausgeforderte bekommt eine Meldung mit Benutzernamen des Herausforderers und mit einer Zeitgrenze der Herausforderer bestimmt hat. Falls kurz davor Herausgeforderte den App geschlossen hat oder einen Spiel mit jemandem angefangen hat dann bekommt Herausforderer eine entsprechende Meldung
+			\item[Stand] Die App ist offen und der Benutzer will einen anderen Benutzer der gerade online ist und sich in keinem Spiel befindet, zum Spiel herausfordern.
+			\item[Aktion] Der Benutzer klickt auf den Button \textbf{\textit{Herausfordern }} und wählt die gewünschte Farbe und \gls{Bedenkzeit}.
+			\item[Reaktion] Der Herausgeforderte bekommt eine Meldung mit dem Benutzernamen des Herausforderers und der \gls{Bedenkzeit}, die der Herausforderer bestimmt hat. Falls der Herausgeforderte kurz davor die App geschlossen hat oder ein Spiel mit jemand anderem angefangen hat, bekommt der Herausforderer eine entsprechende Meldung.
 		\end{description}
 	\end{enumerate}
 	
@@ -757,9 +761,9 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] Benutzer bekommt eine Meldung dass er von einem anderen Spieler herausgefordert wurde
-			\item[Aktion] Benutzer klickt auf den Button \textbf{\textit{Annehmen }} 
-			\item[Reaktion] Falls der Herausforderer kurz davor dass Herausgeforderte seine Herausforderung zum Spiel angenommen hat, den App geschlossen hat dann bekommt Herausgeforderte entsprechende Meldung, ansonsten fängt das Spiel an 
+			\item[Stand] Der Benutzer bekommt eine Meldung, dass er von einem anderen Spieler herausgefordert wurde.
+			\item[Aktion] Der Benutzer klickt auf den Button \textbf{\textit{Annehmen }}. 
+			\item[Reaktion] Falls der Herausforderer kurz bevor der Herausgeforderte seine Herausforderung zum Spiel angenommen hat, die App geschlossen hat, bekommt der Herausgeforderte eine entsprechende Meldung, ansonsten fängt das Spiel an.
 		\end{description}
 	\end{enumerate}
 	
@@ -767,9 +771,9 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] Benutzer bekommt eine Meldung dass er von einem anderen Spieler herausgefordert wurde
-			\item[Aktion] Benutzer klickt auf den Button \textbf{\textit{Ablehnen }} 
-			\item[Reaktion] Falls der Herausforderer kurz davor dass Herausgeforderte seine Herausforderung zum Spiel angenommen hat, die App geschlossen hat, dann bekommt Herausgeforderte entsprechende Meldung, ansonsten bekommt Herausforderer entsprechende Meldung dass Herausgeforderte die Herausforderung zum Spiel abgelehnt hat
+			\item[Stand] Der Benutzer bekommt eine Meldung, dass er von einem anderen Spieler herausgefordert wurde.
+			\item[Aktion] Der Benutzer klickt auf den Button \textbf{\textit{Ablehnen }}.
+			\item[Reaktion] Falls der Herausforderer kurz davor dass Herausgeforderte seine Herausforderung zum Spiel angenommen hat, die App geschlossen hat, dann bekommt Herausgeforderte entsprechende Meldung, ansonsten bekommt Herausforderer entsprechende Meldung dass Herausgeforderte die Herausforderung zum Spiel abgelehnt hat.
 		\end{description}
 	\end{enumerate}
 	
@@ -777,15 +781,15 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] Ein Spiel ist am Laufen und Benutzer ist am Zug
-			\item[Aktion] Benutzer klickt auf eine  Figur
-			\item[Reaktion] Falls die Figur seine eigene Figuren waren, dann es werden alle mögliche Zugfelder markiert, ansonsten wird nichts passieren.
+			\item[Stand] Ein Spiel ist am Laufen und der Benutzer ist am Zug.
+			\item[Aktion] Der Benutzer klickt auf eine  Figur.
+			\item[Reaktion] Falls die Figur seine eigene war, werden alle möglichen Zugfelder markiert, ansonsten wird nichts passieren.
 		\end{description}
 		\item 
 		\begin{description}
-			\item[Stand] Eine Schachfigur wurde angeklickt
+			\item[Stand] Eine Schachfigur wurde angeklickt.
 			\item[Aktion] Der Benutzer klickt auf ein  Feld.
-			\item[Reaktion] Falls es ein markiertes Feld war dann wird die Figur gezogen und die Daten an den Server gesendet, ansonsten es passiert nichts, die Figur wird nicht gezogen.
+			\item[Reaktion] Falls es ein markiertes Feld war, wird die Figur gezogen und die Daten an den Server gesendet, ansonsten passiert nichts, die Figur wird nicht gezogen.
 		\end{description}
 	\end{enumerate}
 	
@@ -794,9 +798,9 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] Ein Spiel ist am Laufen und Benutzer ist nicht am Zug
-			\item[Aktion] Ein Spieler bietet Remis an
-			\item[Reaktion] Der andere Spieler erhält eine Benachrichtigung mit Auswahlmöglichkeit
+			\item[Stand] Ein Spiel ist am Laufen und der Benutzer ist nicht am Zug.
+			\item[Aktion] Ein Spieler bietet Remis an.
+			\item[Reaktion] Der andere Spieler erhält eine Benachrichtigung mit Auswahlmöglichkeit.
 		\end{description}
 	\end{enumerate}
 	
@@ -804,9 +808,9 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] Remis wurde angeboten 
-			\item[Aktion] Der Spieler klickt auf den Button \textbf{\textit{Annehmen}} 
-			\item[Reaktion] Es erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert
+			\item[Stand] Es wurde Remis angeboten. 
+			\item[Aktion] Der Spieler klickt auf den Button \textbf{\textit{Annehmen}}. 
+			\item[Reaktion] Beiden Spielern erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert.
 		\end{description}
 	\end{enumerate}
 	
@@ -814,19 +818,29 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] Ein Spiel ist am Laufen
-			\item[Aktion] Der Spieler klickt auf den Button \textbf{\textit{Aufgeben}} 
-			\item[Reaktion] Es erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert
+			\item[Stand] Es wurde Remis angeboten .
+			\item[Aktion] Der Spieler klickt auf den Button \textbf{\textit{Ablehnen}}. 
+			\item[Reaktion] Der andere Spieler erhält eine Benachrichtigung, dass sein Remis abgelehnt wurde, das Spiel geht normal weiter.
 		\end{description}
 	\end{enumerate}
 	
-	\item[T3050] \textbf{\textit{Rückkampf anbieten: }} 
+	\item[T3050] \textbf{\textit{Aufgeben: }} 
 	\begin{enumerate}
 		\item 
 		\begin{description}
-			\item[Stand] Spiel ist beendet 
-			\item[Aktion] Eine von beiden Spieler drücken auf dem Button \textbf{\textit{Rückkampf}} 
-			\item[Reaktion] Anderer Spieler bekommt eine Benachrichtigung über den Rückkampf Angebot
+			\item[Stand] Ein Spiel ist am Laufen.
+			\item[Aktion] Der Spieler klickt auf den Button \textbf{\textit{Aufgeben}} 
+			\item[Reaktion] Beiden Spielern erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert.
+		\end{description}
+	\end{enumerate}
+	
+	\item[T3060] \textbf{\textit{Rückkampf anbieten: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] Ein Spiel ist beendet.
+			\item[Aktion] Einer von beiden Spieler drückt auf den Button \textbf{\textit{Rückkampf}}.
+			\item[Reaktion] Der andere Spieler bekommt eine Benachrichtigung über das Rückkampf Angebot.
 		\end{description}
 	\end{enumerate}
 	
@@ -839,19 +853,19 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 \section{Systemmodelle}
 \subsection{Szenarien}
 \textbf{Szenario 1: \glqq Spiele gegen zufälligen Spieler\grqq} \\
-Max Mustermann möchte eine Runde \Gls{Schach} in seiner Mittagspause spielen. Er holt sein \gls{Smartphone} aus der Tasche und klickt auf das Appsymbol.
+Max Mustermann möchte eine Runde \gls{Schach} in seiner Mittagspause spielen. Er holt sein \gls{Smartphone} aus der Tasche und klickt auf das Appsymbol.
 Da er die App noch nie verwendet hat, muss er sich zuerst anmelden. Nachdem er dies getan hat, befindet er sich im Hauptmenü.
-Da keiner seiner Kollegen Zeit hat, möchte er gegen einen zufälligen Gegner spielen. Nun klickt er auf \glqq Spiel suchen\grqq und bekommt die Meldung, dass er nun der Spielsuche hinzugefügt wurde.
+Da keiner seiner Kollegen Zeit hat, möchte er gegen einen zufälligen Gegner spielen. Nun klickt er auf \glqq Spiel suchen\grqq\ und bekommt die Meldung, dass er nun der Spielsuche hinzugefügt wurde.
 Nach kurzer Zeit bekommt er einen Gegner zugewiesen und die Partie beginnt. Vor ihm erscheint das \gls{Schachbrett} in seiner \gls{Ausgangsposition}.
 
 Herr Mustermann hat die Farbe Weiß zugewiesen bekommen und sein Gegner Schwarz. Er wählt einen Bauern an und bekommt seine möglichen Züge dieser \gls{Schachfigur} angezeigt.
 Max Mustermann macht seinen Zug. Als nächstes zieht sein Gegner. Nun ist er wieder am Zug. Beide ziehen nun immer abwechselnd. Nach 35 Zügen hat Herr Mustermann
-seinen Gegner \gls{Schachmatt} gesetzt. Die Partie ist somit beendet und Max Mustermann bekommt die Meldung, dass er gewonnen hat. Ihm steht nun zur Auswahl ob er eine Revanche anbieten möchte, die Partie auf seinem Gerät speichern will, oder einfach nur ins Hauptmenü möchte. Er klickt auf den Button \glqq Zum Hauptmenü\grqq und wird zum Hauptmenü weitergeleitet.
+seinen Gegner \gls{Schachmatt} gesetzt. Die Partie ist somit beendet und Max Mustermann bekommt die Meldung, dass er gewonnen hat. Ihm steht nun zur Auswahl ob er eine Revanche anbieten möchte, die Partie auf seinem Gerät speichern will, oder einfach nur ins Hauptmenü möchte. Er klickt auf den Button \glqq Zum Hauptmenü\grqq\ und wird zum Hauptmenü weitergeleitet.
 
 \textbf{Szenario 2: \glqq Spiele gegen einen Freund\grqq} \\
-Magnus und Fabiano wollen in ihrer Freizeit gegeneinander Schach spielen, haben aber gerade kein Schachbrett zur Hand. Beide öffnen auf ihren \gls{Android}-Gerät ihre Schach-App, und Magnus klickt auf den Button \glqq Spieler suchen\grqq. Es öffnet sich eine Spielerübersicht mit einer Suchleiste, in welcher er den Spielernamen von Fabiano eingibt. In der Spielerübersicht erscheint Fabianos Profil, welches Magnus anklickt. Daraufhin öffnet sich Fabianos Profilübersicht mit seinen Statistiken. Auf Fabianos Profil betätigt Magnus den Button \glqq Herausfordern\grqq, und es erscheint ein Auswahlfenster. Magnus wählt als \gls{Bedenkzeit} 2 Stunden und die zufällige Farbenverteilung. Fabiano erhält daraufhin eine Mitteilung, dass er von Magnus zu einem Spiel mit \gls{Bedenkzeit} 2 Stunden herausgefordert wurde, und hat die Möglichkeit, dieses anzunehmen oder abzulehnen. Er klickt auf \glqq Annehmen\grqq und beiden Spielern öffnet sich ein \gls{Schachbrett} in \gls{Ausgangsposition}.
+Magnus und Fabiano wollen in ihrer Freizeit gegeneinander Schach spielen, haben aber gerade kein Schachbrett zur Hand. Beide öffnen auf ihren \gls{Android}-Gerät ihre Schach-App, und Magnus klickt auf den Button \glqq Spieler suchen\grqq. Es öffnet sich eine Spielerübersicht mit einer Suchleiste, in welcher er den Spielernamen von Fabiano eingibt. In der Spielerübersicht erscheint Fabianos Profil, welches Magnus anklickt. Daraufhin öffnet sich Fabianos Profilübersicht mit seinen Statistiken. Auf Fabianos Profil betätigt Magnus den Button \glqq Herausfordern\grqq, und es erscheint ein Auswahlfenster. Magnus wählt als \gls{Bedenkzeit} 2 Stunden und die zufällige Farbenverteilung. Fabiano erhält daraufhin eine Mitteilung, dass er von Magnus zu einem Spiel mit \gls{Bedenkzeit} 2 Stunden herausgefordert wurde, und hat die Möglichkeit, dieses anzunehmen oder abzulehnen. Er klickt auf \glqq Annehmen\grqq\ und beiden Spielern öffnet sich ein \gls{Schachbrett} in \gls{Ausgangsposition}.
 
-Magnus bekommt die schwarzen Figuren zugeteilt, Fabiano die weißen. Nach 115 Zügen ist die Stellung immer noch ausgeglichen und Fabiano klickt auf \glqq Remis anbieten\grqq. Magnus erhält eine Benachrichtigung mit der Möglichkeit, das \gls{Remis} anzunehmen oder abzulehnen. Auch er sieht in der Stellung keine Gewinnmöglichkeit und klickt deshalb auf \glqq Akzeptieren\grqq. Das Spiel wird beendet und die Statistiken beider Spieler werden aktualisiert. Beide Spieler erhalten eine Mitteilung mit der Möglichkeit, eine \gls{Revanche} zu fordern und das Spiel abzuspeichern. Da Magnus das Spiel gerne noch einmal ansehen möchte, klickt er auf \glqq Spiel speichern\grqq und erhält eine Textdatei mit der algebraischen \gls{Notation} der Partie auf sein \gls{Smartphone}.
+Magnus bekommt die schwarzen Figuren zugeteilt, Fabiano die weißen. Nach 115 Zügen ist die Stellung immer noch ausgeglichen und Fabiano klickt auf \glqq Remis anbieten\grqq. Magnus erhält eine Benachrichtigung mit der Möglichkeit, das \gls{Remis} anzunehmen oder abzulehnen. Auch er sieht in der Stellung keine Gewinnmöglichkeit und klickt deshalb auf \glqq Akzeptieren\grqq. Das Spiel wird beendet und die Statistiken beider Spieler werden aktualisiert. Beide Spieler erhalten eine Mitteilung mit der Möglichkeit, eine \gls{Revanche} zu fordern und das Spiel abzuspeichern. Da Magnus das Spiel gerne noch einmal ansehen möchte, klickt er auf \glqq Spiel speichern\grqq\ und erhält eine Textdatei mit der algebraischen \gls{Notation} der Partie auf sein \gls{Smartphone}.
 
 \textbf{Szenario 3: \glqq Statistiken einsehen\grqq} \\
 Magnus behauptet, er wäre ein besserer Spieler als Fabiano. Dieser zweifelt das an, und bittet Magnus, dessen Statistiken mit seinen zu vergleichen. Beide öffnen ihre Schachapp und sind direkt mit ihrem Account angemeldet, da sie dies vorher eingestellt haben. Anschließend klicken sie im Hauptmenü ihrer Schach-App auf \glqq Statistiken\grqq. Sie können nun jeweils ihre Anzahl an gespielten, gewonnenen, remisierten und verlorenen Spielen, sowie ihre \gls{Elo}zahl einsehen. Beide kommen zu dem Schluss, dass Magnus bessere Werte vorzuweisen hat.
