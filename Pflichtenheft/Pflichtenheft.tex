@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage[toc]{glossaries}
 \usepackage{caption}
+\usepackage{pdfpages}
 \hypersetup{ % ‘texdoc hyperref‘ for options 
 pdftitle={PSE Pflichtenheft}, %
 bookmarks=true,%
@@ -113,11 +114,16 @@ bookmarks=true,%
 	name={Schach-Engine},
 	description={Ein Computer Programm zur Berechnung von möglichen Zügen \href{https://de.wikipedia.org/wiki/Schachprogramm}{https://de.wikipedia.org/wiki/Schachprogramm}}
 }
-\newglossaryentry{Patt}{
+\newglossaryentry{Patt}
+{
 	name={Patt},
 	description={Patt im Schach tritt auf, falls dem am Zug befindlichen Spieler keine Zugmöglichkeit zur Verfügung steht, sein König sich jedoch nicht im Schach befindet}
 }
-\newglossaryentry{tote Stellung}{name={tote Stellung},description={Tote Stellung liegt vor, falls eine Stellung entstanden ist, in welcher keiner der Spieler den gegnerischen König mit irgendeiner Folge von regelgemäßen Zügen mattsetzen kann. Zumeist hat hierbei keiner der beiden Spieler genug Figuren übrig, um den anderen Spieler mattsetzen zu können (z. B. König gegen König, König gegen König und Springer, König gegen König und Läufer). Es gibt auch Fälle, in denen etwa aufgrund einer verkeilten Bauernstruktur keiner der Spieler gewinnen kann.}}
+\newglossaryentry{tote Stellung}
+{
+	name={tote Stellung},
+	description={Eine tote Stellung liegt vor, falls eine Stellung entstanden ist, in welcher keiner der Spieler den gegnerischen König mit irgendeiner Folge von regelgemäßen Zügen mattsetzen kann. Zumeist hat hierbei keiner der beiden Spieler genug Figuren übrig, um den anderen Spieler mattsetzen zu können (z. B. König gegen König, König gegen König und Springer, König gegen König und Läufer). Es gibt auch Fälle, in denen etwa aufgrund einer verkeilten Bauernstruktur keiner der Spieler gewinnen kann.}
+}
 
 \newacronym{GUI}{GUI}{Graphical User Interface}
 
@@ -125,12 +131,14 @@ bookmarks=true,%
 
 \begin{document}
 	\begin{titlepage}
-		\centering
-		\vspace*{0.2\textheight}
-		{\Large PSE}\\[\baselineskip]
-		{\Huge PFLICHTENHEFT}\\[\baselineskip]\par
-		{\LARGE Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev, Florian Weber}\par
-	
+		
+		
+		%\centering
+		%\vspace*{0.2\textheight}
+		%{\Large PSE}\\[\baselineskip]
+		%{\Huge PFLICHTENHEFT}\\[\baselineskip]\par
+		%{\LARGE Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev, Florian Weber}\par
+	\includepdf{Titelblatt.pdf}
 	\newpage	
 	\tableofcontents
 	\pagebreak
@@ -140,8 +148,8 @@ bookmarks=true,%
 
 \gls{Schach} ist weltweit bekannt und hat über viele Jahre hinweg eine tiefe kulturelle Bedeutung erlangt. Dadurch ist es zu einer Sportart geworden, die viele begeistert.
 Deshalb soll im Rahmen der Praxis der Softwareentwicklung eine \gls{Schach}-App entwickelt werden, die es ermöglicht zu jeder Zeit Schach zu spielen.
-Spieler sollen Gegner durch eine Spielersuche finden. Außerdem können sie sich in einer Rangliste vergleichen und es wird eine Statistik über jeden Spieler geführt.
-Die App soll somit ein \gls{Schach}spiel simulieren, wo man trotz weiter Entfernungen gegeneinander spielen kann, ohne sich gegenüber zu sitzen.
+Spieler sollen Gegner durch eine Spielsuche finden. Außerdem können sie sich in einer Rangliste vergleichen und es wird eine Statistik über jeden Spieler geführt.
+Die App soll somit eine Partie \gls{Schach} ermöglichen, die man trotz weiter Entfernungen spielen kann, ohne sich gegenüber zu sitzen.
 Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen, sich mit anderen Spielern vergleichen und gegen seine Freunde spielen.
 
 \subsection{Musskriterien}
@@ -155,7 +163,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 \begin{itemize}
 	\item Der Nutzer soll nur gültige Züge, die den \gls{Schachregeln} entsprechen, ausführen können.
 \end{itemize}
-\item[KM1030] \textbf{\textit{Spielersuche}}
+\item[KM1030] \textbf{\textit{Spielsuche}}
 \begin{itemize}
 	\item Es soll dem Spieler möglich sein mit anderen Spielern zu spielen und zwar:
 	\begin{itemize}
@@ -204,22 +212,22 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	
 	\item[KW1030] \textbf{\textit{Einstellbare Bedenkzeit und Spielfarbe}}
 	\begin{itemize}
-		\item Beide Spieler einer Partie sollen eine maximale Bedenkzeit haben.
-		\item Beim Herausfordern eines zuvor gewählten Spielers soll die Bedenkzeit sowie die gewünschte Spielfarbe einstellbar sein.
-		\item Zur Wahl der Bedenkzeit soll eine Liste mit möglichen Zeiten erscheinen.
-		\item Bei der Farbwahl soll zwischen Weiß, Schwarz und zufällig gewählt werden				können.
+		\item Beide Spieler einer Partie sollen eine maximale \gls{Bedenkzeit} haben.
+		\item Beim Herausfordern eines zuvor gewählten Spielers soll die \gls{Bedenkzeit} sowie die gewünschte Spielfarbe einstellbar sein.
+		\item Zur Wahl der \gls{Bedenkzeit} soll eine Liste mit möglichen Zeiten erscheinen.
+		\item Bei der Farbwahl soll zwischen Weiß, Schwarz und zufällig gewählt werden können.
 	\end{itemize}
 	
 	\item[KW1040] 
-	\begin{itemize} \textbf{\textit{Spielerchat}}
+	\begin{itemize} \textbf{\textit{Chat}}
 		\item \gls{Spieler} können einen Chat mit dem entsprechenden Gegner führen.
 		\item Dazu soll es während einer Partie ein Chatsymbol geben, welches ein Chatfenster öffnet.
-		\item Dort können Nachrichten an den Gegner verschickt werden können, sowie Spielmeldungen erscheinen.
+		\item Dort können Nachrichten an den Gegner verschickt werden, sowie Spielmeldungen erscheinen.
 	\end{itemize}
 	
 	\item[KW1050] \textbf{\textit{\gls{Elo}system und Rangliste}}
 	\begin{itemize}
-	\item Es soll für jeden Spieler eine \gls{Elo}zahl zur Messung der Spielerstärke existieren.
+	\item Es soll für jeden Spieler eine \gls{Elo}zahl zur Messung der Spielstärke existieren.
 	\item Nach jeder Partie sollen die Werte beider Spieler entsprechend einer Formel aktualisiert werden.
 	\item Es soll eine Rangliste existieren, in welcher alle Spieler anhand ihrer \gls{Elo}zahl in absteigender Reihenfolge gelistet werden .
 	\end{itemize}
@@ -292,8 +300,8 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 \begin{description}
 	\item[F1010] \textbf{\textit{Anmelden: }} Ein \gls{Android} Nutzer der auch einen Google Account besitzt, kann sich auf der Hauptseite der App erfolgreich anmelden. Für die Anmeldung im System sind folgende Angaben erforderlich:
 	\begin{itemize}
-		\item e-Mail Adresse, die mit Google Konto in Verbindung steht
-		\item Google Konto Passwort 
+		\item Eine e-Mail Adresse, die mit einem Google Konto in Verbindung steht
+		\item Ein Google Konto Passwort 
 	\end{itemize}  
 	\item[F1020] \textbf{\textit{Gastzugang: }} Benutzer die keinen Google Account besitzen, können sich als Gast im System anmelden. Bei der Anmeldung wird ihnen ein eindeutiger Benutzername vom System zugewiesen. 
 	\item[F1030] \textbf{\textit{Abmelden: }} Benutzer, die sich bereits mit ihrem Google Account angemeldet haben, können sich wieder vom System abmelden.
@@ -305,7 +313,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 		\item Wie viele Male gewonnen wurde
 		\item Wie viele Male verloren wurde
 		\item Wie viele Spiele unentschieden gespielt wurden
-		\item Elo-Zahl
+		\item \gls{Elo}-Zahl
 		
 	\end{itemize}
 	\item[F1050] \textbf{\textit{Suche nach Benutzern: }} Der Benutzer kann mit der Suchfunktion nach anderen Benutzern des Systems anhand ihres Benutzernamens suchen.
@@ -321,7 +329,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 
 \subsection{Initialisierung}
 \begin{description}
-	\hypertarget{F2010}{\item[F2010]}\textbf{\textit{Eröffnung 	eines Spieles: }} Der Benutzer kann Spiele suchen, ohne dabei einen anderen Benutzer als Gegner angeben zu müssen. Dann bekommt er vom System einen Gegner zugewiesen, der auch genauso ein Spiel gesucht hat. Die Farbe ist zufällig und es steht eine feste \gls{Bedenkzeit} von 15 Minuten für jeden Spieler.
+	\hypertarget{F2010}{\item[F2010]}\textbf{\textit{Eröffnung 	eines Spieles: }} Der Benutzer kann Spiele suchen, ohne dabei einen anderen Benutzer als Gegner angeben zu müssen. Dann bekommt er vom System einen Gegner zugewiesen, der auch genauso ein Spiel gesucht hat. Die Farbe ist zufällig und es steht eine feste \gls{Bedenkzeit} von 15 Minuten für jeden Spieler fest.
 	\item[F2020] \textbf{\textit{Spieleinstellungen bestimmen: }} Bei der Herausforderung einer bestimmten Person zum Spiel \textbf{\textit{F2050}} kann der Herausforderer folgende
 	Spieleinstellungen aufstellen:
 	\begin{enumerate}
@@ -356,7 +364,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	
 	\item[F3060] \textbf{\textit{Aufgeben: }} Während des Spiels kann jeder Spieler jederzeit aufgeben.
 	\item[F3070] \textbf{\textit{Spiel enden: }} Ein Spiel endet, falls einer von beiden Spielern den anderen Schachmatt gesetzt hat, oder eine der Remis Situationen auftritt \textbf{\textit{F3050}}.
-	\item[F3080] \textbf{\textit{Rückkampf anbieten: }} Nachdem ein Spiel zu Ende gekommen ist, muss jeder Spieler den anderen Spieler einen Rückkampf anbieten zu können.
+	\item[F3080] \textbf{\textit{Rückkampf anbieten: }} Nachdem ein Spiel zu Ende gekommen ist, muss jeder Spieler dmn anderen Spieler einen Rückkampf anbieten können.
 \end{description}
 \newpage
 \section{Nichtfunktionale Anforderungen}
@@ -379,7 +387,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 \subsection{System-Daten auf mobilen Geräten}
 \begin{description}
 	
-	\item[PD1010] Die Einstellungen
+	\item[PD1010] \textbf{\textit{Die Einstellungen}}
 	\begin{description}
 	\item Die Einstellungen beinhalten:
 		
@@ -398,7 +406,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 
 \begin{description}
 	
-	\item[PD1020] Spieldaten von der aktuell laufender Partie
+	\item[PD1020] \textbf{\textit{Spieldaten von der aktuell laufender Partie}}
 		\begin{description}
 	\item Zu den Spieldaten gehört:
 		\begin{itemize}
@@ -414,8 +422,8 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 \subsection{System-Daten auf zentralem Server}
 \begin{description}
 	
-\item[PD2010] Server-Einstellungen
-\item[PD2020] Partie-Informationen
+\item[PD2010] \textbf{\textit{Server-Einstellungen}}
+\item[PD2020] \textbf{\textit{Partie-Informationen}}
 \begin{description} 
 	\item Für jede Partie wird folgendes gespeichert:
 	\begin{itemize}
@@ -430,7 +438,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 
 \subsection{Benutzer-Daten auf mobilen Geräten}
 \begin{description}
-\item[PD3010]  Benutzerinformationen
+\item[PD3010]  \textbf{\textit{Benutzerinformationen}}
 \begin{description} 
 	\item Folgende Daten werden über jeden Benutzer gespeichert:
 	\begin{itemize}
@@ -443,7 +451,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 
 \subsection{Benutzer-Daten auf zentralem Server}
 \begin{description}
-	\item[PD4010]  Benutzerinformationen
+	\item[PD4010]  \textbf{\textit{Benutzerinformationen}}
 	\begin{description} 
 		\item Folgende Daten werden über jeden Benutzer gespeichert:
 		\begin{itemize}
@@ -472,7 +480,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			 \item[G1010] \textbf{\textit{Anmeldemenü: }} Startbildschirm der App. Hier kann man sich entweder über eine Google-Anmeldung anmelden oder als Gastspieler spielen.
+			 \item[G1010] \textbf{\textit{Anmeldemenü: }} Startbildschirm der App. Hier kann man sich entweder über eine Google-Anmeldung anmelden oder als Gast spielen.
 		\end{description}
 	\end{minipage}
 
@@ -487,7 +495,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1020] \textbf{\textit{Google Login: }} Nach dem drücken auf den Anmeldeknopf mit Google öffnet sich das Fenster für das Login.
+			\item[G1020] \textbf{\textit{Google Login: }} Nach dem drücken auf den Knopf "Anmeldung mit Google" öffnet sich das Fenster für den Login.
 		\end{description}
 	\end{minipage}
 \end{figure}
@@ -522,7 +530,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1040] \textbf{\textit{Spielbrett: }} Bei einem Spiel können nach der Wahl einer Figur die möglichen Züge angezeigt werden. Außerdem gibt es zwei Buttons Unentschieden und Aufgeben.
+			\item[G1040] \textbf{\textit{Spielbrett: }} Bei einem Spiel werden nach der Wahl einer Figur die möglichen Züge angezeigt. Außerdem gibt es zwei Buttons Unentschieden und Aufgeben.
 		\end{description}
 	\end{minipage}
 \end{figure}
@@ -539,7 +547,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1050] \textbf{\textit{Sieg: }} Wenn man eine Partie gewonnen hat taucht ein Fenster auf, dass man gewonnen hat und mit den zusätzlichen Knöpfen: Menü, Speichern und noch ein Spiel.
+			\item[G1050] \textbf{\textit{Sieg: }} Wenn man eine Partie gewonnen hat erscheint ein Fenster mit der Meldung, dass man gewonnen hat und mit den zusätzlichen Knöpfen: Menü, Speichern und noch ein Spiel.
 		\end{description}
 	\end{minipage}
 
@@ -571,7 +579,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1070] \textbf{\textit{Unentschieden: }} Wenn man die Partie mit Unentschieden beendet, taucht ein Fenster auf. Man kann dann noch einmal gegen den gleichen Spieler spielen.
+			\item[G1070] \textbf{\textit{Unentschieden: }} Wenn man die Partie mit einem Unentschieden beendet, taucht ein Fenster auf. Man kann bei Bedarf noch einmal gegen den gleichen Spieler spielen.
 		\end{description}
 	\end{minipage}
 
@@ -586,7 +594,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1080] \textbf{\textit{Spielersuche: }} Wenn man auf den Button Spielersuche im Menü [S03] drückt, kann man mit einer Suchleiste Freunde mit der jeweiligen Elo-Zahl suchen und gegen sie spielen.
+			\item[G1080] \textbf{\textit{Spielersuche: }} Wenn man auf den Button Spielersuche im Menü [S03] drückt, kann man mit einer Suchleiste Freunde suchen und gegen sie spielen.
 		\end{description}
 	\end{minipage}
 \end{figure}
@@ -603,7 +611,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1090] \textbf{\textit{Freunde Herausfordern: }} Nach dem man bei der Spielersuche einen Freund gefunden und draufgedrückt hat, öffnet sich die Statistik zu dem Freund. Danach kann man ihn herausfordern.
+			\item[G1090] \textbf{\textit{Freunde Herausfordern: }} Nach dem man bei der Spielersuche einen Freund gefunden und angewählt hat, öffnet sich die Statistik zu diesem Freund. Danach kann man ihn herausfordern.
 		\end{description}
 	\end{minipage}
 
@@ -618,7 +626,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1110]\textbf{\textit{Spieleinstellug: }} Nach dem man auf den Button Herausfordern gedrückt hat, erscheint ein Fenster mit der Einstellung für die Farben, weiß, schwarz oder zufällig, und die Einstellung für die Zeit in Minuten.
+			\item[G1110]\textbf{\textit{Spieleinstellug: }} Nachdem man auf den Button Herausfordern gedrückt hat, erscheint ein Fenster mit der Einstellung für die Farben, weiß, schwarz oder zufällig, und die Einstellung für die Zeit in Minuten.
 		\end{description}
 	\end{minipage}
 \end{figure}
@@ -635,7 +643,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1120] \textbf{\textit{Rangliste: }} Wenn man auf den Button Spielerdaten im Menü [S03] drückt, erscheint die Rangliste des Nutzers aufgelistet in einer Tabelle mit den jeweiligen Punkten.
+			\item[G1120] \textbf{\textit{Rangliste: }} Wenn man auf den Button Spielerdaten im Menü [S03] drückt, erscheint die Rangliste der Nutzer aufgelistet in einer Tabelle mit den jeweiligen Punkten.
 		\end{description}
 	\end{minipage}
 
@@ -650,7 +658,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1130] \textbf{\textit{Statistik: }} Beim weitern Scrollen von [S11] nach unten erscheint die Spielerstatistik des Nutzers. Dort werden Angaben über die gewonnen Spiele, verlorenen Spiele, Gewinnrate, Unentschieden, Gesamtspielanzahl und dem Elo Wert gemacht.
+			\item[G1130] \textbf{\textit{Statistik: }} Beim weiteren Scrollen von [S11] nach unten erscheint die Spielstatistik des Nutzers. Dort werden Angaben über die gewonnen Spiele, verlorenen Spiele, Gewinnrate, Unentschieden, Gesamtspielanzahl und dem Elo Wert gemacht.
 		\end{description}
 	\end{minipage}
 \end{figure}
@@ -682,7 +690,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 \section{Systemmodelle}
 \subsection{Szenarien}
 \textbf{Szenario 1: \glqq Spiele gegen zufälligen Spieler\grqq} \\
-Max Mustermann möchte eine Runde Schach in seiner Mittagspause spielen. Er holt sein Smartphone aus der Tasche und klickt auf das Appsymbol.
+Max Mustermann möchte eine Runde \Gls{Schach} in seiner Mittagspause spielen. Er holt sein \gls{Smartphone} aus der Tasche und klickt auf das Appsymbol.
 Da er die App noch nie verwendet hat, muss er sich zuerst anmelden. Nachdem er dies getan hat, befindet er sich im Hauptmenü.
 Da keiner seiner Kollegen Zeit hat, möchte er gegen einen zufälligen Gegner spielen. Nun klickt er auf \glqq Spiel suchen\grqq und bekommt die Meldung, dass er nun der Spielsuche hinzugefügt wurde.
 Nach kurzer Zeit bekommt er einen Gegner zugewiesen und die Partie beginnt. Vor ihm erscheint das \gls{Schachbrett} in seiner \gls{Ausgangsposition}.
