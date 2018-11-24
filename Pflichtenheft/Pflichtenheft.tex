@@ -300,46 +300,44 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 \begin{description}
 	\item[F1010] \textbf{\textit{Anmelden: }} Ein \gls{Android} Nutzer der auch einen Google Account besitzt, kann sich auf der Hauptseite der App erfolgreich anmelden. Für die Anmeldung im System sind folgende Angaben erforderlich:
 	\begin{itemize}
-		\item Eine e-Mail Adresse, die mit einem Google Konto in Verbindung steht
-		\item Ein Google Konto Passwort 
+		\item e-Mail Adresse, die mit Google Konto in Verbindung steht
+		\item Google Konto Passwort 
 	\end{itemize}  
 	\item[F1020] \textbf{\textit{Gastzugang: }} Benutzer die keinen Google Account besitzen, können sich als Gast im System anmelden. Bei der Anmeldung wird ihnen ein eindeutiger Benutzername vom System zugewiesen. 
 	\item[F1030] \textbf{\textit{Abmelden: }} Benutzer, die sich bereits mit ihrem Google Account angemeldet haben, können sich wieder vom System abmelden.
 	
 	\item [F1040] \textbf{\textit{Anzeige des eigenen, persönlichen Profils: }}  Der Benutzer kann sich sein persönliches Profil anzeigen lassen. Dabei sieht er seine Statistiken:
-
+	
 	\begin{itemize}
 		\item Wie viele Spiele gespielt wurden
 		\item Wie viele Male gewonnen wurde
 		\item Wie viele Male verloren wurde
 		\item Wie viele Spiele unentschieden gespielt wurden
-		\item \gls{Elo}-Zahl
+		\item Elo-Zahl
 		
 	\end{itemize}
 	\item[F1050] \textbf{\textit{Suche nach Benutzern: }} Der Benutzer kann mit der Suchfunktion nach anderen Benutzern des Systems anhand ihres Benutzernamens suchen.
 	
 	\item[F1060]  \textbf{\textit{Anzeigen der persönlichen Profile anderer Benutzer: }}
 	Der Benutzer kann sich die persönlichen Profile von anderen Benutzern anzeigen lassen, wobei er den Benutzernamen und die Statistiken sieht. Die anderen Benutzer können sich genauso sein Profil anzeigen lassen.
-	
-	\item[F1070] \textbf{\textit{Multiplayer auf einem Gerät: }}  Mit einer Multiplayer Funktion können zwei Spieler auf einem Gerät gegeneinander spielen
-	
-	\item[F1080] \textbf{\textit{Chatten: }} Spieler können während des Spiels miteinander chatten.	
+	\item[F1070] \textbf{\textit{Chatten: }} Spieler können während des Spiels miteinander chatten.	
 	
 \end{description}
 
 \subsection{Initialisierung}
 \begin{description}
-	\hypertarget{F2010}{\item[F2010]}\textbf{\textit{Eröffnung 	eines Spieles: }} Der Benutzer kann Spiele suchen, ohne dabei einen anderen Benutzer als Gegner angeben zu müssen. Dann bekommt er vom System einen Gegner zugewiesen, der auch genauso ein Spiel gesucht hat. Die Farbe ist zufällig und es steht eine feste \gls{Bedenkzeit} von 15 Minuten für jeden Spieler fest.
-	\item[F2020] \textbf{\textit{Spieleinstellungen bestimmen: }} Bei der Herausforderung einer bestimmten Person zum Spiel \textbf{\textit{F2050}} kann der Herausforderer folgende
+	\hypertarget{F2010}{\item[F2010]}\textbf{\textit{Eröffnung 	eines Spieles: }} Der Benutzer kann Spiele suchen, ohne dabei einen anderen Benutzer als Gegner angeben zu müssen. Dann bekommt er vom System einen Gegner zugewiesen, der auch genauso ein Spiel gesucht hat. Die Farbe ist zufällig und es steht eine feste \gls{Bedenkzeit} von 15 Minuten für jeden Spieler.
+	
+	\item[F2020] \textbf{\textit{Herausfordern: }} Nachdem ein entsprechender Gegner ausgesucht wurde \textbf{\textit{F1050}} kann der Benutzer ihn zum Spiel herausfordern.
+	\item [F2030] \textbf{\textit{Akzeptieren einer Herausforderung: }} Der Benutzer kann die Herausforderung zum Spiel \textbf{F2030} annehmen.
+	\item [F2040] \textbf{\textit{Ablehnung einer Herausforderung: }} Der Benutzer kann die Herausforderung zum Spiel \textbf{F2030} ablehnen.
+	
+	\item[F2050] \textbf{\textit{Spieleinstellungen bestimmen: }} Bei der Herausforderung einer bestimmten Person zum Spiel \textbf{\textit{F2020}} kann der Herausforderer folgende
 	Spieleinstellungen aufstellen:
 	\begin{enumerate}
 		\item Zeit
 		\item Farbe
 	\end{enumerate}
-	\item[F2030] \textbf{\textit{Herausfordern: }} Nachdem ein entsprechender Gegner ausgesucht wurde \textbf{\textit{F1050}} kann der Benutzer ihn zum Spiel herausfordern.
-	\item [F2040] \textbf{\textit{Akzeptieren einer Herausforderung: }} Der Benutzer kann die Herausforderung zum Spiel \textbf{F2030} annehmen.
-	\item [F2050] \textbf{\textit{Ablehnung einer Herausforderung: }} Der Benutzer kann die Herausforderung zum Spiel \textbf{F2030} ablehnen.
-	
 	
 	
 	
@@ -348,23 +346,22 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 
 \subsection{Spielverlauf} 
 \begin{description}
-	\hypertarget{F3010}{\item[F3010]}\textbf{\textit{Bewegungsmöglichkeiten: }} Der Benutzer kann während des Spiels, falls er dran ist, einen Zug seiner Wahl unter Beibehaltung der Schach Spielregeln ausführen.
+	\item[F3010]\textbf{\textit{Schachfiguren bewegen: }}Der Benutzer kann während des Spiels, falls er dran ist, einen Zug seiner Wahl unter Beibehaltung der Schach Spielregeln ausführen wobei alle erlaubte Züge den Benutzer angezeigt werden.
 	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Ein Spieler, der Remis anbieten möchte, tut dies, nachdem er einen Zug auf dem Schachbrett ausgeführt und nachdem seine Uhr angehalten und die des Gegners sich in Gang gesetzt hat.
 	\item[F3030] \textbf{\textit{Remis annehmen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F3020}, das Angebot annehmen.
 	
 	\item[F3040] \textbf{\textit{Remis ablehnen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F3020}, das Angebot ablehnen.
 	
-	\item[F3050] \textbf{\textit{Unentschieden bleiben: }}
-	Ein Spiel bleibt Unentschieden, falls einer von beiden Spielern Remis angeboten und der andere Spieler das Angebot angenommen hat; oder wenn nach Schachregeln eine Remis Situation auftritt:
+	\item[F3050] \textbf{\textit{Aufgeben: }} Während des Spiels kann jeder Spieler jederzeit aufgeben.
+	\item[F3060] \textbf{\textit{Spiel enden: }} Ein Spiel endet, falls einer von beiden Spielern den anderen Schachmatt gesetzt hat, oder eine von unten gezählten Remis Situation auftritt:
 	\begin{enumerate}
+		\item Falls einer von beiden Spielern Remis angeboten und der andere Spieler das Angebot angenommen hat
 		\item Falls ein \gls{Patt} auftritt
 		\item Falls eine \gls{tote Stellung} vorliegt
 		\item Wenn eine identische Stellung mit gleichen Zugmöglichkeiten und demselben Spieler am Zug mindestens zum dritten Mal auf dem Schachbrett entstanden ist 
 	\end{enumerate}
-	
-	\item[F3060] \textbf{\textit{Aufgeben: }} Während des Spiels kann jeder Spieler jederzeit aufgeben.
-	\item[F3070] \textbf{\textit{Spiel enden: }} Ein Spiel endet, falls einer von beiden Spielern den anderen Schachmatt gesetzt hat, oder eine der Remis Situationen auftritt \textbf{\textit{F3050}}.
-	\item[F3080] \textbf{\textit{Rückkampf anbieten: }} Nachdem ein Spiel zu Ende gekommen ist, muss jeder Spieler dmn anderen Spieler einen Rückkampf anbieten können.
+	\item[F3070] \textbf{\textit{Rückkampf anbieten: }} Nachdem ein Spiel zu Ende gekommen ist, muss jeder Spieler den anderen Spieler einen Rückkampf anbieten zu können.		
+	\item[F3080] \textbf{\textit{Multiplayer auf einem Gerät: }}  Mit einer Multiplayer Funktion können zwei Spieler auf einem Gerät gegeneinander spielen.
 \end{description}
 \newpage
 \section{Nichtfunktionale Anforderungen}
@@ -664,29 +661,180 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\end{minipage}
 \end{figure}
 \newpage
-
+\clearpage
 
 \section{Globale Testfälle}
 \begin{description}
-	\item[T1010] Ein Android Nutzer öffnet die Applikation und registriert sich im System. \textbf{F1010}
-	\item[T1020] Ein bereits registrierter Nutzer meldet sich mit seinen Benutzernamen und seinem Passwort in der Applikation an. \textbf{F1020}
-	\item[T1030] Ein bereits registrierter Nutzer meldet sich vom System ab. \textbf{F1030}
-	\item[T1040] Ein Gastspieler bekommt vom System einen eindeutigen Benutzernamen. \textbf{F1040}
-	\item[T1050] Ein bereits registrierter Benutzer fordert sein Passwort an. \textbf{F1050}
-	\item[T1060] Ein bereits registrierter Benutzer ändert sein Passwort. \textbf{F1060}
-	\item[T2010] Der Benutzer erzeugt ein neues Spiel. \textbf{F2010}
-	\item[T2020] Der Benutzer führt ein schon eröffnetes Spiel fort. \textbf{F2020}
-	\item[T2030] Der Benutzer fordert unter Angabe eines gültigen Benutzernamens einen anderen Benutzer heraus. \textbf{F2030}
-	\item[T2040] Der Benutzer nimmt die Herausforderung an. \textbf{F2040}
-	\item[T2050] Der Benutzer lehnt die Herausforderung ab. \textbf{F2050}
-	\item[T2060] Der Benutzer schaut seine Statistiken an. \textbf{F2060}	
-	\item[T3010] Der Benutzer macht irgendeinen Zug seiner Wahl, wobei die Schachregeln eingehalten werden müssen \textbf{F3010}
-	\item[T3020] Der Benutzer bietet ein Remis an, vorausgesetzt er ist nicht am Zug \textbf{F3020}
-	\item[T3030] Der Benutzer akzeptiert ein Remis \textbf{F3030}
-	\item[T3040] Der Benutzer lehnt ein Remis ab \textbf{F3040}
-	\item[T3050] Der Benutzer tauscht Nachrichten aus \textbf{F3050}
+	\item[T1010] \textbf{\textit{Anmelden: }} \\
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] App ist geschlossen
+			\item[Aktion] Benutzer öffnet App 
+			\item[Reaktion] Es öffnet sich die Startseite des App-s und Anmeldemöglichkeit mit Google Account  ist in der oberen Mitte
+		\end{description} 
+		\item 
+		\begin{description}
+			\item[Stand] Benutzer befindet sich auf der Hauptseite des App-s
+			\item[Aktion] Benutzer drückt auf dem Knopf \textit{\textbf{Anmelden}} an und gibt seine Google Kennung  \textit{\textbf{mustermann@gmail.com }}als  eMail Adresse und \textit{\textbf{max1980!}} als Passwort ein.
+			\item[Reaktion]
+			Falls Benutzer mit solcher eMail Adresse nicht existiert oder Passwort eingetippt war, dann bekommt Benutzer eine entsprechende Fehlermeldung. Bei erfolgreicher Anmeldung wird der Benutzer  automatisch zu einer neue Seite umgeleitet wo er Spiele erzeugen, seine Statistiken angucken oder anhand Benutzername einen Spieler suchen kann.
+		\end{description}
+		
+	\end{enumerate}
+	
+	\item[T1020]  \textbf{\textit{Gastzugang: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] App ist offen und Benutzer befindet sich auf der Hauptseite des App-s
+			\item[Aktion] Benutzer drückt auf \textbf{\textit{Gastspiel}} Knopf, was sich auf untere Mitte der Hauptseite befindet.
+			\item[Reaktion] Benutzer befindet sich auf der Seite wo er Spiele erzeugen kann.
+		\end{description} 
+		
+	\end{enumerate}
+	\item[T1030] \textbf{\textit{Abmelden: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] Benutzer ist angemeldet und befindet sich auf der Hauptseite des Apps 
+			\item[Aktion] Benutzer drückt auf \textbf{\textit{Abmelden}} Knopf
+			\item[Reaktion] Benutzer befindet sich auf der Hauptseite und kann sich wieder anmelden oder als Gastspiel den Spiel betreten.
+		\end{description}
+	\end{enumerate}
+	
+	\item[T1040] \textbf{\textit{Anzeige des eigenen, persönlichen Profils: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] Benutzer hat sich schon angemeldet und befindet sich auf der Seite wo er Spiele erzeugen , Spieler suchen und seine Daten angucken kann
+			\item[Aktion] Benutzer drückt auf den Knopf \textbf{\textit{Spielerdaten}}
+			\item[Reaktion] Es öffnet sich eine neue Seite wo Benutzer seine Statistiken sieht
+		\end{description}
+	\end{enumerate}
+	
+	\item[T1050] \textbf{\textit{Suche nach Benutzern anhand Benutzernamen und Anzeigen der persönlichen Profile anderer Benutzer: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] Benutzer Befindet sich auf der Seite wo er anhand Benutzernamen andere Benutzer finden kann
+			\item[Aktion] Benutzer gibt \textbf{\textit{mustermann }} ein
+			\item[Reaktion] Falls \textbf{\textit{mustermann }} noch nicht im System vorhanden ist dann bekommt Benutzer eine entsprechende Meldung, ansonsten öffnet sich eine neue Seite wo Benutzer den anderen Benutzer herausfordern und seine Daten angucken kann.
+		\end{description}
+	\end{enumerate}
+	
+	\item[T1060] \textbf{\textit{Multiplayer auf einem Gerät: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] App ist offen 
+			\item[Aktion] Benutzer drückt auf dem Knopf Multiplayer 
+			\item[Reaktion] Es öffnet sich ein neues Spielbrett wo zwei Spieler auf einem Gerät gegenseitig Spielen können
+		\end{description}
+	\end{enumerate}
+	
+	\item[T2010] \textbf{\textit{Eröffnung eines Spieles: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] Benutzer befindet sich auf der Seite wo er Spiele erzeugen kann
+			\item[Aktion] Benutzer klickt auf den Button \textbf{\textit{SofortSpiel}} 
+			\item[Reaktion] Entweder wartet der Benutzer bis auf ein andere Benutzer genauso einen Spiel erzeugt (dann fängt das Spiel zwischen zwei Benutzern an) oder kann der Benutzer den Warteprozess jederzeit abbrechen.
+		\end{description}
+	\end{enumerate}
+	
+	\item[T2020] \textbf{\textit{Herausfordern und Spieleinstellungen bestimmen: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] App ist offen und der Benutzer will einen anderen Benutzer der gerade online ist und sich in keinem Spiel befindet, zum Spiel herausfordern
+			\item[Aktion] Benutzer klickt auf den Button \textbf{\textit{Herausfordern }} und wählt gewünschte Farbe und Zeitgrenze
+			\item[Reaktion] Herausgeforderte bekommt eine Meldung mit Benutzernamen des Herausforderers und mit einer Zeitgrenze der Herausforderer bestimmt hat. Falls kurz davor Herausgeforderte den App geschlossen hat oder einen Spiel mit jemandem angefangen hat dann bekommt Herausforderer eine entsprechende Meldung
+		\end{description}
+	\end{enumerate}
+	
+	\item[T2030] \textbf{\textit{Annehmen einer Herausforderung: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] Benutzer bekommt eine Meldung dass er von einem anderen Spieler herausgefordert wurde
+			\item[Aktion] Benutzer klickt auf den Button \textbf{\textit{Annehmen }} 
+			\item[Reaktion] Falls der Herausforderer kurz davor dass Herausgeforderte seine Herausforderung zum Spiel angenommen hat, den App geschlossen hat dann bekommt Herausgeforderte entsprechende Meldung, ansonsten fängt das Spiel an 
+		\end{description}
+	\end{enumerate}
+	
+	\item[T2040] \textbf{\textit{Ablehnen einer Herausforderung: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] Benutzer bekommt eine Meldung dass er von einem anderen Spieler herausgefordert wurde
+			\item[Aktion] Benutzer klickt auf den Button \textbf{\textit{Ablehnen }} 
+			\item[Reaktion] Falls der Herausforderer kurz davor dass Herausgeforderte seine Herausforderung zum Spiel angenommen hat, die App geschlossen hat, dann bekommt Herausgeforderte entsprechende Meldung, ansonsten bekommt Herausforderer entsprechende Meldung dass Herausgeforderte die Herausforderung zum Spiel abgelehnt hat
+		\end{description}
+	\end{enumerate}
+	
+	\item[T3010] \textbf{\textit{Schachfiguren bewegen: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] Ein Spiel ist am Laufen und Benutzer ist am Zug
+			\item[Aktion] Benutzer klickt auf eine  Figur
+			\item[Reaktion] Falls die Figur seine eigene Figuren waren, dann es werden alle mögliche Zugfelder markiert, ansonsten wird nichts passieren.
+		\end{description}
+		\item 
+		\begin{description}
+			\item[Stand] Eine Schachfigur wurde angeklickt
+			\item[Aktion] Der Benutzer klickt auf ein  Feld.
+			\item[Reaktion] Falls es ein markiertes Feld war dann wird die Figur gezogen und die Daten an den Server gesendet, ansonsten es passiert nichts, die Figur wird nicht gezogen.
+		\end{description}
+	\end{enumerate}
+	
+	
+	\item[T3020] \textbf{\textit{Remis bieten: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] Ein Spiel ist am Laufen und Benutzer ist nicht am Zug
+			\item[Aktion] Ein Spieler bietet Remis an
+			\item[Reaktion] Der andere Spieler erhält eine Benachrichtigung mit Auswahlmöglichkeit
+		\end{description}
+	\end{enumerate}
+	
+	\item[T3030] \textbf{\textit{Remis annehmen: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] Remis wurde angeboten 
+			\item[Aktion] Der Spieler klickt auf den Button \textbf{\textit{Annehmen}} 
+			\item[Reaktion] Es erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert
+		\end{description}
+	\end{enumerate}
+	
+	\item[T3040] \textbf{\textit{Remis ablehnen: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] Ein Spiel ist am Laufen
+			\item[Aktion] Der Spieler klickt auf den Button \textbf{\textit{Aufgeben}} 
+			\item[Reaktion] Es erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert
+		\end{description}
+	\end{enumerate}
+	
+	\item[T3050] \textbf{\textit{Rückkampf anbieten: }} 
+	\begin{enumerate}
+		\item 
+		\begin{description}
+			\item[Stand] Spiel ist beendet 
+			\item[Aktion] Eine von beiden Spieler drücken auf dem Button \textbf{\textit{Rückkampf}} 
+			\item[Reaktion] Anderer Spieler bekommt eine Benachrichtigung über den Rückkampf Angebot
+		\end{description}
+	\end{enumerate}
+	
 	
 \end{description}
+
+
+
 \pagebreak
 \section{Systemmodelle}
 \subsection{Szenarien}
@@ -708,122 +856,6 @@ Magnus bekommt die schwarzen Figuren zugeteilt, Fabiano die weißen. Nach 115 Z�
 \textbf{Szenario 3: \glqq Statistiken einsehen\grqq} \\
 Magnus behauptet, er wäre ein besserer Spieler als Fabiano. Dieser zweifelt das an, und bittet Magnus, dessen Statistiken mit seinen zu vergleichen. Beide öffnen ihre Schachapp und sind direkt mit ihrem Account angemeldet, da sie dies vorher eingestellt haben. Anschließend klicken sie im Hauptmenü ihrer Schach-App auf \glqq Statistiken\grqq. Sie können nun jeweils ihre Anzahl an gespielten, gewonnenen, remisierten und verlorenen Spielen, sowie ihre \gls{Elo}zahl einsehen. Beide kommen zu dem Schluss, dass Magnus bessere Werte vorzuweisen hat.
 \pagebreak
-\subsection{Anwendungsfälle}
-\begin{enumerate}
- 
-    \item
-	\begin{description}
-	\item[Zustand:] Die App ist geschlossen und beendet.
-	\item[Aktion:] Die App wird erstmalig geöffnet.
-	\item[Reaktion:] Es erscheint ein Fenster zur Eingabe eines Spielernamens.  \\	
-	\end{description}
-	
-	\item
-	\begin{description}
-	\item[Zustand:] Die App ist geschlossen und beendet.
-	\item[Aktion:] Die App wird zum wiederholten Mal geöffnet.
-	\item[Reaktion:] Es erscheint das Hauptmenü und der Benutzer ist unter seinem Spielernamen eingeloggt. \\
-	\end{description}
-	
-	\item
-	\begin{description}
-	\item[Zustand:] Die App befindet sich im Hauptmenü.
-	\item[Aktion:] Der Benutzer klickt auf den Button \glqq Statistiken\grqq.
-	\item[Reaktion:] Es öffnet sich eine Accountübersicht mit allen gespeicherten Statistiken.  \\
-	\end{description}
-	
-	\item
-	\begin{description}
-	\item[Zustand:] Die App befindet sich im Hauptmenü.
-	\item[Aktion:] Der Benutzer klickt auf den Button \glqq Spiel suchen\grqq.
-	\item[Reaktion:] Der Benutzer kommt in eine Warteschlange für suchende Spieler.  \\
-	\end{description}
-	
-	\item
-	\begin{description}
-	\item[Zustand:] Die App befindet sich im Hauptmenü.
-	\item[Aktion:] Der Benutzer klickt auf den Button \glqq Spieler suchen\grqq.
-	\item[Reaktion:] Es erscheint eine Spielerübersicht mit Suchmöglichkeit.  \\
-	\end{description}
-	
-	\item
-	\begin{description}
-	\item[Zustand:] Die App befindet sich im Hauptmenü.
-	\item[Aktion:] Der Benutzer klickt auf den Button \glqq Rangliste\grqq.
-	\item[Reaktion:] Alle Spieler werden nach \gls{Elo}zahl sortiert aufgelistet.  \\
-	\end{description}
-	
-	\item
-	\begin{description}
-	\item[Zustand:] Die App befindet sich im Spielersuchmenü.
-	\item[Aktion:] Der Benutzer klickt auf einen anderen Spieler.
-	\item[Reaktion:] Es erscheint eine Accountübersicht des Spielers mit Möglichkeit zur Herausforderung.  \\
-	\end{description}
-	
-	\item 
-	\begin{description}
-	\item[Zustand:] Ein Spiel ist am laufen und der Nutzer ist am Zug.
-	\item[Aktion:] Der Benutzer klickt auf eine eigene Figur.
-	\item[Reaktion:] Es werden alle möglichen Zugfelder markiert.  \\
-	\end{description}
-	
-	\item 
-	\begin{description}
-	\item[Zustand:] Ein Spiel ist am laufen und der Nutzer ist am Zug.
-	\item[Aktion:] Der Benutzer klickt auf eine gegnerische Figur oder ein leeres Feld.
-	\item[Reaktion:] Nichts passiert.  \\
-	\end{description}
-	
-	
-	\item
-	\begin{description}
-	\item[Zustand:] Eine \gls{Schachfigur} wurde angeklickt.
-	\item[Aktion:] Der Benutzer klickt auf ein markiertes Feld.
-	\item[Reaktion:] Die Figur wird gezogen und die Daten an den Server gesendet.  \\
-	\end{description}
-	
-	\item
-	\begin{description}
-	\item[Zustand:] Eine \gls{Schachfigur} wurde angeklickt.
-	\item[Aktion:] Der Benutzer klickt auf ein nicht markiertes Feld.
-	\item[Reaktion:] Es passiert nichts, die Figur wird nicht gezogen, die Markierung bleibt.  \\
-	\end{description}
-	
-	\item
-	\begin{description}
-	\item[Zustand:] Ein Spiel ist am laufen.
-	\item[Aktion:] Es wird ein Zug ausgeführt, welcher einen Spieler Matt oder Patt setzt.
-	\item[Reaktion:] Es erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert.  \\
-	\end{description}
-	
-	\item
-	\begin{description}
-	\item[Zustand:] Ein Spiel ist am laufen.
-	\item[Aktion:] Ein Spieler klickt auf den Button \glqq Aufgeben\grqq.
-	\item[Reaktion:] Es erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert.  \\
-	\end{description}
-	
-	\item
-	\begin{description}
-	\item[Zustand:] Ein Spiel ist am laufen.
-	\item[Aktion:] Ein Spieler bietet Remis an.
-	\item[Reaktion:] Der andere Spieler erhält eine Benachrichtigung mit Auswahlmöglichkeit.  \\
-	\end{description}
-	
-	\item
-	\begin{description}
-	\item[Zustand:] Remis wurde angeboten.
-	\item[Aktion:] Der Spieler klickt auf den Button \glqq Annehmen\grqq.
-	\item[Reaktion:] Es erscheint eine Benachrichtigung, die Elozahlen und Statistiken der Spieler werden aktualisiert.  \\
-	\end{description}
-	
-	\item
-	\begin{description}
-	\item[Zustand:] Remis wurde angeboten.
-	\item[Aktion:] Der Spieler klickt auf den Button \glqq Ablehnen\grqq.
-	\item[Reaktion:] Die Benachrichtigung schließt sich, der andere Spieler erhält eine Mitteilung.  \\
-	\end{description}
-
 
 
 \subsection{Anwendungsfalldiagramme} 
@@ -833,7 +865,7 @@ Magnus behauptet, er wäre ein besserer Spieler als Fabiano. Dieser zweifelt das
 			\label{fig:Schach-App}
 				\captionof{figure}{Schach-App}
 		\end{minipage}
-\end{enumerate}
+
 \pagebreak
 \glsaddall 
 \printglossaries
