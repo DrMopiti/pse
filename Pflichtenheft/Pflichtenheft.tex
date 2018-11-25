@@ -121,7 +121,7 @@ bookmarks=true,%
 }
 \newglossaryentry{tote Stellung}
 {
-	name={tote Stellung},
+	name={Tote Stellung},
 	description={Eine tote Stellung liegt vor, falls eine Stellung entstanden ist, in welcher keiner der Spieler den gegnerischen König mit irgendeiner Folge von regelgemäßen Zügen mattsetzen kann. Zumeist hat hierbei keiner der beiden Spieler genug Figuren übrig, um den anderen Spieler mattsetzen zu können (z. B. König gegen König, König gegen König und Springer, König gegen König und Läufer). Es gibt auch Fälle, in denen etwa aufgrund einer verkeilten Bauernstruktur keiner der Spieler gewinnen kann.}
 }
 
@@ -326,11 +326,11 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 
 \subsection{Initialisierung}
 \begin{description}
-	\hypertarget{F2010}{\item[F2010]}\textbf{\textit{Eröffnung 	eines Spieles: }} Der Benutzer kann Spiele suchen, ohne dabei einen anderen Benutzer als Gegner angeben zu müssen. Dann bekommt er vom System einen Gegner zugewiesen, der auch genauso ein Spiel gesucht hat. Die Farbe ist zufällig und es gibt eine feste \gls{Bedenkzeit} von 15 Minuten für jeden Spieler.
+	\hypertarget{F2010}{\item[F2010]}\textbf{\textit{Eröffnung 	eines Spieles: }} Der Benutzer kann Spiele suchen, ohne dabei einen anderen Benutzer als Gegner angeben zu müssen. Dann bekommt er vom System einen Gegner zugewiesen, der ebenfalls ein Spiel gesucht hat. Die Farbe ist zufällig und es gibt eine feste \gls{Bedenkzeit} von 15 Minuten für jeden Spieler.
 	
 	\item[F2020] \textbf{\textit{Herausfordern: }} Nachdem ein entsprechender Gegner ausgesucht wurde \textbf{\textit{F1050}} kann der Benutzer ihn zum Spiel herausfordern.
-	\item [F2030] \textbf{\textit{Akzeptieren einer Herausforderung: }} Der Benutzer kann die Herausforderung zum Spiel \textbf{F2030} annehmen.
-	\item [F2040] \textbf{\textit{Ablehnung einer Herausforderung: }} Der Benutzer kann die Herausforderung zum Spiel \textbf{F2030} ablehnen.
+	\item [F2030] \textbf{\textit{Akzeptieren einer Herausforderung: }} Der Benutzer kann die Herausforderung zum Spiel \textbf{\textit{F2030}} annehmen.
+	\item [F2040] \textbf{\textit{Ablehnung einer Herausforderung: }} Der Benutzer kann die Herausforderung zum Spiel \textbf{\textit{F2030}} ablehnen.
 	
 	\item[F2050] \textbf{\textit{Spieleinstellungen bestimmen: }} Bei der Herausforderung einer bestimmten Person zum Spiel \textbf{\textit{F2020}} kann der Herausforderer folgende
 	Spieleinstellungen aufstellen:
@@ -346,11 +346,11 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 
 \subsection{Spielverlauf} 
 \begin{description}
-	\item[F3010]\textbf{\textit{Schachfiguren bewegen: }}Der Benutzer kann während des Spiels, falls er dran ist, einen Zug seiner Wahl unter Beibehaltung der \gls{Schachregeln} ausführen, wobei alle erlaubte Züge dem Benutzer angezeigt werden.
-	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Ein Spieler der Remis anbieten möchte, tut dies, nachdem er einen Zug auf dem Schachbrett ausgeführt und nachdem seine Uhr angehalten und die des Gegners sich in Gang gesetzt hat.
-	\item[F3030] \textbf{\textit{Remis annehmen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F3020}, das Angebot annehmen.
+	\item[F3010]\textbf{\textit{Schachfiguren bewegen: }}Der Benutzer kann während des Spiels, falls er an der Reihe ist, einen Zug seiner Wahl unter Beibehaltung der \gls{Schachregeln} ausführen, wobei dem Benutzer alle erlaubte Züge  angezeigt werden.
+	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Ein Spieler der Remis anbieten möchte, tut dies, nachdem er einen Zug auf dem Schachbrett ausgeführt und nachdem seine Uhr angehalten und sich die des Gegners in Gang gesetzt hat.
+	\item[F3030] \textbf{\textit{Remis annehmen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{\textit{F3020}}, das Angebot annehmen.
 	
-	\item[F3040] \textbf{\textit{Remis ablehnen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{F3020}, das Angebot ablehnen.
+	\item[F3040] \textbf{\textit{Remis ablehnen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{\textit{F3020}}, das Angebot ablehnen.
 	
 	\item[F3050] \textbf{\textit{Aufgeben: }} Während des Spiels kann jeder Spieler jederzeit aufgeben.
 	\item[F3060] \textbf{\textit{Spiel beenden: }} Ein Spiel endet, falls einer von beiden Spielern den anderen Schachmatt gesetzt hat, ein Spieler aufgegeben hat, oder eine von unten gezählten Remis Situation auftritt:
@@ -368,8 +368,8 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 \begin{description}
 	
 	\item[NF1010] \textbf{\textit{Start der App: }} Das Starten der App soll auf aktuellen Geräten maximal 3 Sekunden dauern. 
-	\item[NF1020] \textbf{\textit{Spiel Erstellung: }} Der Erstellungsprozess \hyperlink{F2010}{\textbf{F2010}} einer neuen Partie darf nicht länger als 5 Sekunden dauern.
-	\item[NF1030] \textbf{\textit{Ermittlung von Spielzügen: }} Die Ermittlung \hyperlink{F3010}{\textbf{F3010}} an möglichen gültigen Zügen darf nicht länger als 0,1 Sekunden dauern.
+	\item[NF1020] \textbf{\textit{Spiel Erstellung: }} Der Erstellungsprozess \hyperlink{F2010}{\textbf{\textit{F2010}}} einer neuen Partie darf nicht länger als 5 Sekunden dauern.
+	\item[NF1030] \textbf{\textit{Ermittlung von Spielzügen: }} Die Ermittlung \hyperlink{F3010}{\textbf{\textit{F3010}}} an möglichen gültigen Zügen darf nicht länger als 0,1 Sekunden dauern.
 	\item[NF1040] \textbf{\textit{Herausforderung: }} Falls ein Spieler herausgefordert wird, hat dieser zwei Minuten Zeit diese anzunehmen. Danach verfällt die Herausforderung. 
 	\item[NF1050] \textbf{\textit{Weiterleitung von Nachrichten: }} Die Weiterleitung und Überprüfung einzelner Züge soll auf dem Server nicht länger als 2 Sekunden dauern.
 	\item[NF1060] \textbf{\textit{Verlust von Paketen: }} Bei Übertragungen zwischen zwei Geräten sollen keine Pakete unbemerkt verloren gehen.
@@ -409,7 +409,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\item Zu den Spieldaten gehört:
 		\begin{itemize}
 		\item Partiekennung
-		\item Aktueller Zustand des Schachbretts	
+		\item Aktueller Zustand des \gls{Schachbrett}s	
 		\item zu ziehende Farbe
 	\end{itemize}
 
@@ -564,7 +564,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 	\begin{minipage}[t]{6cm}
 		\vspace{0pt}
 		\begin{description}
-			\item[G1060] \textbf{\textit{Aufgeben: }} Wenn man auf den Button \glqq Aufgeben\grqq\  drückt, erscheint ein Fenster, ob man wirklich aufhören möchte mit den Buttons: \glqq Ja\grqq\ und \glqq Nein\grqq.
+			\item[G1060] \textbf{\textit{Aufgeben: }} Wenn man auf den Button \glqq Aufgeben\grqq\  drückt, erscheint ein Fenster, ob man wirklich aufgeben möchte mit den Buttons: \glqq Ja\grqq\ und \glqq Nein\grqq.
 		\end{description}
 	\end{minipage}
 \end{figure}
@@ -703,7 +703,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 		\begin{description}
 			\item[Stand] Benutzer ist angemeldet und befindet sich auf der Hauptseite der App.
 			\item[Aktion] Benutzer drückt auf den Knopf \textbf{\textit{Abmelden}}.
-			\item[Reaktion] Benutzer befindet sich auf der Hauptseite und kann sich wieder anmelden oder als Gastspiel den Spiel betreten.
+			\item[Reaktion] Benutzer befindet sich auf der Hauptseite und kann sich wieder anmelden oder als Gast dem Spiel betreten.
 		\end{description}
 	\end{enumerate}
 	
@@ -712,12 +712,12 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 		\item 
 		\begin{description}
 			\item[Stand] Benutzer hat sich schon angemeldet und befindet sich auf der Seite wo er Spiele erzeugen , Spieler suchen und seine Daten einsehen kann.
-			\item[Aktion] Benutzer drückt auf den Knopf \textbf{\textit{Spielerdaten}}.
-			\item[Reaktion] Es öffnet sich eine neue Seite wo der Benutzer seine Statistiken sieht.
+			\item[Aktion] Benutzer drückt auf den Knopf \textbf{\textit{Rangliste/Statistik}}.
+			\item[Reaktion] Es öffnet sich eine neue Seite, auf der der Benutzer seine Statistiken sieht.
 		\end{description}
 	\end{enumerate}
 	
-	\item[T1050] \textbf{\textit{Suche nach Benutzern anhand Benutzernamen und Anzeigen der persönlichen Profile anderer Benutzer: }} 
+	\item[T1050] \textbf{\textit{Suche nach Benutzern anhand des Benutzernamens und Anzeigen der persönlichen Profile anderer Benutzer: }} 
 	\begin{enumerate}
 		\item 
 		\begin{description}
@@ -733,7 +733,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 		\begin{description}
 			\item[Stand] Die App ist offen.
 			\item[Aktion] Der Benutzer drückt auf dem Knopf \textbf{\textit{Multiplayer}}.
-			\item[Reaktion] Es öffnet sich ein neues Spielbrett wo zwei Spieler auf einem Gerät gegeneinander spielen können.
+			\item[Reaktion] Es öffnet sich ein neues Spielbrett, auf dem zwei Spieler auf einem Gerät gegeneinander spielen können.
 		\end{description}
 	\end{enumerate}
 	
@@ -742,8 +742,8 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 		\item 
 		\begin{description}
 			\item[Stand] Der Benutzer befindet sich auf der Seite wo er Spiele erzeugen kann.
-			\item[Aktion] Der Benutzer klickt auf den Button \textbf{\textit{SofortSpiel}}. 
-			\item[Reaktion] Entweder wartet der Benutzer bis ein anderer Benutzer genauso einen Spiel erzeugt (dann fängt das Spiel zwischen zwei Benutzern an) oder der Benutzer bricht den Warteprozess ab.
+			\item[Aktion] Der Benutzer klickt auf den Button \textbf{\textit{Sofortspiel}}. 
+			\item[Reaktion] Entweder wartet der Benutzer bis ein anderer Benutzer ebenfalls ein Spiel sucht (dann fängt das Spiel zwischen zwei Benutzern an) oder der Benutzer bricht den Warteprozess ab.
 		\end{description}
 	\end{enumerate}
 	
@@ -783,7 +783,7 @@ Letztendlich kann man durch häufiges Spielen bessere Spielfähigkeiten erlangen
 		\begin{description}
 			\item[Stand] Ein Spiel ist am Laufen und der Benutzer ist am Zug.
 			\item[Aktion] Der Benutzer klickt auf eine  Figur.
-			\item[Reaktion] Falls die Figur seine eigene war, werden alle möglichen Zugfelder markiert, ansonsten wird nichts passieren.
+			\item[Reaktion] Falls die Figur seine eigene war, werden alle möglichen Zugfelder markiert, ansonsten passiert nichts.
 		\end{description}
 		\item 
 		\begin{description}
