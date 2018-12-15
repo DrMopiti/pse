@@ -1,7 +1,9 @@
 package com.example.user.schachapp;
 
 public class Castling extends Move {
-    public Castling(Position start, Position goal) {
-        super(start, goal);
+    private Move rookMove;
+    public Castling(King king, Position start, Position goal) {
+        super(king, start, goal);
     }
+    public Move getRookMove() {return rookMove;}
 }

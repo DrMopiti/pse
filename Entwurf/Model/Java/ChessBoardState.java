@@ -7,25 +7,32 @@ public class ChessBoardState extends BoardState {
     private boolean whiteQueenCastle;
     private boolean blackKingCastle;
     private boolean blackQueenCastle;
+    private boolean whiteToMove;
 
     public ChessBoardState() {
+        Tile tiles[][] = new Tile[8][8];
+        lastMove = null;
         whiteKingCastle = true;
         whiteQueenCastle = true;
         blackKingCastle = true;
         blackQueenCastle = true;
-        Tile tiles[][] = new Tile[8][8];
+        whiteToMove = true;
         //Do the Startposition here
+    }
+
+    public ChessBoardState(String s) {
+
     }
 
     public void applyMove(Move move) {
     }
 
     public Piece getPieceAt(Position p) {
-        return tiles[p.getX()][p.getY()].getPiece();
+        return null;
     }
 
     public void setPieceAt(Position p, Piece piece) {
-        tiles[p.getX()][p.getY()].setPiece(piece);
+
     }
 
     public Move getLastMove() {
@@ -66,5 +73,9 @@ public class ChessBoardState extends BoardState {
 
     public void setBlackQueenCastle(boolean blackQueenCastle) {
         this.blackQueenCastle = blackQueenCastle;
+    }
+
+    public String toString() {
+        return null;
     }
 }

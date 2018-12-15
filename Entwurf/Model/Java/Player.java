@@ -5,4 +5,7 @@ public class Player {
     public Player(User user) {
         this.user = user;
     }
+    public String getName() {
+        return user.getName();
+    }
 }

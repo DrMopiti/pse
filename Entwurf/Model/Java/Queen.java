@@ -5,4 +5,19 @@ public class Queen extends Piece {
     public Queen(boolean white) {
         this.isWhite = white;
     }
+
+    @Override
+    public String toString() {
+        return "D";
+    }
+
+    @Override
+    public int getValue() {
+        return 9;
+    }
+
+    @Override
+    public boolean isWhite() {
+        return isWhite;
+    }
 }

@@ -19,11 +19,16 @@ public class ChessRuleProvider extends RuleProvider {
 
     @Override
     public boolean hasEnded(BoardState state) {
-        return this.ender.hasEnded(state);
+        return false;
+    }
+
+    @Override
+    public Result getResult() {
+        return this.ender.getResult();
     }
 
     @Override
     public List<Move> getMoves(Position position, BoardState state) {
-        return this.mover.getMoves(position, state);
+        return this.mover.getLegalMoves(position, state);
     }
 }

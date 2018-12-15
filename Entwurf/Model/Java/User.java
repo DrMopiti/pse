@@ -7,6 +7,7 @@ public class User {
     private int drawedGames;
     private int lostGames;
     private int elo;
+    private boolean inGame;
 
     public User(String name) {
         this.name = name;
@@ -15,6 +16,7 @@ public class User {
         this.drawedGames = 0;
         this.lostGames = 0;
         this.elo = 1000;
+        inGame = false;
     }
 
     public int getPlayedGames() {
@@ -54,5 +56,17 @@ public class User {
 
     public void setElo(int elo) {
         this.elo = elo;
+    }
+
+    public boolean isInGame() {
+        return inGame;
+    }
+
+    public void setInGame(boolean inGame) {
+        this.inGame = inGame;
+    }
+
+    public String getName() {
+        return name;
     }
 }
