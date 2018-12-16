@@ -17,15 +17,15 @@ public class MainMenuActivity extends android.app.Activity {
         super.onCreate(savedInstanceState);
     }
 
-    public void sofortspiel(View view) {
+    public void straightGame(View view) {
 
     }
 
-    public void spielersuche(View view) {
+    public void matchMaking(View view) {
 
     }
 
-    public void ranglisteStatistik(View view) {
+    public void rankingStatistics(View view) {
 
     }
 
