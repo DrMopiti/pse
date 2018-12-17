@@ -236,6 +236,7 @@
 		\end{minipage}
 		\begin{itemize}
 			\item \textbf{ClientHandler}
+			Verwaltet eingehende Anfragen an den Server.
 			\begin{description}
 				\item \textbf{\textit{main(String[] args):}}
 				Die main Methode des Servers. Hier wird der Javalin Server gestartet und für jede Anfrage ein neues GameHandler Objekt erzeugt. Diesem werden die gesendeten Anfragen übermittelt. 
@@ -256,8 +257,9 @@
 				Führt zuerst loadGame() aus, überprüft den gegebenen Zug auf Gültigkeit, wendet diesen an, sendet ihn an den anderen Spieler und führt anschließend saveGame() aus.
 				\item \textbf{\textit{sendBoard():}}
 				Sendet das Brett des Spiels per \gls{FCM}.
-				\item \textbf{\textit{sendMove():}}
-				Übermittelt den Zug per \gls{FCM} an den anderen Spieler.
+				\item \textbf{\textit{newGame():}}
+				Legt einen neuen Eintrag in der Datenbank an und füllt ihn mit beiden Benutzernamen und der Startposition.
+			
 			\end{description} 
 		\end{itemize}
 	\section{Sequenzdiagramm}
