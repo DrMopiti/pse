@@ -113,12 +113,7 @@
 				\item \textbf{\textit{isChecked(boolean white, BoardState board):}} Überprüft ob ein Spieler auf dem gegebenen Brett im Schach steht. Ist der übergebene boolean true, wird Weiß überprüft, bei false Schwarz. Dazu wird geschaut, ob es eine gegnerische Figur gibt, welche durch \textbf{\textit{getPosssibleMoves(Position position, BoardState board)}} einen Zug erhält, mit welchem der gegnerische König erreicht werden könnte.
 				\item \textbf{\textit{hasEnded(BoardState board):}} Prüft, ob das Schachspiel zu Ende ist. Dazu wird geprüft, ob der zu ziehende Spieler laut \textbf{\textit{isMate(BoardState board)}} Matt gesetzt, laut \textbf{\textit{isStaleMate(BoardState board)}} Patt gesetzt oder ob laut  \textbf{\textit{isDraw(BoardState board)}} andersweitig ein Unentschieden erreicht wurde.
 				\item \textbf{\textit{getResult()}} Ruft \textbf{\textit{hasEnded(BoardState board)}} auf, gibt aber bei beendetem Spiel das jeweilige Ergebnis als Result mit Begründung zurück. Ist das Spiel nicht beendet wird null zurückgegeben.
-				\item \textbf{\textit{getPossibleMoves(Position position, BoardState board):}} Gibt alle möglichen Züge einer Figur auf dem Brett zurück, ohne dabei zu berücksichtigen, ob der ziehende Spieler nach diesem Zug im Schach stehen würde. Dazu wird die Figur an der entsprechenden Stelle bestimmt und anschließend je eine(bzw. zwei) der folgenden 5 Methoden aufgerufen:
-				\item \textbf{\textit{getDiagonalMoves(Position position, BoardState board):}} Gibt alle Züge zurück, welche eine Figur in alle 4 diagonalen Richtungen ausführen kann. Wird benutzt für Läufer und Dame.
-				\item \textbf{\textit{getHorizontalAndVerticalMoves(Position position, BoardState board):}} Gibt alle Züge zurück, welche eine Figur in horizontaler oder vertikaler Richtung ausführen kann. Wird benutzt für Turm und Dame.
-				\item \textbf{\textit{getKingMoves(Position position, BoardState board):}} Gibt die möglichen Züge eines Königs einschließlich möglicher Rochaden zurück.
-				\item \textbf{\textit{getKnightMoves(Position position, BoardState board):}} Gibt die möglichen Züge eines Springers zurück.
-				\item \textbf{\textit{getPawnMoves(Position position, BoardState board):}} Gibt die möglichen Züge eines Bauern einschließlich möglichem Doppelschritt, enPassant sowie Umwandlung.
+				\item \textbf{\textit{getPossibleMoves(Position position, BoardState board):}} Gibt alle möglichen Züge einer Figur auf dem Brett zurück, ohne dabei zu berücksichtigen, ob der ziehende Spieler nach diesem Zug im Schach stehen würde. Dazu wird die jeweilige getMovement()-Methode der Figur an der angegebenen Position ausgeführt.				
 				\item \textbf{\textit{isMate(BoardState board):}} Prüft, ob der zu ziehende Spieler Matt gesetzt wurde. Das ist der Fall, wenn der Spieler laut \textbf{\textit{isChecked(boolean, BoardState)}} im Schach steht, und es für keine Figur einen nach \textbf{\textit{getLegalMoves(Position, BoardState)}}erlaubten Zug gibt.
 				\item \textbf{\textit{isStaleMate(BoardState board):}} Prüft, ob der zu ziehende Spieler Patt gesetzt wurde. Das ist der Fall, wenn der Spieler laut \textbf{\textit{isChecked(boolean, BoardState)}} nicht im Schach steht, und es für keine Figur einen nach \textbf{\textit{getLegalMoves(Position, BoardState)}}erlaubten Zug gibt.
 				\item \textbf{\textit{isDraw(BoardState board):}} Prüft, ob ein anderweitiges Unentschieden erreicht wurde. Dies ist der Fall, wenn zu wenig Figuren auf dem Brett vorhanden sind um Matt zu setzen, oder wenn 50 Züge lang keine Figur geschlagen und kein Bauer gezogen wurde.
@@ -310,6 +305,7 @@
 				\item \textbf{\textit{CHAR:}} Die Repräsentation eines Königs, wird auf K gesetzt.
 				\item \textbf{\textit{VALUE:}} Der Wert eines Königs, wird auf 0 gesetzt, da dem König an sich kein Wert zugewiesen werden kann.
 				\item \textbf{\textit{King(w: boolean):}} Erzeugt einen neuen König. Dazu wird der Konstruktor von \textbf{\textit{Piece}} aufgerufen, als Parameter werden w, \textbf{\textit{VALUE}}, und \textbf{\textit{CHAR}} übergeben.
+				\item \textbf{\textit{getMovement(Position p, BoardState b):}} Gibt eine Liste der Züge zurück, die ein König auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann, inklusive Rochade. Dabei wird nicht berücksichtigt, ob sich der König nach dem Zug in Schach befinden würde.
 				\end{description}
 				\item \textbf{\textit{Queen}}
 				\begin{description}
@@ -317,6 +313,7 @@
 				\item \textbf{\textit{CHAR:}} Die Repräsentation einer Dame, wird auf D gesetzt.
 				\item \textbf{\textit{VALUE:}} Der Wert einer Dame, wird auf 9 gesetzt.
 				\item \textbf{\textit{Queen(w: boolean):}} Erzeugt eine neue Dame. Dazu wird der Konstruktor von \textbf{\textit{Piece}} aufgerufen, als Parameter werden w, \textbf{\textit{VALUE}}, und \textbf{\textit{CHAR}} übergeben.
+				\item \textbf{\textit{getMovement(Position p, BoardState b):}} Gibt eine Liste der Züge zurück, die eine Dame auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug in Schach befinden würde.
 				\end{description}
 				\item \textbf{\textit{Rook}}
 				\begin{description}
@@ -324,6 +321,7 @@
 				\item \textbf{\textit{CHAR:}} Die Repräsentation eines Turms, wird auf T gesetzt.
 				\item \textbf{\textit{VALUE:}} Der Wert eines Turms, wird auf 5 gesetzt.
 				\item \textbf{\textit{Rook(w: boolean):}} Erzeugt einen neuen Turm. Dazu wird der Konstruktor von \textbf{\textit{Piece}} aufgerufen, als Parameter werden w, \textbf{\textit{VALUE}}, und \textbf{\textit{CHAR}} übergeben.
+				\item \textbf{\textit{getMovement(Position p, BoardState b):}} Gibt eine Liste der Züge zurück, die ein Turm auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug in Schach befinden würde.
 				\end{description}
 				\item \textbf{\textit{Bishop}}
 				\begin{description}
@@ -331,6 +329,7 @@
 				\item \textbf{\textit{CHAR:}} Die Repräsentation eines Läufers, wird auf L gesetzt.
 				\item \textbf{\textit{VALUE:}} Der Wert eines Läufers, wird auf 3 gesetzt.
 				\item \textbf{\textit{Bishop(w: boolean):}} Erzeugt einen neuen Läufer. Dazu wird der Konstruktor von \textbf{\textit{Piece}} aufgerufen, als Parameter werden w, \textbf{\textit{VALUE}}, und \textbf{\textit{CHAR}} übergeben.
+				\item \textbf{\textit{getMovement(Position p, BoardState b):}} Gibt eine Liste der Züge zurück, die ein Läufer auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug in Schach befinden würde.
 				\end{description}
 				\item \textbf{\textit{Knight}}
 				\begin{description}
@@ -338,6 +337,7 @@
 				\item \textbf{\textit{CHAR:}} Die Repräsentation eines Springers, wird auf S gesetzt.
 				\item \textbf{\textit{VALUE:}} Der Wert eines Springers, wird auf 3 gesetzt.
 				\item \textbf{\textit{Knight(w: boolean):}} Erzeugt einen neuen Springer. Dazu wird der Konstruktor von \textbf{\textit{Piece}} aufgerufen, als Parameter werden w, \textbf{\textit{VALUE}}, und \textbf{\textit{CHAR}} übergeben.
+				\item \textbf{\textit{getMovement(Position p, BoardState b):}} Gibt eine Liste der Züge zurück, die ein Springer auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug in Schach befinden würde.
 				\end{description}
 				\item \textbf{\textit{Pawn}}
 				\begin{description}
@@ -345,6 +345,7 @@
 				\item \textbf{\textit{CHAR:}} Die Repräsentation eines Bauerns, wird auf B gesetzt.
 				\item \textbf{\textit{VALUE:}} Der Wert eines Bauerns, wird auf 1 gesetzt.
 				\item \textbf{\textit{Pawn(w: boolean):}} Erzeugt einen neuen Bauern. Dazu wird der Konstruktor von \textbf{\textit{Piece}} aufgerufen, als Parameter werden w, \textbf{\textit{VALUE}}, und \textbf{\textit{CHAR}} übergeben.
+				\item \textbf{\textit{getMovement(Position p, BoardState b):}} Gibt eine Liste der Züge zurück, die ein Bauer auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann, inklusive en passant, Doppelsprung und Umwandlung. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug in Schach befinden würde.
 				\end{description}
 		\end{itemize}		
 		\newpage		
