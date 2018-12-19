@@ -351,7 +351,20 @@
 		\newpage		
 		
 		\subsection{GUI}
-		
+		\begin{minipage}{\linewidth}
+			\centering
+			\includegraphics[width=1\linewidth]{Diagramme/ActivityDiagram}
+			\captionof{figure}{Activities}
+			\label{fig:activities}
+		\end{minipage}
+	
+	
+		\begin{minipage}{\linewidth}
+			\centering
+			\includegraphics[width=1\linewidth]{Diagramme/DialogDiagram}
+			\captionof{figure}{Dialoge}
+			\label{fig:dialoge}
+		\end{minipage}
 		\newpage
 		\subsection{Server}
 		\begin{minipage}{\linewidth}
@@ -365,29 +378,59 @@
 			Verwaltet eingehende Anfragen an den Server.
 			\begin{description}
 				\item \textbf{\textit{main(String[] args):}}
-				Die main Methode des Servers. Hier wird der Javalin Server gestartet und für jede Anfrage ein neues GameHandler Objekt erzeugt. Diesem werden die gesendeten Anfragen übermittelt. 
+				Die main Methode des Servers. Hier wird der Javalin Server gestartet. Je nach Anfrage wird ein GameCreator, ein BoardHandler oder ein MoveHandler erstellt. 
 			\end{description} 
 	
 	
-			\item \textbf{GameHandler}
+			\item \textbf{GameCreator}
 			\begin{description}
-				\item \textbf{\textit{Move move:}}
-				Der Zug, den der GameHandler übermittelt bekommen hat.
-				\item \textbf{\textit{Game game:}}
-				Das Spiel, das aus der Datenbank geladen wurde.
-				\item \textbf{\textit{loadGame():}}
-				Lädt das aktuelle Spiel des Spielers aus der Datenbank und erzeugt daraus ein Game Objekt.
-				\item \textbf{\textit{saveGame():}}
-				Speichert das Game Objekt wieder als String in der Datenbank ab.
-				\item \textbf{\textit{processMove():}}
-				Führt zuerst loadGame() aus, überprüft den gegebenen Zug auf Gültigkeit, wendet diesen an, sendet ihn an den anderen Spieler und führt anschließend saveGame() aus.
-				\item \textbf{\textit{sendBoard():}}
-				Sendet das Brett des Spiels per \gls{FCM}.
-				\item \textbf{\textit{newGame():}}
-				Legt einen neuen Eintrag in der Datenbank an und füllt ihn mit beiden Benutzernamen und der Startposition.
+				\item \textbf{\textit{player1: String:}}
+				Spieler 1 des neuen Spiels.
+				\item \textbf{\textit{player2: String:}}
+				Spieler 2 des neuen Spiels.
+				\item \textbf{\textit{create(player1: String, player2: String):}}
+				Erstellt einen neuen Spiel-Eintrag in der Datenbank. Benutzt dazu einen DatabaseHandler.
+			\end{description}
+			\item \textbf{BoardHandler}
+			\begin{description}
+				\item \textbf{\textit{board: BoardState}}
+				Aktueller Zustand des Bretts.
+				\item \textbf{\textit{getBoard(player: String): String}}
+				Lädt das entsprechende Spielbrett aus der Datenbank. Verwendet ebenfalls einen DatabaseHandler.
+			\end{description}
+			\item \textbf{MoveHandler}
+			\begin{description}
+				\item \textbf{\textit{move: Move}}
+				Der Zug der überprüft und ausgeführt wird.
+				\item \textbf{\textit{board: BoardState}}
+				Das Spielbrett auf dem dieser Zug ausgeführt werden soll.
+				\item \textbf{\textit{processMove(move: Move): BoardState}}
+				Laden und Speichern erfolgen wieder über einen DatabaseHandler.
+				Überprüft ob die Kombination aus Brett und Zug gültig ist. Wendet den Zug an, falls dieser gütlig ist.
+				Speichert das neue Brett ab und benachrichtigt anschließend den Gegner.
+			\end{description}
+			\item \textbf{DatabaseHandler}
+			Legt die Methoden fest, die ein DatabaseHandler implementieren muss.
+			\begin{description}
+				\item \textbf{\textit{newEntry(player1: String, player2: String):void}}	
+				Soll einen neuen Datenbankeintrag mit Spieler 1 , Spieler 2 und einem neuen Brett anlegen.
+				\item \textbf{\textit{loadGame(player: String): String}}
+				Soll das zum Spieler zugehörige Brett aus der Datenbank laden.
+				\item \textbf{\textit{saveGame(player: String): void}}
+				Soll ein Brett wieder in die Datenbank speichern.
+			\end{description}
+			\item \textbf{FirebaseHandler}
+			Verwaltet die Verbindung zur Firebase Datenbank.
+			\begin{description}
+			\item \textbf{\textit{newEntry(player1: String, player2: String):void}}	
+			Erstellt einen neuen Eintrag mit beiden Spielern und einem neuen Brett.
+			\item \textbf{\textit{loadGame(player: String): String}}
+			Lädt das zum Spieler zugehörige Brett aus der Datenbank.
+			\item \textbf{\textit{saveGame(player: String): void}}
+			Speichert das Brett wieder ab.
+			\end{description}
 			
-			\end{description} 
+			
 		\end{itemize}
 	\section{Sequenzdiagramm}
-\printglossaries
 \end{document}
