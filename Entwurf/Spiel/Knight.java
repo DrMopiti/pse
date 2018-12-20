@@ -1,23 +1,15 @@
 package com.example.user.schachapp;
 
+import java.util.List;
+
 public class Knight extends Piece {
-    private boolean isWhite;
-    public Knight(boolean white) {
-        this.isWhite = white;
+    private static final String KNIGHT_CHAR = "S";
+    private static final int KNIGHT_VALUE = 3;
+    public Knight(boolean isWhite) {
+        super(isWhite, KNIGHT_VALUE, KNIGHT_CHAR);
     }
-
     @Override
-    public String toString() {
-        return "S";
-    }
-
-    @Override
-    public int getValue() {
-        return 3;
-    }
-
-    @Override
-    public boolean isWhite() {
-        return isWhite;
+    public List<Move> getMovement(Position position, BoardState board) {
+        return null;
     }
 }

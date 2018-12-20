@@ -2,9 +2,10 @@ package com.example.user.schachapp;
 
 import java.util.List;
 
-public abstract class RuleProvider {
-    public abstract BoardState getStartState();
-    public abstract boolean hasEnded(BoardState state);
-    public abstract Result getResult();
-    public abstract List<Move> getMoves(Position position, BoardState state);
+public interface RuleProvider {
+    BoardState getStartState();
+    List<Move> getLegalMoves(Position position, BoardState boardState);
+    boolean isLegalMove(Move move, BoardState boardState);
+    boolean hasEnded(BoardState state);
+    Result getResult();
 }

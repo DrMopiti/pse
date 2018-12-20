@@ -2,19 +2,21 @@ package com.example.user.schachapp;
 
 import java.util.List;
 
-public class ChessRuleProvider extends RuleProvider {
-    private BoardState start;
-    private MoveValidator mover;
-    private GameEnder ender;
-    public ChessRuleProvider() {
-        this.start = new ChessBoardState();
-        this.mover = new ChessMoveValidator();
-        this.ender = new ChessGameEnder();
-    }
+public class ChessRuleProvider implements RuleProvider {
 
     @Override
     public BoardState getStartState() {
-        return this.start;
+        return null;
+    }
+
+    @Override
+    public boolean isLegalMove(Move move, BoardState boardState) {
+        return false;
+    }
+
+    @Override
+    public List<Move> getLegalMoves(Position position, BoardState state) {
+        return null;
     }
 
     @Override
@@ -24,11 +26,23 @@ public class ChessRuleProvider extends RuleProvider {
 
     @Override
     public Result getResult() {
-        return this.ender.getResult();
+        return null;
     }
 
-    @Override
-    public List<Move> getMoves(Position position, BoardState state) {
-        return this.mover.getLegalMoves(position, state);
+    private List<Move> getPossibleMoves(Position position, BoardState state) {
+        return state.getPieceAt(position).getMovement(position, state);
+    }
+
+    private boolean isChecked(boolean white, BoardState state) {
+        return true;
+    }
+    private boolean isMate(BoardState state) {
+        return false;
+    }
+    private boolean isStaleMate(BoardState state) {
+        return false;
+    }
+    private boolean isDraw(BoardState state) {
+        return false;
     }
 }

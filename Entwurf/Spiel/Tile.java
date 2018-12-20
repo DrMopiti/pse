@@ -7,6 +7,9 @@ public class Tile {
         this.piece = null;
     }
 
+    public Tile(Piece piece) {
+
+    }
     public Piece getPiece() {
         return piece;
     }

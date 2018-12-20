@@ -1,23 +1,15 @@
 package com.example.user.schachapp;
 
+import java.util.List;
+
 public class Rook extends Piece {
-    private boolean isWhite;
-    public Rook(boolean white) {
-        this.isWhite = white;
+    private static final String ROOK_CHAR = "T";
+    private static final int ROOK_VALUE = 5;
+    public Rook(boolean isWhite) {
+        super(isWhite, ROOK_VALUE, ROOK_CHAR);
     }
-
     @Override
-    public String toString() {
-        return "T";
-    }
-
-    @Override
-    public int getValue() {
-        return 5;
-    }
-
-    @Override
-    public boolean isWhite() {
-        return isWhite;
+    public List<Move> getMovement(Position position, BoardState board) {
+        return null;
     }
 }
