@@ -135,7 +135,7 @@
 					\item \textbf{+ getBlackPlayer(): Player}\\ Gibt den schwarzen Spieler \textbf{blackPlayer} zurück.
 					\item \textbf{+ hasPieceAt(position: Position): boolean} Gibt zurück, ob sich an der übergebenen Position auf dem Brett eine Figur befindet.
 					\item \textbf{+ getPieceAt(position: Position): Piece}\\ Gibt die Figur zurück, welche sich an der übergebenen Position befindet. Ist die Position nicht besetzt, wird \textbf{null} zurückgegeben.
-					\item \textbf{+ getPossiblePositions(position: Position): List<Position>}\\ Gibt alle möglichen Positionen als Liste zurück, auf welche eine Figur, welche sich auf der übergebenen Position befindet, ziehen kann. Zum Berechnen dieser wird das \textbf{ruler} Objekt benutzt.
+					\item \textbf{+ getPossibleMoves(position: Position): List<Move>}\\ Gibt alle möglichen Züge als Liste zurück, welche eine Figur, die sich auf der übergebenen Position befindet, ausführen kann. Zum Berechnen dieser wird das \textbf{ruler} Objekt benutzt.
 					\item \textbf{+ applyMove(move: Move): void}\\ Führt den übergebenen Zug auf dem Spielbrett \textbf{board} aus.
 					\item \textbf{+ applyMove(moveString: String): void}\\ Führt den als String übergebenen Zug auf dem Spielbrett \textbf{board} aus. Dazu muss der String erst in ein Objekt vom Typ \textbf{Move} umgewandelt werden.
 					\item \textbf{+ hasEnded(): boolean}\\ Gibt zurück, ob das Spiel gemäß den Schachregeln beendet ist. Dazu wird das \textbf{ruler} Objekt benutzt.
