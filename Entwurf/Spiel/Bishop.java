@@ -1,23 +1,15 @@
 package com.example.user.schachapp;
 
+import java.util.List;
+
 public class Bishop extends Piece {
-    private boolean isWhite;
-    public Bishop(boolean white) {
-        this.isWhite = white;
+    private static final String BISHOP_CHAR = "L";
+    private static final int BISHOP_VALUE = 3;
+    public Bishop(boolean isWhite) {
+        super(isWhite, BISHOP_VALUE, BISHOP_CHAR);
     }
-
     @Override
-    public String toString() {
-        return "L";
-    }
-
-    @Override
-    public int getValue() {
-        return 3;
-    }
-
-    @Override
-    public boolean isWhite() {
-        return isWhite;
+    public List<Move> getMovement(Position position, BoardState board) {
+        return null;
     }
 }

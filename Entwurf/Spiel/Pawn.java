@@ -1,23 +1,15 @@
 package com.example.user.schachapp;
 
+import java.util.List;
+
 public class Pawn extends Piece {
-    private boolean isWhite;
-    public Pawn(boolean white) {
-        this.isWhite = white;
+    private static final String PAWN_CHAR = "";
+    private static final int PAWN_VALUE = 1;
+    public Pawn(boolean isWhite) {
+        super(isWhite, PAWN_VALUE, PAWN_CHAR);
     }
-
     @Override
-    public String toString() {
-        return "";
-    }
-
-    @Override
-    public int getValue() {
-        return 1;
-    }
-
-    @Override
-    public boolean isWhite() {
-        return isWhite;
+    public List<Move> getMovement(Position position, BoardState board) {
+        return null;
     }
 }
