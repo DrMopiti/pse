@@ -18,13 +18,29 @@
 
 
 
-\newglossaryentry{FCM}
+\newglossaryentry{GUI}
 {
-	name={FCM},
-	description={Firebase Cloud Messaging \href{https://firebase.google.com/docs/cloud-messaging/}{https://firebase.google.com/docs/cloud-messaging/}},
-	first={Firebase Cloud Messaging(FCM)},
-	long={Firebase Cloud Messaging}
+	name={GUI},
+	description={Graphical User Interface. Die grafische Benutzeroberfläche}
 }
+\newglossaryentry{REST}
+{
+	name={REST},
+	description={REST steht für Representational State Transfer und ist ein Programmierparadigma. \href{https://de.wikipedia.org/wiki/Representational_State_Transfer}{https://de.wikipedia.org/wiki/Representational\_State\_Transfer}}
+}
+\newglossaryentry{URL}
+{
+	name={URL},
+	description={Ein Uniform Resource Locator (Abgekürzt URL) identifiziert eine Ressource.
+		\href{https://de.wikipedia.org/wiki/Uniform_Resource_Locator}{https://de.wikipedia.org/wiki/Uniform\_Resource\_Locator}}
+}
+\newglossaryentry{WS}
+{
+	name={WebSocket},
+	description={Ein auf TCP basierendes Netzwerkprotokoll. \href{https://de.wikipedia.org/wiki/WebSocket}{https://de.wikipedia.org/wiki/WebSocket}}
+}
+
+
 \begin{document}
 	\begin{titlepage}
 			
@@ -41,7 +57,16 @@
 		
 	\end{titlepage}
 	\section{Entwurfsentscheidungen}
-		Das haben wir so gemacht und mit diesem Entwurfsmuster weil so und so und das wurde geändert und das hat diesen Vorteil und jenen Nachteil
+		Das haben wir so gemacht und mit diesem Entwurfsmuster weil so und so und 
+		das wurde geändert und das hat diesen Vorteil und jenen Nachteil xDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+		\subsection{Paketdiagramm}
+		
+		\subsection{\gls{GUI}}
+		
+		\subsection{Server}
+		Der Server wurde nach dem \gls{REST} Prinzip entworfen. Alle Anfragen werden per \gls{URL} gesendet. Benachrichtigungen über neue Züge erfolgen über eine \gls{WS}-Verbindung.
+		
+		\subsection{Spiellogik}
 	\section{Klassendiagramme}
 	
 		\subsection{Spiel}
@@ -750,4 +775,6 @@
 			
 		\end{itemize}
 	\section{Sequenzdiagramm}
+	
+	\printglossaries
 \end{document}
