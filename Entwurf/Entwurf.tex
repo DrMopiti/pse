@@ -57,14 +57,12 @@
 		
 	\end{titlepage}
 	\section{Entwurfsentscheidungen}
-		Das haben wir so gemacht und mit diesem Entwurfsmuster weil so und so und 
-		das wurde geändert und das hat diesen Vorteil und jenen Nachteil xDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 		\subsection{Paketdiagramm}
 		
 		\subsection{\gls{GUI}}
 		
 		\subsection{Server}
-		Der Server wurde nach dem \gls{REST} Prinzip entworfen. Alle Anfragen werden per \gls{URL} gesendet. Benachrichtigungen über neue Züge erfolgen über eine \gls{WS}-Verbindung.
+		Der Server wurde nach dem \gls{REST} Prinzip entworfen. Alle Anfragen werden per \gls{URL} gesendet. Benachrichtigungen über neue Züge erfolgen über eine \gls{WS}-Verbindung. Da Züge abwechselnd und meist nicht direkt nacheinander ausgeführt werden, wurde sich gegen eine konstante Verbindung zum Zugaustausch entschieden.
 		
 		\subsection{Spiellogik}
 	\section{Klassendiagramme}
@@ -114,7 +112,7 @@
 					 
 			\item Stand aller Figuren auf dem Brett
 			\item mögliche Rochaden
-			\item letzer ausgeführter Spielzug
+			\item letzter ausgeführter Spielzug
 			\item Anzahl der Züge ohne Bauernzug oder Schlagen von Figuren
 			  \end{itemize}	
 			  	 gespeichert.
@@ -134,8 +132,7 @@
 					\item \textbf{+ getWhitePlayer(): Player}\\ Gibt den weißen Spieler \textbf{whitePlayer} zurück.
 					\item \textbf{+ getBlackPlayer(): Player}\\ Gibt den schwarzen Spieler \textbf{blackPlayer} zurück.
 					\item \textbf{+ hasPieceAt(position: Position): boolean} Gibt zurück, ob sich an der übergebenen Position auf dem Brett eine Figur befindet.
-					\item \textbf{+ getPieceAt(position: Position): Piece}\\ Gibt die Figur zurück, welche sich an der übergebenen Position befindet. Ist die Position nicht besetzt, wird \textbf{null} zurückgegeben.
-					\item \textbf{+ getPossibleMoves(position: Position): List<Move>}\\ Gibt alle möglichen Züge als Liste zurück, welche eine Figur, die sich auf der übergebenen Position befindet, ausführen kann. Zum Berechnen dieser wird das \textbf{ruler} Objekt benutzt.
+					\item \textbf{+ getPieceAt(position: Position): Piece}\\ Gibt die Figur zurück, welche sich an der übergebZüge Position befindet. Ist die Position nicht dibesetz wird \textbf{null} zurückgegeben.        ausführ     item \textbf{+ getPossiblePositions(position: Position): List<Position>}\\ Gibt alle möglichen Positionen als Liste zurück, auf welche eine Figur, welche sich auf der übergebenen Position befindet, ziehen kann. Zum Berechnen dieser wird das \textbf{ruler} Objekt benutzt.
 					\item \textbf{+ applyMove(move: Move): void}\\ Führt den übergebenen Zug auf dem Spielbrett \textbf{board} aus.
 					\item \textbf{+ applyMove(moveString: String): void}\\ Führt den als String übergebenen Zug auf dem Spielbrett \textbf{board} aus. Dazu muss der String erst in ein Objekt vom Typ \textbf{Move} umgewandelt werden.
 					\item \textbf{+ hasEnded(): boolean}\\ Gibt zurück, ob das Spiel gemäß den Schachregeln beendet ist. Dazu wird das \textbf{ruler} Objekt benutzt.
