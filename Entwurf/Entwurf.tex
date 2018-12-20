@@ -650,6 +650,37 @@
 			\label{fig:activities}
 		\end{minipage}
 	
+	\begin{itemize}
+			\item \textbf{\Large{android.app.Activity}}
+			
+			Ist eine einzelne, fokussierte Aufgabe, die der Benutzer ausführen kann. Da fast alle Aktivitäten mit dem Benutzer interagieren, kümmert sich die Activity-Klasse darum, ein Fenster für Sie zu erstellen.\\
+			\\			
+				\textbf{\large{Methoden}}
+				\newline
+				\rule{\textwidth}{1pt}
+				\begin{description}			
+					\item \textbf{\# onCreate(savedInstanceState: Bundle):}\\ Wird aufgerufen, wenn die Aktivität beginnt. Wenn die Aktivität neu initialisiert wird, enthält das Bundle die Daten, die es zuletzt bei SaveInstanceState bereitgestellt hat. Ansonsten ist es \textbf{null}.
+					\item \textbf{\# onStart(): }\\ Wird aufgerufen, wenn die Aktivität gestoppt wurde, jetzt aber dem Benutzer wieder angezeigt wird.
+					\item \textbf{\# onStop(): }\\ Wird aufgerufen, wenn man für den Benutzer nicht mehr sichtbar sind.
+					\item \textbf{\# onResume(): }\\ Wird aufgreufen, damit die Aktivität mit dem Benutzer interagieren kann. 
+					\item \textbf{+ onCreateOptionsMenu(menu: Menu): Boolean:}\\ Initialisiert den Inhalt des Standardoptionen-Menüs der Aktivität. Es gibt das Optionsmenü, in dem die Elemente platziert werden sollen. Es gibt true für das angezeigte Menü zurück und bei false wird es nicht angezeigt.
+					\item \textbf{+ onOptionsItemSelected(item: MenuItem): Boolean:}\\ Wird aufgerufen, wenn ein Element im Optionsmenü ausgewählt wird. Item ist das ausgewählte Menüelement. Es gibt false zurück, um die normale Menüverarbeitung fortzusetzen und true, um sie dann zu verbrauchen.\\
+				\\
+				\item \textbf{\Large{BoardActivity}}
+			
+			Es werden alle Borad-Aktivitäten angezeigt, wie z.B. das Brett.\\
+			
+			\item \textbf{\Large{MainMenuActivity}}
+			
+			Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofotrspiel, Spielersuche und Rangliste/Statistik.\\
+			
+			\item \textbf{\Large{RankingStatisticsActivity}}
+			
+			Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Spieler angezeigt.\\
+				\end{description}
+				\end{itemize}
+				
+				\newpage	
 		\subsubsection{Dialoge}
 		\begin{minipage}{\linewidth}
 			\centering
@@ -657,6 +688,40 @@
 			\captionof{figure}{Dialoge}
 			\label{fig:dialoge}
 		\end{minipage}
+		\begin{itemize}
+			\item \textbf{\Large{android.app.Activity}}
+			
+			Die AppComaptActivity wird als Dialog verwendet.\\
+			\\			
+				\textbf{\large{Methoden}}
+				\newline
+				\rule{\textwidth}{1pt}
+				\begin{description}			
+					\item \textbf{\# onCreate(savedInstanceState: Bundle):}\\ Erzeugt die Knöpfe. Wenn die Aktivität neu initialisiert wird, enthält das Bundle die Daten, die es zuletzt bei SaveInstanceState bereitgestellt hat. Ansonsten ist es \textbf{null}.
+					\item\textbf{+ onClick(view: View)}:\\ Erzeugt die Fuktionalität eines Konpfes wobei ein AlertiDialog geöffnet wird
+				\\
+				
+				\item \textbf{\Large{DrawDialog}}
+			
+			Es wird ein Unentschieden-Dialog angezeigt, wie z.B. das Brett.\\
+			
+			\item \textbf{\Large{GiveUpDialog}}
+			
+			Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofotrspiel, Spielersuche und Rangliste/Statistik.\\
+			
+			\item \textbf{\Large{LoginMenuDialog}}
+			
+			Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Spieler angezeigt.\\
+			
+			\item \textbf{\Large{WinnerDialog}}
+			
+			Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofotrspiel, Spielersuche und Rangliste/Statistik.\\
+			
+			\item \textbf{\Large{PawnTransformationDialog}}
+			
+			Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Spieler angezeigt.\\
+				\end{description}
+				\end{itemize}
 		\newpage
 		\subsection{Server}
 		\begin{minipage}{\linewidth}
