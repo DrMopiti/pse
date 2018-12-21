@@ -39,7 +39,11 @@
 	name={WebSocket},
 	description={Ein auf TCP basierendes Netzwerkprotokoll. \href{https://de.wikipedia.org/wiki/WebSocket}{https://de.wikipedia.org/wiki/WebSocket}}
 }
-
+\newglossaryentry{HTTP}
+{
+	name={HTTP},
+	description={Das Hypertext Transfer Protcol ist ein Protokoll zur Übertragung von Daten auf der Anwendungsschicht. Wird meistens zum laden von Websiten verwendet. \href{https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol}{https://de.wikipedia.org/wiki/Hypertext\_Transfer\_Protocol}}
+}
 
 \begin{document}
 	\begin{titlepage}
@@ -705,29 +709,70 @@
 				\begin{description}			
 					\item \textbf{\# onCreate(savedInstanceState: Bundle):}\\ Erzeugt die Knöpfe. Wenn die Aktivität neu initialisiert wird, enthält das Bundle die Daten, die es zuletzt bei SaveInstanceState bereitgestellt hat. Ansonsten ist es \textbf{null}.
 					\item\textbf{+ onClick(view: View)}:\\ Erzeugt die Fuktionalität eines Konpfes wobei ein AlertiDialog geöffnet wird
-				\\
+					\\
 				
-				\item \textbf{\Large{DrawDialog}}
+					\item \textbf{\Large{DrawDialog}}
 			
-			Es wird ein Unentschieden-Dialog angezeigt, wie z.B. das Brett.\\
-			
-			\item \textbf{\Large{GiveUpDialog}}
-			
-			Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofotrspiel, Spielersuche und Rangliste/Statistik.\\
-			
-			\item \textbf{\Large{LoginMenuDialog}}
-			
-			Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Spieler angezeigt.\\
-			
-			\item \textbf{\Large{WinnerDialog}}
-			
-			Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofotrspiel, Spielersuche und Rangliste/Statistik.\\
-			
-			\item \textbf{\Large{PawnTransformationDialog}}
-			
-			Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Spieler angezeigt.\\
+					Es wird ein Unentschieden-Dialog angezeigt, wie z.B. das Brett.\\
+					
+					\item \textbf{\Large{GiveUpDialog}}
+					
+					Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofotrspiel, Spielersuche und Rangliste/Statistik.\\
+					
+					\item \textbf{\Large{LoginMenuDialog}}
+					
+					Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Spieler angezeigt.\\
+					
+					\item \textbf{\Large{WinnerDialog}}
+					
+					Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofotrspiel, Spielersuche und Rangliste/Statistik.\\
+					
+					\item \textbf{\Large{PawnTransformationDialog}}
+					
+					Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Spieler angezeigt.\\
 				\end{description}
 				\end{itemize}
+		\newpage
+		
+		\subsection{ClientSocket}
+		\begin{minipage}{\linewidth}
+			\centering
+			\includegraphics[width=1\linewidth]{Diagramme/ClientSocket}
+			\captionof{figure}{ClientSocket}
+			\label{fig:ClientSocket}
+		\end{minipage}
+		\begin{itemize}	
+				
+			\item \textbf{\Large{ClientSocket}}
+		
+			Baut eine \gls{WS}-Verbindung zum Server auf.
+			Sendet zudem \gls{HTTP}-Anfragen an den Server.
+			
+			\textbf{\large{Methoden}}
+			\newline
+			\rule{\textwidth}{1pt}
+			\begin{description}
+				\item \textbf{+ connectToWS(): void}
+				
+				Baut eine \gls{WS}-Verbindung zum Server auf. Die App wird über diese Verbindung benachrichtigt, falls der Gegner einen Zug ausgeführt hat.
+				
+				\item \textbf{+ requestBoard(): String}
+				
+				Sendet eine GET-Anfrage an den Server, die den aktuellen Brettzustand zurückgibt.
+				
+				\item \textbf{+ sendMove(move: String): String}
+				
+				Sendet einen Zug an den Server.  Bekommt eine Meldung, je nachdem, ob der gesendete Zug gültig war.
+				
+				\item \textbf{+ newGame(opponent: String): String}
+				
+				Sendet eine Anfrage für die Erstellung eines neuen Spiels. Bekommt eine Meldung, wenn das Spiel erstellt wurde.
+				
+				\item \textbf{- getUser(): String}
+				
+				Gibt den Nutzernamen des App-Nutzers zurück.
+			\end{description}
+		\end{itemize}
 		\newpage
 		\subsection{Server}
 		\begin{minipage}{\linewidth}
