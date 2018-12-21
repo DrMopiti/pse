@@ -58,13 +58,19 @@
 	\end{titlepage}
 	\section{Entwurfsentscheidungen}
 		\subsection{Paketdiagramm}
-		
+		\begin{minipage}{\linewidth}
+			\centering
+			\includegraphics[width=1\linewidth]{Diagramme/Paketdiagramm}
+			\captionof{figure}{Paketdiagramm}
+			\label{fig:Paketdiagramm}
+		\end{minipage}
 		\subsection{\gls{GUI}}
 		
 		\subsection{Server}
 		Der Server wurde nach dem \gls{REST} Prinzip entworfen. Alle Anfragen werden per \gls{URL} gesendet. Benachrichtigungen über neue Züge erfolgen über eine \gls{WS}-Verbindung. Da Züge abwechselnd und meist nicht direkt nacheinander ausgeführt werden, wurde sich gegen eine konstante Verbindung zum Zugaustausch entschieden.
 		
 		\subsection{Spiellogik}
+		Die Spiellogik wird komplett selbst implementiert ohne externe Bibliotheken zu benutzen. Zur Spielmodellierung werden verschiedene Konzepte als Klassen implementiert. Die Spiellogik muss zum einen über einen Zug/Brettverwalter mit der Benutzeroberfläche kommunizieren können, um das Spiel in Echtzeit visualisieren zu können, als auch dem Server zur Verfügung stehen, damit dieser die Spielregeln überwachen und über den Spielzustand Bescheid wissen kann.
 	\section{Klassendiagramme}
 	
 		\subsection{Spiel}
