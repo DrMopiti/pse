@@ -791,6 +791,8 @@
 			\rule{\textwidth}{1pt}
 			\begin{description}
 				\item \textbf{+ main(String[] args): void}\\ Die main Methode des Servers. Hier wird der Javalin Server gestartet. Je nach Anfrage wird ein \textbf{GameCreator}, ein \textbf{BoardHandler} oder ein \textbf{MoveHandler} erstellt. \\
+				\item \textbf{- sendMessageTo(user: String): void}\\
+				Sendet eine Benachrichtigung über die WebSocket-Verbindung an den angegebenen Spieler.
 				\\
 			\end{description} 	
 	
@@ -887,6 +889,13 @@
 			
 			
 		\end{itemize}
+	\section{Aktivitätsdiagramm}
+	\begin{minipage}{\linewidth}
+		\centering
+		\includegraphics[width=1\linewidth]{Diagramme/Aktivitaetsdiagramm}
+		\captionof{figure}{Aktivitätsdiagramm}
+		\label{fig:aktivitaetsdiagramm}
+	\end{minipage}
 	\section{Sequenzdiagramm}
 	
 	\printglossaries
