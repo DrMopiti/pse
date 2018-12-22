@@ -120,11 +120,11 @@
 					 \item \textbf{- board: BoardState}\\ Hier wird der aktuelle Spielstatus bestehend aus
 					 \begin{itemize}
 					 
-			\item Stand aller Figuren auf dem Brett
-			\item mögliche Rochaden
-			\item letzter ausgeführter Spielzug
-			\item Anzahl der Züge ohne Bauernzug oder Schlagen von Figuren
-			  \end{itemize}	
+						\item Stand aller Figuren auf dem Brett
+						\item mögliche Rochaden
+						\item letzter ausgeführter Spielzug
+						\item Anzahl der Züge ohne Bauernzug oder Schlagen von Figuren
+						  \end{itemize}	
 			  	 gespeichert.
 					 \item \textbf{- whitePlayer: Player}\\ Der Spieler mit den weißen Figuren.
 					 \item \textbf{- blackPlayer: Player}\\ Der Spieler mit den schwarzen Figuren.\\
@@ -142,7 +142,8 @@
 					\item \textbf{+ getWhitePlayer(): Player}\\ Gibt den weißen Spieler \textbf{whitePlayer} zurück.
 					\item \textbf{+ getBlackPlayer(): Player}\\ Gibt den schwarzen Spieler \textbf{blackPlayer} zurück.
 					\item \textbf{+ hasPieceAt(position: Position): boolean} Gibt zurück, ob sich an der übergebenen Position auf dem Brett eine Figur befindet.
-					\item \textbf{+ getPieceAt(position: Position): Piece}\\ Gibt die Figur zurück, welche sich an der übergebZüge Position befindet. Ist die Position nicht dibesetz wird \textbf{null} zurückgegeben.        ausführ     item \textbf{+ getPossiblePositions(position: Position): List<Position>}\\ Gibt alle möglichen Positionen als Liste zurück, auf welche eine Figur, welche sich auf der übergebenen Position befindet, ziehen kann. Zum Berechnen dieser wird das \textbf{ruler} Objekt benutzt.
+					\item \textbf{+ getPieceAt(position: Position): Piece}\\ Gibt die Figur zurück, welche sich an der übergebenen Position befindet. Ist die Position nicht besetzt wird \textbf{null} zurückgegeben.       
+				   	\item \textbf{+ getPossiblePositions(position: Position): List<Position>}\\ Gibt alle möglichen Positionen als Liste zurück, auf welche eine Figur, welche sich auf der übergebenen Position befindet, ziehen kann. Zum Berechnen dieser wird das \textbf{ruler} Objekt benutzt.
 					\item \textbf{+ applyMove(move: Move): void}\\ Führt den übergebenen Zug auf dem Spielbrett \textbf{board} aus.
 					\item \textbf{+ applyMove(moveString: String): void}\\ Führt den als String übergebenen Zug auf dem Spielbrett \textbf{board} aus. Dazu muss der String erst in ein Objekt vom Typ \textbf{Move} umgewandelt werden.
 					\item \textbf{+ hasEnded(): boolean}\\ Gibt zurück, ob das Spiel gemäß den Schachregeln beendet ist. Dazu wird das \textbf{ruler} Objekt benutzt.
@@ -899,16 +900,16 @@
 	\section{Sequenzdiagramm}
 	\begin{minipage}{\linewidth}
 		\centering
-		\includegraphics[width=1\linewidth]{Diagramme/Sequenzdiagramm1}
+		\includegraphics[width=1\linewidth]{Diagramme/Sequenzdiagramm}
 		\captionof{figure}{Sequenzdiagramm 1}
 		\label{fig:sequenzdiagramm1}
 	\end{minipage}
-\begin{minipage}{\linewidth}
-	\centering
-	\includegraphics[width=1\linewidth]{Diagramme/Sequenzdiagramm2}
-	\captionof{figure}{Sequenzdiagramm 2}
-	\label{fig:sequenzdiagramm2}
-\end{minipage}
+	\begin{minipage}{\linewidth}
+		\centering
+		\includegraphics[width=1\linewidth]{Diagramme/Sequenzdiagramm2}
+		\captionof{figure}{Sequenzdiagramm 2}
+		\label{fig:sequenzdiagramm2}
+	\end{minipage}
 	
 	\printglossaries
 \end{document}
