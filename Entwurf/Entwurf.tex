@@ -666,7 +666,7 @@
 			
 			Ist eine einzelne, fokussierte Aufgabe, die der Benutzer ausführen kann. Da fast alle Aktivitäten mit dem Benutzer interagieren, kümmert sich die Activity-Klasse darum, ein Fenster für Sie zu erstellen.\\
 			\\			
-				\textbf{\large{Methoden}}
+				\textbf{\large{Gemeinsame Methoden}}
 				\newline
 				\rule{\textwidth}{1pt}
 				\begin{description}			
@@ -677,55 +677,50 @@
 					\item \textbf{+ onCreateOptionsMenu(menu: Menu): Boolean:}\\ Initialisiert den Inhalt des Standardoptionen-Menüs der Aktivität. Es gibt das Optionsmenü, in dem die Elemente platziert werden sollen. Es gibt true für das angezeigte Menü zurück und bei false wird es nicht angezeigt.
 					\item \textbf{+ onOptionsItemSelected(item: MenuItem): Boolean:}\\ Wird aufgerufen, wenn ein Element im Optionsmenü ausgewählt wird. Item ist das ausgewählte Menüelement. Es gibt false zurück, um die normale Menüverarbeitung fortzusetzen und true, um sie dann zu verbrauchen.\\
 				\\
+				\end{description}
 				\item \textbf{\Large{BoardActivity}}
 			
-			Es werden alle Board-Aktivitäten angezeigt, wie z.B. das Brett.
-			Hier kann man zudem die einzelnen Kacheln anwählen und somit Züge ausführen.\\
+			Hier wird das Brett mit dem Spiel an sich angezeigt. Hier kann man zudem die einzelnen Kacheln anwählen und somit Züge ausführen. Außer dem Spielfeld gibt es die Buttons  \glqq Unentschieden\grqq\ und \glqq Aufgeben\grqq .
+					 \begin{description}
+									 
+					 \item \textbf{- drawClicked(): void}\\ Wird ausgeführt, wenn der Button \glqq Unentschieden\grqq\ gedürckt wird. Schickt dem Gegner einen \textbf{DrawDialog}, mit welchem er das Remis-Angebot annehmen oder ablehnen kann. 
+					 \item \textbf{- giveUpClicked(): void}\\ Wird ausgeführt, wenn der Button \glqq Aufgeben\grqq\ gedrückt wird. Dem Spieler erscheint ein \textbf{GiveUpDialog}, mit welchem er sein Aufgeben bestätigen oder abbrechen kann. 
+					  \item \textbf{- tileSelected(): void}\\ Wird ausgeführt, wenn der Benutzer eine Kachel auf dem Spielfeld anklickt. Erzeugt aus den Koordinaten, auf welche der Benutzer geklickt hat, eine \textbf{Position}. Prüft mittel der \textbf{whiteToMove()}-Methode des Game-Objekts, ob der Benutzer am Zug ist. Wenn ja, wird zuerst geprüft, ob der Benutzer bereits eine Kachel gewählt hatte. Ist dies der Fall, wird \textbf{executeMove()} ausgeführt, hat der Benutzer noch keine Kacheln gewählt wird \textbf{showPossiblePositions()} ausgeführt. 		  							\item \textbf{- showPossiblePositions(position: Position): void}\\ Prüft zunächst mithilfe von \textbf{getPieceAt(position: Position} des Game-Objektes, ob sich an der gegebenen Position eine eigene Figur befindet. Ist dies der Fall, wird \textbf{getPossibleMoves()} aufgerufen und die Zielpositionen der jeweiligen Züge werden auf dem Brett angezeigt, ansonsten passiert nichts.
+					  \item \textbf{- executeMove(position: Position): void}\\ Prüft zunächst, ob die ausgewählte \textbf{Position} auf dem Brett markiert war. Wenn ja, wird der entsprechende Zug mit \textbf{applyMove()} ausgeführt. Wenn nicht, werden die Markierungen wieder entfernt, und der Benutzer muss erneut eine seiner Figuren anwählen um die möglichen Züge angezeigt zu bekommen.
+					  
+					 \end{description}
 			
 			\item \textbf{\Large{MainMenuActivity}}
 			
-			Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofortspiel, Spielersuche und Rangliste/Statistik.\\
-			
-			\item \textbf{\Large{RankingStatisticsActivity}}
-			
-			Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Spieler angezeigt.\\
-				\end{description}
-				\end{itemize}
-				\newpage	
-				
-				\textbf{\large{Buttons}}
-				\newline
-				\rule{\textwidth}{1pt}
-				\begin{description}		
-				\item \textbf{\Large{BoardActivity}} 
-					 
-					 Hier wird das Spiel angezeigt mit den Buttons „Unentschieden“ und „Aufgeben“.
-					 
-					 \item \textbf{+ drawButton(): void:}\\ Sobald der Benutzer auf diesen Button während des Spieles drückt, wird ein Unentschieden angezeigt. Somit kann er das Spiel abbrechen, ohne das sich etwas an seinem Punktestand ändert. Der Gegner muss diesem zustimmen. Danach gelangt man in die \textbf {„MainMenuActivtiy“}. \\
-		
-					 
-			  \item \textbf{\Large{MainMenuActivity}} 
-					 
-					 Hier wird das Hauptmenü angezeigt mit Buttons „Sofortspiel“, „Spielersuche“, „Rangliste/Statistik“.
+			Hier wird das Hauptmenü angezeigt mit den Buttons \glqq Sofortspiel\grqq , \glqq Spielersuche\grqq\ und \glqq Rangliste/Statistik\grqq .
+					\begin{description}
 					
-					\item \textbf{+ quickMatchButton(): void:}\\ Sobald der Benutzer \textbf {„Sofortspiel“} drückt, öffnet sich die \textbf {„BoardActivity“}. Dort spielt man gegen einen zufälligen Gegner.
+					\item \textbf{- quickMatchClicked(): void}\\ Sobald der Benutzer \textbf {„Sofortspiel“} drückt, öffnet sich die \textbf {„BoardActivity“}. Dort spielt man gegen einen zufälligen Gegner.\\
+					\item \textbf{- searchPlayerClicked(): void}\\ Sobald der Benutzer \textbf {„Spielersuche“} drückt, öffnet sich die \textbf {„SearchPlayerActivity“}. Dort kann man einen anderen Benutzer mit seinem Spielernamen suchen und mit dem Button  \textbf {„Herausfordern“} diesen herausfordern. 
 					
-					\item \textbf{+ searchPlayerButton(): void:}\\ Sobald der Benutzer \textbf {„Spielersuche“} drückt, öffnet sich die \textbf {„SearchPlayerActivity“}. Dort kann man einen anderen Benutzer mit seinem Spielernamen suchen und mit dem Button  \textbf {„Herausfordern“ (+ challengeButton(): void) } diesen herausfordern. 
-					
-					\item \textbf{+ rankingStatisticsButton(): void:}\\ Sobald der Benutzer \textbf {„Rangliste/Statistik“} drückt, öffnet sich die \textbf {„RankingStatisticActivity“}. 
-					Dort kann der Benutzer seine Statistik und den Ranglistenplatz einsehen. \\
-
-					 \item \textbf{\Large{RankingStatisticsActivity}} 
-					 
-					 Nach dem drücken des Buttons \textbf {„Rangliste/Statistik“} in der \textbf {„MainMenuActivity“} öffnet sich  die \textbf {„RankingStatisticActivity“}. Dort kann der Benutzer zum einen in der Statistik seine Daten einsehen und zum anderen in der Rangliste sich mit anderen Benutzern vergleichen. Dieser kann nach dem Einsehen wieder zur \textbf { „MainMenuActivity“} gelangen. \\
-					 
-					 \item \textbf{\Large{SearchPlayerActivity }} 
-					
-					Nach dem drücken des Button \textbf {„SearchPlayer“} in der \textbf {„MainMenuActivity“} öffnet sich die \textbf {„SearchPlayerActivity“}. Dort kann der Benutzer andere Gegner finden und diese mit dem Button \textbf {„Herausfordern“ ( + challengeButton: void)} herausfordern. \\ \\
+					\item \textbf{- statisticsClicked(): void}\\ Sobald der Benutzer \textbf {„Rangliste/Statistik“} drückt, öffnet sich eine \textbf {„StatisticActivity“}, welche den Namen des Benutzers als Parameter erhält. Dort kann der Benutzer seine Statistik einsehen.  \\
 					
 					\end{description}
 			
+			\item \textbf{\Large{StatisticsActivity}}
+			
+			Zeigt die Statistiken eines belibigen Spielers an. Ist die Statistik nicht von dem Benutzer, welcher sie aufruft, gibt es unten einen Button \textbf{Herausfordern}.
+			\begin{description}
+			\item \textbf{- challengeClicked(): void}\\
+			Sendet dem Gegner einen \textbf{ChallengedDialog} mit welchem er die Herausforderung annehmen oder ablehnen kann. \\
+\end{description}			 
+			
+				 \item \textbf{\Large{SearchPlayerActivity }} 
+					
+					Nach dem drücken des Button \textbf {SearchPlayer} in der \textbf{MainMenuActivity} öffnet sich die \textbf {SearchPlayerActivity}. Dort kann der Benutzer mithilfe einer Suchfunktion andere Gegner finden. Klickt er auf einen Spielernamen, öffnet sich eine \textbf{StatisticsActivity} mit den Statistiken des jeweiligen Spielers und mit dem Button \textbf {„Herausfordern“}. \\
+					\\					
+				
+				\end{itemize}
 				\newpage	
+				
+					 
+					 
+		\newpage	
 		\subsubsection{Dialoge}
 		\begin{minipage}{\linewidth}
 			\centering
@@ -733,12 +728,12 @@
 			\captionof{figure}{Dialoge}
 			\label{fig:dialoge}
 		\end{minipage}
-		\begin{itemize}
+		\begin{description}		
 			\item \textbf{\Large{android.support.v7.app.AppCompatActivity}}
 			
 			Die AppComaptActivity wird als Dialog verwendet.\\
 			\\			
-				\textbf{\large{Methoden}}
+				\textbf{\large{Gemeinsame Methoden}}
 				\newline
 				\rule{\textwidth}{1pt}
 				\begin{description}			
@@ -746,43 +741,65 @@
 					\item\textbf{+ onClick(view: View)}:\\ Erzeugt die Fuktionalität eines Konpfes wobei ein AlertDialog geöffnet wird.
 					\\
 				
-				
+				\end{description}
 					
 						\textbf{\large{Dialoge}}
 				\newline
 				\rule{\textwidth}{1pt}
-				\begin{description}		
+				\begin{itemize}					
 					\item \textbf{\Large{DrawDialog}} 
 					
-					Fragt einen Spieler, ob er das Remis-Angebot des Gegners annemhen oder ablehnen will, dafür stehen ihm die zwei Buttons \glqq Ja\grqq\ und \glqq Nein\grqq\ zur Verfügung.\\
-					\item \textbf{+ drawDialog(): void:}\\ Wenn man die Partie mit einem Unentschieden beendet, taucht der \textbf {„DrawDialog“} auf. Man kann bei Bedarf noch einmal gegen den gleichen Gegner spielen, indem man den Button \textbf  {„Ja“} betätigt und in die \textbf {„BoardActivity“} wechselt oder in die \textbf {„MainMenuActivity“} gelangt in dem man \textbf {„Nein“} betätigt. \\
+					Fragt einen Spieler, ob er das Remis-Angebot des Gegners annehmen oder ablehnen will, dafür stehen ihm die zwei Buttons \glqq Annehmen\grqq\ und \glqq Ablehnen\grqq\ zur Verfügung.\\
+					\begin{description}					
+					\item \textbf{- accepted(): void}\\ 
+					\item \textbf{- declined(): void}\\				
+					\end{description}
 					
 					\item \textbf{\Large{GiveUpDialog }} 
 					
 					Ein Dialog, welcher den Spieler bestätigen lässt, dass er aufgeben will. Dafür stehen ihm die zwei Buttons \glqq Ja\grqq\ und \glqq Nein\grqq\ zur Verfügung.
-					\item \textbf{+ giveUpDialog(): void:}\\ Wenn man auf den Button \textbf {„Aufgeben“} drückt, erscheint der \textbf {„GiveUpDialog“}, ob man wirklich aufgeben möchte mit den Buttons \textbf {„Ja“}, wodurch man in die \textbf {„MainMenuActivity“} gelangt und \textbf {„Nein“}, wodurch man in die \textbf {„BoardActivity“} wechselt.\\
+					
+					\begin{description}					
+					\item \textbf{- confirmed(): void}\\ 
+					\item \textbf{- aborted(): void}\\					
+					\end{description}
 					
 					\item \textbf{\Large{LoginMenuDialog }} 
 					
 					Fragt den Spieler nach seinen Benutzerdaten und meldet ihn im System an. 
-					\item \textbf{+ loginMenuDialog(): void:}\\ Nach dem Drücken auf den Knopf \textbf {„Anmeldung"} mit Google öffnet sich der \textbf {„LoginMenuDialog“} für den Login, wo man seine Daten angeben kann und nach dem Login in die \textbf {„ManiMenuActivity“} gelangt.\\
 					
 					\item \textbf{\Large{WinnerDialog }} 
 					
-					Zeigt das Ergebnis eines Spiels für beide Spieler an, und bietet ihnen Buttons \glqq Menü\grqq , \glqq Speichern\grqq\ und \glqq Noch ein Spiel?\grqq\ .
+					Zeigt das Ergebnis eines Spiels für beide Spieler an, und bietet ihnen Buttons \glqq Menü\grqq , \glqq Speichern\grqq\ und \glqq Noch ein Spiel?\grqq .
 					
-					\item \textbf{+ winnerDialog(): void:}\\ Wenn man eine Partie gewonnen hat, erscheint der  \textbf {„WinnerDialog“} mit der Meldung, dass man gewonnen hat und mit den zusätzlichen Buttons:  \textbf {„Menü“}, wodurch man in die  \textbf {„MainMenuActivity“} gelangt,  \textbf {„Speichern“}, wodurch die Spielzüge gespeichert werden und  \textbf {„Noch ein Spiel?“, } wodurch man in die  \textbf { „BoardActivity“}  wechselt.\\
+					\begin{description}					
+					\item \textbf{- backToMenu(): void}\\
+					\item \textbf{- saveGame(): void}\\
+					\item \textbf{- rematch(): void}\\					
+					\end{description}
 					
 					\item \textbf{\Large{PawnTransformationDialog }} 
 					
-					Ein Dialog zur Auswahl einer Figur, in welche sich ein Bauer verwandeln soll, wenn dieser die gegnerische Grundreihe erreicht hat. Dazu hat er die Buttons \glqq Queen\grqq\ , \glqq Rook\grqq\ , \glqq Bishop\grqq\ und \glqq Knight\grqq\ .
+					Ein Dialog zur Auswahl einer Figur, in welche sich ein Bauer verwandeln soll, wenn dieser die gegnerische Grundreihe erreicht hat. Dazu hat der Benutzer die Buttons \glqq Queen\grqq , \glqq Rook\grqq , \glqq Bishop\grqq\ und \glqq Knight\grqq\ zur Verfügung.
 					
-					\item \textbf{+ pawnTransformation(): void:}\\ Wenn ein Bauer die gegnerische Grundreihe erreicht, erfolgt eine Bauernumwandlung. Dabei werden dann die Möglichkeiten Queen, Rook, Bishop, Knight zum austauschen in dem \textbf {„PawnTransforamtionDialog“ } angezeigt. Die umgewandelte Figur wirkt dabei sofort.
-				
+					
+					\begin{description}					
+					\item \textbf{- queenSelected(): void}\\
+					\item \textbf{- rookSelected(): void}\\
+					\item \textbf{- bishopSelected(): void}\\
+					\item \textbf{- knightSelected(): void}\\				
+					\end{description}	
+					
+					\item \textbf{\Large{ChallengedDialog}}
+					
+					Diesen Dialog erhält ein Spieler, wenn er von einem anderen Spieler herausgefordert wurde. Er hat mithilfe der Buttons \glqq Annehmen\grqq\ und \glqq Ablehnen\grqq\ die Möglichkeit, diese Herausforderung anzunehmen oder abzulehnen.
+					\begin{description}					
+					\item \textbf{- accepted(): void}\\ 
+					\item \textbf{- declined(): void}\\					
 					\end{description}
-					
-				\end{description}
+			
 				\end{itemize}
+				\end{description}
 		\newpage
 		
 		\subsection{ClientSocket}
