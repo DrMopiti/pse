@@ -81,7 +81,7 @@
 		\begin{minipage}{\linewidth}
 			\centering
 			\includegraphics[width=1\linewidth]{Diagramme/TotalGame}
-			\captionof{figure}{TotalGame}
+			\captionof{figure}{Spiellogik}
 			\label{fig:Spiellogik}
 		\end{minipage}
 		\newpage
@@ -140,6 +140,7 @@
 					\item \textbf{+ getBoard(board: BoardState): void}\\ Setzt den Brettstatus \textbf{board} auf das übergebene Objekt.
 					\item \textbf{+ getWhitePlayer(): Player}\\ Gibt den weißen Spieler \textbf{whitePlayer} zurück.
 					\item \textbf{+ getBlackPlayer(): Player}\\ Gibt den schwarzen Spieler \textbf{blackPlayer} zurück.
+					\item \textbf{+ whiteToMove(): boolean}\\ Führt \textbf{whiteToMove} auf \textbf{board} auf, gibt zurück, ob Weiß am Zug ist.
 					\item \textbf{+ hasPieceAt(position: Position): boolean} Gibt zurück, ob sich an der übergebenen Position auf dem Brett eine Figur befindet.
 					\item \textbf{+ getPieceAt(position: Position): Piece}\\ Gibt die Figur zurück, welche sich an der übergebenen Position befindet. Ist die Position nicht besetzt wird \textbf{null} zurückgegeben.             
 					\item \textbf{+ getPossiblePositions(position: Position): List<Position>}\\ Gibt alle möglichen Positionen als Liste zurück, auf welche eine Figur, welche sich auf der übergebenen Position befindet, ziehen kann. Zum Berechnen dieser wird das \textbf{ruler} Objekt benutzt.
@@ -236,6 +237,7 @@
 					\item \textbf{+ applyMove(move: Move): void}\\ Führt einen Zug auf dem Brett aus, indem es die Figur(en) wie im Move-Objekt vorgegeben bewegt und möglicherweise andere Figuren schlägt(überschreibt). Außerdem wird die zu ziehende Farbe, der letzte Zug, sowie die Anzahl der Züge ohne Aktion aktualisiert. Bei entsprechender Verletzung werden möglich Rochaden auf \textbf{false} gesetzt.
 					\item \textbf{+ getPieceAt(position: Position): Piece}\\ Gibt die Figur an der übergebenen Position zurück. Ist die Position nicht besetzt, wird \textbf{null} zurückgegeben.			
 					\item \textbf{+ getLastMove(): Move}\\ Gibt \textbf{lastMove} zurück.
+					\item \textbf{+ whiteToMove(): boolean}\\ Gibt \textbf{whiteToMove} zurück.
 					 \item \textbf{+ canWhiteKingCastle(): boolean}\\ Gibt zurück, ob Weiß noch auf der Königsseite rochieren kann.
 					 \item \textbf{+ canWhiteQueenCastle(): boolean}\\ Gibt zurück, ob Weiß noch auf der Damenseite rochieren kann.
 					 \item \textbf{+ canBlackKingCastle(): boolean}\\ Gibt zurück, ob Schwarz noch auf der Königsseite rochieren kann.
