@@ -688,12 +688,12 @@
 			Ist eine einzelne fokussierte Aufgabe, die der Benutzer ausführen kann. Da fast alle Aktivitäten mit dem Benutzer interagieren, kümmert sich die Activity-Klasse darum, ein Fenster für sie zu erstellen.\\
 		
 				\begin{description}			
-					\item \textbf{\# onCreate(savedInstanceState: Bundle):}\\ Wird aufgerufen, wenn die Aktivität erstellt wird. Wenn die Aktivität neu initialisiert wird, enthält das Bundle die Daten, die es zuletzt bei SaveInstanceState bereitgestellt hat. Ansonsten ist es \textbf{null}.
-					\item \textbf{\# onStart(): }\\ Wird aufgerufen, wenn die Aktivität gestoppt wurde, jetzt aber dem Benutzer wieder angezeigt wird.
-					\item \textbf{\# onStop(): }\\ Wird aufgerufen, wenn die Aktivität für den Benutzer nicht mehr sichtbar sind.
-					\item \textbf{\# onResume(): }\\ Wird aufgerufen, damit die Aktivität mit dem Benutzer interagieren kann. 
-					\item \textbf{+ onCreateOptionsMenu(menu: Menu): Boolean:}\\ Initialisiert den Inhalt des Standardoptionen-Menüs der Aktivität. Es gibt das Optionsmenü, in dem die Elemente platziert werden sollen. Es gibt true für das angezeigte Menü zurück, bei false wird es nicht angezeigt.
-					\item \textbf{+ onOptionsItemSelected(item: MenuItem): Boolean:}\\ Wird aufgerufen, wenn ein Element im Optionsmenü ausgewählt wird. Item ist das ausgewählte Menüelement. Es gibt false zurück, um die normale Menüverarbeitung fortzusetzen und true, um sie dann zu verbrauchen.\\
+					\item \textbf{\# onCreate(savedInstanceState: Bundle)}\\ Wird aufgerufen, wenn die Aktivität erstellt wird. Wenn die Aktivität neu initialisiert wird, enthält das Bundle die Daten, die es zuletzt bei SaveInstanceState bereitgestellt hat. Ansonsten ist es \textbf{null}.
+					\item \textbf{\# onStart(): void}\\ Wird aufgerufen, wenn die Aktivität gestoppt wurde, jetzt aber dem Benutzer wieder angezeigt wird.
+					\item \textbf{\# onStop(): void}\\ Wird aufgerufen, wenn die Aktivität für den Benutzer nicht mehr sichtbar sind.
+					\item \textbf{\# onResume(): void}\\ Wird aufgerufen, damit die Aktivität mit dem Benutzer interagieren kann. 
+					\item \textbf{+ onCreateOptionsMenu(menu: Menu): boolean}\\ Initialisiert den Inhalt des Standardoptionen-Menüs der Aktivität. Es gibt das Optionsmenü, in dem die Elemente platziert werden sollen. Es gibt true für das angezeigte Menü zurück, bei false wird es nicht angezeigt.
+					\item \textbf{+ onOptionsItemSelected(item: MenuItem): boolean}\\ Wird aufgerufen, wenn ein Element im Optionsmenü ausgewählt wird. Item ist das ausgewählte Menüelement. Es gibt false zurück, um die normale Menüverarbeitung fortzusetzen und true, um sie dann zu verbrauchen.\\
 				\\
 				\end{description}
 				\item \textbf{\Large{BoardActivity}}
@@ -958,7 +958,7 @@
 				\begin{description}
 					\item \textbf{+ newEntry(player1: String, player2: String): void}\\ Soll einen neuen Datenbankeintrag mit Spieler 1 , Spieler 2 und einem neuen Brett anlegen.
 					\item \textbf{+ loadGame(player: String): String}\\ Soll das zum Spieler zugehörige Brett aus der Datenbank laden.
-					\item \textbf{+ saveGame(player: String): void} Soll ein Brett wieder in die Datenbank speichern.\\
+					\item \textbf{+ saveGame(player: String): void}\\ Soll ein Brett wieder in die Datenbank speichern.\\
 					\\
 				\end{description}
 			
