@@ -68,7 +68,6 @@
 			\captionof{figure}{Paketdiagramm}
 			\label{fig:Paketdiagramm}
 		\end{minipage}
-		\subsection{\gls{GUI}}
 		
 		\subsection{Server}
 		Der Server wurde nach dem \gls{REST} Prinzip entworfen. Alle Anfragen werden per \gls{URL} gesendet. Benachrichtigungen über neue Züge erfolgen über eine \gls{WS}-Verbindung. Da Züge abwechselnd und meist nicht direkt nacheinander ausgeführt werden, wurde sich gegen eine konstante Verbindung zum Zugaustausch entschieden.
@@ -678,7 +677,8 @@
 				\\
 				\item \textbf{\Large{BoardActivity}}
 			
-			Es werden alle Borad-Aktivitäten angezeigt, wie z.B. das Brett.\\
+			Es werden alle Board-Aktivitäten angezeigt, wie z.B. das Brett.
+			Hier kann man zudem die einzelnen Kacheln anwählen und somit Züge ausführen.\\
 			
 			\item \textbf{\Large{MainMenuActivity}}
 			
@@ -711,7 +711,7 @@
 					\item \textbf{+ searchPlayerButton(): void:}\\ Sobald der Benutzer \textbf {„Spielersuche“} drückt, öffnet sich die \textbf {„SearchPlayerActivity“}. Dort kann man einen anderen Benutzer mit seinem Spielernamen suchen und mit dem Button  \textbf {„Herausfordern“ (+ challengeButton(): void) } diesen herausfordern. 
 					
 					\item \textbf{+ rankingStatisticsButton(): void:}\\ Sobald der Benutzer \textbf {„Rangliste/Statistik“} drückt, öffnet sich die \textbf {„RankingStatisticActivity“}. 
-Dort kann der Benutzer seine Statistik und den Ranglistenplatz einsehen. \\
+					Dort kann der Benutzer seine Statistik und den Ranglistenplatz einsehen. \\
 
 					 \item \textbf{\Large{RankingStatisticsActivity}} 
 					 
@@ -949,11 +949,11 @@ Dort kann der Benutzer seine Statistik und den Ranglistenplatz einsehen. \\
 	
 	\item \textbf{Beschreibung:}\\ \\
 		Zunächst wird der Server gestartet und initiiert. Danach gelangt man in den Startbildschirm, wo man sich anmelden muss. Dabei muss zum einen abgefragt werden, ob der Login automatisch ablief. Dies bedeutet, dass der Benutzer sich schon ein Account erstellt hat und somit der Login erfolgreich war. Zum andern kann der Login fehlschlagen und der Benutzer muss sich mit einem Google Login anmelden. Bei beiden Fällen gelangt man dann anschließend in das Hauptmenü. Hier kann man seinen Gegner suchen und ein Spiel anfragen. Wenn der Gegner das Spiel akzeptiert landet man im Spiel-Screen und wenn er ablehnt sucht man sich einen neuen Gegner.\\ \\
-Wenn das Spiel startet bekommt jeder Spieler eine Farbe zugewiesen. Danach macht der weiße Spieler seinen ersten Zug. Wenn dieser inkorrekt ist, muss er wieder eine neune Zug machen. Ist jedoch der Zug korrekt und es liegt kein Matt, Patt oder Unentschieden vor ist der schwarze Spieler am Zug. Ansonsten wird angezeigt, ob der Spieler gewonnen hat oder ein Unentschieden vorliegt. 
-Bei dem schwarzen Spieler läuft die gleiche Abfrage, wie bei dem weißen Spieler, ab. Wenn kein Matt, Patt oder Unentschieden vorliegt ist wieder der weiße Spieler am Zug. Ansonsten wird angezeigt, ob der Spieler gewonnen hat oder ein Unentschieden vorliegt und das Spiel ist beednet. Danach verlässt man die Activity.
+		Wenn das Spiel startet bekommt jeder Spieler eine Farbe zugewiesen. Danach macht der weiße Spieler seinen ersten Zug. Wenn dieser inkorrekt ist, muss er wieder eine neune Zug machen. Ist jedoch der Zug korrekt und es liegt kein Matt, Patt oder Unentschieden vor ist der schwarze Spieler am Zug. Ansonsten wird angezeigt, ob der Spieler gewonnen hat oder ein Unentschieden vorliegt. 
+		Bei dem schwarzen Spieler läuft die gleiche Abfrage, wie bei dem weißen Spieler, ab. Wenn kein Matt, Patt oder Unentschieden vorliegt ist wieder der weiße Spieler am Zug. Ansonsten wird angezeigt, ob der Spieler gewonnen hat oder ein Unentschieden vorliegt und das Spiel ist beendet. Danach verlässt man die Activity.
 
 \end{description}
-	\section{Sequenzdiagramm}
+	\section{Sequenzdiagramme}
 	\begin{minipage}{\linewidth}
 		\centering
 		\includegraphics[width=1\linewidth]{Diagramme/MoveClient}
