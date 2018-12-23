@@ -744,54 +744,36 @@ Dort kann der Benutzer seine Statistik und den Ranglistenplatz einsehen. \\
 					\item\textbf{+ onClick(view: View)}:\\ Erzeugt die Fuktionalität eines Konpfes wobei ein AlertDialog geöffnet wird.
 					\\
 				
-					\item \textbf{\Large{DrawDialog}}
-			
-					Fragt einen Spieler, ob er das Remis-Angebot des Gegners annemhen oder ablehnen will, dazu stehen ihm zwei Buttons zur Verfügung.\\
+				
 					
-					\item \textbf{\Large{GiveUpDialog}}
-					
-					Ein Dialog, welcher den Spieler bestätigen lässt, dass er aufgeben will.\\
-					
-					\item \textbf{\Large{LoginMenuDialog}}
-					
-					Fragt den Spieler nach seinen Benutzerdaten und meldet ihn im System an.\\
-					
-					\item \textbf{\Large{WinnerDialog}}
-					
-					Zeigt das Ergebnis eines Spiels für beide Spieler an, und bietet ihnen die Möglichkeit zur Revanche.\\
-					
-					\item \textbf{\Large{PawnTransformationDialog}}
-					
-					Ein Dialog zur Auswahl einer Figur, in welche sich ein Bauer verwandeln soll, wenn dieser die gegnerische Grundreihe erreicht hat.\\
-					
-					\textbf{\large{Buttons}}
+						\textbf{\large{Dialoge}}
 				\newline
 				\rule{\textwidth}{1pt}
 				\begin{description}		
-					\item \textbf{\Large{DrawDialog }} 
+					\item \textbf{\Large{DrawDialog}} 
 					
-					Hier wird ein Unentschieden-Fenster geöffnet mit den Buttons „Ja“ und „ Nein“.
+					Fragt einen Spieler, ob er das Remis-Angebot des Gegners annemhen oder ablehnen will, dafür stehen ihm die zwei Buttons \glqq Ja\grqq\ und \glqq Nein\grqq\ zur Verfügung.\\
 					\item \textbf{+ drawDialog(): void:}\\ Wenn man die Partie mit einem Unentschieden beendet, taucht der \textbf {„DrawDialog“} auf. Man kann bei Bedarf noch einmal gegen den gleichen Gegner spielen, indem man den Button \textbf  {„Ja“} betätigt und in die \textbf {„BoardActivity“} wechselt oder in die \textbf {„MainMenuActivity“} gelangt in dem man \textbf {„Nein“} betätigt. \\
 					
 					\item \textbf{\Large{GiveUpDialog }} 
 					
-					Hier wird ein Aufgeben-Fenster geöffnet mit den Buttons „Ja“ und „ Nein“.
+					Ein Dialog, welcher den Spieler bestätigen lässt, dass er aufgeben will. Dafür stehen ihm die zwei Buttons \glqq Ja\grqq\ und \glqq Nein\grqq\ zur Verfügung.
 					\item \textbf{+ giveUpDialog(): void:}\\ Wenn man auf den Button \textbf {„Aufgeben“} drückt, erscheint der \textbf {„GiveUpDialog“}, ob man wirklich aufgeben möchte mit den Buttons \textbf {„Ja“}, wodurch man in die \textbf {„MainMenuActivity“} gelangt und \textbf {„Nein“}, wodurch man in die \textbf {„BoardActivity“} wechselt.\\
 					
 					\item \textbf{\Large{LoginMenuDialog }} 
 					
-					Hier wird ein Login-Menü-Fenster geöffnet. 
+					Fragt den Spieler nach seinen Benutzerdaten und meldet ihn im System an. 
 					\item \textbf{+ loginMenuDialog(): void:}\\ Nach dem Drücken auf den Knopf \textbf {„Anmeldung"} mit Google öffnet sich der \textbf {„LoginMenuDialog“} für den Login, wo man seine Daten angeben kann und nach dem Login in die \textbf {„ManiMenuActivity“} gelangt.\\
 					
 					\item \textbf{\Large{WinnerDialog }} 
 					
-					Hier wird ein Gewonnen-Fenster geöffnet mit den Buttons „Menü“, „Speichern“ und „Noch ein Spiel?“
+					Zeigt das Ergebnis eines Spiels für beide Spieler an, und bietet ihnen Buttons \glqq Menü\grqq , \glqq Speichern\grqq\ und \glqq Noch ein Spiel?\grqq\ .
 					
 					\item \textbf{+ winnerDialog(): void:}\\ Wenn man eine Partie gewonnen hat, erscheint der  \textbf {„WinnerDialog“} mit der Meldung, dass man gewonnen hat und mit den zusätzlichen Buttons:  \textbf {„Menü“}, wodurch man in die  \textbf {„MainMenuActivity“} gelangt,  \textbf {„Speichern“}, wodurch die Spielzüge gespeichert werden und  \textbf {„Noch ein Spiel?“, } wodurch man in die  \textbf { „BoardActivity“}  wechselt.\\
 					
 					\item \textbf{\Large{PawnTransformationDialog }} 
 					
-					Hier wird ein Bauernumwandlungs-Fenster geöffnet mit den Buttons „Queen“, „Rook“, „Bishop“ und „Knight“.
+					Ein Dialog zur Auswahl einer Figur, in welche sich ein Bauer verwandeln soll, wenn dieser die gegnerische Grundreihe erreicht hat. Dazu hat er die Buttons \glqq Queen\grqq\ , \glqq Rook\grqq\ , \glqq Bishop\grqq\ und \glqq Knight\grqq\ .
 					
 					\item \textbf{+ pawnTransformation(): void:}\\ Wenn ein Bauer die gegnerische Grundreihe erreicht, erfolgt eine Bauernumwandlung. Dabei werden dann die Möglichkeiten Queen, Rook, Bishop, Knight zum austauschen in dem \textbf {„PawnTransforamtionDialog“ } angezeigt. Die umgewandelte Figur wirkt dabei sofort.
 				
