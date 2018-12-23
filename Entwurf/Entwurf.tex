@@ -667,10 +667,7 @@
 			\item \textbf{\Large{android.app.Activity}}
 			
 			Ist eine einzelne, fokussierte Aufgabe, die der Benutzer ausführen kann. Da fast alle Aktivitäten mit dem Benutzer interagieren, kümmert sich die Activity-Klasse darum, ein Fenster für Sie zu erstellen.\\
-			\\			
-				\textbf{\large{Gemeinsame Methoden}}
-				\newline
-				\rule{\textwidth}{1pt}
+		
 				\begin{description}			
 					\item \textbf{\# onCreate(savedInstanceState: Bundle):}\\ Wird aufgerufen, wenn die Aktivität beginnt. Wenn die Aktivität neu initialisiert wird, enthält das Bundle die Daten, die es zuletzt bei SaveInstanceState bereitgestellt hat. Ansonsten ist es \textbf{null}.
 					\item \textbf{\# onStart(): }\\ Wird aufgerufen, wenn die Aktivität gestoppt wurde, jetzt aber dem Benutzer wieder angezeigt wird.
@@ -730,31 +727,25 @@
 			\captionof{figure}{Dialoge}
 			\label{fig:dialoge}
 		\end{minipage}
-		\begin{description}		
+		\begin{itemize}		
 			\item \textbf{\Large{android.support.v7.app.AppCompatActivity}}
 			
 			Die AppComaptActivity wird als Dialog verwendet.\\
-			\\			
-				\textbf{\large{Gemeinsame Methoden}}
-				\newline
-				\rule{\textwidth}{1pt}
-				\begin{description}			
+				
+					\begin{description}			
 					\item \textbf{\# onCreate(savedInstanceState: Bundle):}\\ Erzeugt die Knöpfe. Wenn die Aktivität neu initialisiert wird, enthält das Bundle die Daten, die es zuletzt bei SaveInstanceState bereitgestellt hat. Ansonsten ist es \textbf{null}.
 					\item\textbf{+ onClick(view: View)}:\\ Erzeugt die Fuktionalität eines Konpfes wobei ein AlertDialog geöffnet wird.
 					\\
 				
 				\end{description}
 					
-						\textbf{\large{Dialoge}}
-				\newline
-				\rule{\textwidth}{1pt}
-				\begin{itemize}					
+									
 					\item \textbf{\Large{DrawDialog}} 
 					
 					Fragt einen Spieler, ob er das Remis-Angebot des Gegners annehmen oder ablehnen will, dafür stehen ihm die zwei Buttons \glqq Annehmen\grqq\ und \glqq Ablehnen\grqq\ zur Verfügung.\\
 					\begin{description}					
-					\item \textbf{- accepted(): void}\\ 
-					\item \textbf{- declined(): void}\\				
+					\item \textbf{- accepted(): void}\\ Sendet dem Server die Information, dass das Spiel mit einem Unentschieden beedndet wurde. Dieser zeigt beiden Spielern einen entsprechenden \textbf{ResultDialog}.
+					\item \textbf{- declined(): void}\\ Schließt den Dialog und sendet dem anderen Benutzer einen \textbf{DeniedDialog}.			
 					\end{description}
 					
 					\item \textbf{\Large{GiveUpDialog }} 
@@ -762,22 +753,22 @@
 					Ein Dialog, welcher den Spieler bestätigen lässt, dass er aufgeben will. Dafür stehen ihm die zwei Buttons \glqq Ja\grqq\ und \glqq Nein\grqq\ zur Verfügung.
 					
 					\begin{description}					
-					\item \textbf{- confirmed(): void}\\ 
-					\item \textbf{- aborted(): void}\\					
+					\item \textbf{- confirmed(): void}\\ Sendet dem Server die Information, dass das Spiel beendet wurde. Dieser zeigt beiden Spielern einen entsprechenden \textbf{ResultDialog}.
+					\item \textbf{- aborted(): void}\\ Schließt den Dialog.					
 					\end{description}
 					
 					\item \textbf{\Large{LoginMenuDialog }} 
 					
 					Fragt den Spieler nach seinen Benutzerdaten und meldet ihn im System an. 
 					
-					\item \textbf{\Large{WinnerDialog }} 
+					\item \textbf{\Large{ResultDialog}} 
 					
 					Zeigt das Ergebnis eines Spiels für beide Spieler an, und bietet ihnen Buttons \glqq Menü\grqq , \glqq Speichern\grqq\ und \glqq Noch ein Spiel?\grqq .
 					
 					\begin{description}					
-					\item \textbf{- backToMenu(): void}\\
-					\item \textbf{- saveGame(): void}\\
-					\item \textbf{- rematch(): void}\\					
+					\item \textbf{- backToMenu(): void}\\ Schließt den Dialog und öffnet die \textbf{MainMenuActivity}.
+					\item \textbf{- saveGame(): void}\\ Speichert das Spiel als String ab.
+					\item \textbf{- rematch(): void}\\ Sendet dem Gegner einen erneuten \textbf{ChallengeDialog}. Dieser kann dann erneut ein Spiel akzeptieren oder ablehnen.			
 					\end{description}
 					
 					\item \textbf{\Large{PawnTransformationDialog }} 
@@ -786,22 +777,29 @@
 					
 					
 					\begin{description}					
-					\item \textbf{- queenSelected(): void}\\
-					\item \textbf{- rookSelected(): void}\\
-					\item \textbf{- bishopSelected(): void}\\
-					\item \textbf{- knightSelected(): void}\\				
+					\item \textbf{- queenSelected(): void}\\ Erzeugt einen \textbf{Promotion}-Move mit einer \textbf{Queen} als Parameter, und wendet diesen auf das Brett an.
+					\item \textbf{- rookSelected(): void}\\ Erzeugt einen \textbf{Promotion}-Move mit einem \textbf{Rook} als Parameter, und wendet diesen auf das Brett an.
+					\item \textbf{- bishopSelected(): void}\\ Erzeugt einen \textbf{Promotion}-Move mit einem \textbf{Bishop} als Parameter, und wendet diesen auf das Brett an.
+					\item \textbf{- knightSelected(): void}\\Erzeugt einen \textbf{Promotion}-Move mit einem \textbf{Knight} als Parameter, und wendet diesen auf das Brett an.				
 					\end{description}	
 					
 					\item \textbf{\Large{ChallengedDialog}}
 					
 					Diesen Dialog erhält ein Spieler, wenn er von einem anderen Spieler herausgefordert wurde. Er hat mithilfe der Buttons \glqq Annehmen\grqq\ und \glqq Ablehnen\grqq\ die Möglichkeit, diese Herausforderung anzunehmen oder abzulehnen.
 					\begin{description}					
-					\item \textbf{- accepted(): void}\\ 
-					\item \textbf{- declined(): void}\\					
+					\item \textbf{- accepted(): void}\\ Erzeugt ein neues Spiel zwischen den beiden Spielern und informiert den Server darüber.
+					\item \textbf{- declined(): void}\\	Schließt den Dialog, der andere Spieler erhält einen	\textbf{DeniedDialog}.			
 					\end{description}
+					
+					\item \textbf{\Large{DeniedDialog}}\\
+					Ein Dialog, welcher den Benutzer über eine abgelehnte Anfrage durch einen anderen Spieler informiert. Der Dialog hat einen \glqq Ok\grqq -Button zur Bestätigung.
+					\begin{description}
+					\item \textbf{- okClicked(): void}\\ Schließt den Dialog.
+					\end{description}
+					
 			
 				\end{itemize}
-				\end{description}
+				
 		\newpage
 		
 		\subsection{ClientSocket}
