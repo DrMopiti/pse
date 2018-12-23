@@ -954,7 +954,6 @@ Dort kann der Benutzer seine Statistik und den Ranglistenplatz einsehen. \\
 					Speichert das Brett wieder ab.
 				\end{description}
 			
-			
 		\end{itemize}
 	\section{Aktivitätsdiagramm}
 	\begin{minipage}{\linewidth}
@@ -963,6 +962,15 @@ Dort kann der Benutzer seine Statistik und den Ranglistenplatz einsehen. \\
 		\captionof{figure}{Aktivitätsdiagramm}
 		\label{fig:aktivitaetsdiagramm}
 	\end{minipage}
+	
+	\begin{description}
+	
+	\item \textbf{Beschreibung:}\\ \\
+		Zunächst wird der Server gestartet und initiiert. Danach gelangt man in den Startbildschirm, wo man sich anmelden muss. Dabei muss zum einen abgefragt werden, ob der Login automatisch ablief. Dies bedeutet, dass der Benutzer sich schon ein Account erstellt hat und somit der Login erfolgreich war. Zum andern kann der Login fehlschlagen und der Benutzer muss sich mit einem Google Login anmelden. Bei beiden Fällen gelangt man dann anschließend in das Hauptmenü. Hier kann man seinen Gegner suchen und ein Spiel anfragen. Wenn der Gegner das Spiel akzeptiert landet man im Spiel-Screen und wenn er ablehnt sucht man sich einen neuen Gegner.\\ \\
+Wenn das Spiel startet bekommt jeder Spieler eine Farbe zugewiesen. Danach macht der weiße Spieler seinen ersten Zug. Wenn dieser inkorrekt ist, muss er wieder eine neune Zug machen. Ist jedoch der Zug korrekt und es liegt kein Matt, Patt oder Unentschieden vor ist der schwarze Spieler am Zug. Ansonsten wird angezeigt, ob der Spieler gewonnen hat oder ein Unentschieden vorliegt. 
+Bei dem schwarzen Spieler läuft die gleiche Abfrage, wie bei dem weißen Spieler, ab. Wenn kein Matt, Patt oder Unentschieden vorliegt ist wieder der weiße Spieler am Zug. Ansonsten wird angezeigt, ob der Spieler gewonnen hat oder ein Unentschieden vorliegt und das Spiel ist beednet. Danach verlässt man die Activity.
+
+\end{description}
 	\section{Sequenzdiagramm}
 	\begin{minipage}{\linewidth}
 		\centering
