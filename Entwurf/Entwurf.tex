@@ -120,11 +120,11 @@
 					 \item \textbf{- board: BoardState}\\ Hier wird der aktuelle Spielstatus bestehend aus
 					 \begin{itemize}
 					 
-						\item Stand aller Figuren auf dem Brett
-						\item mögliche Rochaden
-						\item letzter ausgeführter Spielzug
-						\item Anzahl der Züge ohne Bauernzug oder Schlagen von Figuren
-						  \end{itemize}	
+			\item Stand aller Figuren auf dem Brett
+			\item mögliche Rochaden
+			\item letzter ausgeführter Spielzug
+			\item Anzahl der Züge ohne Bauernzug oder Schlagen von Figuren
+			  \end{itemize}	
 			  	 gespeichert.
 					 \item \textbf{- whitePlayer: Player}\\ Der Spieler mit den weißen Figuren.
 					 \item \textbf{- blackPlayer: Player}\\ Der Spieler mit den schwarzen Figuren.\\
@@ -142,8 +142,7 @@
 					\item \textbf{+ getWhitePlayer(): Player}\\ Gibt den weißen Spieler \textbf{whitePlayer} zurück.
 					\item \textbf{+ getBlackPlayer(): Player}\\ Gibt den schwarzen Spieler \textbf{blackPlayer} zurück.
 					\item \textbf{+ hasPieceAt(position: Position): boolean} Gibt zurück, ob sich an der übergebenen Position auf dem Brett eine Figur befindet.
-					\item \textbf{+ getPieceAt(position: Position): Piece}\\ Gibt die Figur zurück, welche sich an der übergebenen Position befindet. Ist die Position nicht besetzt wird \textbf{null} zurückgegeben.       
-				   	\item \textbf{+ getPossiblePositions(position: Position): List<Position>}\\ Gibt alle möglichen Positionen als Liste zurück, auf welche eine Figur, welche sich auf der übergebenen Position befindet, ziehen kann. Zum Berechnen dieser wird das \textbf{ruler} Objekt benutzt.
+					\item \textbf{+ getPieceAt(position: Position): Piece}\\ Gibt die Figur zurück, welche sich an der übergebZüge Position befindet. Ist die Position nicht dibesetz wird \textbf{null} zurückgegeben.        ausführ     item \textbf{+ getPossiblePositions(position: Position): List<Position>}\\ Gibt alle möglichen Positionen als Liste zurück, auf welche eine Figur, welche sich auf der übergebenen Position befindet, ziehen kann. Zum Berechnen dieser wird das \textbf{ruler} Objekt benutzt.
 					\item \textbf{+ applyMove(move: Move): void}\\ Führt den übergebenen Zug auf dem Spielbrett \textbf{board} aus.
 					\item \textbf{+ applyMove(moveString: String): void}\\ Führt den als String übergebenen Zug auf dem Spielbrett \textbf{board} aus. Dazu muss der String erst in ein Objekt vom Typ \textbf{Move} umgewandelt werden.
 					\item \textbf{+ hasEnded(): boolean}\\ Gibt zurück, ob das Spiel gemäß den Schachregeln beendet ist. Dazu wird das \textbf{ruler} Objekt benutzt.
@@ -673,7 +672,7 @@
 					\item \textbf{\# onCreate(savedInstanceState: Bundle):}\\ Wird aufgerufen, wenn die Aktivität beginnt. Wenn die Aktivität neu initialisiert wird, enthält das Bundle die Daten, die es zuletzt bei SaveInstanceState bereitgestellt hat. Ansonsten ist es \textbf{null}.
 					\item \textbf{\# onStart(): }\\ Wird aufgerufen, wenn die Aktivität gestoppt wurde, jetzt aber dem Benutzer wieder angezeigt wird.
 					\item \textbf{\# onStop(): }\\ Wird aufgerufen, wenn man für den Benutzer nicht mehr sichtbar sind.
-					\item \textbf{\# onResume(): }\\ Wird aufgreufen, damit die Aktivität mit dem Benutzer interagieren kann. 
+					\item \textbf{\# onResume(): }\\ Wird aufgerufen, damit die Aktivität mit dem Benutzer interagieren kann. 
 					\item \textbf{+ onCreateOptionsMenu(menu: Menu): Boolean:}\\ Initialisiert den Inhalt des Standardoptionen-Menüs der Aktivität. Es gibt das Optionsmenü, in dem die Elemente platziert werden sollen. Es gibt true für das angezeigte Menü zurück und bei false wird es nicht angezeigt.
 					\item \textbf{+ onOptionsItemSelected(item: MenuItem): Boolean:}\\ Wird aufgerufen, wenn ein Element im Optionsmenü ausgewählt wird. Item ist das ausgewählte Menüelement. Es gibt false zurück, um die normale Menüverarbeitung fortzusetzen und true, um sie dann zu verbrauchen.\\
 				\\
@@ -683,14 +682,47 @@
 			
 			\item \textbf{\Large{MainMenuActivity}}
 			
-			Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofotrspiel, Spielersuche und Rangliste/Statistik.\\
+			Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofortspiel, Spielersuche und Rangliste/Statistik.\\
 			
 			\item \textbf{\Large{RankingStatisticsActivity}}
 			
 			Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Spieler angezeigt.\\
 				\end{description}
 				\end{itemize}
+				\newpage	
 				
+				\textbf{\large{Buttons}}
+				\newline
+				\rule{\textwidth}{1pt}
+				\begin{description}		
+				\item \textbf{\Large{BoardActivity}} 
+					 
+					 Hier wird das Spiel angezeigt mit den Buttons „Unentschieden“ und „Aufgeben“.
+					 
+					 \item \textbf{+ drawButton(): void:}\\ Sobald der Benutzer auf diesen Button während des Spieles drückt, wird ein Unentschieden angezeigt. Somit kann er das Spiel abbrechen, ohne das sich etwas an seinem Punktestand ändert. Der Gegner muss diesem zustimmen. Danach gelangt man in die \textbf {„MainMenuActivtiy“}. \\
+		
+					 
+			  \item \textbf{\Large{MainMenuActivity}} 
+					 
+					 Hier wird das Hauptmenü angezeigt mit Buttons „Sofortspiel“, „Spielersuche“, „Rangliste/Statistik“.
+					
+					\item \textbf{+ quickMatchButton(): void:}\\ Sobald der Benutzer \textbf {„Sofortspiel“} drückt, öffnet sich die \textbf {„BoardActivity“}. Dort spielt man gegen einen zufälligen Gegner.
+					
+					\item \textbf{+ searchPlayerButton(): void:}\\ Sobald der Benutzer \textbf {„Spielersuche“} drückt, öffnet sich die \textbf {„SearchPlayerActivity“}. Dort kann man einen anderen Benutzer mit seinem Spielernamen suchen und mit dem Button  \textbf {„Herausfordern“ (+ challengeButton(): void) } diesen herausfordern. 
+					
+					\item \textbf{+ rankingStatisticsButton(): void:}\\ Sobald der Benutzer \textbf {„Rangliste/Statistik“} drückt, öffnet sich die \textbf {„RankingStatisticActivity“}. 
+Dort kann der Benutzer seine Statistik und den Ranglistenplatz einsehen. \\
+
+					 \item \textbf{\Large{RankingStatisticsActivity}} 
+					 
+					 Nach dem drücken des Buttons \textbf {„Rangliste/Statistik“} in der \textbf {„MainMenuActivity“} öffnet sich  die \textbf {„RankingStatisticActivity“}. Dort kann der Benutzer zum einen in der Statistik seine Daten einsehen und zum anderen in der Rangliste sich mit anderen Benutzern vergleichen. Dieser kann nach dem Einsehen wieder zur \textbf { „MainMenuActivity“} gelangen. \\
+					 
+					 \item \textbf{\Large{SearchPlayerActivity }} 
+					
+					Nach dem drücken des Button \textbf {„SearchPlayer“} in der \textbf {„MainMenuActivity“} öffnet sich die \textbf {„SearchPlayerActivity“}. Dort kann der Benutzer andere Gegner finden und diese mit dem Button \textbf {„Herausfordern“ ( + challengeButton: void)} herausfordern. \\ \\
+					
+					\end{description}
+			
 				\newpage	
 		\subsubsection{Dialoge}
 		\begin{minipage}{\linewidth}
@@ -700,7 +732,7 @@
 			\label{fig:dialoge}
 		\end{minipage}
 		\begin{itemize}
-			\item \textbf{\Large{android.app.Activity}}
+			\item \textbf{\Large{android.support.v7.app.AppCompatActivity}}
 			
 			Die AppComaptActivity wird als Dialog verwendet.\\
 			\\			
@@ -709,7 +741,7 @@
 				\rule{\textwidth}{1pt}
 				\begin{description}			
 					\item \textbf{\# onCreate(savedInstanceState: Bundle):}\\ Erzeugt die Knöpfe. Wenn die Aktivität neu initialisiert wird, enthält das Bundle die Daten, die es zuletzt bei SaveInstanceState bereitgestellt hat. Ansonsten ist es \textbf{null}.
-					\item\textbf{+ onClick(view: View)}:\\ Erzeugt die Fuktionalität eines Konpfes wobei ein AlertiDialog geöffnet wird
+					\item\textbf{+ onClick(view: View)}:\\ Erzeugt die Fuktionalität eines Konpfes wobei ein AlertDialog geöffnet wird.
 					\\
 				
 					\item \textbf{\Large{DrawDialog}}
@@ -718,7 +750,7 @@
 					
 					\item \textbf{\Large{GiveUpDialog}}
 					
-					Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofotrspiel, Spielersuche und Rangliste/Statistik.\\
+					Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofortspiel, Spielersuche und Rangliste/Statistik.\\
 					
 					\item \textbf{\Large{LoginMenuDialog}}
 					
@@ -726,11 +758,45 @@
 					
 					\item \textbf{\Large{WinnerDialog}}
 					
-					Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofotrspiel, Spielersuche und Rangliste/Statistik.\\
+					Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofortspiel, Spielersuche und Rangliste/Statistik.\\
 					
 					\item \textbf{\Large{PawnTransformationDialog}}
 					
-					Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Spieler angezeigt.\\
+					Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Benutzer angezeigt.\\
+					
+					\textbf{\large{Buttons}}
+				\newline
+				\rule{\textwidth}{1pt}
+				\begin{description}		
+					\item \textbf{\Large{DrawDialog }} 
+					
+					Hier wird ein Unentschieden-Fenster geöffnet mit den Buttons „Ja“ und „ Nein“.
+					\item \textbf{+ drawDialog(): void:}\\ Wenn man die Partie mit einem Unentschieden beendet, taucht der \textbf {„DrawDialog“} auf. Man kann bei Bedarf noch einmal gegen den gleichen Gegner spielen, indem man den Button \textbf  {„Ja“} betätigt und in die \textbf {„BoardActivity“} wechselt oder in die \textbf {„MainMenuActivity“} gelangt in dem man \textbf {„Nein“} betätigt. \\
+					
+					\item \textbf{\Large{GiveUpDialog }} 
+					
+					Hier wird ein Aufgeben-Fenster geöffnet mit den Buttons „Ja“ und „ Nein“.
+					\item \textbf{+ giveUpDialog(): void:}\\ Wenn man auf den Button \textbf {„Aufgeben“} drückt, erscheint der \textbf {„GiveUpDialog“}, ob man wirklich aufgeben möchte mit den Buttons \textbf {„Ja“}, wodurch man in die \textbf {„MainMenuActivity“} gelangt und \textbf {„Nein“}, wodurch man in die \textbf {„BoardActivity“} wechselt.\\
+					
+					\item \textbf{\Large{LoginMenuDialog }} 
+					
+					Hier wird ein Login-Menü-Fenster geöffnet. 
+					\item \textbf{+ loginMenuDialog(): void:}\\ Nach dem Drücken auf den Knopf \textbf {„Anmeldung"} mit Google öffnet sich der \textbf {„LoginMenuDialog“} für den Login, wo man seine Daten angeben kann und nach dem Login in die \textbf {„ManiMenuActivity“} gelangt.\\
+					
+					\item \textbf{\Large{WinnerDialog }} 
+					
+					Hier wird ein Gewonnen-Fenster geöffnet mit den Buttons „Menü“, „Speichern“ und „Noch ein Spiel?“
+					
+					\item \textbf{+ winnerDialog(): void:}\\ Wenn man eine Partie gewonnen hat, erscheint der  \textbf {„WinnerDialog“} mit der Meldung, dass man gewonnen hat und mit den zusätzlichen Buttons:  \textbf {„Menü“}, wodurch man in die  \textbf {„MainMenuActivity“} gelangt,  \textbf {„Speichern“}, wodurch die Spielzüge gespeichert werden und  \textbf {„Noch ein Spiel?“, } wodurch man in die  \textbf { „BoardActivity“}  wechselt.\\
+					
+					\item \textbf{\Large{PawnTransformationDialog }} 
+					
+					Hier wird ein Bauernumwandlungs-Fenster geöffnet mit den Buttons „Queen“, „Rook“, „Bishop“ und „Knight“.
+					
+					\item \textbf{+ pawnTransformation(): void:}\\ Wenn ein Bauer die gegnerische Grundreihe erreicht, erfolgt eine Bauernumwandlung. Dabei werden dann die Möglichkeiten Queen, Rook, Bishop, Knight zum austauschen in dem \textbf {„PawnTransforamtionDialog“ } angezeigt. Die umgewandelte Figur wirkt dabei sofort.
+				
+					\end{description}
+					
 				\end{description}
 				\end{itemize}
 		\newpage
@@ -900,16 +966,16 @@
 	\section{Sequenzdiagramm}
 	\begin{minipage}{\linewidth}
 		\centering
-		\includegraphics[width=1\linewidth]{Diagramme/Sequenzdiagramm}
+		\includegraphics[width=1\linewidth]{Diagramme/Sequenzdiagramm1}
 		\captionof{figure}{Sequenzdiagramm 1}
 		\label{fig:sequenzdiagramm1}
 	\end{minipage}
-	\begin{minipage}{\linewidth}
-		\centering
-		\includegraphics[width=1\linewidth]{Diagramme/Sequenzdiagramm2}
-		\captionof{figure}{Sequenzdiagramm 2}
-		\label{fig:sequenzdiagramm2}
-	\end{minipage}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=1\linewidth]{Diagramme/Sequenzdiagramm2}
+	\captionof{figure}{Sequenzdiagramm 2}
+	\label{fig:sequenzdiagramm2}
+\end{minipage}
 	
 	\printglossaries
 \end{document}
