@@ -684,8 +684,8 @@
 									 
 					 \item \textbf{- drawClicked(): void}\\ Wird ausgeführt, wenn der Button \glqq Unentschieden\grqq\ gedürckt wird. Schickt dem Gegner einen \textbf{DrawDialog}, mit welchem er das Remis-Angebot annehmen oder ablehnen kann. 
 					 \item \textbf{- giveUpClicked(): void}\\ Wird ausgeführt, wenn der Button \glqq Aufgeben\grqq\ gedrückt wird. Dem Spieler erscheint ein \textbf{GiveUpDialog}, mit welchem er sein Aufgeben bestätigen oder abbrechen kann. 
-					  \item \textbf{- tileSelected(): void}\\ Wird ausgeführt, wenn der Benutzer eine Kachel auf dem Spielfeld anklickt. Erzeugt aus den Koordinaten, auf welche der Benutzer geklickt hat, eine \textbf{Position}. Prüft mittel der \textbf{whiteToMove()}-Methode des Game-Objekts, ob der Benutzer am Zug ist. Wenn ja, wird zuerst geprüft, ob der Benutzer bereits eine Kachel gewählt hatte. Ist dies der Fall, wird \textbf{executeMove()} ausgeführt, hat der Benutzer noch keine Kacheln gewählt wird \textbf{showPossiblePositions()} ausgeführt. 		  							\item \textbf{- showPossiblePositions(position: Position): void}\\ Prüft zunächst mithilfe von \textbf{getPieceAt(position: Position} des Game-Objektes, ob sich an der gegebenen Position eine eigene Figur befindet. Ist dies der Fall, wird \textbf{getPossibleMoves()} aufgerufen und die Zielpositionen der jeweiligen Züge werden auf dem Brett angezeigt, ansonsten passiert nichts.
-					  \item \textbf{- executeMove(position: Position): void}\\ Prüft zunächst, ob die ausgewählte \textbf{Position} auf dem Brett markiert war. Wenn ja, wird der entsprechende Zug mit \textbf{applyMove()} ausgeführt. Wenn nicht, werden die Markierungen wieder entfernt, und der Benutzer muss erneut eine seiner Figuren anwählen um die möglichen Züge angezeigt zu bekommen.
+					  \item \textbf{- tileSelected(): void}\\ Wird ausgeführt, wenn der Benutzer eine Kachel auf dem Spielfeld anklickt. Erzeugt aus den Koordinaten, auf welche der Benutzer geklickt hat, eine \textbf{Position}. Prüft mittel der \textbf{whiteToMove()}-Methode des Game-Objekts, ob der Benutzer am Zug ist. Wenn ja, wird zuerst geprüft, ob der Benutzer bereits eine Kachel gewählt hatte. Ist dies der Fall, wird \textbf{executeMove()} ausgeführt, hat der Benutzer noch keine Kacheln gewählt wird \textbf{showPossiblePositions()} ausgeführt. 		  							\item \textbf{- showPositions(start: Position): void}\\ Prüft zunächst mithilfe von \textbf{getPieceAt(position: Position} des Game-Objektes, ob sich an der gegebenen Position eine eigene Figur befindet. Ist dies der Fall, wird \textbf{getPossibleMoves()} aufgerufen und die Zielpositionen der jeweiligen Züge werden auf dem Brett angezeigt, ansonsten passiert nichts.
+					  \item \textbf{- executeMove(goal: Position): void}\\ Prüft zunächst, ob die ausgewählte \textbf{Position} auf dem Brett markiert war. Wenn ja, wird der entsprechende Zug mit \textbf{applyMove()} ausgeführt. Wenn nicht, werden die Markierungen wieder entfernt, und der Benutzer muss erneut eine seiner Figuren anwählen um die möglichen Züge angezeigt zu bekommen.
 					  
 					 \end{description}
 			
@@ -712,7 +712,10 @@
 				 \item \textbf{\Large{SearchPlayerActivity }} 
 					
 					Nach dem drücken des Button \textbf {SearchPlayer} in der \textbf{MainMenuActivity} öffnet sich die \textbf {SearchPlayerActivity}. Dort kann der Benutzer mithilfe einer Suchfunktion andere Gegner finden. Klickt er auf einen Spielernamen, öffnet sich eine \textbf{StatisticsActivity} mit den Statistiken des jeweiligen Spielers und mit dem Button \textbf {„Herausfordern“}. \\
-					\\					
+					\begin{description}
+					\item \textbf{playerSelected(String name): void} Ruft eine \textbf{StatisticsActivity} mit den Statistiken des entsprechenden Spielers auf. \\	
+					\end{description}
+									
 				
 				\end{itemize}
 				\newpage	
