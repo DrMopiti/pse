@@ -5,7 +5,14 @@ public class Position {
     private int y;
 
     public Position(String representation) throws IllegalPositionException {
-
+        String alpha = "abcdefgh";
+        String[] coords = representation.split("");
+        int y = Integer.parseInt(coords[1]);
+        if (!alpha.contains(coords[0]) || (y > 7 || y < 0)) throw new IllegalPositionException();
+        else {
+            this.x = alpha.indexOf(coords[0]);
+            this.y = y;
+        }
     }
     public Position(int x, int y) throws IllegalPositionException {
         if ((x > 7 || x < 0) || (y > 7 || y < 0)) throw new IllegalPositionException();
@@ -22,7 +29,9 @@ public class Position {
         return y;
     }
     public String toString() {
-        return null;
+        String alpha = "abcdefgh";
+        Integer y = this.y;
+        return alpha.charAt(this.x) + y.toString();
     }
 
 }

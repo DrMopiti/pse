@@ -1,12 +1,9 @@
 package com.example.user.schachapp;
 
 public class Move {
-    private Position start;
-    private Position goal;
+    protected Position start;
+    protected Position goal;
 
-    public Move(String representation) {
-
-    }
     public Move(Position start, Position goal) {
         this.start = start;
         this.goal = goal;
@@ -22,6 +19,6 @@ public class Move {
 
     @Override
     public String toString() {
-        return null;
+        return start.toString() + "-" + goal.toString();
     }
 }

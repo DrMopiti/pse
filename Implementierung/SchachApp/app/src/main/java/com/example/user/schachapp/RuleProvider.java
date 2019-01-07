@@ -6,6 +6,6 @@ public interface RuleProvider {
     BoardState getStartState();
     List<Move> getLegalMoves(Position position, BoardState boardState);
     boolean isLegalMove(Move move, BoardState boardState);
-    boolean hasEnded(BoardState state);
-    Result getResult();
+    boolean hasEnded(BoardState board);
+    Result getResult(BoardState board);
 }

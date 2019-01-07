@@ -23,16 +23,24 @@ public class BoardState {
 
     public BoardState(String string) {}
 
-    public void applyMove(Move move) {}
+    public void applyMove(Move move) {
 
-    public boolean hasPieceAt(Position position) {return false;}
+    }
+
+    public boolean hasPieceAt(Position position) {
+        return !tiles[position.getX()][position.getY()].getPiece().equals(null);
+    }
 
     public Piece getPieceAt(Position position) {
-        return null;
+        return tiles[position.getX()][position.getY()].getPiece();
     }
 
     public Move getLastMove() {
         return lastMove;
+    }
+
+    public boolean whiteToMove() {
+        return whiteToMove;
     }
 
     public boolean canWhiteKingCastle() {

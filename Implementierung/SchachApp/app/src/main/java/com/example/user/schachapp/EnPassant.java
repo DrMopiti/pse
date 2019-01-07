@@ -10,4 +10,8 @@ public class EnPassant extends Move {
     public Position getRemovePawn() {
         return removePawn;
     }
+
+    public String toString() {
+        return start.toString() + "-" + goal.toString();
+    }
 }
