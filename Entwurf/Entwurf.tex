@@ -68,10 +68,12 @@
 			\captionof{figure}{Paketdiagramm}
 			\label{fig:Paketdiagramm}
 		\end{minipage}
-		\subsection{\gls{GUI}}
 		
 		\subsection{Server}
 		Der Server wurde nach dem \gls{REST} Prinzip entworfen. Alle Anfragen werden per \gls{URL} gesendet. Benachrichtigungen über neue Züge erfolgen über eine \gls{WS}-Verbindung. Da Züge abwechselnd und meist nicht direkt nacheinander ausgeführt werden, wurde sich gegen eine konstante Verbindung zum Zugaustausch entschieden.
+		
+		\subsection{GUI}
+		Die GUI wurde mit den Klassen android.app.Activity und android.support.v7.app.AppCompatActivity aus der Oberklasse android.content.Context erstellt. Alle Aktivitäten erben von der Activity-Klasse und die Dialoge von AppComaptActivity-Klasse. Durch die Aktivity kann der Benutzer eine bestimmte Aufgabe ausführen. In der Klasse AppCompatActivity wird außerdem der AlertDialog verwendet. Dadurch kann man die Knöpfe anzeigen lassen, die somit eine Interaktion der Benutzeroberfläche erzeugen.
 		
 		\subsection{Spiellogik}
 		Die Spiellogik wird komplett selbst implementiert ohne externe Bibliotheken zu benutzen. Zur Spielmodellierung werden verschiedene Konzepte als Klassen implementiert. Die Spiellogik muss zum einen über einen Zug/Brettverwalter mit der Benutzeroberfläche kommunizieren können, um das Spiel in Echtzeit visualisieren zu können, als auch dem Server zur Verfügung stehen, damit dieser die Spielregeln überwachen und über den Spielzustand Bescheid wissen kann.
@@ -82,21 +84,28 @@
 		\begin{minipage}{\linewidth}
 			\centering
 			\includegraphics[width=1\linewidth]{Diagramme/TotalGame}
-			\captionof{figure}{TotalGame}
+			\captionof{figure}{Spiellogik}
 			\label{fig:Spiellogik}
 		\end{minipage}
 		\newpage
 		\textbf{\Large{Spiel}}
-				\begin{description}
-					\item \textbf{Game} stellt ein Spiel dar. Es besteht aus zwei Spielern \textbf{Player} und einem Spielfeld \textbf{BoardState}. Außerdem benutzt es eine Instanziierung des Interface \textbf{RuleProvider}, welches die Regeln für ein beliebiges Spiel auf einem Schachbrett liefert. Die Regeln samt Startkonfiguration des Brettes auf ein Interface auszulagern anstatt sie ins \textbf{Game} direkt einzubauen macht die Spiellogik leichter austauschbar und ermöglicht zum Beispiel das Erstellen weiterer Spielvarianten. Diese könnten dann einfach in dem Konsturktor der \textbf{Game} Klasse mitgegeben werden. Auch könnte man so beispielsweise einen Spieler mit einem einstellbaren Figurendefizit in das Spiel startet lassen, indem man einen \textbf{RuleProvider} mit entsprechender Anfangsstellung einfügt.
-					\item In unserem Fall wird das Interface nur von der Klasse \textbf{ChessRuleProvider} implementiert, welche die Standard-Schachregeln liefert. Diese Klasse hat bei einer Methode als Rückgabewert ein Objekt vom Typ \textbf{Result}. Ergebnisse als eigenes Objekt zu behandeln anstatt diese einfach nur als String anzugeben hat den Vorteil, dass zum Ergebnis an sich auch eine Begründung mitgeliefert werden kann, welche der Spieler nach Spielende einsehen kann. Außerdem ist ein Ergebnis so auch immer als ein solches erkennbar.
-					\item Ein \textbf{Player} ist ein Spieler eines konkretes Spiels und besteht aus einem \textbf{User}, welcher einen Benutzer im Allgemeinen darstellt. Umgekehrt muss ein \textbf{User} aber nicht zu jedem Zeitpunkt einen \textbf{Player} haben. Das Trennen der Konzepte Spieler und Benutzer ermöglicht das Hinzufügen von Spielern zu bestimmten \textbf{Game}-Objekten, ohne Benutzer direkt an ein Spiel koppeln zu müssen.
-					\item Das Spielfeld \textbf{BoardState} enthält 64  \textbf{Tiles} (Schachfelder) und einen \textbf{Move}, welcher hier den letzten ausgeführten Zug des Spiels darstellt. Das Speichern des zuletzt ausgeführten Zuges ist für den Zug \glqq en passant\grqq\ sowie zur Überprüfung gespielter Züge bei Übertragung des Brettes notwendig.
-					\item Ein \textbf{Tile} kann ein \textbf{Piece} enthalten, muss es aber nicht. Das Brett als Array von \textbf{Tiles} mit Figuren zu speichern ist notwendig, um zu jedem Zeitpunkt jedes Feld zur Hand zu haben und auf dieses Figuren setzen und entfernen zu können. Leere Felder können einfach erkannt werden, nämlich wenn sie kein Objekt vom Typ Piece enthalten.
-					\item \textbf{Piece} ist eine abstrakte Klasse und stellt eine Figur dar. Sie wird von den sechs konkreten Figurenklassen beerbt. Diese speichern Informationen über ihren Wert, ihre Darstellung als Zeichen sowie ihre Zugfähigkeiten. Dadurch werden switch-case Abfragen vermieden, und von jeder Figur kann direkt der gewünschte Wert/das Verhalten angefordert werden, ohne über den Typ Bescheid wissen zu müssen.
-					\item Ein \textbf{Move} besteht im Allgemeinen nur aus zwei \textbf{Positionen}. Ein Zug muss über die ziehende Figur nicht Bescheid wissen, da zur Ausführung des Zuges ohnehin das gesamte Brett mit allen Positionen aller Figuren vorliegen muss. Es gibt drei Spezialfälle eines Zuges, welche eine gesonderte Implementierung benötigen, da sie neben zwei Positionen noch andere Informationen enthalten müssen. Diese erben alle von \textbf{Move}, da diese trotzdem aus einer Start- und Zielposition bestehen. Das macht das Erstellen und Weitergeben von Listen von Zügen einfacher, und ermöglicht eine einfache Ausführung auf der Benutzeroberfläche.
-					\item \textbf{Position} stellt eine Position auf einem Schachbrett dar und besteht aus zwei Zahlen, welche die Koordinaten darstellen. Diese müssen zwischen 0-7 liegen, was beim Erstellen eines solchen Objektes sichergestellt wird. Das hat den Vorteil, dass Positionen nicht bei jeder Nutzung auf Korrektheit überprüft werden müssen um Programmabstürze zu vermeiden.
-				\end{description}		
+				
+					\textbf{Game} stellt ein Spiel dar. Es besteht aus zwei Spielern \textbf{Player} und einem Spielfeld \textbf{BoardState}. Außerdem benutzt es eine Instanziierung des Interface \textbf{RuleProvider}, welches die Regeln für ein beliebiges Spiel auf einem Schachbrett liefert. Die Regeln samt Startkonfiguration des Brettes auf ein Interface auszulagern anstatt sie ins \textbf{Game} direkt einzubauen macht die Spiellogik leichter austauschbar und ermöglicht zum Beispiel das Erstellen weiterer Spielvarianten. Diese könnten dann einfach in dem Konstruktor der \textbf{Game} Klasse mitgegeben werden. Auch könnte man so beispielsweise einen Spieler mit einem einstellbaren Figurendefizit in das Spiel startet lassen, indem man einen \textbf{RuleProvider} mit entsprechender Anfangsstellung einfügt. \\
+					\\
+					 In unserem Fall wird das Interface nur von der Klasse \textbf{ChessRuleProvider} implementiert, welche die Standard-Schachregeln liefert. Diese Klasse hat bei einer Methode als Rückgabewert ein Objekt vom Typ \textbf{Result}. Ergebnisse als eigenes Objekt zu behandeln anstatt diese einfach nur als String anzugeben hat den Vorteil, dass zum Ergebnis an sich auch eine Begründung mitgeliefert werden kann, welche der Spieler nach Spielende einsehen kann. Außerdem ist ein Ergebnis so auch immer als ein solches erkennbar. \\
+					 \\			
+					 		 Ein \textbf{Player} ist ein Spieler eines konkreten Spieles und besteht aus einem \textbf{User}, welcher einen Benutzer im Allgemeinen darstellt. Umgekehrt muss ein \textbf{User} aber nicht zu jedem Zeitpunkt einen \textbf{Player} haben. Das Trennen der Konzepte, Spieler und Benutzer, ermöglicht das Hinzufügen von Spielern zu bestimmten \textbf{Game}-Objekten, ohne Benutzer direkt an ein Spiel koppeln zu müssen.\\
+					 \\
+					Das Spielfeld \textbf{BoardState} enthält 64  \textbf{Tiles} (Schachfelder) und einen \textbf{Move}, welcher hier den letzten ausgeführten Zug des Spiels darstellt. Das Speichern des zuletzt ausgeführten Zuges ist für den Zug \glqq en passant\grqq\ sowie zur Überprüfung gespielter Züge bei Übertragung des Brettes notwendig.\\
+					\\
+					 Ein \textbf{Tile} kann ein \textbf{Piece} enthalten, muss es aber nicht. Das Brett als Array von \textbf{Tiles} mit Figuren zu speichern ist notwendig, um zu jedem Zeitpunkt jedes Feld zur Hand zu haben und auf dieses Figuren setzen und entfernen zu können. Leere Felder können einfach erkannt werden, da sie kein Objekt vom Typ Piece enthalten.\\
+					 \\
+					 \textbf{Piece} ist eine abstrakte Klasse und stellt eine Figur dar. Sie wird von den sechs konkreten Figurenklassen beerbt. Diese speichern Informationen über ihren Wert, ihre Darstellung als Zeichen sowie ihre Zugfähigkeiten. Dadurch werden switch-case Abfragen vermieden, und von jeder Figur kann direkt der gewünschte Wert/das Verhalten angefordert werden, ohne über den Typ Bescheid wissen zu müssen.\\
+					 \\
+					 Ein \textbf{Move} besteht im Allgemeinen nur aus zwei \textbf{Positionen}. Ein Zug muss über die ziehende Figur nicht Bescheid wissen, da zur Ausführung des Zuges ohnehin das gesamte Brett mit allen Positionen aller Figuren vorliegen muss. Es gibt drei Spezialfälle eines Zuges, welche eine gesonderte Implementierung benötigen, da sie neben zwei Positionen noch andere Informationen enthalten müssen. Diese erben alle von \textbf{Move}, da diese trotzdem aus einer Start- und Zielposition bestehen. Das macht das Erstellen und Weitergeben von Listen von Zügen einfacher, und ermöglicht eine einfache Ausführung auf der Benutzeroberfläche.\\
+					 \\
+					 \textbf{Position} stellt eine Position auf einem Schachbrett dar und besteht aus zwei Zahlen, welche die Koordinaten darstellen. Diese müssen zwischen 0-7 liegen, was beim Erstellen eines solchen Objektes sichergestellt wird. Das hat den Vorteil, dass Positionen nicht bei jeder Nutzung auf Korrektheit überprüft werden müssen um Programmabstürze zu vermeiden.
+					
 		\newpage
 		
 		\subsubsection{Game}
@@ -121,8 +130,8 @@
 					 \begin{itemize}
 					 
 			\item Stand aller Figuren auf dem Brett
-			\item mögliche Rochaden
-			\item letzter ausgeführter Spielzug
+			\item möglichen Rochaden
+			\item letztem ausgeführten Spielzug
 			\item Anzahl der Züge ohne Bauernzug oder Schlagen von Figuren
 			  \end{itemize}	
 			  	 gespeichert.
@@ -137,17 +146,21 @@
 	 			\begin{description}
 					 \item \textbf{+ Game(user1: User ,user2: User)}\\ Konstruktor, welcher ein Spiel mit den Standard Schachregeln und einem Brett auf Anfangsposition erzeugt. Der zuerst übergebene User erhält die weißen Figuren, der zweite die schwarzen.
 					 \item \textbf{+ Game(user1: User ,user2: User, board: BoardState)}\\ Konstruktor, welcher ein Spiel mit den Standard Schachregeln und dem übergebenen Brettstatus erzeugt. Der zuerst übergebene \textbf{User} erhält die weißen Figuren, der zweite die schwarzen.
-					 \item \textbf{+ getBoard(): BoardState}\\ Gibt den Brettstatus \textbf{board}des akutellen Spiels zurück.
+					 \item \textbf{+ getBoard(): BoardState}\\ Gibt den Brettstatus \textbf{board} des aktuellen Spiels zurück.
 					\item \textbf{+ getBoard(board: BoardState): void}\\ Setzt den Brettstatus \textbf{board} auf das übergebene Objekt.
 					\item \textbf{+ getWhitePlayer(): Player}\\ Gibt den weißen Spieler \textbf{whitePlayer} zurück.
 					\item \textbf{+ getBlackPlayer(): Player}\\ Gibt den schwarzen Spieler \textbf{blackPlayer} zurück.
-					\item \textbf{+ hasPieceAt(position: Position): boolean} Gibt zurück, ob sich an der übergebenen Position auf dem Brett eine Figur befindet.
-					\item \textbf{+ getPieceAt(position: Position): Piece}\\ Gibt die Figur zurück, welche sich an der übergebZüge Position befindet. Ist die Position nicht dibesetz wird \textbf{null} zurückgegeben.        ausführ     item \textbf{+ getPossiblePositions(position: Position): List<Position>}\\ Gibt alle möglichen Positionen als Liste zurück, auf welche eine Figur, welche sich auf der übergebenen Position befindet, ziehen kann. Zum Berechnen dieser wird das \textbf{ruler} Objekt benutzt.
+					\item \textbf{+ whiteToMove(): boolean}\\ Führt \textbf{whiteToMove} auf \textbf{board} aus, gibt zurück, ob Weiß am Zug ist.
+					\item \textbf{+ hasPieceAt(position: Position): boolean}\\ Gibt zurück, ob sich an der übergebenen Position auf dem Brett eine Figur befindet.
+					\item \textbf{+ getPieceAt(position: Position): Piece}\\ Gibt die Figur zurück, welche sich an der übergebenen Position befindet. Ist die Position nicht besetzt wird \textbf{null} zurückgegeben.             
+					\item \textbf{+ getPossiblePositions(position: Position): List<Position>}\\ Gibt alle möglichen Positionen als Liste zurück, auf welche eine Figur, welche sich auf der übergebenen Position befindet, ziehen kann. Zum Berechnen dieser wird das \textbf{ruler}-Objekt benutzt.
+					\item \textbf{+ isLegalMove(move: Move): boolean}\\ Prüft, ob ein Zug gemäß den Schachregeln erlaubt ist. Führt dazu die gleichnamige Methode auf dem \textbf{ruler}-Objekt aus, mit \textbf{board} als zusätzlichen Parameter.
 					\item \textbf{+ applyMove(move: Move): void}\\ Führt den übergebenen Zug auf dem Spielbrett \textbf{board} aus.
 					\item \textbf{+ applyMove(moveString: String): void}\\ Führt den als String übergebenen Zug auf dem Spielbrett \textbf{board} aus. Dazu muss der String erst in ein Objekt vom Typ \textbf{Move} umgewandelt werden.
-					\item \textbf{+ hasEnded(): boolean}\\ Gibt zurück, ob das Spiel gemäß den Schachregeln beendet ist. Dazu wird das \textbf{ruler} Objekt benutzt.
-					\item \textbf{+ getResult(): Result}\\ Gibt das Ergebnis eines Spiels als Objekt vom Typ \textbf{Result} zurück. Ist das Spiel noch nicht beendet, wird \textbf{null} zurückgegeben.
-					\item \textbf{+ toString(): String}\\ Wandelt den gesamten Spielstatus in eine Zeichenkette um. Dazu werden die Benutzernamen sowie die String-Repräsentation des \textbf{board} Objekts genutzt.
+					\item \textbf{+ hasEnded(): boolean}\\ Gibt zurück, ob das Spiel gemäß den Schachregeln beendet ist. Dazu wird das \textbf{ruler}-Objekt benutzt.
+					\item \textbf{+ getResult(): Result}\\ Gibt das Ergebnis eines Spiels als Objekt vom Typ \textbf{Result} zurück. Ist das Spiel noch nicht beendet, wird \textbf{null} zurückgegeben. 
+					\newpage
+					\item \textbf{+ toString(): String}\\ Wandelt den gesamten Spielstatus in eine Zeichenkette um. Dazu werden die Benutzernamen sowie die String-Repräsentation des \textbf{board}-Objekts genutzt.
 				\end{description}
 			
 			
@@ -185,16 +198,16 @@
 				\newline
 				\rule{\textwidth}{1pt}
 				\begin{description}
-					\item \textbf{+ getStartState(): BoardState}\\ Gibt die Standard Anfangsstellung eines Schachspiels als \textbf{BoardState} zurück.
-					\item \textbf{+ getLegalMoves(position: Position, board: BoardState): List<Move>}\\ Gibt eine Liste an erlaubten Zügen ausgehend von einer ausgewählten Position und einem Brett zurück. Dazu werden zunächst mit \textbf{getPossibleMoves(Position, BoardState)} alle möglichen Züge berechnet. Anschließen wird jeder Zug auf einer Kopie des Brettes simuliert, und mithilfe von \textbf{isChecked(boolean, BoardState)} überprüft, ob der selbe Spieler danach im Schach stünde (was den Zug ungültig machen würde).
+					\item \textbf{+ getStartState(): BoardState}\\ Gibt die Standard-Anfangsstellung eines Schachspiels als \textbf{BoardState} zurück.
+					\item \textbf{+ getLegalMoves(position: Position, board: BoardState): List<Move>}\\ Gibt eine Liste an erlaubten Zügen ausgehend von einer ausgewählten Position und einem Brett zurück. Dazu werden zunächst mit \textbf{getPossibleMoves(Position, BoardState)} alle möglichen Züge berechnet. Anschließend wird jeder Zug auf einer Kopie des Brettes simuliert, und mithilfe von \textbf{isChecked(boolean, BoardState)} überprüft, ob der ziehende Spieler nach seinem Zug im Schach stünde (was den Zug ungültig machen würde).
 					\item \textbf{+ isLegalMove(move: Move, board: BoardState): boolean}\\ Prüft, ob ein Zug gemäß den Schachregeln auf dem übergebenen Brett erlaubt ist.
-					\item \textbf{+ isChecked(white: boolean, board: BoardState): boolean}\\ Überprüft ob ein Spieler auf dem gegebenen Brett im Schach steht. Ist der übergebene boolean true, wird Weiß überprüft, bei false Schwarz. Dazu wird geschaut, ob es eine gegnerische Figur gibt, welche durch \textbf{getPosssibleMoves(Position, BoardState)} einen Zug erhält, mit welchem der eigene König erreicht werden könnte.
+					\item \textbf{+ isChecked(white: boolean, board: BoardState): boolean}\\ Überprüft, ob ein Spieler auf dem gegebenen Brett im Schach steht. Ist der übergebene boolean true, wird Weiß überprüft, bei false Schwarz. Dazu wird geschaut, ob es eine gegnerische Figur gibt, welche durch \textbf{getPosssibleMoves(Position, BoardState)} einen Zug erhält, mit welchem der eigene König erreicht werden könnte.
 					\item \textbf{+ hasEnded(board: BoardState): boolean}\\ Prüft, ob das Schachspiel zu Ende ist. Dazu wird geprüft, ob der zu ziehende Spieler laut \textbf{isMate(BoardState)} Matt gesetzt, laut \textbf{isStaleMate(BoardState)} Patt gesetzt oder ob laut  \textbf{isDraw(BoardState)} andersweitig ein Unentschieden erreicht wurde.
 					\item \textbf{+ getResult(): Result}\\ Ruft \textbf{hasEnded(BoardState board)} auf, gibt aber bei beendetem Spiel das jeweilige Ergebnis als \textbf{Result} zurück. Ist das Spiel nicht beendet wird \textbf{null} zurückgegeben.
 					\item \textbf{- getPossibleMoves(position: Position, board: BoardState): List<Move>}\\ Gibt alle möglichen Züge einer Figur auf dem Brett zurück, ohne dabei zu berücksichtigen, ob der ziehende Spieler nach diesem Zug im Schach stehen würde. Dazu wird die jeweilige \textbf{getMovement()}-Methode der Figur an der angegebenen Position ausgeführt.				
-					\item \textbf{- isMate(board: BoardState): boolean}\\ Prüft, ob der zu ziehende Spieler Matt gesetzt wurde. Das ist der Fall, wenn der Spieler laut \textbf{isChecked(boolean, BoardState)} im Schach steht, und es für keine Figur einen nach \textbf{getLegalMoves(Position, BoardState)}erlaubten Zug gibt.
-					\item \textbf{- isStaleMate(board: BoardState): boolean}\\ Prüft, ob der zu ziehende Spieler Patt gesetzt wurde. Das ist der Fall, wenn der Spieler laut \textbf{isChecked(boolean, BoardState)} nicht im Schach steht, und es für keine Figur einen nach \textbf{getLegalMoves(Position, BoardState)}erlaubten Zug gibt.
-					\item \textbf{- isDraw(board: BoardState): boolean}\\ Prüft, ob ein anderweitiges Unentschieden erreicht wurde. Dies ist der Fall, wenn zu wenig Figuren auf dem Brett vorhanden sind um Matt zu setzen, oder wenn 50 Züge lang keine Figur geschlagen und kein Bauer gezogen wurde, also wenn der \textbf{movesWithoutAction}-Wert des \textbf{board}-Objekts 50 (oder größer) ist.
+					\item \textbf{- isMate(board: BoardState): boolean}\\ Prüft, ob der zu ziehende Spieler Matt gesetzt wurde. Das ist der Fall, wenn der Spieler laut \textbf{isChecked(boolean, BoardState)} im Schach steht, und es für keine Figur einen nach \textbf{getLegalMoves(Position, BoardState)} erlaubten Zug gibt.
+					\item \textbf{- isStaleMate(board: BoardState): boolean}\\ Prüft, ob der zu ziehende Spieler Patt gesetzt wurde. Das ist der Fall, wenn der Spieler laut \textbf{isChecked(boolean, BoardState)} nicht im Schach steht, und es für keine Figur einen nach \textbf{getLegalMoves(Position, BoardState)} erlaubten Zug gibt.
+					\item \textbf{- isDraw(board: BoardState): boolean}\\ Prüft, ob ein anderweitiges Unentschieden erreicht wurde. Dies ist der Fall, wenn zu wenig Figuren auf dem Brett vorhanden sind, um Matt zu setzen oder wenn 50 Züge lang keine Figur geschlagen und kein Bauer gezogen wurde, also wenn der \textbf{movesWithoutAction}-Wert von \textbf{board} 50 (oder größer) ist.
 				\end{description}
 		\end{itemize}
 		\newpage
@@ -216,9 +229,10 @@
 				\rule{\textwidth}{1pt}
 			
 				\begin{description}				
-					\item \textbf{- tiles: Tile[][]}\\ Ein Array von Tiles, welches den Aufbau des Spielbretts darstellt
+					\item \textbf{- tiles: Tile[][]}\\ Ein Array von Tiles, welches den Aufbau des Spielbretts darstellt.
 					 \item \textbf{- lastMove: Move}\\ Der letzte gespielte Zug.
 					 \item \textbf{- whiteToMove: boolean}\\ Speichert, ob Weiß am Zug ist.
+					 \newpage
 					 \item \textbf{- whiteKingCastle: boolean}\\ Speichert ab, ob Weiß noch auf der Königsseite rochieren kann.
 					 \item \textbf{- whiteQueenCastle: boolean}\\ Speichert ab, ob Weiß noch auf der Damenseite rochieren kann.
 					 \item \textbf{- blackKingCastle: boolean}\\ Speichert ab, ob Schwarz noch auf der Königsseite rochieren kann.
@@ -231,10 +245,12 @@
 				\rule{\textwidth}{1pt}
 				\begin{description}
 					\item \textbf{+ BoardState()}\\ Erzeugt ein leeres Schachbrett und setzt alle Variablen auf ihre Standardwerte.
-					\item \textbf{+ BoardState(representation: String)} Erzeugt ein Brett, ausgehen von einem String. In diesem müssen alle notwendigen Informationen in einem einheitlichen Format gespeichert sein.
-					\item \textbf{+ applyMove(move: Move): void}\\ Führt einen Zug auf dem Brett aus, indem es die Figur(en) wie im Move-Objekt vorgegeben bewegt und möglicherweise andere Figuren schlägt(überschreibt). Außerdem wird die zu ziehende Farbe, der letzte Zug, sowie die Anzahl der Züge ohne Aktion aktualisiert. Bei entsprechender Verletzung werden möglich Rochaden auf \textbf{false} gesetzt.
+					\item \textbf{+ BoardState(representation: String)} Erzeugt ein Brett, ausgehend von einem String. In diesem müssen alle notwendigen Informationen in einem einheitlichen Format gespeichert sein.
+					\item \textbf{+ applyMove(move: Move): void}\\ Führt einen Zug auf dem Brett aus, indem es die Figur(en) wie im Move-Objekt vorgegeben bewegt und möglicherweise andere Figuren schlägt(überschreibt). Außerdem wird die zu ziehende Farbe, der letzte Zug, sowie die Anzahl der Züge ohne Aktion aktualisiert. Bei entsprechender Verletzung werden mögliche Rochaden auf \textbf{false} gesetzt.
 					\item \textbf{+ getPieceAt(position: Position): Piece}\\ Gibt die Figur an der übergebenen Position zurück. Ist die Position nicht besetzt, wird \textbf{null} zurückgegeben.			
 					\item \textbf{+ getLastMove(): Move}\\ Gibt \textbf{lastMove} zurück.
+					\newpage
+					\item \textbf{+ whiteToMove(): boolean}\\ Gibt \textbf{whiteToMove} zurück.
 					 \item \textbf{+ canWhiteKingCastle(): boolean}\\ Gibt zurück, ob Weiß noch auf der Königsseite rochieren kann.
 					 \item \textbf{+ canWhiteQueenCastle(): boolean}\\ Gibt zurück, ob Weiß noch auf der Damenseite rochieren kann.
 					 \item \textbf{+ canBlackKingCastle(): boolean}\\ Gibt zurück, ob Schwarz noch auf der Königsseite rochieren kann.
@@ -246,7 +262,7 @@
 			
 			\item \textbf{\Large{Tile}}
 			
-			Stellt eine Feld eines Schachbretts dar.\\
+			Stellt ein Feld eines Schachbretts dar.\\
 			\\
 				\textbf{\large{Attribute}}
 				\newline
@@ -255,6 +271,7 @@
 				\begin{description}					
 					\item \textbf{- piece: Piece}\\ Die Figur, welche sich auf dem Feld befindet. Befindet sich keine Figur auf dem Feld, steht hier \textbf{null}.\\
 					\\
+					\newpage
 				\end{description}
 				\textbf{\large{Methoden}}
 				\newline
@@ -279,7 +296,7 @@
 		\begin{itemize}
 			\item \textbf{\Large{Player}}
 			
-			Stellt einen Spieler eines konkretes Spiels dar. Existiert nur während das jeweilige Spiel existiert.\\
+			Stellt einen Spieler eines konkreten Spieles dar. Existiert nur während das jeweilige Spiel existiert.\\
 			\\
 				\textbf{\large{Attribute}}
 				\newline
@@ -321,7 +338,9 @@
 				\begin{description}
 					\item \textbf{+ User(name: String)}\\ Erstellt einen neuen Benutzer mit dem übergebenen Namen. Setzt \textbf{elo} auf 1000, alle anderen Attribute auf 0. 
 					\item \textbf{+ getPlayedGames(): int}\\ Gibt \textbf{playedGames} zurück.
+					\newpage
 					\item \textbf{+ getWonGames(): int}\\ Gibt \textbf{wonGames} zurück.
+					
 					\item \textbf{+ addWonGame(): void}\\ Erhöht \textbf{wonGames} und \textbf{playedGames} um eins.
 					\item \textbf{+ getDrawedGames(): int}\\ Gibt \textbf{drawedGames} zurück.
 					\item \textbf{+ addDrawedGame(): void}\\ Erhöht \textbf{drawedGames} und \textbf{playedGames} um eins.
@@ -354,6 +373,7 @@
 					\item \textbf{- result: String}\\ Das Ergebnis eines Spiels als String codiert.
 					\item \textbf{- reason: String}\\ Eine optionale Begründung zum Ergebnis als String.\\
 					\\
+					\newpage
 				\end{description}
 				\textbf{\large{Methoden}}
 				\newline
@@ -362,7 +382,7 @@
 					\item \textbf{+ Result(result: String)}\\ Erzeugt ein Objekt mit dem übergebenen String als \textbf{result} und einer leeren \textbf{reason}.
 					\item \textbf{+ Result(result: String, reason: String)}\\ Erzeugt ein Objekt mit dem ersten übergebenen String als \textbf{result} und dem zweiten übergebenen String als \textbf{reason}.
 					\item \textbf{+ toString(): String}\\ Gibt \textbf{result} zurück.
-					\item \textbf{+ getReson(): String} Gibt \textbf{reason} zurück.						
+					\item \textbf{+ getReson(): String} \\ Gibt \textbf{reason} zurück.						
 				\end{description}		
 		\newpage
 		
@@ -407,7 +427,7 @@
 				\rule{\textwidth}{1pt}
 			
 				\begin{description}			
-					\item \textbf{- x: int}\\ Stellt die horizontale Koordinate auf dem Schachbrett dar.,
+					\item \textbf{- x: int}\\ Stellt die horizontale Koordinate auf dem Schachbrett dar.
 					\item \textbf{- y: int}\\ Stellt die vertikale Koordinate auf dem Schachbrett dar.\\
 					\\
 				\end{description}
@@ -416,7 +436,7 @@
 				\rule{\textwidth}{1pt}
 				\begin{description}
 					\item \textbf{+ Position(x: int, y: int)}\\ Erzeugt eine Position mit den angegebenen Koordinaten. Liegen die Koordinaten außerhalb eines Schachbretts wird eine Exception ausgelöst.
-					\item \textbf{+ Position(representation: String)}\\ Erzeugt eine Position indem der übergebene String in Koordinaten umgewandelt wird. Liegen die Koordinaten außerhalb eines Schachbretts wird eine Exception ausgelöst.
+					\item \textbf{+ Position(representation: String)}\\ Erzeugt eine Position, indem der übergebene String in Koordinaten umgewandelt wird. Liegen die Koordinaten außerhalb eines Schachbretts wird eine Exception ausgelöst.
 					\item \textbf{+ getX(): int}\\ Gibt \textbf{\textit{x}} zurück.
 					\item \textbf{+ getY(): int}\\ Gibt \textbf{\textit{y}} zurück.
 					\item \textbf{+ toString(): String}\\ Gibt eine Repräsentation der Position als String zurück.\\
@@ -439,7 +459,7 @@
 				\newline
 				\rule{\textwidth}{1pt}
 				\begin{description}
-					\item \textbf{+ EnPassant(start: Position, goal: Position)}\\ Ruft den Konstruktor von \textbf{Move} auf, berechnet und setzt die Position\textbf{removePawn}.
+					\item \textbf{+ EnPassant(start: Position, goal: Position)}\\ Ruft den Konstruktor von \textbf{Move} auf, berechnet und setzt die Position \textbf{removePawn}.
 					\item \textbf{+ getRemovePawn(): Position}\\ Gibt \textbf{removePawn} zurück.
 					\item \textbf{+ toString(): String}\\ Gibt eine eindeutige Repräsentation des Zugs als Zeichenkette zurück.\\
 					\\
@@ -455,6 +475,7 @@
 				\begin{description}				
 					\item \textbf{- promotion: Piece}\\ Die Figur, in welche sich der Bauer verwandeln soll.\\
 					\\
+					\newpage
 				\end{description}
 				\textbf{\large{Methoden}}
 				\newline
@@ -482,7 +503,7 @@
 				\newline
 				\rule{\textwidth}{1pt}
 				\begin{description}
-					\item \textbf{+ Castling(start: Position, goal: Position)}\\ Ruft den Konstruktor von \textbf{Move} auf, berechnet und setzt den Zug\textbf{rookMove}.
+					\item \textbf{+ Castling(start: Position, goal: Position)}\\ Ruft den Konstruktor von \textbf{Move} auf, berechnet und setzt den Zug \textbf{rookMove}.
 					\item \textbf{+ getRookMove(): Move}\\ Gibt \textbf{rookMove} zurück.
 					\item \textbf{+ toString(): String}\\ Gibt eine eindeutige Repräsentation des Zugs als Zeichenkette zurück.
 				\end{description}			
@@ -529,16 +550,17 @@
 				\newline
 				\rule{\textwidth}{1pt}
 				\begin{description}			
-					\item \textbf{- CHAR: String}\\ Die Repräsentation eines Königs, wird auf \glqq K\grqq\  gesetzt.
-					\item \textbf{- VALUE: int}\\ Der Wert eines Königs, wird auf 0 gesetzt, da dem König an sich kein Wert zugewiesen werden kann.\\
+					\item \textbf{- CHAR: String}\\ Die Repräsentation eines Königs; wird auf \glqq K\grqq\  gesetzt.
+					\item \textbf{- VALUE: int}\\ Der Wert eines Königs; wird auf 0 gesetzt, da dem König an sich kein Wert zugewiesen werden kann.\\
 					\\
+					\newpage
 				\end{description}
 				\textbf{\large{Methoden}}
 				\newline
 				\rule{\textwidth}{1pt}
 				\begin{description}
 					\item \textbf{+ King(w: boolean)}\\ Erzeugt einen neuen König. Dazu wird der Konstruktor von \textbf{Piece} aufgerufen, als Parameter werden w, \textbf{VALUE}, und \textbf{CHAR} übergeben.
-					\item \textbf{+ getMovement(p: Position, b: BoardState): List<Move>}\\ Gibt eine Liste der Züge zurück, die ein König auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann, inklusive Rochade. Dabei wird nicht berücksichtigt, ob sich der König nach dem Zug in Schach befinden würde.\\
+					\item \textbf{+ getMovement(p: Position, b: BoardState): List<Move>}\\ Gibt eine Liste der Züge zurück, die ein König auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann, inklusive Rochade. Dabei wird nicht berücksichtigt, ob sich der König nach dem Zug im Schach befinden würde.\\
 					\\
 				\end{description}
 				
@@ -551,8 +573,8 @@
 				\newline
 				\rule{\textwidth}{1pt}
 				\begin{description}				
-					\item \textbf{- CHAR: String}\\ Die Repräsentation einer Dame, wird auf \glqq D\grqq\ gesetzt.
-					\item \textbf{- VALUE: int}\\ Der Wert einer Dame, wird auf 9 gesetzt.\\
+					\item \textbf{- CHAR: String}\\ Die Repräsentation einer Dame; wird auf \glqq D\grqq\ gesetzt.
+					\item \textbf{- VALUE: int}\\ Der Wert einer Dame; wird auf 9 gesetzt.\\
 					\\
 				\end{description}
 				\textbf{\large{Methoden}}
@@ -560,7 +582,7 @@
 				\rule{\textwidth}{1pt}
 				\begin{description}	
 					\item \textbf{+ Queen(w: boolean)}\\ Erzeugt eine neue Dame. Dazu wird der Konstruktor von \textbf{Piece} aufgerufen, als Parameter werden w, \textbf{VALUE}, und \textbf{CHAR} übergeben.
-					\item \textbf{+ getMovement(p: Position, b: BoardState): List<Move>}\\ Gibt eine Liste der Züge zurück, die eine Dame auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug in Schach befinden würde.\\
+					\item \textbf{+ getMovement(p: Position, b: BoardState): List<Move>}\\ Gibt eine Liste der Züge zurück, die eine Dame auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug im Schach befinden würde.\\
 					\\
 				\end{description}
 			
@@ -572,8 +594,8 @@
 				\newline
 				\rule{\textwidth}{1pt}
 				\begin{description}
-					\item \textbf{- CHAR: String}\\ Die Repräsentation eines Turms, wird auf \glqq T\grqq\ gesetzt.
-					\item \textbf{- VALUE: int}\\ Der Wert eines Turms, wird auf 5 gesetzt.\\
+					\item \textbf{- CHAR: String}\\ Die Repräsentation eines Turms; wird auf \glqq T\grqq\ gesetzt.
+					\item \textbf{- VALUE: int}\\ Der Wert eines Turms; wird auf 5 gesetzt.\\
 					\\
 				\end{description}
 				\textbf{\large{Methoden}}
@@ -581,7 +603,7 @@
 				\rule{\textwidth}{1pt}
 				\begin{description}	
 					\item \textbf{+ Rook(w: boolean)}\\ Erzeugt einen neuen Turm. Dazu wird der Konstruktor von \textbf{Piece} aufgerufen, als Parameter werden w, \textbf{VALUE}, und \textbf{CHAR} übergeben.
-					\item \textbf{+ getMovement(p: Position, b: BoardState)}\\ Gibt eine Liste der Züge zurück, die ein Turm auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug in Schach befinden würde.\\
+					\item \textbf{+ getMovement(p: Position, b: BoardState)}\\ Gibt eine Liste der Züge zurück, die ein Turm auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug im Schach befinden würde.\\
 					\\
 				\end{description}
 			
@@ -593,8 +615,8 @@
 				\newline
 				\rule{\textwidth}{1pt}
 				\begin{description}			
-					\item \textbf{- CHAR: String}\\ Die Repräsentation eines Läufers, wird auf \glqq L\grqq\ gesetzt.
-					\item \textbf{- VALUE: int}\\ Der Wert eines Läufers, wird auf 3 gesetzt.\\
+					\item \textbf{- CHAR: String}\\ Die Repräsentation eines Läufers; wird auf \glqq L\grqq\ gesetzt.
+					\item \textbf{- VALUE: int}\\ Der Wert eines Läufers; wird auf 3 gesetzt.\\
 					\\
 				\end{description}
 				\textbf{\large{Methoden}}
@@ -602,7 +624,7 @@
 				\rule{\textwidth}{1pt}	
 				\begin{description}				
 					\item \textbf{+ Bishop(w: boolean)}\\ Erzeugt einen neuen Läufer. Dazu wird der Konstruktor von \textbf{Piece} aufgerufen, als Parameter werden w, \textbf{VALUE}, und \textbf{CHAR} übergeben.
-					\item \textbf{+ getMovement(p: Position, b: BoardState)}\\ Gibt eine Liste der Züge zurück, die ein Läufer auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug in Schach befinden würde.\\
+					\item \textbf{+ getMovement(p: Position, b: BoardState)}\\ Gibt eine Liste der Züge zurück, die ein Läufer auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug im Schach befinden würde.\\
 					\\
 				\end{description}
 			
@@ -615,8 +637,8 @@
 				\rule{\textwidth}{1pt}
 				
 				\begin{description}			
-					\item \textbf{- CHAR: String}\\ Die Repräsentation eines Springers, wird auf \glqq S\grqq\ gesetzt.
-					\item \textbf{- VALUE: int}\\ Der Wert eines Springers, wird auf 3 gesetzt.\\
+					\item \textbf{- CHAR: String}\\ Die Repräsentation eines Springers; wird auf \glqq S\grqq\ gesetzt.
+					\item \textbf{- VALUE: int}\\ Der Wert eines Springers; wird auf 3 gesetzt.\\
 					\\
 				\end{description}
 				\textbf{\large{Methoden}}
@@ -624,7 +646,7 @@
 				\rule{\textwidth}{1pt}
 				\begin{description}
 					\item \textbf{+ Knight(w: boolean)}\\ Erzeugt einen neuen Springer. Dazu wird der Konstruktor von \textbf{Piece} aufgerufen, als Parameter werden w, \textbf{VALUE}, und \textbf{CHAR} übergeben.
-					\item \textbf{+ getMovement(p: Position, b: BoardState)}\\ Gibt eine Liste der Züge zurück, die ein Springer auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug in Schach befinden würde.\\
+					\item \textbf{+ getMovement(p: Position, b: BoardState)}\\ Gibt eine Liste der Züge zurück, die ein Springer auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug im Schach befinden würde.\\
 					\\
 				\end{description}
 			
@@ -637,8 +659,8 @@
 				\rule{\textwidth}{1pt}
 				
 				\begin{description}				
-					\item \textbf{- CHAR: String}\\ Die Repräsentation eines Bauerns, wird auf \glqq B\grqq\ gesetzt.
-					\item \textbf{- VALUE: int}\\ Der Wert eines Bauerns, wird auf 1 gesetzt.\\
+					\item \textbf{- CHAR: String}\\ Die Repräsentation eines Bauerns; wird auf \glqq B\grqq\ gesetzt.
+					\item \textbf{- VALUE: int}\\ Der Wert eines Bauerns; wird auf 1 gesetzt.\\
 					\\
 				\end{description}
 				\textbf{\large{Methoden}}
@@ -646,7 +668,7 @@
 				\rule{\textwidth}{1pt}
 				\begin{description}
 					\item \textbf{+ Pawn(w: boolean)}\\ Erzeugt einen neuen Bauern. Dazu wird der Konstruktor von \textbf{Piece} aufgerufen, als Parameter werden w, \textbf{VALUE}, und \textbf{CHAR} übergeben.
-					\item \textbf{+ getMovement(p: Position, b: BoardState)}\\ Gibt eine Liste der Züge zurück, die ein Bauer auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann, inklusive en passant, Doppelsprung und Umwandlung. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug in Schach befinden würde.
+					\item \textbf{+ getMovement(p: Position, b: BoardState)}\\ Gibt eine Liste der Züge zurück, die ein Bauer auf dem gegebenen Schachbrett von der gegebenen Position aus ausführen kann, inklusive en passant, Doppelsprung und Umwandlung. Dabei wird nicht berücksichtigt, ob sich der König des ziehenden Spielers nach dem Zug im Schach befinden würde.
 				\end{description}
 		\end{itemize}		
 		\newpage		
@@ -663,34 +685,68 @@
 	\begin{itemize}
 			\item \textbf{\Large{android.app.Activity}}
 			
-			Ist eine einzelne, fokussierte Aufgabe, die der Benutzer ausführen kann. Da fast alle Aktivitäten mit dem Benutzer interagieren, kümmert sich die Activity-Klasse darum, ein Fenster für Sie zu erstellen.\\
-			\\			
-				\textbf{\large{Methoden}}
-				\newline
-				\rule{\textwidth}{1pt}
+			Ist eine einzelne fokussierte Aufgabe, die der Benutzer ausführen kann. Da fast alle Aktivitäten mit dem Benutzer interagieren, kümmert sich die Activity-Klasse darum, ein Fenster für sie zu erstellen.\\
+		
 				\begin{description}			
-					\item \textbf{\# onCreate(savedInstanceState: Bundle):}\\ Wird aufgerufen, wenn die Aktivität beginnt. Wenn die Aktivität neu initialisiert wird, enthält das Bundle die Daten, die es zuletzt bei SaveInstanceState bereitgestellt hat. Ansonsten ist es \textbf{null}.
-					\item \textbf{\# onStart(): }\\ Wird aufgerufen, wenn die Aktivität gestoppt wurde, jetzt aber dem Benutzer wieder angezeigt wird.
-					\item \textbf{\# onStop(): }\\ Wird aufgerufen, wenn man für den Benutzer nicht mehr sichtbar sind.
-					\item \textbf{\# onResume(): }\\ Wird aufgreufen, damit die Aktivität mit dem Benutzer interagieren kann. 
-					\item \textbf{+ onCreateOptionsMenu(menu: Menu): Boolean:}\\ Initialisiert den Inhalt des Standardoptionen-Menüs der Aktivität. Es gibt das Optionsmenü, in dem die Elemente platziert werden sollen. Es gibt true für das angezeigte Menü zurück und bei false wird es nicht angezeigt.
-					\item \textbf{+ onOptionsItemSelected(item: MenuItem): Boolean:}\\ Wird aufgerufen, wenn ein Element im Optionsmenü ausgewählt wird. Item ist das ausgewählte Menüelement. Es gibt false zurück, um die normale Menüverarbeitung fortzusetzen und true, um sie dann zu verbrauchen.\\
+					\item \textbf{\# onCreate(savedInstanceState: Bundle)}\\ Wird aufgerufen, wenn die Aktivität erstellt wird. Wenn die Aktivität neu initialisiert wird, enthält das Bundle die Daten, die es zuletzt bei SaveInstanceState bereitgestellt hat. Ansonsten ist es \textbf{null}.
+					\item \textbf{\# onStart(): void}\\ Wird aufgerufen, wenn die Aktivität gestoppt wurde, jetzt aber dem Benutzer wieder angezeigt wird.
+					\item \textbf{\# onStop(): void}\\ Wird aufgerufen, wenn die Aktivität für den Benutzer nicht mehr sichtbar sind.
+					\item \textbf{\# onResume(): void}\\ Wird aufgerufen, damit die Aktivität mit dem Benutzer interagieren kann. 
+					\item \textbf{+ onCreateOptionsMenu(menu: Menu): boolean}\\ Initialisiert den Inhalt des Standardoptionen-Menüs der Aktivität. Es gibt das Optionsmenü, in dem die Elemente platziert werden sollen. Es gibt true für das angezeigte Menü zurück, bei false wird es nicht angezeigt.
+					\item \textbf{+ onOptionsItemSelected(item: MenuItem): boolean}\\ Wird aufgerufen, wenn ein Element im Optionsmenü ausgewählt wird. Item ist das ausgewählte Menüelement. Es gibt false zurück, um die normale Menüverarbeitung fortzusetzen und true, um sie dann zu verbrauchen.\\
 				\\
+				\end{description}
 				\item \textbf{\Large{BoardActivity}}
 			
-			Es werden alle Borad-Aktivitäten angezeigt, wie z.B. das Brett.\\
+			Hier wird das Brett mit dem Spiel an sich angezeigt. Man kann zudem die einzelnen Kacheln anwählen und somit Züge ausführen. Außer dem Spielfeld gibt es die Buttons  \glqq Unentschieden\grqq\ und \glqq Aufgeben\grqq .
+					 \begin{description}
+									 
+					 \item \textbf{- drawClicked(): void}\\ Wird ausgeführt, wenn der Button \glqq Unentschieden\grqq\ gedrückt wird. Schickt dem Gegner einen \textbf{DrawDialog}, mit welchem er das Remis-Angebot annehmen oder ablehnen kann. 
+					 \item \textbf{- giveUpClicked(): void}\\ Wird ausgeführt, wenn der Button \glqq Aufgeben\grqq\ gedrückt wird. Dem Spieler erscheint ein \textbf{GiveUpDialog}, mit welchem er sein Aufgeben bestätigen oder abbrechen kann. 
+
+					  \item \textbf{- tileSelected(): void}\\ Wird ausgeführt, wenn der Benutzer eine Kachel auf dem Spielfeld anklickt. Erzeugt aus den Koordinaten, auf welche der Benutzer geklickt hat, eine \textbf{Position}. Prüft mittel der \textbf{whiteToMove()}-Methode des Game-Objekts, ob der Benutzer am Zug ist. Wenn ja, wird zuerst geprüft, ob der Benutzer bereits eine Kachel gewählt hatte. Ist dies der Fall, wird \textbf{executeMove()} ausgeführt, hat der Benutzer noch keine Kacheln gewählt wird \textbf{showPossiblePositions()} ausgeführt. 		  						
+					  \item \textbf{- showPositions(start: Position): void}\\ Prüft zunächst mithilfe von \textbf{getPieceAt(position: Position} des Game-Objektes, ob sich an der gegebenen Position eine eigene Figur befindet. Ist dies der Fall, wird \textbf{getPossibleMoves()} aufgerufen und die Zielpositionen der jeweiligen Züge werden auf dem Brett angezeigt, ansonsten passiert nichts.
+					  \item \textbf{- executeMove(goal: Position): void}\\ Prüft zunächst, ob die ausgewählte \textbf{Position} auf dem Brett markiert war. Wenn ja, wird der entsprechende Zug mit \textbf{applyMove()} ausgeführt. Wenn nicht, werden die Markierungen wieder entfernt, und der Benutzer muss erneut eine seiner Figuren anwählen, um die möglichen Züge angezeigt zu bekommen.
+					  
+					 \end{description}
 			
 			\item \textbf{\Large{MainMenuActivity}}
 			
-			Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofotrspiel, Spielersuche und Rangliste/Statistik.\\
-			
-			\item \textbf{\Large{RankingStatisticsActivity}}
-			
-			Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Spieler angezeigt.\\
-				\end{description}
-				\end{itemize}
+			Hier wird das Hauptmenü angezeigt mit den Buttons \glqq Sofortspiel\grqq , \glqq Spielersuche\grqq\ und \glqq Rangliste/Statistik\grqq .
+					\begin{description}
+					
+					\item \textbf{- quickMatchClicked(): void}\\ Sobald der Benutzer \textbf {„Sofortspiel“} drückt, öffnet sich die \textbf {„BoardActivity“}. Dort spielt man gegen einen zufälligen Gegner.
 				
+					\item \textbf{- searchPlayerClicked(): void}\\ Sobald der Benutzer \textbf {„Spielersuche“} drückt, öffnet sich die \textbf {„SearchPlayerActivity“}. Dort kann man einen anderen Benutzer mit seinem Spielernamen suchen und mit dem Button  \textbf {„Herausfordern“} diesen herausfordern. 
+					
+					\item \textbf{- statisticsClicked(): void}\\ Sobald der Benutzer \textbf {„Rangliste/Statistik“} drückt, öffnet sich eine \textbf {„StatisticActivity“}, welche den Namen des Benutzers als Parameter erhält. Dort kann der Benutzer seine Statistik einsehen.  \\
+					
+					\end{description}
+			
+			\item \textbf{\Large{StatisticsActivity}}
+			
+			Zeigt die Statistiken eines belibigen Spielers an. Ist die Statistik nicht von dem Benutzer, welcher sie aufruft, gibt es unten einen Button \textbf{Herausfordern}.
+			\begin{description}
+			\item \textbf{- challengeClicked(): void}\\
+			Sendet dem Gegner einen \textbf{ChallengedDialog} mit welchem er die Herausforderung annehmen oder ablehnen kann. \\
+\end{description}			 
+
+\newpage
+			
+				 \item \textbf{\Large{SearchPlayerActivity }} 
+					
+
+					Nach dem drücken des Button \textbf {SearchPlayer} in der \textbf{MainMenuActivity} öffnet sich die \textbf {SearchPlayerActivity}. Dort kann der Benutzer mithilfe einer Suchfunktion andere Gegner finden. Klickt er auf einen Spielernamen, öffnet sich eine \textbf{StatisticsActivity} mit den Statistiken des jeweiligen Spielers und mit dem Button \textbf {„Herausfordern“}.
+					\begin{description}
+					\item \textbf{-playerSelected(name: String): void} \\ Ruft eine \textbf{StatisticsActivity} mit den Statistiken des entsprechenden Spielers auf. \\	
+					\end{description}
+				
+				\end{itemize}
 				\newpage	
+				
+					 
+					 
+		\newpage	
 		\subsubsection{Dialoge}
 		\begin{minipage}{\linewidth}
 			\centering
@@ -698,40 +754,76 @@
 			\captionof{figure}{Dialoge}
 			\label{fig:dialoge}
 		\end{minipage}
-		\begin{itemize}
-			\item \textbf{\Large{android.app.Activity}}
+		\begin{itemize}		
+			\item \textbf{\Large{android.support.v7.app.AppCompatActivity}}
 			
-			Die AppComaptActivity wird als Dialog verwendet.\\
-			\\			
-				\textbf{\large{Methoden}}
-				\newline
-				\rule{\textwidth}{1pt}
-				\begin{description}			
+			Die AppCompatActivity wird als Dialog verwendet.\\
+				
+					\begin{description}			
 					\item \textbf{\# onCreate(savedInstanceState: Bundle):}\\ Erzeugt die Knöpfe. Wenn die Aktivität neu initialisiert wird, enthält das Bundle die Daten, die es zuletzt bei SaveInstanceState bereitgestellt hat. Ansonsten ist es \textbf{null}.
-					\item\textbf{+ onClick(view: View)}:\\ Erzeugt die Fuktionalität eines Konpfes wobei ein AlertiDialog geöffnet wird
+					\item\textbf{+ onClick(view: View)}:\\ Erzeugt die Funktionalität eines Knopfes, wobei ein AlertDialog geöffnet wird.
 					\\
 				
-					\item \textbf{\Large{DrawDialog}}
-			
-					Es wird ein Unentschieden-Dialog angezeigt, wie z.B. das Brett.\\
-					
-					\item \textbf{\Large{GiveUpDialog}}
-					
-					Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofotrspiel, Spielersuche und Rangliste/Statistik.\\
-					
-					\item \textbf{\Large{LoginMenuDialog}}
-					
-					Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Spieler angezeigt.\\
-					
-					\item \textbf{\Large{WinnerDialog}}
-					
-					Es werden alle Menü-Aktivitäten angezeigt, wie z.B. die Knöpfe Sofotrspiel, Spielersuche und Rangliste/Statistik.\\
-					
-					\item \textbf{\Large{PawnTransformationDialog}}
-					
-					Es werden alle Ranglisten und Statistiken-Aktivitäten angezeigt, wie z.B. ein Rangliste mit allen Spielern und den jeweiligen Punkten oder eine Statistik über den Spieler angezeigt.\\
 				\end{description}
+					
+									
+					\item \textbf{\Large{DrawDialog}} 
+					
+					Fragt einen Spieler, ob er das Remis-Angebot des Gegners annehmen oder ablehnen will, dafür stehen ihm die zwei Buttons \glqq Annehmen\grqq\ und \glqq Ablehnen\grqq\ zur Verfügung.\\
+					\begin{description}					
+					\item \textbf{- accepted(): void}\\ Sendet dem Server die Information, dass das Spiel mit einem Unentschieden beendet wurde. Dieser zeigt beiden Spielern einen entsprechenden \textbf{ResultDialog}.
+					\item \textbf{- declined(): void}\\ Schließt den Dialog und sendet dem anderen Benutzer einen \textbf{DeniedDialog}.			
+					\end{description}
+					
+					\item \textbf{\Large{GiveUpDialog }} 
+					
+					Ein Dialog, welcher den Spieler bestätigen lässt, dass er aufgeben will. Dafür stehen ihm die zwei Buttons \glqq Ja\grqq\ und \glqq Nein\grqq\ zur Verfügung.
+					
+					\begin{description}					
+					\item \textbf{- confirmed(): void}\\ Sendet dem Server die Information, dass das Spiel beendet wurde. Dieser zeigt beiden Spielern einen entsprechenden \textbf{ResultDialog}.
+					\item \textbf{- aborted(): void}\\ Schließt den Dialog.					
+					\end{description}
+					
+					
+					\item \textbf{\Large{ResultDialog}} 
+					
+					Zeigt das Ergebnis eines Spiels für beide Spieler an, und bietet ihnen Buttons \glqq Menü\grqq , \glqq Speichern\grqq\ und \glqq Noch ein Spiel?\grqq .
+					
+					\begin{description}					
+					\item \textbf{- backToMenu(): void}\\ Schließt den Dialog und öffnet die \textbf{MainMenuActivity}.
+					\item \textbf{- saveGame(): void}\\ Speichert das Spiel als String ab.
+					\item \textbf{- rematch(): void}\\ Sendet dem Gegner einen erneuten \textbf{ChallengeDialog}. Dieser kann dann erneut ein Spiel akzeptieren oder ablehnen.			
+					\end{description}
+					
+					\item \textbf{\Large{PawnTransformationDialog }} 
+					
+					Ein Dialog zur Auswahl einer Figur, in welche sich ein Bauer verwandeln soll, wenn dieser die gegnerische Grundreihe erreicht hat. Dazu hat der Benutzer die Buttons \glqq Queen\grqq , \glqq Rook\grqq , \glqq Bishop\grqq\ und \glqq Knight\grqq\ zur Verfügung.
+					
+					
+					\begin{description}					
+					\item \textbf{- queenSelected(): void}\\ Erzeugt einen \textbf{Promotion}-Move mit einer \textbf{Queen} als Parameter und wendet diesen auf das Brett an.
+					\item \textbf{- rookSelected(): void}\\ Erzeugt einen \textbf{Promotion}-Move mit einem \textbf{Rook} als Parameter, und wendet diesen auf das Brett an.
+					\item \textbf{- bishopSelected(): void}\\ Erzeugt einen \textbf{Promotion}-Move mit einem \textbf{Bishop} als Parameter und wendet diesen auf das Brett an.
+					\item \textbf{- knightSelected(): void}\\Erzeugt einen \textbf{Promotion}-Move mit einem \textbf{Knight} als Parameter und wendet diesen auf das Brett an.				
+					\end{description}	
+					
+					\item \textbf{\Large{ChallengedDialog}}
+					
+					Diesen Dialog erhält ein Spieler, wenn er von einem anderen Spieler herausgefordert wurde. Er hat mithilfe der Buttons \glqq Annehmen\grqq\ und \glqq Ablehnen\grqq\ die Möglichkeit, diese Herausforderung anzunehmen oder abzulehnen.
+					\begin{description}					
+					\item \textbf{- accepted(): void}\\ Erzeugt ein neues Spiel zwischen den beiden Spielern und informiert den Server darüber.
+					\item \textbf{- declined(): void}\\	Schließt den Dialog; der andere Spieler erhält einen	\textbf{DeniedDialog}.			
+					\end{description}
+					
+					\item \textbf{\Large{DeniedDialog}}\\
+					Ein Dialog, welcher den Benutzer über eine abgelehnte Anfrage durch einen anderen Spieler informiert. Der Dialog hat einen \glqq Ok\grqq -Button zur Bestätigung.
+					\begin{description}
+					\item \textbf{- okClicked(): void}\\ Schließt den Dialog.
+					\end{description}
+					
+			
 				\end{itemize}
+				
 		\newpage
 		
 		\subsection{ClientSocket}
@@ -791,6 +883,8 @@
 			\rule{\textwidth}{1pt}
 			\begin{description}
 				\item \textbf{+ main(String[] args): void}\\ Die main Methode des Servers. Hier wird der Javalin Server gestartet. Je nach Anfrage wird ein \textbf{GameCreator}, ein \textbf{BoardHandler} oder ein \textbf{MoveHandler} erstellt. \\
+				\item \textbf{- sendMessageTo(user: String): void}\\
+				Sendet eine Benachrichtigung über die WebSocket-Verbindung an den angegebenen Spieler.
 				\\
 			\end{description} 	
 	
@@ -849,7 +943,7 @@
 				\newline
 				\rule{\textwidth}{1pt}	
 				\begin{description}
-					\item \textbf{+ processMove(move: Move): BoardState}\\ Laden und Speichern erfolgen wieder über einen \textbf{DatabaseHandler}. Überprüft, ob die Kombination aus Brett und Zug gültig ist. Wendet den Zug an, falls dieser gütlig ist. Speichert das neue Brett ab und benachrichtigt anschließend den Gegner.\\
+					\item \textbf{+ processMove(move: String): void}\\ Laden und Speichern erfolgen wieder über einen \textbf{DatabaseHandler}. Überprüft, ob die Kombination aus Brett und Zug gültig ist. Wendet den Zug an, falls dieser valide ist. Speichert das neue Brett ab und benachrichtigt anschließend den Gegner.\\
 					\\
 				\end{description}
 		
@@ -864,7 +958,7 @@
 				\begin{description}
 					\item \textbf{+ newEntry(player1: String, player2: String): void}\\ Soll einen neuen Datenbankeintrag mit Spieler 1 , Spieler 2 und einem neuen Brett anlegen.
 					\item \textbf{+ loadGame(player: String): String}\\ Soll das zum Spieler zugehörige Brett aus der Datenbank laden.
-					\item \textbf{+ saveGame(player: String): void} Soll ein Brett wieder in die Datenbank speichern.\\
+					\item \textbf{+ saveGame(player: String): void}\\ Soll ein Brett wieder in die Datenbank speichern.\\
 					\\
 				\end{description}
 			
@@ -884,10 +978,42 @@
 					\item \textbf{+ saveGame(player: String): void}\\
 					Speichert das Brett wieder ab.
 				\end{description}
-			
-			
 		\end{itemize}
-	\section{Sequenzdiagramm}
+	\section{Aktivitätsdiagramm}
+	\begin{minipage}{\linewidth}
+		\centering
+		\includegraphics[width=1\linewidth]{Diagramme/Aktivitaetsdiagramm}
+		\captionof{figure}{Aktivitätsdiagramm}
+		\label{fig:aktivitaetsdiagramm}
+	\end{minipage}
+	
+	\begin{description}
+	
+	\item \textbf{Beschreibung:}\\ \\
+		Zunächst wird der Server gestartet und initiiert. Danach gelangt man in den Startbildschirm, um sich anzumelden. Dabei muss zum einen abgefragt werden, ob der Login automatisch ablief. Dies bedeutet, dass sich der Benutzer bereits früher angemeldet hatte und somit der Login erfolgreich war. Zum andern kann der Login fehlschlagen und der Benutzer muss sich mit seinem Google Account anmelden. Bei beiden Fällen gelangt man dann anschließend in das Hauptmenü. Hier kann man seinen Gegner suchen und ein Spiel anfragen. Wenn der Gegner das Spiel akzeptiert, landet man im Spiel-Screen und wenn er ablehnt sucht man sich einen neuen Gegner.\\ \\
+		Wenn das Spiel startet bekommt jeder Spieler eine Farbe zugewiesen. Danach macht der weiße Spieler seinen ersten Zug. Wenn dieser inkorrekt ist, muss er einen neuen Zug machen. Ist jedoch der Zug korrekt und es liegt kein Matt, Patt oder Unentschieden vor, ist der schwarze Spieler am Zug. Ansonsten wird angezeigt, ob der Spieler gewonnen hat oder ein Unentschieden vorliegt. 
+		Bei dem schwarzen Spieler läuft die gleiche Abfrage wie bei dem weißen Spieler ab. Wenn kein Matt, Patt oder Unentschieden vorliegt ist wieder der weiße Spieler am Zug. Ansonsten wird angezeigt, ob der Spieler gewonnen hat oder ein Unentschieden vorliegt und das Spiel ist dann beendet. Danach verlässt man die Activity.
+
+\end{description}
+	\section{Sequenzdiagramme}
+	\begin{minipage}{\linewidth}
+		\centering
+		\includegraphics[width=1\linewidth]{Diagramme/MoveClient}
+		\captionof{figure}{Zug ausführen (Client)}
+		\label{fig:sequenzdiagramm1}
+	\end{minipage}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=1\linewidth]{Diagramme/MoveServer}
+	\captionof{figure}{Zug ausführen (Server)}
+	\label{fig:sequenzdiagramm2}
+\end{minipage}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=1\linewidth]{Diagramme/ServerSequenz}
+	\captionof{figure}{Server gesamt}
+	\label{fig:sequenzdiagramm3}
+\end{minipage}
 	
 	\printglossaries
 \end{document}
