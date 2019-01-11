@@ -1,0 +1,8 @@
+ClientSocket:
+connectToWS implementieren
+
+Movehandler:
+processMove implementieren
+
+FirebaseHandler:
+loadGame, saveGame und newEntry implementieren

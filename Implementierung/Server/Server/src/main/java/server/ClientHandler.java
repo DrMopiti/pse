@@ -15,14 +15,20 @@ public class ClientHandler {
 	public static void main(String[] args) {
 		
 		 Javalin app = Javalin.create();
-	        app.get("/newgame", ctx -> {
-	        	
+	        app.get("/newgame/*/*", ctx -> {
+	        	String white = ctx.splat(0);
+	        	String black = ctx.splat(1);
+	        	ctx.result(newGame(white, black));
 	        });
-	        app.get("/board/:param", ctx -> {
-	        	
+	        app.get("/board/player", ctx -> {
+	        	String player = ctx.pathParam("player");
+	        	ctx.result(board(player));
 	        });
-	        app.get("/move/:move", ctx -> {	   
-	        	String otherPlayer ="";
+	        app.get("/move/*/*", ctx -> {	
+	        	String player = ctx.splat(0);
+	        	String move = ctx.splat(1);
+	        	move(player, move);
+	        	String otherPlayer ="Hurensohn";
 	        	sendMessageTo(otherPlayer);
 	        });
 	        app.ws("/socket", ws -> {
@@ -34,6 +40,7 @@ public class ClientHandler {
 	            ws.onMessage((session, message) -> {
 	            	
 	               sessionMap.put(message, session);
+	               System.out.println("DEBUG: ADDED "+ message+ " TO MAP");
 	               
 	            });
 	            
@@ -41,6 +48,7 @@ public class ClientHandler {
 	            	
 	            	String key = sessionMap.inverse().get(session);
 	            	sessionMap.remove(key);
+	            	System.out.println("DEBUG: REMOVED "+ key + " FROM MAP -- DISCONNECT");
 	            	
 	            });
 	            
@@ -48,6 +56,7 @@ public class ClientHandler {
 	            	
 	            	String key = sessionMap.inverse().get(session);
 	            	sessionMap.remove(key);
+	            	System.out.println("DEBUG: REMOVED "+ key + " FROM MAP -- ERROR");
 	            	
 	            });
 	        });
@@ -58,9 +67,29 @@ public class ClientHandler {
 	 private static void sendMessageTo(String user) {
 	        WsSession session = sessionMap.get(user);
 	        if (session != null) {
-	        session.send("New Move");
-	        System.out.println("SENT");
+	        	session.send("New Move");
+	        	System.out.println("DEBUG: SENT MESSAGE TO "+ user);
+	        } else {
+	        	System.out.println("DEBUG: "+ user + "IS OFFLINE");
 	        }
+	     
 	    }
 
+	 private static String newGame(String white, String black) {
+		 GameCreator creator = new GameCreator(white, black);
+		 String success = creator.create();
+		 return success;
+	 }
+	 
+	 private static String board(String player) {
+		 BoardHandler handler = new BoardHandler(player);
+		 String success = handler.getBoard();
+		 return success;
+	 }
+	 
+	 private static String move(String player, String move) {
+		 MoveHandler handler = new MoveHandler(player, move);
+		 String success = handler.processMove();
+		 return success;
+	 }
 }
