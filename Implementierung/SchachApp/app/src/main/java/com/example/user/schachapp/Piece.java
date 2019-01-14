@@ -20,5 +20,5 @@ public abstract class Piece {
     public boolean isWhite() {
         return this.isWhite;
     };
-    public abstract List<Move> getMovement(Position position, BoardState board);
+    public abstract List<Move> getMovement(Position position, BoardState board) throws IllegalPositionException;
 }
