@@ -1,8 +1,11 @@
 package com.example.user.schachapp;
 
+import android.widget.ImageView;
+
 import java.util.List;
 
 public abstract class Piece {
+    protected ImageView iv;
     protected boolean isWhite;
     protected int value;
     protected String representation;
@@ -17,6 +20,7 @@ public abstract class Piece {
     public int getValue() {
         return this.value;
     }
+    public ImageView getImageView() { return iv; }
     public boolean isWhite() {
         return this.isWhite;
     };
