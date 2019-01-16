@@ -29,6 +29,8 @@ dependencies {
 	
 	implementation "org.slf4j:slf4j-simple:1.7.25"
 	
+	implementation "org.java-websocket:Java-WebSocket:1.3.9"
+	
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }

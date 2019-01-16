@@ -1,11 +1,16 @@
-package clientSocket;
+package com.example.user.schachapp;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;	
+import org.java_websocket.drafts.Draft_6455;
 
 public class ClientSocket {
 	
@@ -25,7 +30,48 @@ public class ClientSocket {
 	}
 	
 	public void connectToWS() {
-		
+		 WebSocketClient mWs;
+		try {
+			mWs = new WebSocketClient(new URI( getUrl() +"/socket" ), new Draft_6455())
+			{
+				@Override
+				public void onMessage(String message) {
+					requestBoard();
+				}
+				
+				@Override
+				public void onOpen(ServerHandshake handshake) {
+					//do nothing
+				}
+				
+				@Override
+				public void onClose(int code, String reason, boolean remote) {
+					try {
+						Thread.sleep(500);
+						connectToWS();
+					} catch (InterruptedException e) {						
+						e.printStackTrace();						
+					}
+				}
+				
+				@Override
+				public void onError(Exception ex) {
+					try {
+						Thread.sleep(500);
+						connectToWS();
+					} catch (InterruptedException e) {						
+						e.printStackTrace();
+					}
+				}
+				
+			};                                 
+			                 
+			mWs.connect();
+		} catch (URISyntaxException e) {	
+			e.printStackTrace();
+		}
+
+	
 	}
 	
 	public String requestBoard() {
