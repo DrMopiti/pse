@@ -19,17 +19,20 @@ public class ClientHandler {
 	        	String white = ctx.splat(0);
 	        	String black = ctx.splat(1);
 	        	ctx.result(newGame(white, black));
+	        	System.out.println("DEBUG: NEW GAME CREATED");
 	        });
-	        app.get("/board/player", ctx -> {
+	        app.get("/board/:player", ctx -> {
 	        	String player = ctx.pathParam("player");
 	        	ctx.result(board(player));
+	        	System.out.println("DEBUG: RETURNED BOARD");
 	        });
 	        app.get("/move/*/*", ctx -> {	
 	        	String player = ctx.splat(0);
 	        	String move = ctx.splat(1);
 	        	move(player, move);
-	        	String otherPlayer ="Hurensohn";
+	        	String otherPlayer ="Netter Mensch";
 	        	sendMessageTo(otherPlayer);
+	        	System.out.println("DEBUG: APPLIED MOVE");
 	        });
 	        app.ws("/socket", ws -> {
 	        	
@@ -70,7 +73,7 @@ public class ClientHandler {
 	        	session.send("New Move");
 	        	System.out.println("DEBUG: SENT MESSAGE TO "+ user);
 	        } else {
-	        	System.out.println("DEBUG: "+ user + "IS OFFLINE");
+	        	System.out.println("DEBUG: "+ user + " IS OFFLINE");
 	        }
 	     
 	    }

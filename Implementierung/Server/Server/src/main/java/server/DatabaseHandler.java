@@ -5,4 +5,5 @@ public interface DatabaseHandler {
 	 public String loadGame(String player);
 	 public void saveGame(String player);
 	 public boolean hasActiveGame(String player);
+	 public void connect();
 }

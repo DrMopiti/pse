@@ -20,14 +20,16 @@ public class GameCreator {
 	 */
 	public String create() {
 		String retString;
-		DatabaseHandler handler = new FirebaseHandler();
+		DatabaseHandler handler = FirebaseHandler.getHandler();
 		boolean whiteActiveGame = handler.hasActiveGame(whitePlayer);
 		boolean blackActiveGame = handler.hasActiveGame(blackPlayer);
 		if (whiteActiveGame || blackActiveGame) {
 			retString = "Error";
+			System.out.println("DEBUG: PLAYER IS IN GAME");
 		} else {
 			handler.newEntry(whitePlayer, blackPlayer);
 			retString = "Success";
+			System.out.println("DEBUG: PLAYER NOT IN GAME");
 		}
 		return retString;
 	}
