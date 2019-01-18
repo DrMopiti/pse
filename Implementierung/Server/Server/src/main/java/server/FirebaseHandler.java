@@ -80,7 +80,7 @@ public class FirebaseHandler implements DatabaseHandler {
 		Map<String, Object> data = new HashMap<>();
 		data.put("board", "Testbrett");
 		data.put("whitePlayer", whitePlayer);
-		data.put("last", blackPlayer);
+		data.put("blackPlayer", blackPlayer);
 
 		ApiFuture<WriteResult> result = docRef.set(data);
 		System.out.println("DEBUG: CREATED NEW GAME");
