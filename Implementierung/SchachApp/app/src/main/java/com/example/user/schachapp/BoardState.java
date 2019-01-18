@@ -1,5 +1,8 @@
 package com.example.user.schachapp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BoardState {
     private Tile[][] tiles;
     private Move lastMove;
@@ -35,6 +38,28 @@ public class BoardState {
         return tiles[position.getX()][position.getY()].getPiece();
     }
 
+    public List<Position> getPiecesOfColor(boolean white) {
+        List<Position> pieces = new ArrayList<>();
+        for (int i = 0; i <= 7; i++) {
+            for (int h = 0; h <= 7; h++) {
+                if(tiles[i][h].getPiece().isWhite == white) {
+                    pieces.add(new Position(i, h));
+                }
+            }
+        }
+        return pieces;
+    }
+
+    public Position getKingOfColor(boolean white) {
+        for (int i = 0; i <= 7; i++) {
+            for (int h = 0; h <= 7; h++) {
+                if(tiles[i][h].getPiece().toString() == "K" && (tiles[i][h].getPiece().isWhite == white)) {
+                    return new Position(i, h);
+                }
+            }
+        }
+        return null;
+    }
     public Move getLastMove() {
         return lastMove;
     }

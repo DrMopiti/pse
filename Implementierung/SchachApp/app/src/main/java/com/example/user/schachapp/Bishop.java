@@ -10,7 +10,7 @@ public class Bishop extends Piece {
         super(isWhite, BISHOP_VALUE, BISHOP_CHAR);
     }
     @Override
-    public List<Move> getMovement(Position position, BoardState board) throws IllegalPositionException {
+    public List<Move> getMovement(Position position, BoardState board) {
         List<Move> permittedMoves = new ArrayList<Move>();
         int yPosition = position.getY();
         int xPosition = position.getX();

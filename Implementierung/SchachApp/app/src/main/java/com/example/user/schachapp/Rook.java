@@ -10,7 +10,7 @@ public class Rook extends Piece {
         super(isWhite, ROOK_VALUE, ROOK_CHAR);
     }
     @Override
-    public List<Move> getMovement(Position position, BoardState board) throws IllegalPositionException {
+    public List<Move> getMovement(Position position, BoardState board) {
         List<Move> permittedMoves = new ArrayList<Move>();
 
         int yPosition = position.getY();

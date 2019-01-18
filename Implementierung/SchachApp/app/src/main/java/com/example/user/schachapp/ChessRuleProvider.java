@@ -12,7 +12,7 @@ public class ChessRuleProvider implements RuleProvider {
     
     @Override
     public List<Move> getLegalMoves(Position position, BoardState board) {
-        List<Move> legalMoves = new ArrayList<Move>();
+        List<Move> legalMoves = new ArrayList<>();
         List<Move> possibleMoves = getPossibleMoves(position, board);
         for (Move move: possibleMoves) {
             if(isLegalMove(move, board)) {
@@ -57,11 +57,24 @@ public class ChessRuleProvider implements RuleProvider {
         return board.getPieceAt(position).getMovement(position, board);
     }
 
-    private boolean isChecked(boolean white, BoardState state) {
-        return true;
+    private boolean isChecked(boolean color, BoardState board) {
+
+        Position kingPos = board.getKingOfColor(color);
+        List<Position> opponentsPieces = board.getPiecesOfColor(!color);
+
+        for (Position p: opponentsPieces) {             //checks if any opposing Piece covers the Kings Position and returns true if so
+            for(Move m: getPossibleMoves(p, board)) {
+                if(m.getGoal().equals(kingPos)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
     private boolean isMate(BoardState state) {
-        return false;
+
+        return true;
     }
     private boolean isStaleMate(BoardState state) {
         return false;

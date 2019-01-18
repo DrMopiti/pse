@@ -10,7 +10,7 @@ public class Queen extends Piece {
         super(isWhite, QUEEN_VALUE, QUEEN_CHAR);
     }
     @Override
-    public  List<Move> getMovement(Position position, BoardState board) throws IllegalPositionException {
+    public  List<Move> getMovement(Position position, BoardState board) {
 
         List<Move> permittedMoves = new ArrayList<Move>();
         int yPosition = position.getY();

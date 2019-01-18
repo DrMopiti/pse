@@ -10,7 +10,7 @@ public class Pawn extends Piece {
         super(isWhite, PAWN_VALUE, PAWN_CHAR);
     }
     @Override
-    public List<Move> getMovement(Position position, BoardState board) throws IllegalPositionException {
+    public List<Move> getMovement(Position position, BoardState board) {
         ArrayList<Position> possiblePositions = new ArrayList<Position>();
         List <Move> possibleMoves = new ArrayList<Move>();
 
