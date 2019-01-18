@@ -24,7 +24,8 @@ public class BoardState {
         movesWithoutAction = 0;
     }
 
-    public BoardState(String string) {}
+    public BoardState(String string) {
+    }
 
     public void applyMove(Move move) {
 

@@ -72,14 +72,30 @@ public class ChessRuleProvider implements RuleProvider {
 
         return false;
     }
-    private boolean isMate(BoardState state) {
 
-        return true;
-    }
-    private boolean isStaleMate(BoardState state) {
+    private boolean hasLegalMove(BoardState board) {
+        List<Position> ownPieces = board.getPiecesOfColor(board.whiteToMove());
+
+        for (Position p: ownPieces) {
+            if (!getLegalMoves(p, board).isEmpty()) {
+                return true;
+            }
+        }
         return false;
     }
-    private boolean isDraw(BoardState state) {
+
+    private boolean isMate(BoardState board) {
+        return (isChecked(board.whiteToMove(), board) && hasLegalMove(board));
+    }
+
+    private boolean isStaleMate(BoardState board) {
+        return hasLegalMove(board);
+    }
+
+    private boolean isDraw(BoardState board) {
+        if (board.getMovesWithoutAction() >= 50) {
+            return true;
+        }
         return false;
     }
 }
