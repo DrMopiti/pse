@@ -10,7 +10,6 @@ public class BoardHandler {
 	public String getBoard() {
 		String retString;
 		DatabaseHandler handler = FirebaseHandler.getHandler();
-		handler.connect();
 		if (handler.hasActiveGame(player)) {
 			retString = handler.loadGame(player);
 		} else {

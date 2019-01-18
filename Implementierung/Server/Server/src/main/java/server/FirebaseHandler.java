@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
+import java.util.Arrays;
 
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -82,30 +83,13 @@ public class FirebaseHandler implements DatabaseHandler {
 		data.put("last", blackPlayer);
 
 		ApiFuture<WriteResult> result = docRef.set(data);
-		try {
-			System.out.println("Update time : " + result.get().getUpdateTime());
-		} catch (InterruptedException | ExecutionException e) {
-			e.printStackTrace();
-			System.out.println("DEBUG: ERROR WHILE GETTING UPDATE TIME");
-		}
-		  
+		System.out.println("DEBUG: CREATED NEW GAME");
 
 	}
 
 	@Override
 	public String loadGame(String player) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void saveGame(String player) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean hasActiveGame(String player) {
+		String board = "";
 	
 		// asynchronously retrieve all users
 		ApiFuture<QuerySnapshot> query = db.collection("games").get();
@@ -116,28 +100,75 @@ public class FirebaseHandler implements DatabaseHandler {
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 			System.out.println("DEBUG: ERROR WHILE GETTING QUERY");
-			return true; //assume the player already is in a game
+			}
+		List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+		for (QueryDocumentSnapshot document : documents) {
+			String name = document.getId();
+			System.out.println("DEBUG: CHECKING GAME " + document.getId() + " FOR PLAYER " + player);
+			String[] parts = name.split("-");
+			System.out.println("DEBUG: PARTS " + Arrays.deepToString(parts));
+			if (parts.length != 2) {
+				System.out.println("DEBUG: ILLEGAL GAME ID FOUND");
+				board = "ERROR";
+			}
+			if (parts[0].equalsIgnoreCase(player)) {
+				System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
+				board = document.getString("board");
+			}
+			if (parts[1].equalsIgnoreCase(player)) {
+				System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
+				board = document.getString("board");
+			}
+		}
+		return board;
+	}
+
+	@Override
+	public void saveGame(String player) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public boolean hasActiveGame(String player) {
+		int occurrence = 0;
+		// asynchronously retrieve all users
+		ApiFuture<QuerySnapshot> query = db.collection("games").get();
+		// query.get() blocks on response
+		QuerySnapshot querySnapshot = null;
+		try {
+			querySnapshot = query.get();
+		} catch (InterruptedException | ExecutionException e) {
+			e.printStackTrace();
+			System.out.println("DEBUG: ERROR WHILE GETTING QUERY");
+			occurrence++; //assume the player already is in a game
 		}
 		List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 		for (QueryDocumentSnapshot document : documents) {
 			String name = document.getId();
-			System.out.println("DEBUG: CHECKING GAME " + document.getId() + "FOR PLAYER: " + player);
+			System.out.println("DEBUG: CHECKING GAME " + document.getId() + " FOR PLAYER " + player);
 			String[] parts = name.split("-");
-			System.out.println("DEBUG: PARTS " + parts.toString());
+			System.out.println("DEBUG: PARTS " + Arrays.deepToString(parts));
 			if (parts.length != 2) {
 				System.out.println("DEBUG: ILLEGAL GAME ID FOUND");
-				return true;
+				occurrence++;
 			}
-			if (parts[0] == player) {
-				return true;
+			if (parts[0].equalsIgnoreCase(player)) {
+				System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
+				occurrence++;
 			}
-			if (parts[1] == player) {
-				return true;
+			if (parts[1].equalsIgnoreCase(player)) {
+				System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
+				occurrence++;
 			}
 			
 		}
-
-		return false;
+		if (occurrence > 0) {
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 
 }
