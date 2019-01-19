@@ -3,8 +3,9 @@ package com.example.user.schachapp;
 public class EnPassant extends Move {
     Position removePawn;
 
-    public EnPassant(Pawn pawn, Position start, Position goal) {
+    public EnPassant(Position start, Position goal) {
         super(start, goal);
+        removePawn = new Position(goal.getX(), start.getY());
     }
 
     public Position getRemovePawn() {
@@ -12,6 +13,6 @@ public class EnPassant extends Move {
     }
 
     public String toString() {
-        return start.toString() + "-" + goal.toString();
+        return start.toString() + "-" + goal.toString() + "-" + removePawn.toString();
     }
 }
