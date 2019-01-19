@@ -37,7 +37,7 @@ public class BoardState {
             }
         }
 
-        //sets last Move
+        //sets lastMove
         if(sectors[1].equals("")) {
             lastMove = null;
         } else {
@@ -72,7 +72,7 @@ public class BoardState {
         blackKingCastle = bools[3].equals("t");
         blackQueenCastle = bools[4].equals("t");
 
-        //sets Moves without Action
+        //sets movesWithoutAction
         movesWithoutAction = Integer.parseInt(sectors[3]);
 
     }
@@ -194,9 +194,41 @@ public class BoardState {
         return movesWithoutAction;
     }
 
-    public String toString() {return null;}
+    public String toString() {
+
+        //converts the board to String
+        String pieces = "";
+        for (int i = 0; i <= 7; i++) {
+            for (int h = 0; h <= 7; h++) {
+                if (tiles[i][h].equals(null)) {
+                   pieces = pieces + 0;
+                } else {
+                   pieces = pieces + tiles[i][h].toString();
+                }
+            }
+        }
+
+        //converts lastMove
+        String move = "";
+        if(!lastMove.equals(null)) {
+            move = lastMove.toString();
+        }
+
+        //converts the booleans
+        String bools = "";
+        bools = bools + (whiteToMove ? "t" : "f");
+        bools = bools + (whiteKingCastle ? "t" : "f");
+        bools = bools + (whiteQueenCastle ? "t" : "f");
+        bools = bools + (blackKingCastle ? "t" : "f");
+        bools = bools + (blackQueenCastle ? "t" : "f");
+
+        //converts movesWithoutAction
+        String noAction = String.valueOf(movesWithoutAction);
+
+        return pieces + "#" + move + "#" + bools + "#" + noAction;
+    }
 
     public BoardState clone() {
-        return null;
+        return new BoardState(this.toString());
     }
 }

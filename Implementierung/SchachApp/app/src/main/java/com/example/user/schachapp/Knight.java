@@ -11,7 +11,7 @@ public class Knight extends Piece {
         super(isWhite, KNIGHT_VALUE, KNIGHT_CHAR);
     }
     @Override
-    public List<Move> getMovement(Position position, BoardState board) throws IllegalPositionException {
+    public List<Move> getMovement(Position position, BoardState board) {
         int [][] offsets = {{-2,-1},{-2,1},{-1,2},{1,2},{2,1},{2,-1},{1,-2},{-1,-2}};
         ArrayList<Position> possiblePositions = new ArrayList<Position>();
         List <Move> possibleMoves = new ArrayList<Move>();

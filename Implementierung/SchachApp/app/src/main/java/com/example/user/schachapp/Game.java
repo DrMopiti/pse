@@ -47,11 +47,11 @@ public class Game {
     public Piece getPieceAt(Position position) {return board.getPieceAt(position);}
 
     public List<Move> getPossibleMoves(Position position) {
-        return ruler.getLegalMoves(position, this.board);
+        return ruler.getLegalMoves(position, board);
     }
 
     public boolean isLegalMove(Move move) {
-        return ruler.isLegalMove(move, this.board);
+        return ruler.isLegalMove(move, board);
     }
 
     public void applyMove(String moveString) {
@@ -63,9 +63,9 @@ public class Game {
         board.applyMove(move);
     }
 
-    public boolean hasEnded() {return ruler.hasEnded(this.board);}
+    public boolean hasEnded() {return ruler.hasEnded(board);}
 
-    public Result getResult() {return ruler.getResult();}
+    public Result getResult() {return ruler.getResult(board);}
 
     public String toString() {return null;}
 }

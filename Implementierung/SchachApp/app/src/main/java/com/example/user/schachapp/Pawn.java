@@ -18,7 +18,7 @@ public class Pawn extends Piece {
         int xPosition = position.getX();
 
 
-        if (this.isWhite == true){
+        if (isWhite){
             if (yPosition >= 1 && yPosition < 7) {
                 int limit = yPosition == 1 ? yPosition + 2 : yPosition + 1;
                 for (int j = yPosition + 1 ; j <= limit; j++) {
@@ -33,9 +33,13 @@ public class Pawn extends Piece {
                     }
                 }
             }
+
+            if (yPosition == 4) {
+            
+            }
         }
 
-        else if (this.isWhite == false)
+        else if (!isWhite)
         {
             if (yPosition > 1 && yPosition <= 7) {
                 int limit = yPosition == 6 ? yPosition - 2 : yPosition - 1;
@@ -50,6 +54,10 @@ public class Pawn extends Piece {
                         break;
                     }
                 }
+            }
+
+            if(yPosition == 5) {
+
             }
         }
         return possibleMoves;

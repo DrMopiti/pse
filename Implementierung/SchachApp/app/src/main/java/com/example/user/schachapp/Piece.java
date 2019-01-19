@@ -15,14 +15,18 @@ public abstract class Piece {
         this.representation = representation;
     }
     public String toString() {
-        return this.representation;
+        if (isWhite) {
+            return representation;
+        } else {
+            return representation.toLowerCase();
+        }
     };
     public int getValue() {
-        return this.value;
+        return value;
     }
     public ImageView getImageView() { return iv; }
     public boolean isWhite() {
-        return this.isWhite;
+        return isWhite;
     };
     public abstract List<Move> getMovement(Position position, BoardState board);
 }

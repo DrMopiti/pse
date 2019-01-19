@@ -32,20 +32,38 @@ public class King extends Piece  {
             }
         }
 
-        if (this.isWhite == true && (board.canWhiteKingCastle() || board.canWhiteQueenCastle())) {
+        if (this.isWhite) {
             if (board.canWhiteQueenCastle()) {
-                possibleMoves.add(new Move(position, new Position(2, 0)));
+                Position pos1 = new Position("b1");
+                Position pos2 = new Position("c1");
+                Position pos3 = new Position("d1");
+                if(!board.hasPieceAt(pos1) && !board.hasPieceAt(pos2) && !board.hasPieceAt(pos3)) {
+                    possibleMoves.add(new Castling(position, new Position("c1")));
+                }
             }
             if (board.canWhiteKingCastle()){
-                possibleMoves.add(new Move(position, new Position(6, 0)));
+                Position pos1 = new Position("f1");
+                Position pos2 = new Position("g1");
+                if(!board.hasPieceAt(pos1) && !board.hasPieceAt(pos2)) {
+                    possibleMoves.add(new Castling(position, new Position("g1")));
+                }
             }
         }
-        else if (this.isWhite == false && (board.canBlackQueenCastle() || board.canBlackKingCastle())) {
+        else {
             if (board.canBlackKingCastle()) {
-                possibleMoves.add(new Move(position, new Position(6, 7)));
+                Position pos1 = new Position("f8");
+                Position pos2 = new Position("g8");
+                if(!board.hasPieceAt(pos1) && !board.hasPieceAt(pos2)) {
+                    possibleMoves.add(new Castling(position, new Position("g8")));
+                }
             }
             if (board.canBlackQueenCastle()) {
-                possibleMoves.add(new Move(position, new Position(2, 7)));
+                Position pos1 = new Position("b8");
+                Position pos2 = new Position("c8");
+                Position pos3 = new Position("d81");
+                if(!board.hasPieceAt(pos1) && !board.hasPieceAt(pos2) && !board.hasPieceAt(pos3)) {
+                    possibleMoves.add(new Castling(position, new Position("c8")));
+                }
             }
         }
         return possibleMoves;
