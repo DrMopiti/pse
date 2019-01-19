@@ -63,9 +63,15 @@ public class Game {
         board.applyMove(move);
     }
 
-    public boolean hasEnded() {return ruler.hasEnded(board);}
+    public boolean hasEnded() {
+        return ruler.hasEnded(board);
+    }
 
-    public Result getResult() {return ruler.getResult(board);}
+    public Result getResult() {
+        return ruler.getResult(board);
+    }
 
-    public String toString() {return null;}
+    public String toString() {
+        return board.toString() + whitePlayer.getName() + blackPlayer.getName();
+    }
 }

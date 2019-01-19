@@ -122,9 +122,46 @@ public class BoardState {
         int goalX = move.getGoal().getX();
         int goalY = move.getGoal().getY();
 
+        //update attributes
+        lastMove = move;
+        movesWithoutAction++;
+        if (getPieceAt(move.start) instanceof Pawn || hasPieceAt(move.goal)) {
+            movesWithoutAction = 0;
+        }
+        if (whiteKingCastle || whiteQueenCastle || blackKingCastle ||blackQueenCastle) {
+            if (getPieceAt(move.start) instanceof King) {
+                if (getPieceAt(move.start).isWhite) {
+                    whiteKingCastle = false;
+                    whiteQueenCastle = false;
+                } else {
+                    blackKingCastle = false;
+                    blackQueenCastle = false;
+                }
+            }
+            if (getPieceAt(move.start) instanceof Rook) {
+                if (getPieceAt(move.start).isWhite) {
+                    if (move.getGoal().equals(new Position("a8"))) {
+                        whiteKingCastle = false;
+                    }
+                    if (move.getGoal().equals(new Position("a1"))) {
+                        whiteQueenCastle = false;
+                    }
+                } else {
+                    if (move.getGoal().equals(new Position("h8"))) {
+                        blackKingCastle = false;
+                    }
+                    if (move.getGoal().equals(new Position("h1"))) {
+                        blackQueenCastle = false;
+                    }
+                }
+            }
+        }
+
+        //execute Move
         tiles[goalX][goalY].setPiece(getPieceAt(move.getStart()));
         tiles[startX][startY].removePiece();
 
+        //execute additional things for special Moves
         if(move instanceof EnPassant) {
             int pawnX = ((EnPassant) move).getRemovePawn().getX();
             int pawnY = ((EnPassant) move).getRemovePawn().getY();
@@ -137,7 +174,7 @@ public class BoardState {
     }
 
     public boolean hasPieceAt(Position position) {
-        return !tiles[position.getX()][position.getY()].getPiece().equals(null);
+        return tiles[position.getX()][position.getY()].getPiece() != null;
     }
 
     public Piece getPieceAt(Position position) {
@@ -159,7 +196,7 @@ public class BoardState {
     public Position getKingOfColor(boolean white) {
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
-                if(tiles[i][h].getPiece().toString() == "K" && (tiles[i][h].getPiece().isWhite == white)) {
+                if(tiles[i][h].getPiece() instanceof King && (tiles[i][h].getPiece().isWhite == white)) {
                     return new Position(i, h);
                 }
             }
@@ -174,7 +211,7 @@ public class BoardState {
         return whiteToMove;
     }
 
-    public boolean canWhiteKingCastle() {
+    boolean canWhiteKingCastle() {
         return whiteKingCastle;
     }
 

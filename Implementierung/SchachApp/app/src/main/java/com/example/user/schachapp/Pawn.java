@@ -16,50 +16,26 @@ public class Pawn extends Piece {
 
         int yPosition = position.getY();
         int xPosition = position.getX();
+        int dir = isWhite ? 1 : -1;
+        int base = isWhite ? 1 : 6;
 
-
-        if (isWhite){
-            if (yPosition >= 1 && yPosition < 7) {
-                int limit = yPosition == 1 ? yPosition + 2 : yPosition + 1;
-                for (int j = yPosition + 1 ; j <= limit; j++) {
-                    Position tempPosition = new Position(position.getX(),j);
-                    if (board.getPieceAt(tempPosition) == null) {
-                        possibleMoves.add(new Move(position, tempPosition));
-                    } else if (board.getPieceAt(tempPosition).isWhite() == false) {
-                        possibleMoves.add(new Move(position, tempPosition));
-                        break;
-                    } else {
-                        break;
-                    }
-                }
-            }
-
-            if (yPosition == 4) {
-            
+        //straight Pawn Moves
+        int limit = (yPosition == base) ? yPosition + 2*dir : yPosition + dir;
+        for (int j = yPosition + dir ; j <= limit; j++) {
+            Position tempPosition = new Position(position.getX(),j);
+            if (!board.hasPieceAt(tempPosition)) {
+                possibleMoves.add(new Move(position, tempPosition));
             }
         }
 
-        else if (!isWhite)
-        {
-            if (yPosition > 1 && yPosition <= 7) {
-                int limit = yPosition == 6 ? yPosition - 2 : yPosition - 1;
-                for (int j = yPosition - 1 ; j <= limit; j--) {
-                    Position tempPosition = new Position(position.getX(),j);
-                    if (board.getPieceAt(tempPosition) == null) {
-                        possibleMoves.add(new Move(position, tempPosition));
-                    } else if (board.getPieceAt(tempPosition).isWhite() == true) {
-                        possibleMoves.add(new Move(position, tempPosition));
-                        break;
-                    } else {
-                        break;
-                    }
-                }
-            }
+        //diagonal Pawn Moves
 
-            if(yPosition == 5) {
 
-            }
+        //EnPassant
+        if (yPosition == base + 4*dir) {
+
         }
+
         return possibleMoves;
     }
 }

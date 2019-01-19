@@ -7,7 +7,7 @@ public class ChessRuleProvider implements RuleProvider {
 
     @Override
     public BoardState getStartState() {
-        return new BoardState();
+        return new BoardState("TB000000btSB000000bsLB000000blDB000000bdKB000000bKLB000000blSB000000bsTB000000bt##ttttt#0");
     }
     
     @Override
@@ -24,9 +24,21 @@ public class ChessRuleProvider implements RuleProvider {
 
     @Override
     public boolean isLegalMove(Move move, BoardState board) {
-        BoardState test = board.clone();
-        test.applyMove(move);
-        return !isChecked(board.whiteToMove(), test);
+        if (move instanceof Castling) {
+            BoardState test1 = board.clone();
+            test1.applyMove(move);
+
+            //King cannot jump over covered squares
+            BoardState test2 = board.clone();
+            int jumpOver = (move.getStart().getX() + move.getGoal().getX()) / 2;
+            test2.applyMove(new Move(move.getStart(), new Position(jumpOver, move.getStart().getY())));
+
+            return !isChecked(board.whiteToMove(), test1) && !isChecked(board.whiteToMove(), test2);
+        } else {
+            BoardState test = board.clone();
+            test.applyMove(move);
+            return !isChecked(board.whiteToMove(), test);
+        }
     }
 
     @Override
