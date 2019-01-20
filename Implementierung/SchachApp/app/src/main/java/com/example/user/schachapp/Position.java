@@ -30,12 +30,11 @@ public class Position {
     }
     public String toString() {
         String alpha = "abcdefgh";
-        Integer y = this.y;
-        return alpha.charAt(this.x) + y.toString();
+        return alpha.charAt(this.x) + String.valueOf(this.y);
     }
 
     public boolean equals(Position compareTo) {
-        return ((compareTo.getY() == y) && (compareTo.getX() == x));
+        return ((compareTo.getY() == this.y) && (compareTo.getX() == this.x));
     }
 
 }

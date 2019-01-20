@@ -140,17 +140,17 @@ public class BoardState {
             }
             if (getPieceAt(move.start) instanceof Rook) {
                 if (getPieceAt(move.start).isWhite) {
-                    if (move.getGoal().equals(new Position("a8"))) {
+                    if (move.getStart().equals(new Position("a8"))) {
                         whiteKingCastle = false;
                     }
-                    if (move.getGoal().equals(new Position("a1"))) {
+                    if (move.getStart().equals(new Position("a1"))) {
                         whiteQueenCastle = false;
                     }
                 } else {
-                    if (move.getGoal().equals(new Position("h8"))) {
+                    if (move.getStart().equals(new Position("h8"))) {
                         blackKingCastle = false;
                     }
-                    if (move.getGoal().equals(new Position("h1"))) {
+                    if (move.getStart().equals(new Position("h1"))) {
                         blackQueenCastle = false;
                     }
                 }
@@ -167,7 +167,13 @@ public class BoardState {
             int pawnY = ((EnPassant) move).getRemovePawn().getY();
             tiles[pawnX][pawnY].removePiece();
         } else if (move instanceof Castling) {
-            applyMove(((Castling) move).getRookMove());
+            Move rookMove = ((Castling) move).getRookMove();
+            int rookStartX = rookMove.getStart().getX();
+            int rookStartY = rookMove.getStart().getY();
+            int rookGoalX = rookMove.getGoal().getX();
+            int rookGoalY = rookMove.getGoal().getY();
+            tiles[rookGoalX][rookGoalY].setPiece(getPieceAt(rookMove.getStart()));
+            tiles[rookStartX][rookStartY].removePiece();
         } else if (move instanceof Promotion) {
             tiles[goalX][goalY].setPiece(((Promotion) move).getPromotion());
         }

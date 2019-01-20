@@ -13,13 +13,12 @@ public class ChessRuleProvider implements RuleProvider {
     @Override
     public List<Move> getLegalMoves(Position position, BoardState board) {
         List<Move> legalMoves = new ArrayList<>();
-        List<Move> possibleMoves = getPossibleMoves(position, board);
-        for (Move move: possibleMoves) {
+        for (Move move: getPossibleMoves(position, board)) {
             if(isLegalMove(move, board)) {
                legalMoves.add(move);
             }
         }
-        return possibleMoves;
+        return legalMoves;
     }
 
     @Override
@@ -33,7 +32,7 @@ public class ChessRuleProvider implements RuleProvider {
             int jumpOver = (move.getStart().getX() + move.getGoal().getX()) / 2;
             test2.applyMove(new Move(move.getStart(), new Position(jumpOver, move.getStart().getY())));
 
-            return !isChecked(board.whiteToMove(), test1) && !isChecked(board.whiteToMove(), test2);
+            return (!isChecked(board.whiteToMove(), test1) && !isChecked(board.whiteToMove(), test2));
         } else {
             BoardState test = board.clone();
             test.applyMove(move);
@@ -66,7 +65,10 @@ public class ChessRuleProvider implements RuleProvider {
     }
 
     private List<Move> getPossibleMoves(Position position, BoardState board) {
-        return board.getPieceAt(position).getMovement(position, board);
+        if (board.hasPieceAt(position)) {
+            return board.getPieceAt(position).getMovement(position, board);
+        }
+        return null;
     }
 
     private boolean isChecked(boolean color, BoardState board) {
@@ -75,9 +77,14 @@ public class ChessRuleProvider implements RuleProvider {
         List<Position> opponentsPieces = board.getPiecesOfColor(!color);
 
         for (Position p: opponentsPieces) {             //checks if any opposing Piece covers the Kings Position and returns true if so
-            for(Move m: getPossibleMoves(p, board)) {
-                if(m.getGoal().equals(kingPos)) {
-                    return true;
+            if (board.getPieceAt(p) instanceof Pawn) {
+
+            }
+            for (Move m: getPossibleMoves(p, board)) {
+                if (!((board.getPieceAt(p) instanceof Pawn) && (m.getStart().getX() == m.getGoal().getX()))) { //Pawns cannot threat Positions in front of them
+                    if(m.getGoal().equals(kingPos)) {
+                        return true;
+                    }
                 }
             }
         }
@@ -97,11 +104,11 @@ public class ChessRuleProvider implements RuleProvider {
     }
 
     private boolean isMate(BoardState board) {
-        return (isChecked(board.whiteToMove(), board) && hasLegalMove(board));
+        return (isChecked(board.whiteToMove(), board) && !hasLegalMove(board));
     }
 
     private boolean isStaleMate(BoardState board) {
-        return hasLegalMove(board);
+        return !hasLegalMove(board);
     }
 
     private boolean isDraw(BoardState board) {
