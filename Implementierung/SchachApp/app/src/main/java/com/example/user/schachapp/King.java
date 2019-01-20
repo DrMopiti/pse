@@ -25,9 +25,9 @@ public class King extends Piece  {
         for (Iterator<Position> iterator = possiblePositions.iterator(); iterator.hasNext();){
             Position goalPosition = iterator.next();
             if(board.getPieceAt(goalPosition).isWhite() != this.isWhite){
-                possibleMoves.add(new Move(position,goalPosition ));
+                possibleMoves.add(new Move(position, goalPosition ));
             }
-            else if (board.getPieceAt(goalPosition) == null) {
+            else if (!board.hasPieceAt(goalPosition)) {
                 possibleMoves.add(new Move(position, goalPosition));
             }
         }
@@ -60,7 +60,7 @@ public class King extends Piece  {
             if (board.canBlackQueenCastle()) {
                 Position pos1 = new Position("b8");
                 Position pos2 = new Position("c8");
-                Position pos3 = new Position("d81");
+                Position pos3 = new Position("d8");
                 if(!board.hasPieceAt(pos1) && !board.hasPieceAt(pos2) && !board.hasPieceAt(pos3)) {
                     possibleMoves.add(new Castling(position, new Position("c8")));
                 }

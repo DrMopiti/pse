@@ -18,7 +18,7 @@ public class Bishop extends Piece {
         // permitted Moves main diagonal up
         for (int i = xPosition + 1, j = yPosition + 1; i <= 7 && j <= 7; i++, j++) {
             Position tempPosition = new Position(i, j);
-            if (board.getPieceAt(tempPosition) == null) {
+            if (!board.hasPieceAt(tempPosition)) {
                 permittedMoves.add(new Move(position, tempPosition));
             } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
                 permittedMoves.add(new Move(position, tempPosition));
@@ -30,7 +30,7 @@ public class Bishop extends Piece {
         // permitted Moves main diagonal down
         for (int i = xPosition - 1, j = yPosition - 1; i >= 0 && j >= 0; i--, j--) {
             Position tempPosition = new Position(i, j);
-            if (board.getPieceAt(tempPosition) == null) {
+            if (!board.hasPieceAt(tempPosition)) {
                 permittedMoves.add(new Move(position, tempPosition));
             } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
                 permittedMoves.add(new Move(position, tempPosition));
@@ -42,7 +42,7 @@ public class Bishop extends Piece {
         //permitted Moves neben diagonal up
         for (int i = xPosition - 1, j = yPosition + 1; i >= 0 && j <= 7; i--, j++) {
             Position tempPosition = new Position(i, j);
-            if (board.getPieceAt(tempPosition) == null) {
+            if (!board.hasPieceAt(tempPosition)) {
                 permittedMoves.add(new Move(position, tempPosition));
             } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
                 permittedMoves.add(new Move(position, tempPosition));
@@ -55,7 +55,7 @@ public class Bishop extends Piece {
         //permitted Moves neben diagonal down
         for (int i = xPosition + 1, j = yPosition - 1; i <=7 && j >= 0; i++, j--) {
             Position tempPosition = new Position(i, j);
-            if (board.getPieceAt(tempPosition) == null) {
+            if (!board.hasPieceAt(tempPosition)) {
                 permittedMoves.add(new Move(position, tempPosition));
             } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
                 permittedMoves.add(new Move(position, tempPosition));
