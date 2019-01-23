@@ -25,10 +25,12 @@ public class ChessRuleProvider implements RuleProvider {
     public boolean isLegalMove(Move move, BoardState board) { //checks if move is legal on this board
         Piece movingPiece;
         if (!board.hasPieceAt(move.getStart())) {
+            System.out.println("No piece found at starting position");
             return false;
         }
         movingPiece = board.getPieceAt(move.getStart());
         if (movingPiece.isWhite != board.whiteToMove()) {
+            System.out.println("Wrong color to move");
             return false;
         }
         List<Move> legalMoves = getLegalMoves(move.getStart(), board);
@@ -37,6 +39,7 @@ public class ChessRuleProvider implements RuleProvider {
                 return true;
             }
         }
+        System.out.println("Not an allowed Move");
         return false;
     }
 
