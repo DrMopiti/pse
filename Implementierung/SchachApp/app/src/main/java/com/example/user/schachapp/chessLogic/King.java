@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class King extends Piece  {
+public class King extends Piece {
     private static final String KING_CHAR = "K";
     private static final int KING_VALUE = 0;
     public King(boolean isWhite) {
