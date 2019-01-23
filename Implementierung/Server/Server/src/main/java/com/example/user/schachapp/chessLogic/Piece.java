@@ -1,9 +1,11 @@
-package com.example.user.schachapp;
+package com.example.user.schachapp.chessLogic;
+
 
 
 import java.util.List;
 
 public abstract class Piece {
+    
     protected boolean isWhite;
     protected int value;
     protected String representation;

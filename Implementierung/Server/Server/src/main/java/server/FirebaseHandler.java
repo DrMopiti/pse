@@ -6,14 +6,11 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
-import java.util.Arrays;
 
-import com.example.user.schachapp.BoardState;
-import com.example.user.schachapp.ChessRuleProvider;
-import com.example.user.schachapp.Game;
-import com.example.user.schachapp.RuleProvider;
+import com.example.user.schachapp.chessLogic.BoardState;
+import com.example.user.schachapp.chessLogic.ChessRuleProvider;
+import com.example.user.schachapp.chessLogic.RuleProvider;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.CollectionReference;
@@ -82,7 +79,9 @@ public class FirebaseHandler implements DatabaseHandler {
 			return;
 		}
 		RuleProvider ruler = new ChessRuleProvider();
+		
 		BoardState board = ruler.getStartState();
+		System.out.println(ruler.getStartState().toString());
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("board", board.toString());
@@ -133,7 +132,7 @@ public class FirebaseHandler implements DatabaseHandler {
 		String otherPlayer = getOtherPlayer(player);
 		Map<String, Object> update = new HashMap<>();
 		update.put("board", board);
-		db.collection("games")
+		ApiFuture<WriteResult> reuslt = db.collection("games")
 			.document(player+"-"+otherPlayer)
 		    .set(update, SetOptions.merge());
 		return "Success";

@@ -1,4 +1,4 @@
-package com.example.user.schachapp;
+package com.example.user.schachapp.chessLogic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +27,19 @@ public class BoardState {
     public BoardState(String string) {
         //splits the String in 4 Sectors: Pieces, Last Move, Booleans, Moves without Action
         String[] sectors = string.split("#");
+        if (sectors.length != 4) {
+            throw new IllegalArgumentException("String in wrong format");
+        }
 
         //sets all Pieces and empty Positions
         String[] pieces = sectors[0].split("");
+        if (pieces.length != 64) {
+            throw new IllegalArgumentException("String for pieces not 64 chars long");
+        }
         tiles = new Tile[8][8];
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
-                tiles[i][h].setPiece(pieceFactory(pieces[i*8+h]));
+                tiles[i][h] = new Tile(PieceFactory.getPiece(pieces[i*8+h]));
             }
         }
 
@@ -41,31 +47,17 @@ public class BoardState {
         if(sectors[1].equals("")) {
             lastMove = null;
         } else {
-            String[] move = sectors[1].split("-");
-            Position start = new Position(move[0]);
-            Position goal = new Position(move[1]);
-            switch (move.length)  {
-                case 2:
-                    lastMove = new Move(start, goal);
-                    break;
-                case 3:
-                    if (move[2].length() == 1) {
-                        lastMove = new Promotion(start, goal, pieceFactory(move[2]));
-                    }
-                    if (move[2].length() == 2) {
-                        lastMove = new EnPassant(start, goal);
-                    }
-                    break;
-                case 4:
-                    lastMove = new Castling(start, goal);
-                    break;
-                default:
-                    lastMove = null;
+            lastMove = MoveFactory.getMove(sectors[1]);
+            if (lastMove == null) {
+                throw new IllegalArgumentException("String for last move not correct");
             }
         }
 
         //sets all Booleans
         String[] bools = sectors[2].split("");
+        if (bools.length != 5) {
+            throw new IllegalArgumentException("String for booleans not correct");
+        }
         whiteToMove = bools[0].equals("t");
         whiteKingCastle = bools[1].equals("t");
         whiteQueenCastle = bools[2].equals("t");
@@ -73,47 +65,11 @@ public class BoardState {
         blackQueenCastle = bools[4].equals("t");
 
         //sets movesWithoutAction
-        movesWithoutAction = Integer.parseInt(sectors[3]);
-
-    }
-
-    private Piece pieceFactory(String pieceRepresentation) {
-        Piece p;
-        switch (pieceRepresentation) {
-            case "K":
-                p = (new King(true));
-                break;
-            case "k":
-                p = (new King(false));
-                break;
-            case "D":
-                p = (new Queen(true));
-                break;
-            case "d":
-                p = (new Queen(false));
-                break;
-            case "L":
-                p = (new Bishop(true));
-                break;
-            case "l":
-                p = (new Bishop(false));
-                break;
-            case "S":
-                p = (new Knight(true));
-                break;
-            case "s":
-                p = (new Knight(false));
-                break;
-            case "B":
-                p = (new Pawn(true));
-                break;
-            case "b":
-                p = (new Pawn(false));
-                break;
-            default:
-                p = null;
+        try {
+            movesWithoutAction = Integer.parseInt(sectors[3]);
+        } catch (IllegalArgumentException e) {
+            movesWithoutAction = 0;
         }
-        return p;
     }
 
     public void applyMove(Move move) {
@@ -253,7 +209,7 @@ public class BoardState {
 
         //converts lastMove
         String move = "";
-        if(!lastMove.equals(null)) {
+        if(lastMove != null) {
             move = lastMove.toString();
         }
 

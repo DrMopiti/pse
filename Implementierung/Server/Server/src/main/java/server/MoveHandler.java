@@ -1,10 +1,13 @@
 package server;
 
-import com.example.user.schachapp.BoardState;
-import com.example.user.schachapp.ChessRuleProvider;
-import com.example.user.schachapp.Move;
-import com.example.user.schachapp.Position;
-import com.example.user.schachapp.RuleProvider;
+
+
+import com.example.user.schachapp.chessLogic.BoardState;
+import com.example.user.schachapp.chessLogic.ChessRuleProvider;
+import com.example.user.schachapp.chessLogic.Move;
+import com.example.user.schachapp.chessLogic.MoveFactory;
+import com.example.user.schachapp.chessLogic.Position;
+import com.example.user.schachapp.chessLogic.RuleProvider;
 
 public class MoveHandler {
 	private String player;
@@ -26,8 +29,7 @@ public class MoveHandler {
 		}
 		BoardState board = new BoardState(boardString);
 		RuleProvider ruler = new ChessRuleProvider();
-		//Move move = MoveFactory.getMove(this.move);
-		Move move = new Move(new Position(1,1), new Position(2,3));
+		Move move = MoveFactory.getMove(this.move);
 		if(ruler.isLegalMove(move, board)) {
 			board.applyMove(move);
 		} else {
