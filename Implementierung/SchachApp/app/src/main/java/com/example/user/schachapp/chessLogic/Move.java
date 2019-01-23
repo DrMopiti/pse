@@ -1,10 +1,13 @@
-package com.example.user.schachapp;
+package com.example.user.schachapp.chessLogic;
 
 public class Move {
     protected Position start;
     protected Position goal;
 
     public Move(Position start, Position goal) {
+        if(start == null || goal == null){
+            throw new NullPointerException("start or goal positions can not be null");
+        }
         this.start = start;
         this.goal = goal;
     }

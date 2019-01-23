@@ -1,4 +1,4 @@
-package com.example.user.schachapp;
+package com.example.user.schachapp.chessLogic;
 
 import android.widget.ImageView;
 

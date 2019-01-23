@@ -1,4 +1,4 @@
-package com.example.user.schachapp;
+package com.example.user.schachapp.chessLogic;
 
 import java.util.ArrayList;
 import java.util.List;

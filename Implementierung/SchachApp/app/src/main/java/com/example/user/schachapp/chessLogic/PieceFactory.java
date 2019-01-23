@@ -1,4 +1,4 @@
-package com.example.user.schachapp;
+package com.example.user.schachapp.chessLogic;
 
 public class PieceFactory {
     public static Piece getPiece(String pieceRepresentation) {
@@ -33,6 +33,12 @@ public class PieceFactory {
                 break;
             case "b":
                 p = (new Pawn(false));
+                break;
+            case "T":
+                p = (new Rook(true));
+                break;
+            case "t":
+                p = (new Rook(false));
                 break;
             default:
                 p = null;
