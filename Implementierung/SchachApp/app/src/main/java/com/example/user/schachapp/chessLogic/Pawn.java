@@ -1,4 +1,6 @@
-package com.example.user.schachapp.chessLogic;
+package com.example.user.schachapp.com.example.user.schachapp.chessLogic;
+
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,12 +8,11 @@ import java.util.List;
 public class Pawn extends Piece {
     private static final String PAWN_CHAR = "B";
     private static final int PAWN_VALUE = 1;
-    public Pawn(boolean isWhite) {
-        super(isWhite, PAWN_VALUE, PAWN_CHAR);
+    public Pawn(boolean isWhite, ImageView iv) {
+        super(isWhite, PAWN_VALUE, PAWN_CHAR, iv);
     }
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
-
         ArrayList<Position> possiblePositions = new ArrayList<Position>();
         List <Move> possibleMoves = new ArrayList<Move>();
 
@@ -28,7 +29,8 @@ public class Pawn extends Piece {
             if (!board.hasPieceAt(tempPosition)) {
                 possibleMoves.add(new Move(position, tempPosition));
             }
-            if (isWhite ) {
+            if (isWhite )
+            {
                 j++;
             } else {
                 j--;
@@ -66,7 +68,6 @@ public class Pawn extends Piece {
             }
         }
 
-        System.out.println("test");
         return possibleMoves;
     }
 }

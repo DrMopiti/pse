@@ -1,4 +1,6 @@
-package com.example.user.schachapp.chessLogic;
+package com.example.user.schachapp.com.example.user.schachapp.chessLogic;
+
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +8,8 @@ import java.util.List;
 public class Rook extends Piece {
     private static final String ROOK_CHAR = "T";
     private static final int ROOK_VALUE = 5;
-    public Rook(boolean isWhite) {
-        super(isWhite, ROOK_VALUE, ROOK_CHAR);
+    public Rook(boolean isWhite, ImageView iv) {
+        super(isWhite, ROOK_VALUE, ROOK_CHAR, iv);
     }
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
