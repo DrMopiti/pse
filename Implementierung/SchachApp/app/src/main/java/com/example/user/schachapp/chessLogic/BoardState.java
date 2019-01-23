@@ -200,9 +200,9 @@ public class BoardState {
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
                 if (tiles[i][h].equals(null)) {
-                   pieces = pieces + 0;
+                   pieces = pieces + "0";
                 } else {
-                   pieces = pieces + tiles[i][h].toString();
+                   pieces = pieces + tiles[i][h].getPiece().toString();
                 }
             }
         }
