@@ -33,7 +33,7 @@ public class BoardState {
         tiles = new Tile[8][8];
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
-                tiles[i][h].setPiece(PieceFactory.getPiece(pieces[i*8+h]));
+                tiles[i][h] = new Tile(PieceFactory.getPiece(pieces[i*8+h]));
             }
         }
 
