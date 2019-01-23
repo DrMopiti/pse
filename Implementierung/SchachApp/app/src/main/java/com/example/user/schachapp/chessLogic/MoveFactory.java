@@ -1,4 +1,4 @@
-package com.example.user.schachapp;
+package com.example.user.schachapp.chessLogic;
 
 public class MoveFactory {
     public static Move getMove(String moveString) {

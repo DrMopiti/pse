@@ -1,4 +1,6 @@
-package com.example.user.schachapp;
+package com.example.user.schachapp.chessLogic;
+
+import com.example.user.schachapp.chessLogic.Piece;
 
 public class Tile {
     private Piece piece;
