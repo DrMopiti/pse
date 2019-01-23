@@ -1,6 +1,10 @@
 package server;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
 import io.javalin.Javalin;
@@ -11,6 +15,7 @@ import com.google.common.collect.HashBiMap;
 
 public class ClientHandler {
 	private static BiMap<String, WsSession> sessionMap = HashBiMap.create();
+	private static Set<String> playerSet = new TreeSet();
 	
 	public static void main(String[] args) {
 		
@@ -34,6 +39,10 @@ public class ClientHandler {
 	        	sendMessageTo(otherPlayer);
 	        	System.out.println("DEBUG: APPLIED MOVE");
 	        });
+	        app.get("/players", ctx -> {
+	        	ctx.result(playerSet.toString());
+	        	System.out.println("DEBUG: PLAYER LIST");
+	        });
 	        app.ws("/socket", ws -> {
 	        	
 	        	ws.onConnect(session -> {	 
@@ -43,6 +52,7 @@ public class ClientHandler {
 	            ws.onMessage((session, message) -> {
 	            	
 	               sessionMap.put(message, session);
+	               playerSet.add(message);
 	               System.out.println("DEBUG: ADDED "+ message+ " TO MAP");
 	               
 	            });
