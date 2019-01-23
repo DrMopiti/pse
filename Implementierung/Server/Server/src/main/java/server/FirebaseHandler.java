@@ -81,7 +81,7 @@ public class FirebaseHandler implements DatabaseHandler {
 		RuleProvider ruler = new ChessRuleProvider();
 		
 		BoardState board = ruler.getStartState();
-		System.out.println(ruler.getStartState().toString());
+		System.out.println(board.toString());
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("board", board.toString());
