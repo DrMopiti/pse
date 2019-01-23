@@ -25,6 +25,7 @@ public class ChessRuleProvider implements RuleProvider {
     public boolean isLegalMove(Move move, BoardState board) { //checks if move is legal on this board
         Piece movingPiece;
         if (!board.hasPieceAt(move.getStart())) {
+            System.out.println(move.getStart().toString());
             System.out.println("No piece found at starting position");
             return false;
         }

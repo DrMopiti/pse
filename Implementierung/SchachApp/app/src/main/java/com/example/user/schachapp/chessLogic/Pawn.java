@@ -11,6 +11,7 @@ public class Pawn extends Piece {
     }
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
+
         ArrayList<Position> possiblePositions = new ArrayList<Position>();
         List <Move> possibleMoves = new ArrayList<Move>();
 
@@ -27,8 +28,7 @@ public class Pawn extends Piece {
             if (!board.hasPieceAt(tempPosition)) {
                 possibleMoves.add(new Move(position, tempPosition));
             }
-            if (isWhite )
-            {
+            if (isWhite ) {
                 j++;
             } else {
                 j--;
@@ -66,6 +66,7 @@ public class Pawn extends Piece {
             }
         }
 
+        System.out.println("test");
         return possibleMoves;
     }
 }
