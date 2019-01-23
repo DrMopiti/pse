@@ -7,7 +7,7 @@ public class ChessRuleProvider implements RuleProvider {
 
     @Override
     public BoardState getStartState() {
-        return new BoardState("TB000000btSB000000bsLB000000blDB000000bdKB000000bKLB000000blSB000000bsTB000000bt##ttttt#0");
+        return new BoardState("TB0000btSB0000bsLB0000blDB0000bdKB0000bKLB0000blSB0000bsTB0000bt##ttttt#0");
     }
     
     @Override
