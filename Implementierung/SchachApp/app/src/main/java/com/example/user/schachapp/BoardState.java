@@ -41,7 +41,7 @@ public class BoardState {
         if(sectors[1].equals("")) {
             lastMove = null;
         } else {
-            MoveFactory.getMove(sectors[1]);
+            lastMove = MoveFactory.getMove(sectors[1]);
         }
 
         //sets all Booleans
