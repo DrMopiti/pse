@@ -27,9 +27,15 @@ public class BoardState {
     public BoardState(String string) {
         //splits the String in 4 Sectors: Pieces, Last Move, Booleans, Moves without Action
         String[] sectors = string.split("#");
+        if (sectors.length != 4) {
+            throw new IllegalArgumentException("String in wrong format");
+        }
 
         //sets all Pieces and empty Positions
         String[] pieces = sectors[0].split("");
+        if (pieces.length != 64) {
+            throw new IllegalArgumentException("String for pieces not 64 chars long");
+        }
         tiles = new Tile[8][8];
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
@@ -42,10 +48,16 @@ public class BoardState {
             lastMove = null;
         } else {
             lastMove = MoveFactory.getMove(sectors[1]);
+            if (lastMove == null) {
+                throw new IllegalArgumentException("String for last move not correct");
+            }
         }
 
         //sets all Booleans
         String[] bools = sectors[2].split("");
+        if (bools.length != 5) {
+            throw new IllegalArgumentException("String for booleans not correct");
+        }
         whiteToMove = bools[0].equals("t");
         whiteKingCastle = bools[1].equals("t");
         whiteQueenCastle = bools[2].equals("t");
@@ -53,8 +65,11 @@ public class BoardState {
         blackQueenCastle = bools[4].equals("t");
 
         //sets movesWithoutAction
-        movesWithoutAction = Integer.parseInt(sectors[3]);
-
+        try {
+            movesWithoutAction = Integer.parseInt(sectors[3]);
+        } catch (IllegalArgumentException e) {
+            movesWithoutAction = 0;
+        }
     }
 
     public void applyMove(Move move) {
@@ -194,7 +209,7 @@ public class BoardState {
 
         //converts lastMove
         String move = "";
-        if(!lastMove.equals(null)) {
+        if(lastMove != null) {
             move = lastMove.toString();
         }
 
