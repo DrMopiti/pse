@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.user.schachapp.chessLogic.Position;
+
 public class BoardActivity extends AppCompatActivity {
     private Button buttonDraw, buttonGiveUp;
     private ImageView chessboard;
@@ -106,7 +108,7 @@ public class BoardActivity extends AppCompatActivity {
                     moveFigure((ImageView) findViewById(R.id.king_black), new Position(chessX, chessY));
                     moveFigure((ImageView) findViewById(R.id.pawn_white_2), new Position(chessX, chessY));
                     chessChar = new Position(chessX, chessY).toString();
-                } catch (IllegalPositionException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 txt.setText(chessChar);

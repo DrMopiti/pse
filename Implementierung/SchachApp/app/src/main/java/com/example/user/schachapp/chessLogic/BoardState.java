@@ -1,4 +1,4 @@
-package com.example.user.schachapp;
+package com.example.user.schachapp.chessLogic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class BoardState {
         tiles = new Tile[8][8];
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
-                tiles[i][h].setPiece(pieceFactory(pieces[i*8+h]));
+                tiles[i][h] = new Tile(PieceFactory.getPiece(pieces[i*8+h]));
             }
         }
 
@@ -41,27 +41,7 @@ public class BoardState {
         if(sectors[1].equals("")) {
             lastMove = null;
         } else {
-            String[] move = sectors[1].split("-");
-            Position start = new Position(move[0]);
-            Position goal = new Position(move[1]);
-            switch (move.length)  {
-                case 2:
-                    lastMove = new Move(start, goal);
-                    break;
-                case 3:
-                    if (move[2].length() == 1) {
-                        lastMove = new Promotion(start, goal, pieceFactory(move[2]));
-                    }
-                    if (move[2].length() == 2) {
-                        lastMove = new EnPassant(start, goal);
-                    }
-                    break;
-                case 4:
-                    lastMove = new Castling(start, goal);
-                    break;
-                default:
-                    lastMove = null;
-            }
+            lastMove = MoveFactory.getMove(sectors[1]);
         }
 
         //sets all Booleans
@@ -75,45 +55,6 @@ public class BoardState {
         //sets movesWithoutAction
         movesWithoutAction = Integer.parseInt(sectors[3]);
 
-    }
-
-    private Piece pieceFactory(String pieceRepresentation) {
-        Piece p;
-        switch (pieceRepresentation) {
-            case "K":
-                p = (new King(true));
-                break;
-            case "k":
-                p = (new King(false));
-                break;
-            case "D":
-                p = (new Queen(true));
-                break;
-            case "d":
-                p = (new Queen(false));
-                break;
-            case "L":
-                p = (new Bishop(true));
-                break;
-            case "l":
-                p = (new Bishop(false));
-                break;
-            case "S":
-                p = (new Knight(true));
-                break;
-            case "s":
-                p = (new Knight(false));
-                break;
-            case "B":
-                p = (new Pawn(true));
-                break;
-            case "b":
-                p = (new Pawn(false));
-                break;
-            default:
-                p = null;
-        }
-        return p;
     }
 
     public void applyMove(Move move) {
