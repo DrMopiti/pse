@@ -53,7 +53,7 @@ public class BoardState {
         if(sectors[1].equals("")) {
             lastMove = null;
         } else {
-            lastMove = MoveFactory.getMove(sectors[1]);
+            lastMove = MoveFactory.getMove(sectors[1], ba);
             if (lastMove == null) {
                 throw new IllegalArgumentException("String for last move not correct");
             }
