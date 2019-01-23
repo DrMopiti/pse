@@ -21,4 +21,8 @@ public class Move {
     public String toString() {
         return start.toString() + "-" + goal.toString();
     }
+
+    public boolean equals(Move compareTo) {
+        return (start.equals(compareTo.getStart()) && goal.equals(compareTo.getGoal()));
+    }
 }

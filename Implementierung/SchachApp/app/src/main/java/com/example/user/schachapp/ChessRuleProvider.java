@@ -14,7 +14,7 @@ public class ChessRuleProvider implements RuleProvider {
     public List<Move> getLegalMoves(Position position, BoardState board) {
         List<Move> legalMoves = new ArrayList<>();
         for (Move move: getPossibleMoves(position, board)) {
-            if(isLegalMove(move, board)) {
+            if(isAllowedMove(move, board)) {
                legalMoves.add(move);
             }
         }
@@ -22,22 +22,22 @@ public class ChessRuleProvider implements RuleProvider {
     }
 
     @Override
-    public boolean isLegalMove(Move move, BoardState board) {
-        if (move instanceof Castling) {
-            BoardState test1 = board.clone();
-            test1.applyMove(move);
-
-            //King cannot jump over covered squares
-            BoardState test2 = board.clone();
-            int jumpOver = (move.getStart().getX() + move.getGoal().getX()) / 2;
-            test2.applyMove(new Move(move.getStart(), new Position(jumpOver, move.getStart().getY())));
-
-            return (!isChecked(board.whiteToMove(), test1) && !isChecked(board.whiteToMove(), test2));
-        } else {
-            BoardState test = board.clone();
-            test.applyMove(move);
-            return !isChecked(board.whiteToMove(), test);
+    public boolean isLegalMove(Move move, BoardState board) { //checks if move is legal on this board
+        Piece movingPiece;
+        if (!board.hasPieceAt(move.getStart())) {
+            return false;
         }
+        movingPiece = board.getPieceAt(move.getStart());
+        if (movingPiece.isWhite != board.whiteToMove()) {
+            return false;
+        }
+        List<Move> legalMoves = getLegalMoves(move.getStart(), board);
+        for (Move m: legalMoves) {
+            if (m.equals(move)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -64,6 +64,24 @@ public class ChessRuleProvider implements RuleProvider {
         return null;
     }
 
+    private boolean isAllowedMove(Move move, BoardState board) { //checks if moving player would be checked after move
+        if (move instanceof Castling) {
+            BoardState test1 = board.clone();
+            test1.applyMove(move);
+
+            //King cannot jump over covered squares
+            BoardState test2 = board.clone();
+            int jumpOver = (move.getStart().getX() + move.getGoal().getX()) / 2;
+            test2.applyMove(new Move(move.getStart(), new Position(jumpOver, move.getStart().getY())));
+
+            return (!isChecked(board.whiteToMove(), test1) && !isChecked(board.whiteToMove(), test2));
+        } else {
+            BoardState test = board.clone();
+            test.applyMove(move);
+            return !isChecked(board.whiteToMove(), test);
+        }
+    }
+
     private List<Move> getPossibleMoves(Position position, BoardState board) {
         if (board.hasPieceAt(position)) {
             return board.getPieceAt(position).getMovement(position, board);
@@ -72,7 +90,6 @@ public class ChessRuleProvider implements RuleProvider {
     }
 
     private boolean isChecked(boolean color, BoardState board) {
-
         Position kingPos = board.getKingOfColor(color);
         List<Position> opponentsPieces = board.getPiecesOfColor(!color);
 
