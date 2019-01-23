@@ -1,4 +1,6 @@
-package com.example.user.schachapp.chessLogic;
+package com.example.user.schachapp.com.example.user.schachapp.chessLogic;
+
+import com.example.user.schachapp.BoardActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,19 @@ public class BoardState {
     private boolean blackKingCastle;
     private boolean blackQueenCastle;
     private int movesWithoutAction;
+    private BoardActivity ba;
+
+    public BoardState() {
+        tiles = new Tile[8][8];
+        lastMove = null;
+        whiteKingCastle = true;
+        whiteQueenCastle = true;
+        blackKingCastle = true;
+        blackQueenCastle = true;
+        whiteToMove = true;
+        movesWithoutAction = 0;
+        ba = new BoardActivity();
+    }
 
     public BoardState(String string) {
         //splits the String in 4 Sectors: Pieces, Last Move, Booleans, Moves without Action
@@ -25,10 +40,12 @@ public class BoardState {
         if (pieces.length != 64) {
             throw new IllegalArgumentException("String for pieces not 64 chars long");
         }
+        ba = new BoardActivity();
         tiles = new Tile[8][8];
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
-                tiles[i][h] = new Tile(PieceFactory.getPiece(pieces[i*8+h]));
+                tiles[i][h] = new Tile(PieceFactory.getPiece(pieces[i*8+h], ba));
+                ba.moveFigure(tiles[i][h].getPiece().getImageView(), new Position(i, h), 0);
             }
         }
 
@@ -70,7 +87,6 @@ public class BoardState {
         //update attributes
         lastMove = move;
         movesWithoutAction++;
-        whiteToMove = !whiteToMove;
         if (getPieceAt(move.start) instanceof Pawn || hasPieceAt(move.goal)) {
             movesWithoutAction = 0;
         }
@@ -126,22 +142,18 @@ public class BoardState {
     }
 
     public boolean hasPieceAt(Position position) {
-
         return tiles[position.getX()][position.getY()].getPiece() != null;
     }
 
     public Piece getPieceAt(Position position) {
-        if (hasPieceAt(position)) {
-            return tiles[position.getX()][position.getY()].getPiece();
-        }
-        return null;
+        return tiles[position.getX()][position.getY()].getPiece();
     }
 
     public List<Position> getPiecesOfColor(boolean white) {
         List<Position> pieces = new ArrayList<>();
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
-                if(hasPieceAt(new Position(i, h)) && tiles[i][h].getPiece().isWhite == white) {
+                if(tiles[i][h].getPiece().isWhite == white) {
                     pieces.add(new Position(i, h));
                 }
             }
@@ -193,10 +205,10 @@ public class BoardState {
         String pieces = "";
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
-                if (tiles[i][h].getPiece() == null) {
-                   pieces = pieces + "0";
+                if (tiles[i][h].equals(null)) {
+                    pieces = pieces + "0";
                 } else {
-                   pieces = pieces + tiles[i][h].getPiece().toString();
+                    pieces = pieces + tiles[i][h].getPiece().toString();
                 }
             }
         }
