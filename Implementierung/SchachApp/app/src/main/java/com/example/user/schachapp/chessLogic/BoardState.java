@@ -202,7 +202,7 @@ public class BoardState {
                 if (tiles[i][h].equals(null)) {
                    pieces = pieces + 0;
                 } else {
-                   pieces = pieces + tiles[i][h].toString();
+                   pieces = pieces + tiles[i][h].getPiece().toString();
                 }
             }
         }
