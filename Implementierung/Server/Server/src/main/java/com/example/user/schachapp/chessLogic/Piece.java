@@ -24,7 +24,7 @@ public abstract class Piece {
     public int getValue() {
         return value;
     }
-   
+ 
     public boolean isWhite() {
         return isWhite;
     };

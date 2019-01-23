@@ -13,7 +13,6 @@ import com.example.user.schachapp.chessLogic.ChessRuleProvider;
 import com.example.user.schachapp.chessLogic.RuleProvider;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
@@ -23,6 +22,8 @@ import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+
+
 
 public class FirebaseHandler implements DatabaseHandler {
 	
@@ -78,10 +79,9 @@ public class FirebaseHandler implements DatabaseHandler {
 			System.out.println("DEBUG: ERROR WHILE GETTING DOC REF");
 			return;
 		}
-		RuleProvider ruler = new ChessRuleProvider();
-		
+		RuleProvider ruler = new ChessRuleProvider();		
 		BoardState board = ruler.getStartState();
-		System.out.println(board.toString());
+	
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("board", board.toString());
