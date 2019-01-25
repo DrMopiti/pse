@@ -19,7 +19,7 @@ public class ClientHandler {
 	        });
 	        app.get("/move/:move", ctx -> {	   
 	        	ctx.result(ctx.pathParam("move")+ userUsernameMap.toString());
-	        	broadcastMessage("player");
+	        	sendMessageTo("player");
 	        });
 	        app.ws("/socket", ws -> {
 	        	ws.onConnect(session -> {
@@ -37,7 +37,7 @@ public class ClientHandler {
 	        
 	}
 	
-	  private static void broadcastMessage(String user) {
+	  private static void sendMessageTo(String user) {
 	        WsSession session = userUsernameMap.get(user);
 	        session.send("refresh faggot");	               
 	    }
