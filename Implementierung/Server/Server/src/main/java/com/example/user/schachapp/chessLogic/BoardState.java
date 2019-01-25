@@ -199,7 +199,7 @@ public class BoardState {
         String pieces = "";
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
-                if (tiles[i][h].equals(null)) {
+                if (tiles[i][h] == (null)) {
                    pieces = pieces + "0";
                 } else {
                    pieces = pieces + tiles[i][h].getPiece().toString();
