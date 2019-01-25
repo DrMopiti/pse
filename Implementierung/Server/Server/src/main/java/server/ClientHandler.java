@@ -1,11 +1,9 @@
 package server;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
+
 
 import io.javalin.Javalin;
 import io.javalin.websocket.WsSession;
@@ -15,7 +13,7 @@ import com.google.common.collect.HashBiMap;
 
 public class ClientHandler {
 	private static BiMap<String, WsSession> sessionMap = HashBiMap.create();
-	private static Set<String> playerSet = new TreeSet();
+	private static Set<String> playerSet = new TreeSet<String>();
 	
 	public static void main(String[] args) {
 		
