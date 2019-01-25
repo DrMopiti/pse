@@ -1,49 +1,44 @@
-package com.example.user.schachapp.com.example.user.schachapp.chessLogic;
-
-import android.widget.ImageView;
-
-import com.example.user.schachapp.BoardActivity;
+package com.example.user.schachapp.chessLogic;
 
 public class PieceFactory {
-    public static Piece getPiece(String pieceRepresentation, BoardActivity ba) {
+    public static Piece getPiece(String pieceRepresentation) {
         Piece p;
-        ImageView iv = ba.getPieceIV(pieceRepresentation);
         switch (pieceRepresentation) {
             case "K":
-                p = (new King(true, iv));
+                p = (new King(true));
                 break;
             case "k":
-                p = (new King(false, iv));
+                p = (new King(false));
                 break;
             case "D":
-                p = (new Queen(true, iv));
+                p = (new Queen(true));
                 break;
             case "d":
-                p = (new Queen(false, iv));
+                p = (new Queen(false));
                 break;
             case "L":
-                p = (new Bishop(true, iv));
+                p = (new Bishop(true));
                 break;
             case "l":
-                p = (new Bishop(false, iv));
+                p = (new Bishop(false));
                 break;
             case "S":
-                p = (new Knight(true, iv));
+                p = (new Knight(true));
                 break;
             case "s":
-                p = (new Knight(false, iv));
+                p = (new Knight(false));
                 break;
             case "B":
-                p = (new Pawn(true, iv));
+                p = (new Pawn(true));
                 break;
             case "b":
-                p = (new Pawn(false, iv));
+                p = (new Pawn(false));
                 break;
             case "T":
-                p = (new Rook(true, iv));
+                p = (new Rook(true));
                 break;
             case "t":
-                p = (new Rook(false, iv));
+                p = (new Rook(false));
                 break;
             default:
                 p = null;

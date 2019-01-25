@@ -1,7 +1,4 @@
-package com.example.user.schachapp.com.example.user.schachapp.chessLogic;
-
-import android.media.Image;
-import android.widget.ImageView;
+package com.example.user.schachapp.chessLogic;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,8 +7,8 @@ import java.util.List;
 public class King extends Piece {
     private static final String KING_CHAR = "K";
     private static final int KING_VALUE = 0;
-    public King(boolean isWhite, ImageView iv) {
-        super(isWhite, KING_VALUE, KING_CHAR, iv);
+    public King(boolean isWhite) {
+        super(isWhite, KING_VALUE, KING_CHAR);
     }
     @Override
     public List<Move> getMovement(Position position, BoardState board) {

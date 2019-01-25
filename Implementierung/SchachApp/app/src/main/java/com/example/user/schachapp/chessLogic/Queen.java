@@ -1,6 +1,4 @@
-package com.example.user.schachapp.com.example.user.schachapp.chessLogic;
-
-import android.widget.ImageView;
+package com.example.user.schachapp.chessLogic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +6,8 @@ import java.util.List;
 public class Queen extends Piece {
     private static final String QUEEN_CHAR = "D";
     private static final int QUEEN_VALUE = 9;
-    public Queen(boolean isWhite, ImageView iv) {
-        super(isWhite, QUEEN_VALUE, QUEEN_CHAR, iv);
+    public Queen(boolean isWhite) {
+        super(isWhite, QUEEN_VALUE, QUEEN_CHAR);
     }
     @Override
     public  List<Move> getMovement(Position position, BoardState board) {
