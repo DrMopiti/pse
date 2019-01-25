@@ -50,21 +50,21 @@ public class FirebaseHandler implements DatabaseHandler {
 		serviceAccount = new FileInputStream("serviceAccount.json");
 	} catch (FileNotFoundException e) {
 		e.printStackTrace();
-		System.out.println("DEBUG: ERROR WHILE READING SERVICE ACCOUNT JSON");
+		//System.out.println("DEBUG: ERROR WHILE READING SERVICE ACCOUNT JSON");
 	}
 	GoogleCredentials credentials = null;
 	try {
 		credentials = GoogleCredentials.fromStream(serviceAccount);
 	} catch (IOException e) {
 		e.printStackTrace();
-		System.out.println("DEBUG: ERROR WHILE SETTING CREDENTIALS");
+		//System.out.println("DEBUG: ERROR WHILE SETTING CREDENTIALS");
 	}
 	FirebaseOptions options = new FirebaseOptions.Builder()
 	    .setCredentials(credentials).build();
 	FirebaseApp.initializeApp(options);
 
 	db = FirestoreClient.getFirestore();
-	System.out.println("DEBUG: ESTABLISHED DATABASE CONNECTION");
+	//System.out.println("DEBUG: ESTABLISHED DATABASE CONNECTION");
 	}
 	
 	
@@ -74,9 +74,9 @@ public class FirebaseHandler implements DatabaseHandler {
 		String id = whitePlayer + "-" +blackPlayer;
 		try {
 			docRef = db.collection("games").document(id);
-			System.out.println("DEBUG: DOC REF CREATED");
+			//System.out.println("DEBUG: DOC REF CREATED");
 		} catch (NullPointerException e) {
-			System.out.println("DEBUG: ERROR WHILE GETTING DOC REF");
+			//System.out.println("DEBUG: ERROR WHILE GETTING DOC REF");
 			return;
 		}
 		RuleProvider ruler = new ChessRuleProvider();		
@@ -89,7 +89,7 @@ public class FirebaseHandler implements DatabaseHandler {
 		data.put("blackPlayer", blackPlayer);
 
 		ApiFuture<WriteResult> result = docRef.set(data);
-		System.out.println("DEBUG: CREATED NEW GAME");
+		//System.out.println("DEBUG: CREATED NEW GAME");
 
 	}
 
@@ -105,21 +105,21 @@ public class FirebaseHandler implements DatabaseHandler {
 			querySnapshot = query.get();
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
-			System.out.println("DEBUG: ERROR WHILE GETTING QUERY");
+			//System.out.println("DEBUG: ERROR WHILE GETTING QUERY");
 			}
 		List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 		for (QueryDocumentSnapshot document : documents) {
 			String white = document.getString("whitePlayer");
 			String black = document.getString("blackPlayer");
 
-			System.out.println("DEBUG: CHECKING GAME " + document.getId() + " FOR PLAYER " + player);
-			System.out.println("DEBUG: PARTS " + white + " & " + black);
+			//System.out.println("DEBUG: CHECKING GAME " + document.getId() + " FOR PLAYER " + player);
+			//System.out.println("DEBUG: PARTS " + white + " & " + black);
 			if (white.equalsIgnoreCase(player)) {
-				System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
+				//System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
 				board = document.getString("board");
 			}
 			if (black.equalsIgnoreCase(player)) {
-				System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
+				//System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
 				board = document.getString("board");
 			}
 		}
@@ -151,21 +151,21 @@ public class FirebaseHandler implements DatabaseHandler {
 			querySnapshot = query.get();
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
-			System.out.println("DEBUG: ERROR WHILE GETTING QUERY");
+			//System.out.println("DEBUG: ERROR WHILE GETTING QUERY");
 			}
 		List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 		for (QueryDocumentSnapshot document : documents) {
 			String white = document.getString("whitePlayer");
 			String black = document.getString("blackPlayer");
 
-			System.out.println("DEBUG: CHECKING GAME " + document.getId() + " FOR PLAYER " + player);
-			System.out.println("DEBUG: PLAYER " + player);
+			//System.out.println("DEBUG: CHECKING GAME " + document.getId() + " FOR PLAYER " + player);
+			//System.out.println("DEBUG: PLAYER " + player);
 			if (white.equalsIgnoreCase(player)) {
-				System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
+				//System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
 				other = document.getString("blackPlayer");
 			}
 			if (black.equalsIgnoreCase(player)) {
-				System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
+				//System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
 				other = document.getString("whitePlayer");
 			}
 		}
@@ -183,7 +183,7 @@ public class FirebaseHandler implements DatabaseHandler {
 			querySnapshot = query.get();
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
-			System.out.println("DEBUG: ERROR WHILE GETTING QUERY");
+			//System.out.println("DEBUG: ERROR WHILE GETTING QUERY");
 			occurrence++; //assume the player already is in a game
 		}
 		List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
@@ -191,14 +191,14 @@ public class FirebaseHandler implements DatabaseHandler {
 			String white = document.getString("whitePlayer");
 			String black = document.getString("blackPlayer");
 
-			System.out.println("DEBUG: CHECKING GAME " + document.getId() + " FOR PLAYER " + player);
-			System.out.println("DEBUG: PARTS " + white + " & " + black);
+			//System.out.println("DEBUG: CHECKING GAME " + document.getId() + " FOR PLAYER " + player);
+			//System.out.println("DEBUG: PARTS " + white + " & " + black);
 			if (white.equalsIgnoreCase(player)) {
-				System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
+				//System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
 				occurrence++;
 			}
 			if (black.equalsIgnoreCase(player)) {
-				System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
+				//System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
 				occurrence++;
 			}
 			

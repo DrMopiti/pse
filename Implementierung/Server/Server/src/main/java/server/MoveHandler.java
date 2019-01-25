@@ -33,7 +33,7 @@ public class MoveHandler {
 		if(ruler.isLegalMove(move, board)) {
 			board.applyMove(move);
 		} else {
-			System.out.println("DEBUG: ILLEGAL MOVE");
+			//System.out.println("DEBUG: ILLEGAL MOVE");
 			return "IllegalMove";
 		}
 		retString = handler.saveGame(player, board.toString());

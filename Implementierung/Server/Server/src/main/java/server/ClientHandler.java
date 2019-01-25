@@ -23,25 +23,34 @@ public class ClientHandler {
 	        app.get("/newgame/*/*", ctx -> {
 	        	String white = ctx.splat(0);
 	        	String black = ctx.splat(1);
-	        	ctx.result(newGame(white, black));
-	        	System.out.println("DEBUG: NEW GAME CREATED");
+	        	ctx.json(newGame(white, black));
+	        	//System.out.println("DEBUG: NEW GAME CREATED");
 	        });
 	        app.get("/board/:player", ctx -> {
 	        	String player = ctx.pathParam("player");
-	        	ctx.result(board(player));
-	        	System.out.println("DEBUG: RETURNED BOARD");
+	        	ctx.json(board(player));
+	        	//System.out.println("DEBUG: RETURNED BOARD");
 	        });
 	        app.get("/move/*/*", ctx -> {	
 	        	String player = ctx.splat(0);
 	        	String move = ctx.splat(1);
-	        	move(player, move);
-	        	String otherPlayer ="Netter Mensch";
+	        	String ifSuccess = move(player, move);
+	        	DatabaseHandler handler = FirebaseHandler.getHandler();
+	        	String otherPlayer = handler.getOtherPlayer(player);
 	        	sendMessageTo(otherPlayer);
-	        	System.out.println("DEBUG: APPLIED MOVE");
+	        	ctx.json(ifSuccess);
+	        	//System.out.println("DEBUG: APPLIED MOVE");
 	        });
 	        app.get("/players", ctx -> {
-	        	ctx.result(playerSet.toString());
-	        	System.out.println("DEBUG: PLAYER LIST");
+	        	ctx.json(playerSet);
+	        	//System.out.println("DEBUG: PLAYER LIST");
+	        });
+	        app.get("/isonline/:player", ctx -> {
+	        	if (playerSet.contains(ctx.pathParam("player"))) {
+	        		ctx.json(true);
+	        	} else {
+	        		ctx.json(false);
+	        	}
 	        });
 	        app.ws("/socket", ws -> {
 	        	
@@ -53,7 +62,7 @@ public class ClientHandler {
 	            	
 	               sessionMap.put(message, session);
 	               playerSet.add(message);
-	               System.out.println("DEBUG: ADDED "+ message+ " TO MAP");
+	               //System.out.println("DEBUG: ADDED "+ message+ " TO MAP");
 	               
 	            });
 	            
@@ -61,7 +70,7 @@ public class ClientHandler {
 	            	
 	            	String key = sessionMap.inverse().get(session);
 	            	sessionMap.remove(key);
-	            	System.out.println("DEBUG: REMOVED "+ key + " FROM MAP -- DISCONNECT");
+	            	//System.out.println("DEBUG: REMOVED "+ key + " FROM MAP -- DISCONNECT");
 	            	
 	            });
 	            
@@ -69,7 +78,7 @@ public class ClientHandler {
 	            	
 	            	String key = sessionMap.inverse().get(session);
 	            	sessionMap.remove(key);
-	            	System.out.println("DEBUG: REMOVED "+ key + " FROM MAP -- ERROR");
+	            	//System.out.println("DEBUG: REMOVED "+ key + " FROM MAP -- ERROR");
 	            	
 	            });
 	        });
@@ -81,28 +90,28 @@ public class ClientHandler {
 	        WsSession session = sessionMap.get(user);
 	        if (session != null) {
 	        	session.send("New Move");
-	        	System.out.println("DEBUG: SENT MESSAGE TO "+ user);
+	        	//System.out.println("DEBUG: SENT MESSAGE TO "+ user);
 	        } else {
-	        	System.out.println("DEBUG: "+ user + " IS OFFLINE");
+	        	//System.out.println("DEBUG: "+ user + " IS OFFLINE");
 	        }
 	     
 	    }
 
 	 private static String newGame(String white, String black) {
 		 GameCreator creator = new GameCreator(white, black);
-		 String success = creator.create();
-		 return success;
+		 String ifSuccess = creator.create();
+		 return ifSuccess;
 	 }
 	 
 	 private static String board(String player) {
 		 BoardHandler handler = new BoardHandler(player);
-		 String success = handler.getBoard();
-		 return success;
+		 String ifSuccess = handler.getBoard();
+		 return ifSuccess;
 	 }
 	 
 	 private static String move(String player, String move) {
 		 MoveHandler handler = new MoveHandler(player, move);
-		 String success = handler.processMove();
-		 return success;
+		 String ifSuccess = handler.processMove();
+		 return ifSuccess;
 	 }
 }

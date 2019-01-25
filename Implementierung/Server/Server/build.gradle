@@ -9,6 +9,7 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
+    id 'war'
 }
 
 repositories {
@@ -34,6 +35,8 @@ dependencies {
 	implementation "org.java-websocket:Java-WebSocket:1.3.9"
 	
 	implementation 'com.google.firebase:firebase-admin:6.6.0'
+	
+	implementation "com.fasterxml.jackson.core:jackson-databind:2.9.6"
 	
 	
     // Use JUnit test framework
