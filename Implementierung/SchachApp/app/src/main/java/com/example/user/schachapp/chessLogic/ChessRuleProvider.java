@@ -13,7 +13,8 @@ public class ChessRuleProvider implements RuleProvider {
     @Override
     public List<Move> getLegalMoves(Position position, BoardState board) {
         List<Move> legalMoves = new ArrayList<>();
-        for (Move move: getPossibleMoves(position, board)) {
+        List<Move> possibleMoves = getPossibleMoves(position, board);
+        for (Move move: possibleMoves) {
             if(isAllowedMove(move, board)) {
                legalMoves.add(move);
             }
@@ -25,7 +26,6 @@ public class ChessRuleProvider implements RuleProvider {
     public boolean isLegalMove(Move move, BoardState board) { //checks if move is legal on this board
         Piece movingPiece;
         if (!board.hasPieceAt(move.getStart())) {
-            System.out.println(move.getStart().toString());
             System.out.println("No piece found at starting position");
             return false;
         }
@@ -79,11 +79,10 @@ public class ChessRuleProvider implements RuleProvider {
             test2.applyMove(new Move(move.getStart(), new Position(jumpOver, move.getStart().getY())));
 
             return (!isChecked(board.whiteToMove(), test1) && !isChecked(board.whiteToMove(), test2));
-        } else {
-            BoardState test = board.clone();
-            test.applyMove(move);
-            return !isChecked(board.whiteToMove(), test);
         }
+        BoardState test = board.clone();
+        test.applyMove(move);
+        return !isChecked(board.whiteToMove(), test);
     }
 
     private List<Move> getPossibleMoves(Position position, BoardState board) {
@@ -98,12 +97,17 @@ public class ChessRuleProvider implements RuleProvider {
         List<Position> opponentsPieces = board.getPiecesOfColor(!color);
 
         for (Position p: opponentsPieces) {             //checks if any opposing Piece covers the Kings Position and returns true if so
-            if (board.getPieceAt(p) instanceof Pawn) {
+            List<Move> checkingMoves = getPossibleMoves(p, board);
 
-            }
-            for (Move m: getPossibleMoves(p, board)) {
-                if (!((board.getPieceAt(p) instanceof Pawn) && (m.getStart().getX() == m.getGoal().getX()))) { //Pawns cannot threat Positions in front of them
-                    if(m.getGoal().equals(kingPos)) {
+            if (board.getPieceAt(p) instanceof Pawn) {      //Pawns cannot threat Positions in front of them
+                for (Move m: checkingMoves) {
+                    if ((m.getStart().getX() != m.getGoal().getX()) && (m.getGoal().equals(kingPos)))  {
+                        return true;
+                    }
+                }
+            } else {
+                for (Move m : checkingMoves) {
+                    if (m.getGoal().equals(kingPos)) {
                         return true;
                     }
                 }

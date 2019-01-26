@@ -16,9 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.user.schachapp.com.example.user.schachapp.chessLogic.ClientSocket;
-import com.example.user.schachapp.com.example.user.schachapp.chessLogic.Move;
-import com.example.user.schachapp.com.example.user.schachapp.chessLogic.Position;
+import com.example.user.schachapp.chessLogic.*;
 
 import java.util.List;
 

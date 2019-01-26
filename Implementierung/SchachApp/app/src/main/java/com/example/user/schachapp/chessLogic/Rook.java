@@ -21,10 +21,10 @@ public class Rook extends Piece {
             Position tempPosition = new Position(i, position.getY());
             if (!board.hasPieceAt(tempPosition)) {
                 permittedMoves.add(new Move(position, tempPosition));
-            } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
-                permittedMoves.add(new Move(position, tempPosition));
-                break;
             } else {
+                if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
+                    permittedMoves.add(new Move(position, tempPosition));
+                }
                 break;
             }
         }
@@ -35,10 +35,10 @@ public class Rook extends Piece {
             Position tempPosition = new Position(i, position.getY());
             if (!board.hasPieceAt(tempPosition)) {
                 permittedMoves.add(new Move(position, tempPosition));
-            } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
-                permittedMoves.add(new Move(position, tempPosition));
-                break;
             } else {
+                if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
+                    permittedMoves.add(new Move(position, tempPosition));
+                }
                 break;
             }
         }
@@ -48,10 +48,10 @@ public class Rook extends Piece {
             Position tempPosition = new Position(position.getX(), j);
             if (!board.hasPieceAt(tempPosition)) {
                 permittedMoves.add(new Move(position, tempPosition));
-            } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
-                permittedMoves.add(new Move(position, tempPosition));
-                break;
             } else {
+                if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
+                    permittedMoves.add(new Move(position, tempPosition));
+                }
                 break;
             }
         }
@@ -61,23 +61,14 @@ public class Rook extends Piece {
             Position tempPosition = new Position(position.getX(), j);
             if (!board.hasPieceAt(tempPosition)) {
                 permittedMoves.add(new Move(position, tempPosition));
-            } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
-                permittedMoves.add(new Move(position, tempPosition));
-                break;
             } else {
+                if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
+                    permittedMoves.add(new Move(position, tempPosition));
+                }
                 break;
             }
         }
 
-        // muss geprüft werden wegen Rochade , wie ich gelesen habe enPassant muss mit Bewegungen von Schach anfangen nicht von Rook
-        /*
-        if (this.isWhite == true && (board.canWhiteKingCastle() || board.canWhiteQueenCastle())) {
-                permittedMoves.add(new Move(position, new Position(4,0)));
-        }
-        else if (this.isWhite == false && (board.canBlackQueenCastle() || board.canBlackKingCastle())) {
-                permittedMoves.add(new Move(position, new Position(4,7)));
-        }
-        */
         return permittedMoves;
     }
 }

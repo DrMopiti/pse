@@ -126,23 +126,21 @@ public class BoardState {
     }
 
     public boolean hasPieceAt(Position position) {
-
-        return tiles[position.getX()][position.getY()].getPiece() != null;
+        return (tiles[position.getX()][position.getY()].getPiece() != null);
     }
 
     public Piece getPieceAt(Position position) {
-        if (hasPieceAt(position)) {
-            return tiles[position.getX()][position.getY()].getPiece();
-        }
-        return null;
+        return tiles[position.getX()][position.getY()].getPiece(); //getPiece already returns null if tile is empty
     }
 
     public List<Position> getPiecesOfColor(boolean white) {
         List<Position> pieces = new ArrayList<>();
+        Position temp;
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
-                if(hasPieceAt(new Position(i, h)) && tiles[i][h].getPiece().isWhite == white) {
-                    pieces.add(new Position(i, h));
+                temp = new Position(i, h);
+                if(hasPieceAt(temp) && tiles[i][h].getPiece().isWhite == white) {
+                    pieces.add(temp);
                 }
             }
         }
@@ -159,6 +157,7 @@ public class BoardState {
         }
         return null;
     }
+
     public Move getLastMove() {
         return lastMove;
     }
@@ -194,7 +193,7 @@ public class BoardState {
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
                 if (tiles[i][h].getPiece() == null) {
-                   pieces = pieces + "0";
+                   pieces = pieces + "0";           //placeholder for empty tiles
                 } else {
                    pieces = pieces + tiles[i][h].getPiece().toString();
                 }
