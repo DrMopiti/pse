@@ -74,7 +74,7 @@ public class BoardState {
         if (getPieceAt(move.start) instanceof Pawn || hasPieceAt(move.goal)) {
             movesWithoutAction = 0;
         }
-        if (whiteKingCastle || whiteQueenCastle || blackKingCastle ||blackQueenCastle) {
+        if (whiteKingCastle || whiteQueenCastle || blackKingCastle || blackQueenCastle) {
             if (getPieceAt(move.start) instanceof King) {
                 if (getPieceAt(move.start).isWhite) {
                     whiteKingCastle = false;
