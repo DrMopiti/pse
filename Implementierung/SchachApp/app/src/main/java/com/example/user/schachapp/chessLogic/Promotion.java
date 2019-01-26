@@ -13,6 +13,6 @@ public class Promotion extends Move {
 
     @Override
     public String toString() {
-        return start.toString() + "-" + goal.toString() + "-" + promotion.toString();
+        return (start.toString() + "-" + goal.toString() + "-" + promotion.toString());
     }
 }

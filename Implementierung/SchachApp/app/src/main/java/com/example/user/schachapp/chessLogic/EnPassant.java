@@ -13,6 +13,6 @@ public class EnPassant extends Move {
     }
 
     public String toString() {
-        return start.toString() + "-" + goal.toString() + "-" + removePawn.toString();
+        return (start.toString() + "-" + goal.toString() + "-E");
     }
 }

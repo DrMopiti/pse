@@ -167,7 +167,7 @@ public class BoardState {
         return whiteToMove;
     }
 
-    boolean canWhiteKingCastle() {
+    public boolean canWhiteKingCastle() {
         return whiteKingCastle;
     }
 

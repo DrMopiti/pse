@@ -22,7 +22,7 @@ public class Move {
 
     @Override
     public String toString() {
-        return start.toString() + "-" + goal.toString();
+        return (start.toString() + "-" + goal.toString());
     }
 
     public boolean equals(Move compareTo) {
