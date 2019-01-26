@@ -7,19 +7,22 @@ public class Position {
     public Position(String representation) {
 
         if (representation == null || !representation.matches("[a-h][1-8]")) {
-            throw new IllegalArgumentException("übergebene object ist entweder null oder "
-                    + "representation passt nicht vorgaben");
+            throw new IllegalArgumentException("null argument or incorrect position representaion");
+        } else {
+            String alpha = "abcdefgh";
+            String[] coords = representation.split("");
+            int y = Integer.parseInt(coords[1]);
+            this.x = alpha.indexOf(coords[0]);
+            this.y = y - 1;
         }
-
-        String alpha = "abcdefgh";
-        String[] coords = representation.split("");
-        int y = Integer.parseInt(coords[1]);
-        this.x = alpha.indexOf(coords[0]);
-        this.y = y - 1;
     }
     public Position(int x, int y) {
-        this.x = x;
-        this.y = y;
+        if (x < 0 || x > 7 || y < 0 || y > 7) {
+           throw new IllegalArgumentException("Not a correct Position on a chessboard");
+        } else {
+            this.x = x;
+            this.y = y;
+        }
     }
 
     public int getX() {
