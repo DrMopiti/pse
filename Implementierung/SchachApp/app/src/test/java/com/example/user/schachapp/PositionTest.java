@@ -2,9 +2,7 @@ package com.example.user.schachapp;
 
 import com.example.user.schachapp.chessLogic.Position;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
+import org.junit.*;
 import static org.junit.Assert.*;
 
 public class PositionTest {
@@ -25,12 +23,12 @@ public class PositionTest {
 
     @Test
     public void getYFromFirstConsPosition() {
-        assertEquals(firstConsPosition.getY(), 6);
+        assertEquals(firstConsPosition.getY(), 5);
     }
 
     @Test
     public void toStringFromSecondConsPosition() {
-        assertEquals(secondConsPosition.toString(),"d5");
+        assertEquals(secondConsPosition.toString(),"d6");
     }
 
     @Test
@@ -40,12 +38,17 @@ public class PositionTest {
 
     @Test
     public void equalityOfPositions() {
-        Position equalFirstConsPosition = new Position(1,6);
+        Position equalFirstConsPosition = new Position(1,5);
         assertTrue(firstConsPosition.equals(equalFirstConsPosition));
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void testIllegalArgumentException (){
         assertNull(new Position(null));
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void wrongArgument (){
+        assertNull(new Position("h9"));
     }
 }

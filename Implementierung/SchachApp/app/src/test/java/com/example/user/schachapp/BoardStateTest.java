@@ -5,7 +5,6 @@ import com.example.user.schachapp.chessLogic.MoveFactory;
 import com.example.user.schachapp.chessLogic.Pawn;
 import com.example.user.schachapp.chessLogic.Position;
 
-
 import org.junit.*;
 
 import static org.junit.Assert.*;
