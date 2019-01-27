@@ -43,12 +43,13 @@ public class PositionTest {
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void testIllegalArgumentException (){
-        assertNull(new Position(null));
+    public void ifFalsePositionThen_IllegalArgumentExceptionThrown (){
+        new Position(null);
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void wrongArgument (){
-        assertNull(new Position("h9"));
+    public void ifWrongArgumentThen_IllegalArgumentException (){
+        new Position("h9");
     }
+
 }

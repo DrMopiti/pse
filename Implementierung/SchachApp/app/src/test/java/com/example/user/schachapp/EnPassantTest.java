@@ -19,18 +19,13 @@ public class EnPassantTest {
     }
 
     @Test
-    public void positionFromRemovedPawn() {
-        assertTrue(enPassant.getRemovePawn().equals(new Position("d4")));
-    }
-
-    @Test
     public void testRemovedPawn() {
         assertTrue(enPassant.getRemovePawn().equals(new Position("d4")));
     }
 
     @Test
     public void enPassantToString() {
-        assertEquals(enPassant.toString(),"e4-d5-d4");
+        assertEquals(enPassant.toString(),"e4-d5-E");
     }
 
     @Test

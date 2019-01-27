@@ -18,6 +18,9 @@ public class Position {
         this.y = y - 1;
     }
     public Position(int x, int y) {
+        if (x < 0 || x > 7 || y < 0 || y > 7) {
+            throw new IllegalArgumentException("Position not on board");
+        }
         this.x = x;
         this.y = y;
     }

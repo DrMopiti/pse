@@ -23,21 +23,21 @@ public class MoveTest {
     }
     @Test
     public void equalityOfStartPosition() {
-        assertTrue(move.getStart().equals(new Position(0,3)));
+        assertTrue(move.getStart().equals(new Position(0,2)));
     }
 
     @Test
     public void equalityOfGoalPosition() {
-        assertTrue(move.getGoal().equals(new Position("e5")));
+        assertTrue(move.getGoal().equals(new Position("e6")));
     }
 
     @Test
     public void moveToString() {
-        assertEquals(move.toString(),"a3-e5");
+        assertEquals(move.toString(),"a3-e6");
     }
 
     @Test
     public void equalityOfMoves() {
-        assertTrue(move.equals(new Move(new Position(0,3) , new Position("e5"))));
+        assertTrue(move.equals(new Move(new Position(0,2) , new Position("e6"))));
     }
 }
