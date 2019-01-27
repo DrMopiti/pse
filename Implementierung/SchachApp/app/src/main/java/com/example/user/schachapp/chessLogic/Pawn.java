@@ -28,12 +28,7 @@ public class Pawn extends Piece {
             if (!board.hasPieceAt(tempPosition)) {
                 possibleMoves.add(new Move(position, tempPosition));
             }
-            if (isWhite ) {
-                j++;
-            } else {
-                j--;
-            }
-
+            j = isWhite ? j++ : j--;
         }
 
         //capturing Pawn Moves (diagonal)

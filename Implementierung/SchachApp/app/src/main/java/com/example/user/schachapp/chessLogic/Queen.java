@@ -3,6 +3,8 @@ package com.example.user.schachapp.chessLogic;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.http.HEAD;
+
 public class Queen extends Piece {
     private static final String QUEEN_CHAR = "D";
     private static final int QUEEN_VALUE = 9;
@@ -24,11 +26,14 @@ public class Queen extends Piece {
                 permittedMoves.add(new Move(position, tempPosition));
             } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
                 permittedMoves.add(new Move(position, tempPosition));
-                break;
             } else {
+                if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
+                    permittedMoves.add(new Move(position, tempPosition));
+                }
                 break;
             }
         }
+
         // permitted Moves main diagonal down
         for (int i = xPosition - 1, j = yPosition - 1; i >= 0 && j >= 0; i--, j--) {
             Position tempPosition = new Position(i, j);
@@ -36,11 +41,14 @@ public class Queen extends Piece {
                 permittedMoves.add(new Move(position, tempPosition));
             } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
                 permittedMoves.add(new Move(position, tempPosition));
-                break;
             } else {
+                if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
+                    permittedMoves.add(new Move(position, tempPosition));
+                }
                 break;
             }
         }
+
         //permitted Moves neben diagonal up
         for (int i = xPosition - 1, j = yPosition + 1; i >= 0 && j <= 7; i--, j++) {
             Position tempPosition = new Position(i, j);
@@ -48,8 +56,10 @@ public class Queen extends Piece {
                 permittedMoves.add(new Move(position, tempPosition));
             } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
                 permittedMoves.add(new Move(position, tempPosition));
-                break;
             } else {
+                if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
+                    permittedMoves.add(new Move(position, tempPosition));
+                }
                 break;
             }
         }
@@ -61,8 +71,10 @@ public class Queen extends Piece {
                 permittedMoves.add(new Move(position, tempPosition));
             } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
                 permittedMoves.add(new Move(position, tempPosition));
-                break;
             } else {
+                if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
+                    permittedMoves.add(new Move(position, tempPosition));
+                }
                 break;
             }
         }
@@ -72,10 +84,10 @@ public class Queen extends Piece {
             Position tempPosition = new Position(i, position.getY());
             if (!board.hasPieceAt(tempPosition)) {
                 permittedMoves.add(new Move(position, tempPosition));
-            } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
-                permittedMoves.add(new Move(position, tempPosition));
-                break;
             } else {
+                if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
+                    permittedMoves.add(new Move(position, tempPosition));
+                }
                 break;
             }
         }
@@ -86,10 +98,10 @@ public class Queen extends Piece {
             Position tempPosition = new Position(i, position.getY());
             if (!board.hasPieceAt(tempPosition)) {
                 permittedMoves.add(new Move(position, tempPosition));
-            } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
-                permittedMoves.add(new Move(position, tempPosition));
-                break;
             } else {
+                if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
+                    permittedMoves.add(new Move(position, tempPosition));
+                }
                 break;
             }
         }
@@ -99,10 +111,10 @@ public class Queen extends Piece {
             Position tempPosition = new Position(position.getX(), j);
             if (!board.hasPieceAt(tempPosition)) {
                 permittedMoves.add(new Move(position, tempPosition));
-            } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
-                permittedMoves.add(new Move(position, tempPosition));
-                break;
             } else {
+                if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
+                    permittedMoves.add(new Move(position, tempPosition));
+                }
                 break;
             }
         }
@@ -112,10 +124,10 @@ public class Queen extends Piece {
             Position tempPosition = new Position(position.getX(), j);
             if (!board.hasPieceAt(tempPosition)) {
                 permittedMoves.add(new Move(position, tempPosition));
-            } else if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
-                permittedMoves.add(new Move(position, tempPosition));
-                break;
             } else {
+                if (board.getPieceAt(tempPosition).isWhite() != this.isWhite) {
+                    permittedMoves.add(new Move(position, tempPosition));
+                }
                 break;
             }
         }
