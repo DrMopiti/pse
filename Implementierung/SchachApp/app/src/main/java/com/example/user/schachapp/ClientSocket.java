@@ -1,6 +1,7 @@
 package com.example.user.schachapp;
 
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Set;
@@ -10,99 +11,140 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.java_websocket.drafts.Draft_6455;
 
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ClientSocket {
 
-	private String url = "127.0.0.1:370";
-	private String user = "";
-	private final ClientApi clientApi;
+    private String url = "ws://localhost:8080/";
+    private String user = "";
+    private final ClientApi clientApi;
 
-	public ClientSocket(String user) {
-
-	    this.user = user;
+    public ClientSocket(String user) {
+        this.user = user;
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://sdq-pse-gruppe1.ipd.kit.edu/server/")
+                .baseUrl("http://localhost:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         clientApi = retrofit.create(ClientApi.class);
-	}
-
-	private String getUser() {
-		return this.user;
-	}
-
-	private String getUrl() {
-		return this.url;
-	}
-
-	public void connectToWS() {
-		WebSocketClient mWs;
-		try {
-			mWs = new WebSocketClient(new URI( getUrl() +"/socket" ), new Draft_6455())
-			{
-				@Override
-				public void onMessage(String message) {
-					requestBoard(user);
-				}
-
-				@Override
-				public void onOpen(ServerHandshake handshake) {
-					//do nothing
-				}
-
-				@Override
-				public void onClose(int code, String reason, boolean remote) {
-					try {
-						Thread.sleep(500);
-						connectToWS();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-
-				@Override
-				public void onError(Exception ex) {
-					try {
-						Thread.sleep(500);
-						connectToWS();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-
-			};
-
-			mWs.connect();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-
-
-	}
-
-	public Call<String> requestBoard(String user) {
-	    Call<String> board = clientApi.getBoard(user);
-	    return board;
     }
 
-    public Call<String> newGame(String whitePlayer, String blackPlayer) {
-	    Call<String> ifSuccess = clientApi.newGame(whitePlayer, blackPlayer);
-	    return ifSuccess;
+    private String getUser() {
+        return this.user;
     }
 
-    public Call<String> sendMove(String user, String move) {
-        Call<String> ifSuccess = clientApi.sendMove(user, move);
+    private String getUrl() {
+        return this.url;
+    }
+
+    public void connectToWS() {
+        WebSocketClient mWs;
+        try {
+            mWs = new WebSocketClient(new URI( getUrl() +"socket" ), new Draft_6455())
+            {
+                @Override
+                public void onMessage(String message) {
+                    String board = requestBoard(user);
+                }
+
+                @Override
+                public void onOpen(ServerHandshake handshake) {
+                    send(user);
+                }
+
+                @Override
+                public void onClose(int code, String reason, boolean remote) {
+                    try {
+                        Thread.sleep(5000);
+                        connectToWS();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onError(Exception ex) {
+                    try {
+                        Thread.sleep(5000);
+                        connectToWS();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            };
+
+            mWs.connect();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public String requestBoard(String user) {
+        Call<String> boardCall = clientApi.getBoard(user);
+        Response response = null;
+        try {
+            response = boardCall.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String board = response.body().toString();
+        return board;
+    }
+
+    public String newGame(String whitePlayer, String blackPlayer) {
+        Call<String> ifSuccessCall = clientApi.newGame(whitePlayer, blackPlayer);
+        Response response = null;
+        try {
+            response = ifSuccessCall.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String ifSuccess = response.body().toString();
         return ifSuccess;
     }
 
-    public Call<Set<String>> getPlayers() {
-	    return clientApi.getPlayers();
+    public String sendMove(String user, String move) {
+        Call<String> ifSuccessCall = clientApi.sendMove(user, move);
+        Response response = null;
+        try {
+            response = ifSuccessCall.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String ifSuccess = response.body().toString();
+        return ifSuccess;
     }
 
-    public Call<Boolean> isOnline(String player) {
-	    return clientApi.isOnline(player);
+    public Set<String> getPlayers() {
+        Call<Set<String>> playerSetCall = clientApi.getPlayers();
+        Response response = null;
+        try {
+            response = playerSetCall.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Set<String> playerSet = ((Set<String>) response.body());
+        return playerSet;
+    }
+
+    public boolean isOnline(String player) {
+        Call<Boolean> isOnlineCall = clientApi.isOnline(player);
+        Response response = null;
+        try {
+            response = isOnlineCall.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String boolString = response.body().toString();
+        if (boolString.equals("true")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
