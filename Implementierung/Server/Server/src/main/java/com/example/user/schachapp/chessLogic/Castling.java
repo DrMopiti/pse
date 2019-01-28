@@ -18,6 +18,6 @@ public class Castling extends Move {
     public Move getRookMove() {return rookMove; }
 
     public String toString() {
-        return start.toString() + "-" + goal.toString() + "-" + rookMove.getStart().toString() + "-" + rookMove.getGoal().toString();
+        return (start.toString() + "-" + goal.toString() + "-C");
     }
 }

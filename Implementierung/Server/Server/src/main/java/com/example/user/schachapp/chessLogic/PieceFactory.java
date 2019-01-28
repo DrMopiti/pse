@@ -2,47 +2,33 @@ package com.example.user.schachapp.chessLogic;
 
 public class PieceFactory {
     public static Piece getPiece(String pieceRepresentation) {
-        Piece p;
         switch (pieceRepresentation) {
             case "K":
-                p = (new King(true));
-                break;
+                return new King(true);
             case "k":
-                p = (new King(false));
-                break;
+                return new King(false);
             case "D":
-                p = (new Queen(true));
-                break;
+                return new Queen(true);
             case "d":
-                p = (new Queen(false));
-                break;
+                return new Queen(false);
             case "L":
-                p = (new Bishop(true));
-                break;
+                return new Bishop(true);
             case "l":
-                p = (new Bishop(false));
-                break;
+                return new Bishop(false);
             case "S":
-                p = (new Knight(true));
-                break;
+                return new Knight(true);
             case "s":
-                p = (new Knight(false));
-                break;
+                return new Knight(false);
             case "B":
-                p = (new Pawn(true));
-                break;
+                return new Pawn(true);
             case "b":
-                p = (new Pawn(false));
-                break;
+                return new Pawn(false);
             case "T":
-                p = (new Rook(true));
-                break;
+                return new Rook(true);
             case "t":
-                p = (new Rook(false));
-                break;
+                return new Rook(false);
             default:
-                p = null;
+                return null;
         }
-        return p;
     }
 }

@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.socket.server.standard.SpringConfigurator;
 
 @RestController
-@ServerEndpoint(value = "/ws")
+@ServerEndpoint(value = "/socket", configurator = SpringConfigurator.class)
 @SpringBootApplication
 public class ClientHandler{
 	private static BiMap<String, Session> sessionMap = HashBiMap.create();
@@ -69,22 +70,28 @@ public class ClientHandler{
 	       
 		 	@OnOpen
 		    public void onOpen(Session session) throws IOException {
-		        // Get session and WebSocket connection
+		        // Get session and WebSocket connection	 		
 		    }
 		 
 		    @OnMessage
 		    public void onMessage(Session session, String message) throws IOException {
 		    	sessionMap.put(message, session);
+		    	playerSet.add(message);
+		    	System.out.println("DEBUG: ADDED "+ message+ " TO MAP");
 		    }
 		 
 		    @OnClose
 		    public void onClose(Session session) throws IOException {
-		        sessionMap.inverse().remove(session);
+		    	String key = sessionMap.inverse().get(session);
+            	sessionMap.remove(key);
+		        System.out.println("DEBUG: REMOVED "+ key+ " FROM MAP");
 		    }
 		 
 		    @OnError
 		    public void onError(Session session, Throwable throwable) {
-		    	sessionMap.inverse().remove(session);
+		    	String key = sessionMap.inverse().get(session);
+            	sessionMap.remove(key);
+		    	System.out.println("DEBUG: REMOVED "+ key+ " FROM MAP");
 		    }
 	       
 	
@@ -95,9 +102,9 @@ public class ClientHandler{
 	        Session session = sessionMap.get(user);
 	        if (session != null) {
 	        	session.getBasicRemote().sendText("New Move");
-	        	//System.out.println("DEBUG: SENT MESSAGE TO "+ user);
+	        	System.out.println("DEBUG: SENT MESSAGE TO "+ user);
 	        } else {
-	        	//System.out.println("DEBUG: "+ user + " IS OFFLINE");
+	        	System.out.println("DEBUG: "+ user + " IS OFFLINE");
 	        }
 	     
 	    }

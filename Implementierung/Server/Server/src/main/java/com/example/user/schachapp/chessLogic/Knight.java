@@ -18,16 +18,21 @@ public class Knight extends Piece {
 
         int j = 0;
         for (int i = 0; i <= 7; i++) {
-            possiblePositions.add(new Position(position.getX() + offsets[i][j], position.getY() + offsets[i][j + 1]));
+            try {
+                Position tempPosition = new Position(position.getX() + offsets[i][j], position.getY() + offsets[i][j + 1]);
+                possiblePositions.add(tempPosition);
+            } catch (IllegalArgumentException e) {
+                e.getMessage();
+            }
+
         }
 
         for (Iterator<Position> iterator = possiblePositions.iterator(); iterator.hasNext();){
             Position goalPosition = iterator.next();
-            if(board.getPieceAt(goalPosition).isWhite() != this.isWhite){
-                possibleMoves.add(new Move(position,goalPosition ));
-            }
-            else if (!board.hasPieceAt(goalPosition)) {
+            if (!board.hasPieceAt(goalPosition)) {
                 possibleMoves.add(new Move(position, goalPosition));
+            } else if(board.getPieceAt(goalPosition).isWhite() != this.isWhite){
+                possibleMoves.add(new Move(position,goalPosition ));
             }
         }
         return possibleMoves;

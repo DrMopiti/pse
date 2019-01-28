@@ -2,27 +2,32 @@ package com.example.user.schachapp.chessLogic;
 
 public class MoveFactory {
     public static Move getMove(String moveString) {
-        Move move = null;
         String[] moveParts = moveString.split("-");
         Position start = new Position(moveParts[0]);
         Position goal = new Position(moveParts[1]);
+        if (start == null || goal == null || start.equals(goal)) {
+            return null;
+        }
         switch (moveParts.length)  {
             case 2:
-                move = new Move(start, goal);
-                break;
+                return new Move(start, goal);
             case 3:
-                if (moveParts[2].length() == 1) {
-                    move = new Promotion(start, goal, PieceFactory.getPiece(moveParts[2]));
-                } else if (moveParts[2].length() == 2) {
-                    move = new EnPassant(start, goal);
-                }
-                break;
-            case 4:
-                move = new Castling(start, goal);
-                break;
+               if (moveParts[2].length() != 1) {
+                    return null;
+               }
+               if (moveParts[2].equals("E")) {
+                   return new EnPassant(start, goal);
+               }
+               if (moveParts[2].equals("C")) {
+                   return new Castling(start, goal);
+               }
+               Piece promotion = PieceFactory.getPiece(moveParts[2]);
+               if (promotion == null || promotion instanceof King || promotion instanceof Pawn) {
+                   return null;
+               }
+               return new Promotion(start, goal, promotion);
             default:
-                move = null;
+                return null;
         }
-        return move;
     }
 }

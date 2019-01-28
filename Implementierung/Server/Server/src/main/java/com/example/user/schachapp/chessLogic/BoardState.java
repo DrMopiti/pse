@@ -13,17 +13,6 @@ public class BoardState {
     private boolean blackQueenCastle;
     private int movesWithoutAction;
 
-    public BoardState() {
-        tiles = new Tile[8][8];
-        lastMove = null;
-        whiteKingCastle = true;
-        whiteQueenCastle = true;
-        blackKingCastle = true;
-        blackQueenCastle = true;
-        whiteToMove = true;
-        movesWithoutAction = 0;
-    }
-
     public BoardState(String string) {
         //splits the String in 4 Sectors: Pieces, Last Move, Booleans, Moves without Action
         String[] sectors = string.split("#");
@@ -81,10 +70,11 @@ public class BoardState {
         //update attributes
         lastMove = move;
         movesWithoutAction++;
+        whiteToMove = !whiteToMove;
         if (getPieceAt(move.start) instanceof Pawn || hasPieceAt(move.goal)) {
             movesWithoutAction = 0;
         }
-        if (whiteKingCastle || whiteQueenCastle || blackKingCastle ||blackQueenCastle) {
+        if (whiteKingCastle || whiteQueenCastle || blackKingCastle || blackQueenCastle) {
             if (getPieceAt(move.start) instanceof King) {
                 if (getPieceAt(move.start).isWhite) {
                     whiteKingCastle = false;
@@ -136,19 +126,21 @@ public class BoardState {
     }
 
     public boolean hasPieceAt(Position position) {
-        return tiles[position.getX()][position.getY()].getPiece() != null;
+        return (tiles[position.getX()][position.getY()].getPiece() != null);
     }
 
     public Piece getPieceAt(Position position) {
-        return tiles[position.getX()][position.getY()].getPiece();
+        return tiles[position.getX()][position.getY()].getPiece(); //getPiece already returns null if tile is empty
     }
 
     public List<Position> getPiecesOfColor(boolean white) {
         List<Position> pieces = new ArrayList<>();
+        Position temp;
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
-                if(tiles[i][h].getPiece().isWhite == white) {
-                    pieces.add(new Position(i, h));
+                temp = new Position(i, h);
+                if(hasPieceAt(temp) && tiles[i][h].getPiece().isWhite == white) {
+                    pieces.add(temp);
                 }
             }
         }
@@ -165,6 +157,7 @@ public class BoardState {
         }
         return null;
     }
+
     public Move getLastMove() {
         return lastMove;
     }
@@ -173,7 +166,7 @@ public class BoardState {
         return whiteToMove;
     }
 
-    boolean canWhiteKingCastle() {
+    public boolean canWhiteKingCastle() {
         return whiteKingCastle;
     }
 
@@ -199,8 +192,8 @@ public class BoardState {
         String pieces = "";
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
-                if (tiles[i][h] == (null)) {
-                   pieces = pieces + "0";
+                if (tiles[i][h].getPiece() == null) {
+                   pieces = pieces + "0";           //placeholder for empty tiles
                 } else {
                    pieces = pieces + tiles[i][h].getPiece().toString();
                 }

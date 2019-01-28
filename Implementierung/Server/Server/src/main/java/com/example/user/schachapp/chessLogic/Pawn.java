@@ -11,6 +11,7 @@ public class Pawn extends Piece {
     }
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
+
         ArrayList<Position> possiblePositions = new ArrayList<Position>();
         List <Move> possibleMoves = new ArrayList<Move>();
 
@@ -27,44 +28,46 @@ public class Pawn extends Piece {
             if (!board.hasPieceAt(tempPosition)) {
                 possibleMoves.add(new Move(position, tempPosition));
             }
-            if (isWhite )
-            {
-                j++;
-            } else {
-                j--;
-            }
-
+            j = isWhite ? j++ : j--;
         }
 
         //capturing Pawn Moves (diagonal)
-        Position diagPosLeft = new Position(xPos + 1, yPos + dir);
-        if (board.hasPieceAt(diagPosLeft) && (board.getPieceAt(diagPosLeft).isWhite != this.isWhite)) {
-            possibleMoves.add(new Move(position, diagPosLeft));
-        }
 
-        Position diagPosRight = new Position(xPos - 1, yPos + dir);
-        if (board.hasPieceAt(diagPosLeft) && (board.getPieceAt(diagPosLeft).isWhite != this.isWhite)) {
-            possibleMoves.add(new Move(position, diagPosRight));
-        }
+            if (xPos - dir >= 0 && xPos - dir <= 7) {
+                Position diagPosLeft = new Position(xPos - dir, yPos + dir);
+                if (board.hasPieceAt(diagPosLeft) && (board.getPieceAt(diagPosLeft).isWhite() != this.isWhite)) {
+                    possibleMoves.add(new Move(position, diagPosLeft));
+                }
+            }
 
-        //EnPassant
-        if (yPos == base + 3 * dir) { // korrigiert war yPos = 4
-            Move lastMove = board.getLastMove();
-            Position lastMoved = lastMove.getGoal();
-            if (board.getPieceAt(lastMoved).getValue() == 1) {
-                Position possibleStartLeft = new Position(xPos - 1, yPos + 2 * dir);
-                Position possibleGoalLeft = new Position(xPos - 1, yPos);
-                if (lastMove.getStart().equals(possibleStartLeft) && lastMove.getGoal().equals(possibleGoalLeft)) {
-                    possibleMoves.add(new EnPassant(position, diagPosLeft));
-                } else {
-                    Position possibleStartRight = new Position(xPos + 1, yPos + 2 * dir);
-                    Position possibleGoalRight = new Position(xPos + 1, yPos);
-                    if (lastMove.getStart().equals(possibleStartRight) && lastMove.getGoal().equals(possibleGoalRight)) {
-                        possibleMoves.add(new EnPassant(position, diagPosRight));
+                // Kleine Fehler behoben
+            if(xPos + dir >= 0 && xPos + dir <= 7) {
+                Position diagPosRight = new Position(xPos + dir, yPos + dir);
+                if (board.hasPieceAt(diagPosRight) && (board.getPieceAt(diagPosRight).isWhite() != this.isWhite)) {
+                    possibleMoves.add(new Move(position, diagPosRight));
+                }
+            }
+            // noch einige Fehler behoben
+            //EnPassant
+            if (yPos == base + 3 * dir) { // korrigiert war yPos = 4
+                Move lastMove = board.getLastMove();
+                Position lastMoved = lastMove.getGoal();
+                if (board.getPieceAt(lastMoved).getValue() == 1) {
+                    if (xPos - dir >= 0 && xPos - dir <= 7) {
+                        Position possibleStartLeft = new Position(xPos - dir, yPos + 2 * dir);
+                        Position possibleGoalLeft = new Position(xPos - dir, yPos);
+                        if (lastMove.getStart().equals(possibleStartLeft) && lastMove.getGoal().equals(possibleGoalLeft)) {
+                            possibleMoves.add(new EnPassant(position, new Position(xPos - dir, yPos + dir)));
+                        }
+                    } if(xPos + dir >= 0 && xPos + dir <= 7){
+                        Position possibleStartRight = new Position(xPos + dir, yPos + 2 * dir);
+                        Position possibleGoalRight = new Position(xPos + dir, yPos);
+                        if (lastMove.getStart().equals(possibleStartRight) && lastMove.getGoal().equals(possibleGoalRight)) {
+                            possibleMoves.add(new EnPassant(position, new Position(xPos + dir, yPos + dir)));
+                        }
                     }
                 }
             }
-        }
 
         return possibleMoves;
     }
