@@ -11,6 +11,9 @@ public class Bishop extends Piece {
     }
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
+        if (board == null) {
+            throw new NullPointerException("board can not be null");
+        }
         List<Move> permittedMoves = new ArrayList<Move>();
         int yPosition = position.getY();
         int xPosition = position.getX();

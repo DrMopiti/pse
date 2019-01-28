@@ -6,22 +6,26 @@ public class Position {
 
     public Position(String representation) {
 
-        if (representation == null || !representation.matches("[a-h][1-8]")) {
-            throw new IllegalArgumentException("null argument or incorrect position representaion");
-        } else {
-            String alpha = "abcdefgh";
-            String[] coords = representation.split("");
-            int y = Integer.parseInt(coords[1]);
-            this.x = alpha.indexOf(coords[0]);
-            this.y = y - 1;
+        try {
+            if (representation == null || !representation.matches("[a-h][1-8]")) {
+                throw new IllegalArgumentException("null argument or incorrect position representaion");
+            } else {
+                String alpha = "abcdefgh";
+                String[] coords = representation.split("");
+                int y = Integer.parseInt(coords[1]);
+                this.x = alpha.indexOf(coords[0]);
+                this.y = y - 1;
+            }
+        } catch (IllegalArgumentException e) {
+            e.getMessage();
         }
     }
     public Position(int x, int y) {
-        if (x < 0 || x > 7 || y < 0 || y > 7) {
-            throw new IllegalArgumentException("Position not on board");
-        }
-        this.x = x;
-        this.y = y;
+            if (x < 0 || x > 7 || y < 0 || y > 7) {
+                throw new IllegalArgumentException("Position not on board");
+            }
+            this.x = x;
+            this.y = y;
     }
 
     public int getX() {
