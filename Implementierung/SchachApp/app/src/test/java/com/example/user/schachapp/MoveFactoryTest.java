@@ -18,8 +18,8 @@ public class MoveFactoryTest {
     @Test
     public void movePositions() {
         move = MoveFactory.getMove("b3-g5");
-        assertTrue(move.getStart().equals(new Position(1, 4)));
-        assertTrue(move.getGoal().equals(new Position(6, 6)));
+        assertTrue(move.getStart().equals(new Position(1, 2)));
+        assertTrue(move.getGoal().equals(new Position(6, 4)));
     }
 
     @Test
@@ -67,9 +67,8 @@ public class MoveFactoryTest {
         assertTrue(move == null);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void incorrectPositions() {
         move = MoveFactory.getMove("k1-l9");
-        assertTrue(move == null);
     }
 }

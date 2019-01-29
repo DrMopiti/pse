@@ -24,9 +24,12 @@ public abstract class Piece {
     public int getValue() {
         return value;
     }
-    public ImageView getImageView() { return iv; }
+    public ImageView getImageView() {
+        return iv;
+    }
     public boolean isWhite() {
         return isWhite;
-    };
+    }
+
     public abstract List<Move> getMovement(Position position, BoardState board);
 }

@@ -74,5 +74,44 @@ public class KingTest {
         assertTrue(possibleMoves.toString().equals("[e8-d7, e8-e7, e8-f7, e8-f8]"));
     }
 
+    @Test
+    public void testForBlackKingCastleForE8() {
+        BoardState board = new BoardState("TBS00sbt" +
+                "0B000db0" +
+                "00B0b000" +
+                "0D0Bbl00" +
+                "KBL00b0k" +
+                "L0B0l0b0" +
+                "S00B00b0" +
+                "T00B0sbt" +
+                "##ttttt#0");
 
+        List<Move> possibleMoves = blackKing.getMovement(new Position("e8"), board);
+        assertTrue(possibleMoves.toString().equals("[e8-d7, e8-d8, e8-e7, e8-f8, e8-g8-C, e8-c8-C]"));
+    }
+
+    @Test
+    public void testForWhiteKingForE1() {
+        BoardState board = new BoardState("TBS000bt" +
+                "0B000db0" +
+                "00B0b000" +
+                "0s0Bbl00" +
+                "KBL00b0k" +
+                "L0B0l0b0" +
+                "S00B00b0" +
+                "T00B0sbt" +
+                "##tfftt#0");
+
+        List<Move> possibleMoves = whiteKing.getMovement(new Position("e1"), board);
+        assertTrue(possibleMoves.toString().equals("[e1-d1, e1-d2, e1-f2]"));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void throwsNullPointerException() {
+        BoardState board = null;
+        List<Move> possibleMoves = whiteKing.getMovement(new Position("e5"), board);
+    }
 }
+
+
+

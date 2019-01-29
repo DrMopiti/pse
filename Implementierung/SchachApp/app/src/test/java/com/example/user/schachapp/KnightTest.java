@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -57,5 +58,11 @@ public class KnightTest {
     public void possibleMovesForBlackKnightG4(){
         List<Move> possibleMoves = blackKnight.getMovement(new Position("g4"), boardState);
         assertTrue(possibleMoves.toString().equals("[g4-e3, g4-e5, g4-f6, g4-h6, g4-h2, g4-f2]"));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void throwsNullPointerExceptionIfBoardNull() {
+        BoardState board = null;
+        List<Move> possibleMoves = whiteKnight.getMovement(new Position("b2"), board);
     }
 }

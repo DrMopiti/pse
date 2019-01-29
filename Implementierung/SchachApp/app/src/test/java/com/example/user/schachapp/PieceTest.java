@@ -29,15 +29,23 @@ public class PieceTest {
 
     @Test
     public void testChar() {
-        assertEquals(piece.toString(), "D");
+        assertEquals("D",piece.toString());
         piece = new Queen(false);
-        assertEquals(piece.toString(), "d");
+        assertEquals("d",piece.toString());
     }
 
     @Test
     public void testMovement() {
-        BoardState board = new BoardState("TB0000btSB0000bsLB0000blDB0000bdKB0000bKLB0000blSB0000bsTB0000bt##ttttt#0");
-        List<Move> movement = piece.getMovement(new Position("d4"), board);
-        assertTrue(movement.isEmpty());
+        BoardState board = new BoardState("TB0000bt" +
+                "SB0000bs" +
+                "LB0000bl" +
+                "DB0000bd" +
+                "KB0000bk" +
+                "LB0000bl" +
+                "SB0000bs" +
+                "TB0000bt" +
+                "##ttttt#0");
+        List<Move> movement = piece.getMovement(new Position("d1"), board);
+        assertTrue(movement.toString().equals("[]"));
     }
 }

@@ -14,12 +14,20 @@ public class BoardStateTest {
 
     @Before
     public void setBoard() {
-        board = new BoardState("TB0000btSB0000bsLB0000blDB0000bdKB0000bKLB0000blSB0000bsTB0000bt##ttttt#0");
+        board = new BoardState("TB0000bt" +
+                "SB0000bs" +
+                "LB0000bl" +
+                "DB0000bd" +
+                "KB0000bk" +
+                "LB0000bl" +
+                "SB0000bs" +
+                "TB0000bt" +
+                "##ttttt#0");
     }
 
     @Test
     public void stringTest() {
-        assertEquals(board.toString(), "TB0000btSB0000bsLB0000blDB0000bdKB0000bKLB0000blSB0000bsTB0000bt##ttttt#0");
+        assertEquals(board.toString(), "TB0000btSB0000bsLB0000blDB0000bdKB0000bkLB0000blSB0000bsTB0000bt##ttttt#0");
     }
 
     @Test
@@ -51,6 +59,16 @@ public class BoardStateTest {
         board.applyMove(MoveFactory.getMove("a1-b1"));
         assertFalse(board.canWhiteQueenCastle());
         assertTrue(board.canWhiteKingCastle());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void boardParamaterNotCorrect() {
+        BoardState board = new BoardState("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void stringIsNotLegalForBoard() {
+        BoardState board = new BoardState("TB0000btSB0000bsLB000LblDB0000bdKB0000bkLB00K0blSB00B0bsTB0000bt##ttttt#0");
     }
 
 
