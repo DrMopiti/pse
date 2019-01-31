@@ -2,10 +2,12 @@ package com.example.user.schachapp;
 
 import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.Image;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,10 +18,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.user.schachapp.ClientSocket;
+import com.example.user.schachapp.chessLogic.BoardState;
+import com.example.user.schachapp.chessLogic.Game;
 import com.example.user.schachapp.chessLogic.Move;
+import com.example.user.schachapp.chessLogic.Piece;
 import com.example.user.schachapp.chessLogic.Position;
-import com.example.user.schachapp.chessLogic.*;
 
 import java.util.List;
 
@@ -27,55 +30,77 @@ import java.util.List;
 public class BoardActivity extends AppCompatActivity {
     private Button buttonDraw, buttonGiveUp;
     private ImageView chessboard;
-    private ImageView[] pieces = new ImageView[32];
+    private ImageView[][] savedPieces = new ImageView[8][8];
+    private ImageView[][] pieces = new ImageView[8][8];
     private DisplayMetrics dm;
-    private Position startPos;
-    private ClientSocket cs = new ClientSocket("HI");
-    // private Game game = new Game(new User("user1"), new User("user2"));
+    private Position startPos = null;
+    private BoardState board;
+    private SharedPreferences sharedPrefs;
+    private ClientSocket cs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.example.user.schachapp.R.layout.activity_board);
         chessboard = findViewById(R.id.chessboard);
-        pieces[0] = findViewById(R.id.rook_black_1);
-        pieces[1] = findViewById(R.id.rook_black_2);
-        pieces[2] = findViewById(R.id.bishop_black_1);
-        pieces[3] = findViewById(R.id.bishop_black_2);
-        pieces[4] = findViewById(R.id.knight_black_1);
-        pieces[5] = findViewById(R.id.knight_black_2);
-        pieces[6] = findViewById(R.id.pawn_black_1);
-        pieces[7] = findViewById(R.id.pawn_black_2);
-        pieces[8] = findViewById(R.id.pawn_black_3);
-        pieces[9] = findViewById(R.id.pawn_black_4);
-        pieces[10] = findViewById(R.id.pawn_black_5);
-        pieces[11] = findViewById(R.id.pawn_black_6);
-        pieces[12] = findViewById(R.id.pawn_black_7);
-        pieces[13] = findViewById(R.id.pawn_black_8);
-        pieces[14] = findViewById(R.id.queen_black);
-        pieces[15] = findViewById(R.id.king_black);
-        pieces[16] = findViewById(R.id.rook_white_1);
-        pieces[17] = findViewById(R.id.rook_white_2);
-        pieces[18] = findViewById(R.id.bishop_white_1);
-        pieces[19] = findViewById(R.id.bishop_white_2);
-        pieces[20] = findViewById(R.id.knight_white_1);
-        pieces[21] = findViewById(R.id.knight_white_2);
-        pieces[22] = findViewById(R.id.pawn_white_1);
-        pieces[23] = findViewById(R.id.pawn_white_2);
-        pieces[24] = findViewById(R.id.pawn_white_3);
-        pieces[25] = findViewById(R.id.pawn_white_4);
-        pieces[26] = findViewById(R.id.pawn_white_5);
-        pieces[27] = findViewById(R.id.pawn_white_6);
-        pieces[28] = findViewById(R.id.pawn_white_7);
-        pieces[29] = findViewById(R.id.pawn_white_8);
-        pieces[30] = findViewById(R.id.queen_white);
-        pieces[31] = findViewById(R.id.king_white);
-        //Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.king_figure_black);
-        //pieces[22].setImageBitmap(bm);
+        sharedPrefs = getSharedPreferences("chessApp", 0);
+        cs = new ClientSocket(sharedPrefs.getString("Username", "noUserFound"));
+
+        savedPieces[0][0] = findViewById(R.id.rook_black_1);
+        savedPieces[1][0] = findViewById(R.id.knight_black_1);
+        savedPieces[2][0] = findViewById(R.id.bishop_black_1);
+        savedPieces[3][0] = findViewById(R.id.queen_black);
+        savedPieces[4][0] = findViewById(R.id.king_black);
+        savedPieces[5][0] = findViewById(R.id.bishop_black_2);
+        savedPieces[6][0] = findViewById(R.id.knight_black_2);
+        savedPieces[7][0] = findViewById(R.id.rook_black_2);
+        savedPieces[0][1] = findViewById(R.id.pawn_black_1);
+        savedPieces[1][1] = findViewById(R.id.pawn_black_2);
+        savedPieces[2][1] = findViewById(R.id.pawn_black_3);
+        savedPieces[3][1] = findViewById(R.id.pawn_black_4);
+        savedPieces[4][1] = findViewById(R.id.pawn_black_5);
+        savedPieces[5][1] = findViewById(R.id.pawn_black_6);
+        savedPieces[6][1] = findViewById(R.id.pawn_black_7);
+        savedPieces[7][1] = findViewById(R.id.pawn_black_8);
+        savedPieces[0][6] = findViewById(R.id.pawn_white_1);
+        savedPieces[1][6] = findViewById(R.id.pawn_white_2);
+        savedPieces[2][6] = findViewById(R.id.pawn_white_3);
+        savedPieces[3][6] = findViewById(R.id.pawn_white_4);
+        savedPieces[4][6] = findViewById(R.id.pawn_white_5);
+        savedPieces[5][6] = findViewById(R.id.pawn_white_6);
+        savedPieces[6][6] = findViewById(R.id.pawn_white_7);
+        savedPieces[7][6] = findViewById(R.id.pawn_white_8);
+        savedPieces[0][7] = findViewById(R.id.rook_white_1);
+        savedPieces[1][7] = findViewById(R.id.knight_white_1);
+        savedPieces[2][7] = findViewById(R.id.bishop_white_1);
+        savedPieces[4][7] = findViewById(R.id.king_white);
+        savedPieces[3][7] = findViewById(R.id.queen_white);
+        savedPieces[5][7] = findViewById(R.id.bishop_white_2);
+        savedPieces[6][7] = findViewById(R.id.knight_white_2);
+        savedPieces[7][7] = findViewById(R.id.rook_white_2);
+
         dm = getResources().getDisplayMetrics();
 
         buttonDraw = findViewById(com.example.user.schachapp.R.id.buttonDraw);
         buttonGiveUp = findViewById(com.example.user.schachapp.R.id.buttonGiveUp);
+
+        String boardString = cs.requestBoard(sharedPrefs.getString("Username", "noUserFound"));
+
+        Piece p = null;
+        ImageView pieceIV = null;
+            for (int i = 0; i < savedPieces.length; i++) {
+                for (int j = 0; j < savedPieces[i].length; j++) {
+                    p = board.getPieceAt(new Position(i,j));
+                    if (p != null) {
+                        pieceIV = getPieceIV(p.toString());
+                        moveFigure(pieceIV, new Position(i,j), 0);
+                        pieces[i][j] = pieceIV;
+                        pieceIV.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+
 
         buttonDraw.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +125,7 @@ public class BoardActivity extends AppCompatActivity {
         });
     }
 
-    public void drawClicked() {
+    private void drawClicked() {
         AlertDialog.Builder a_builder = new AlertDialog.Builder(BoardActivity.this);
         a_builder.setMessage("Willst du das Unentschieden annehmen?").setCancelable(false)
                 .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
@@ -120,7 +145,7 @@ public class BoardActivity extends AppCompatActivity {
         draw.show();
     }
 
-    public void giveUpClicked() {
+    private void giveUpClicked() {
         AlertDialog.Builder a_builder = new AlertDialog.Builder(BoardActivity.this);
         a_builder.setMessage("Willst du wirklich Aufgeben?").setCancelable(false)
                 .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
@@ -142,30 +167,17 @@ public class BoardActivity extends AppCompatActivity {
 
     // Board zeigt positionen an
     public boolean boardClicked(MotionEvent event) {
-
-        TextView txt = findViewById(R.id.textView);
-        final ImageView image = (ImageView) findViewById(R.id.bishop_black_1);
-
         int totalX = (int) event.getX(); // x-Koordinate der Berührung in Pixeln
         int totalY = (int) event.getY();
         int boardMetric = dm.widthPixels; // Breite des Displays in Pixeln
         int chessX = (totalX * 8 ) / boardMetric; // berechnet das Schachbrettfeld
         int chessY = 7 - ((totalY * 8 ) / boardMetric);
-        String chessChar = "Außerhalb";
-        moveFigure((ImageView) findViewById(R.id.pawn_black_1), new Position(chessX, chessY), 500);
-        moveFigure((ImageView) findViewById(R.id.king_black), new Position(chessX, chessY), 500);
-        moveFigure((ImageView) findViewById(R.id.pawn_white_2), new Position(chessX, chessY), 500);
-        image.setColorFilter(Color.argb(100, 0, 0, 255));
-        chessChar = new Position(chessX, chessY).toString();
-        txt.setText(chessChar);
-
-        colorMoves(null, new Position(chessX, chessY));
-
+        tileSelected(chessX, chessY);
         return true;
     }
 
     // Methode um Figuren auf dem Board zu bewegen
-    public void moveFigure(ImageView iv, Position targetPosition, int animationDuration) {
+    private void moveFigure(ImageView iv, Position targetPosition, int animationDuration) {
         float boardMetric = dm.widthPixels;
         int targetPosXPixels = Math.round(targetPosition.getX() * boardMetric / 8); // Entfernung des Ziels vom linken Schachbrettrand in Pixeln
         int targetPosYPixels = Math.round(targetPosition.getY() * boardMetric / 8); // Entfernung des Ziels vom oberen SChachbrettrand in Pixeln
@@ -179,63 +191,93 @@ public class BoardActivity extends AppCompatActivity {
         animationY.start();
     }
 
-    public void tileSelected(int x, int y) {
+    private void tileSelected(int x, int y) {
         Position positionClicked = new Position(x, y);
-        // game.whiteToMove();
-        if (startPos == null) {
-            startPos = positionClicked;
-        } else {
-            executeMove(positionClicked);
+        if (board.whiteToMove()) {
+            if ((startPos == null) && (board.getPieceAt(positionClicked) != null) && (board.getPieceAt(positionClicked).isWhite())) {
+                startPos = positionClicked;
+                showPosition();
+            } else if ((startPos != null) && (!startPos.equals(positionClicked))){
+                executeMove(positionClicked);
+                startPos = null;
+            }
         }
     }
 
-    public void showPosition(Position start) {
-        // Piece selectedPiece = game.getPieceAt(start);
-        // if (selectedPiece != null) {
-        //     selectedPiece.getMovement(start, game.getBoard());
-        // }
+    private void showPosition() {
+         Piece selectedPiece = board.getPieceAt(startPos);
+         if ((selectedPiece != null) && (pieces[startPos.getX()][startPos.getY()] != null)) {
+             pieces[startPos.getX()][startPos.getY()].setColorFilter(Color.argb(100,0,0,255));
+             System.out.println(selectedPiece.toString() + " " + startPos.toString() + " " + board.getPieceAt(startPos).toString());
+             List<Move> moves = selectedPiece.getMovement(startPos, board);
+             if (moves.size() > 0) {
+                 colorMoves(moves);
+             }
+         }
     }
 
-    public void executeMove(Position goal) {
-
+    private void executeMove(Position goal) {
+         Piece selectedPiece = board.getPieceAt(startPos);
+         List<Move> moves = selectedPiece.getMovement(startPos, board);
+         pieces[startPos.getX()][startPos.getY()].setColorFilter(Color.argb(0,0,0,255));
+         Move move = new Move(startPos, goal);
+         if (movesContains(moves, move)) {
+             if (pieces[goal.getX()][goal.getY()] != null) {
+                 pieces[goal.getX()][goal.getY()].setVisibility(ImageView.INVISIBLE);
+             }
+             moveFigure(pieces[startPos.getX()][startPos.getY()], goal, 500);
+             pieces[goal.getX()][goal.getY()] = pieces[startPos.getX()][startPos.getY()];
+             pieces[startPos.getX()][startPos.getY()] = null;
+             Move moveToApply = new Move(startPos, goal);
+             board.applyMove(moveToApply);
+             cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), moveToApply.toString());
+         }
+        clearColores();
     }
 
-    public void colorMoves(List<Move> moves, Position targetPosition) {
+    private void clearColores() {
         ImageView toDraw = findViewById(R.id.toDraw);
-        Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
+        Bitmap.Config conf = Bitmap.Config.ARGB_8888;
+        Bitmap bmp = Bitmap.createBitmap(chessboard.getWidth(), chessboard.getHeight(), conf);
+        toDraw.setImageBitmap(bmp);
+    }
+
+    private void colorMoves(List<Move> moves) {
+        ImageView toDraw = findViewById(R.id.toDraw);
+        Bitmap.Config conf = Bitmap.Config.ARGB_8888;
         Bitmap bmp = Bitmap.createBitmap(chessboard.getWidth(), chessboard.getHeight(), conf); // this creates a MUTABLE bitmap
         Canvas c = new Canvas(bmp);
         Paint p = new Paint();
         p.setColor(Color.argb(70,0,0,255));
         float boardMetric = dm.widthPixels;
-        int targetPosXPixels = Math.round(targetPosition.getX() * boardMetric / 8); // Entfernung des Ziels vom linken Schachbrettrand in Pixeln
-        int targetPosYPixels = Math.round(targetPosition.getY() * boardMetric / 8); // Entfernung des Ziels vom oberen SChachbrettrand in Pixeln
-        c.drawRect(targetPosXPixels + boardMetric / 8,boardMetric - (targetPosYPixels + boardMetric / 8),targetPosXPixels, boardMetric - targetPosYPixels,p);
+        Position position = new Position(0, 0);
+        for (int i = 0; i < moves.size(); i++) {
+            position = moves.get(i).getGoal();
+            int targetPosXPixels = Math.round(position.getX() * boardMetric / 8); // Entfernung des Ziels vom linken Schachbrettrand in Pixeln
+            int targetPosYPixels = Math.round(position.getY() * boardMetric / 8); // Entfernung des Ziels vom oberen Schachbrettrand in Pixeln
+            c.drawRect(targetPosXPixels + boardMetric / 8,boardMetric - (targetPosYPixels + boardMetric / 8),targetPosXPixels, boardMetric - targetPosYPixels,p);
+        }
         toDraw.setImageBitmap(bmp);
     }
 
-    public ImageView[] getPieces() {
-        return pieces;
-    }
-
-    public ImageView getPieceIV(String pieceRepresentation) {
-        ImageView pieceIV;
+    private ImageView getPieceIV(String pieceRepresentation) {
+        ImageView pieceIV = null;
         switch (pieceRepresentation) {
             case "K":
-                pieceIV = pieces[31];
-                pieces[31] = null;
+                pieceIV = savedPieces[4][7];
+                savedPieces[4][7] = null;
                 break;
             case "k":
-                pieceIV = pieces[15];
-                pieces[15] = null;
+                pieceIV = savedPieces[4][0];
+                savedPieces[4][0] = null;
                 break;
             case "D":
-                pieceIV = pieces[30];
-                pieces[30] = null;
+                pieceIV = savedPieces[3][7];
+                savedPieces[3][7] = null;
                 break;
             case "d":
-                pieceIV = pieces[14];
-                pieces[14] = null;
+                pieceIV = savedPieces[3][0];
+                savedPieces[3][0] = null;
                 break;
             default:
                 pieceIV = getPieceFromPieces(pieceRepresentation);
@@ -246,47 +288,67 @@ public class BoardActivity extends AppCompatActivity {
     private ImageView getPieceFromPieces(String pieceRepresentation) {
         ImageView pieceIV = null;
         if (pieceRepresentation.equals("L")) {
-            for (int i = 18; pieces[i] == null; i++) {
-                pieceIV = pieces[i];
-                pieces[i] = null;
-            }
+                pieceIV = savedPieces[2][7];
+                savedPieces[2][7] = null;
+                if (pieceIV == null) {
+                    pieceIV = savedPieces[5][7];
+                    savedPieces[5][7] = null;
+                }
         } else if (pieceRepresentation.equals("l")) {
-            for (int i = 2; pieces[i] == null; i++) {
-                pieceIV = pieces[i];
-                pieces[i] = null;
+            pieceIV = savedPieces[2][0];
+            savedPieces[2][0] = null;
+            if (pieceIV == null) {
+                pieceIV = savedPieces[5][0];
+                savedPieces[5][0] = null;
             }
         } else if (pieceRepresentation.equals("S")) {
-            for (int i = 20; pieces[i] == null; i++) {
-                pieceIV = pieces[i];
-                pieces[i] = null;
+            pieceIV = savedPieces[1][7];
+            savedPieces[1][7] = null;
+            if (pieceIV == null) {
+                pieceIV = savedPieces[6][7];
+                savedPieces[6][7] = null;
             }
         } else if (pieceRepresentation.equals("s")) {
-            for (int i = 4; pieces[i] == null; i++) {
-                pieceIV = pieces[i];
-                pieces[i] = null;
+            pieceIV = savedPieces[1][0];
+            savedPieces[1][0] = null;
+            if (pieceIV == null) {
+                pieceIV = savedPieces[6][0];
+                savedPieces[6][0] = null;
             }
         } else if (pieceRepresentation.equals("B")) {
-            for (int i = 22; pieces[i] == null; i++) {
-                pieceIV = pieces[i];
-                pieces[i] = null;
+            for (int i = 0; pieceIV == null; i++) {
+                pieceIV = savedPieces[i][6];
+                savedPieces[i][6] = null;
             }
         } else if (pieceRepresentation.equals("b")) {
-            for (int i = 6; pieces[i] == null; i++) {
-                pieceIV = pieces[i];
-                pieces[i] = null;
+            for (int i = 0; pieceIV == null; i++) {
+                pieceIV = savedPieces[i][1];
+                savedPieces[i][1] = null;
             }
         } else if (pieceRepresentation.equals("T")) {
-            for (int i = 16; pieces[i] == null; i++) {
-                pieceIV = pieces[i];
-                pieces[i] = null;
-
+            pieceIV = savedPieces[0][7];
+            savedPieces[0][7] = null;
+            if (pieceIV == null) {
+                pieceIV = savedPieces[7][7];
+                savedPieces[7][7] = null;
             }
         } else if (pieceRepresentation.equals("t")) {
-            for (int i = 0; pieces[i] == null; i++) {
-                pieceIV = pieces[i];
-                pieces[i] = null;
+            pieceIV = savedPieces[0][0];
+            savedPieces[0][0] = null;
+            if (pieceIV == null) {
+                pieceIV = savedPieces[7][0];
+                savedPieces[7][0] = null;
             }
         }
         return pieceIV;
+    }
+
+    private boolean movesContains(List<Move> moves, Move move) {
+        for (int i = 0; i < moves.size(); i++) {
+            if (moves.get(i).equals(move)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
