@@ -289,12 +289,12 @@ public class BoardState {
 
                }
             }
-        if (counterForBlackKing != 1 || counterForWhiteKing != 1 || counterForBlackBishop > 2 ||
+        /*if (counterForBlackKing != 1 || counterForWhiteKing != 1 || counterForBlackBishop > 2 ||
                 counterForWhiteBishop > 2 || counterForBlackKnight > 2 || counterForWhiteKnight > 2 ||
                 counterForBlackRook > 2 || counterForWhiteRook > 2 || counterForBlackPawn > 8 ||
                 counterForWhitePawn > 8 || counterForBlackQueen > 1 || counterForWhiteQueen > 1) {
             return false;
-        }
+        }*/
         return true;
     }
 }
