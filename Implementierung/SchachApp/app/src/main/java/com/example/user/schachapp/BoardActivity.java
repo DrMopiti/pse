@@ -2,6 +2,7 @@ package com.example.user.schachapp;
 
 import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -16,13 +17,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.user.schachapp.chessLogic.BoardState;
-import com.example.user.schachapp.chessLogic.Game;
+import com.example.user.schachapp.chessLogic.ChessRuleProvider;
 import com.example.user.schachapp.chessLogic.Move;
 import com.example.user.schachapp.chessLogic.Piece;
 import com.example.user.schachapp.chessLogic.Position;
+import com.example.user.schachapp.chessLogic.Result;
 
 import java.util.List;
 
@@ -36,6 +37,8 @@ public class BoardActivity extends AppCompatActivity {
     private Position startPos = null;
     private BoardState board;
     private SharedPreferences sharedPrefs;
+    private SharedPreferences.Editor editor;
+    private ChessRuleProvider crp;
     private ClientSocket cs;
 
     @Override
@@ -44,7 +47,9 @@ public class BoardActivity extends AppCompatActivity {
         setContentView(com.example.user.schachapp.R.layout.activity_board);
         chessboard = findViewById(R.id.chessboard);
         sharedPrefs = getSharedPreferences("chessApp", 0);
+        editor = sharedPrefs.edit();
         cs = new ClientSocket(sharedPrefs.getString("Username", "noUserFound"));
+        crp = new ChessRuleProvider();
 
         savedPieces[0][0] = findViewById(R.id.rook_black_1);
         savedPieces[1][0] = findViewById(R.id.knight_black_1);
@@ -84,7 +89,9 @@ public class BoardActivity extends AppCompatActivity {
         buttonDraw = findViewById(com.example.user.schachapp.R.id.buttonDraw);
         buttonGiveUp = findViewById(com.example.user.schachapp.R.id.buttonGiveUp);
 
-        String boardString = cs.requestBoard(sharedPrefs.getString("Username", "noUserFound"));
+        //String boardString = cs.requestBoard(sharedPrefs.getString("Username", "noUserFound"));
+
+        board = new BoardState("TB0000btSB0000bsLB0000blDB0000bdKB0000bkLB0000blSB0000bsTB0000bt##ttttt#0"/*boardString*/);
 
         Piece p = null;
         ImageView pieceIV = null;
@@ -101,6 +108,35 @@ public class BoardActivity extends AppCompatActivity {
             }
 
 
+        Intent thisIntent = getIntent();
+        if (thisIntent.getIntExtra("clickedFigure", 0) != 0) {
+            int id = thisIntent.getIntExtra("clickedFigure", R.drawable.pawn_figure_white);
+            for (int i = 0; i < savedPieces.length; i++) {
+                if (board.getPieceAt(new Position(i,7)).toString().equals("B")) {
+                    pieces[i][7].setImageResource(id);
+                }
+            }
+        }
+
+        if (crp.hasEnded(board)) {
+            Result result = crp.getResult(board);
+            String resultString = result.getResult();
+            if (resultString.charAt(2) == '1') {
+                int loses = Integer.valueOf(sharedPrefs.getString("Verloren", "0"));
+                loses++;
+                editor.putString("Verloren", String.valueOf(loses));
+                editor.commit();
+                Intent intent = new Intent(this, LostActivity.class);
+                startActivity(intent);
+            } else if (resultString.charAt(2) == '5') {
+                int draws = Integer.valueOf(sharedPrefs.getString("Unentschieden", "0"));
+                draws++;
+                editor.putString("Unentschieden", String.valueOf(draws));
+                editor.commit();
+                Intent intent = new Intent(this, DrawActivity.class);
+                startActivity(intent);
+            }
+        }
 
         buttonDraw.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,8 +228,13 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     private void tileSelected(int x, int y) {
-        Position positionClicked = new Position(x, y);
-        if (board.whiteToMove()) {
+        Position positionClicked = null;
+        try {
+            positionClicked = new Position(x, y);
+        } catch (IllegalArgumentException e) {
+
+        }
+        if (/*board.whiteToMove()*/true && positionClicked != null) {
             if ((startPos == null) && (board.getPieceAt(positionClicked) != null) && (board.getPieceAt(positionClicked).isWhite())) {
                 startPos = positionClicked;
                 showPosition();
@@ -219,20 +260,43 @@ public class BoardActivity extends AppCompatActivity {
     private void executeMove(Position goal) {
          Piece selectedPiece = board.getPieceAt(startPos);
          List<Move> moves = selectedPiece.getMovement(startPos, board);
-         pieces[startPos.getX()][startPos.getY()].setColorFilter(Color.argb(0,0,0,255));
+         ImageView piece = pieces[startPos.getX()][startPos.getY()];
+         piece.setColorFilter(Color.argb(0,0,0,255));
          Move move = new Move(startPos, goal);
          if (movesContains(moves, move)) {
              if (pieces[goal.getX()][goal.getY()] != null) {
                  pieces[goal.getX()][goal.getY()].setVisibility(ImageView.INVISIBLE);
              }
-             moveFigure(pieces[startPos.getX()][startPos.getY()], goal, 500);
-             pieces[goal.getX()][goal.getY()] = pieces[startPos.getX()][startPos.getY()];
+             moveFigure(piece, goal, 500);
+             pieces[goal.getX()][goal.getY()] = piece;
              pieces[startPos.getX()][startPos.getY()] = null;
-             Move moveToApply = new Move(startPos, goal);
-             board.applyMove(moveToApply);
-             cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), moveToApply.toString());
+             board.applyMove(move);
+             //cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move.toString());
+             if (crp.hasEnded(board)) {
+                Result result = crp.getResult(board);
+                String resultString = result.getResult();
+                if (resultString.charAt(2) == '0') {
+                    int wins = Integer.valueOf(sharedPrefs.getString("Gewonnen", "0"));
+                    wins++;
+                    editor.putString("Gewonnen", String.valueOf(wins));
+                    editor.commit();
+                    Intent intent = new Intent(this, WinnerActivity.class);
+                    startActivity(intent);
+                } else if (resultString.charAt(2) == '5') {
+                    int draws = Integer.valueOf(sharedPrefs.getString("Unentschieden", "0"));
+                    draws++;
+                    editor.putString("Unentschieden", String.valueOf(draws));
+                    editor.commit();
+                    Intent intent = new Intent(this, DrawActivity.class);
+                    startActivity(intent);
+                }
+             }
          }
         clearColores();
+        if ((selectedPiece.toString().toLowerCase().equals("b")) && (move.getGoal().getY() == 6)) {
+            Intent intent = new Intent(this, PawnActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void clearColores() {
