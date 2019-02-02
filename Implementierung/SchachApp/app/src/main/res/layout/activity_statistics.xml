@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,20 +8,218 @@
 
     <ImageView
         android:id="@+id/holz_balken_hintergrund_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
         android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/background_holz_balken" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="StatisticsActivity" />
+        android:id="@+id/usernameText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/backgroundStatistik"
+        app:layout_constraintDimensionRatio="5:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/holz_balken_hintergrund_4" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/backgroundStatistik"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/background_statistic" />
+
+    <TextView
+        android:id="@+id/statistik"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="STATISTIK"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundStatistik"
+        app:layout_constraintDimensionRatio="9:1"
+        app:layout_constraintEnd_toEndOf="@+id/unentschiedenZahl"
+        app:layout_constraintStart_toStartOf="@+id/backgroundStatistik"
+        app:layout_constraintTop_toTopOf="@+id/backgroundStatistik"
+        app:layout_constraintVertical_bias="0.050000012" />
+
+    <TextView
+        android:id="@+id/gewonnen"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="200dp"
+        android:text="Gewonnene Spiele:"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundStatistik"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundStatistik"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/backgroundStatistik"
+        app:layout_constraintTop_toTopOf="@+id/backgroundStatistik"
+        app:layout_constraintVertical_bias="0.293" />
+
+    <TextView
+        android:id="@+id/verloren"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="200dp"
+        android:text="Verlorene Spiele:"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundStatistik"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundStatistik"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/backgroundStatistik"
+        app:layout_constraintTop_toTopOf="@+id/backgroundStatistik"
+        app:layout_constraintVertical_bias="0.412" />
+
+    <TextView
+        android:id="@+id/gewinnrate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="200dp"
+        android:text="Gewinnrate:"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundStatistik"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundStatistik"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/backgroundStatistik"
+        app:layout_constraintTop_toTopOf="@+id/backgroundStatistik"
+        app:layout_constraintVertical_bias="0.534" />
+
+    <TextView
+        android:id="@+id/unentschieden"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="200dp"
+        android:text="Unentschieden:"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundStatistik"
+        app:layout_constraintEnd_toEndOf="@+id/gewinnrateZahl"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/backgroundStatistik"
+        app:layout_constraintTop_toTopOf="@+id/backgroundStatistik"
+        app:layout_constraintVertical_bias="0.656" />
+
+    <TextView
+        android:id="@+id/gesamtSpielAnzahl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="200dp"
+        android:text="Gesamtspielanzahl:"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundStatistik"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundStatistik"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/backgroundStatistik"
+        app:layout_constraintTop_toTopOf="@+id/backgroundStatistik"
+        app:layout_constraintVertical_bias="0.775" />
+
+    <TextView
+        android:id="@+id/gewonnenZahl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:text="zahl1"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundStatistik"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundStatistik"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/gewonnen"
+        app:layout_constraintTop_toTopOf="@+id/backgroundStatistik"
+        app:layout_constraintVertical_bias="0.295" />
+
+    <TextView
+        android:id="@+id/verlorenZahl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:text="zahl2"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundStatistik"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundStatistik"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/verloren"
+        app:layout_constraintTop_toTopOf="@+id/backgroundStatistik"
+        app:layout_constraintVertical_bias="0.414" />
+
+    <TextView
+        android:id="@+id/gewinnrateZahl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:text="zahl3"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundStatistik"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundStatistik"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/gewinnrate"
+        app:layout_constraintTop_toTopOf="@+id/backgroundStatistik"
+        app:layout_constraintVertical_bias="0.535" />
+
+    <TextView
+        android:id="@+id/unentschiedenZahl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:text="zahl4"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundStatistik"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundStatistik"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/unentschieden"
+        app:layout_constraintTop_toTopOf="@+id/backgroundStatistik"
+        app:layout_constraintVertical_bias="0.654" />
+
+    <TextView
+        android:id="@+id/gesamtspielanzahlZahl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:text="zahl5"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundStatistik"
+        app:layout_constraintEnd_toEndOf="@+id/unentschiedenZahl"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/gesamtSpielAnzahl"
+        app:layout_constraintTop_toTopOf="@+id/backgroundStatistik"
+        app:layout_constraintVertical_bias="0.773" />
+
+
+</android.support.constraint.ConstraintLayout>
