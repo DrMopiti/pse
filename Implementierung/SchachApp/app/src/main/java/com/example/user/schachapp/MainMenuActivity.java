@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * The type Main menu activity.
+ * This Activity opens a MainMenuActivity.
+ * The Player can choose between the buttons quick-match, search-player and statistics.
+ */
 public class MainMenuActivity extends AppCompatActivity {
     private Button buttonQuickMatch, buttonSearchPlayer, buttonStatistics;
     private SharedPreferences sharedPrefs;
@@ -16,21 +21,23 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Looks if a user names is stored.
         sharedPrefs = getSharedPreferences("chessApp", 0);
         editor = sharedPrefs.edit();
         if (sharedPrefs.getString("Username", "").length() < 1) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
+
         //SharedPreferences.Editor editor = sharedPrefs.edit();
         //editor.putString(VAL_KEY, "");
         //editor.commit();
-
         setContentView(com.example.user.schachapp.R.layout.activity_main_menu);
         buttonQuickMatch = findViewById(com.example.user.schachapp.R.id.buttonQuickMatch);
         buttonSearchPlayer = findViewById(com.example.user.schachapp.R.id.buttonSearchPlayer);
         buttonStatistics = findViewById(com.example.user.schachapp.R.id.buttonStatistics);
 
+        // clickListener to change in the BoardActivity.
         buttonQuickMatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +46,7 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        // clickListener to change in the SearchPlayerActivity.
         buttonSearchPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +54,7 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        // clickListener to change in the StatisticsActivity.
         buttonStatistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +64,10 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * When Quick match is clicked, the player changes in the BoardActivity.
+     * Also it stores allGames in the StatisticsActivity.
+     */
     public void quickMatchClicked() {
         int allGames = Integer.valueOf(sharedPrefs.getString("GesamtSpielAnzahl", "0"));
         allGames++;
@@ -64,11 +77,17 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * When Search player is clicked, the player changes in the SearchPlayerActivity.
+     */
     public void searchPlayerClicked() {
         Intent intent = new Intent(this, SearchPlayerActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * When Statistics is clicked, the player changes in the StatisticsActivity.
+     */
     public void statisticsClicked() {
         Intent intent = new Intent(this, StatisticsActivity.class);
         startActivity(intent);

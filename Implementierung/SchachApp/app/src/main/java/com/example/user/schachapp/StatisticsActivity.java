@@ -7,11 +7,18 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+/**
+ * The type Statistics activity.
+ * This Activity opens a StatisticsActivity, when the player clicks the button Statistics.
+ * There can the player see his Statistics.
+ */
 public class StatisticsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // store all values for the statistics.
         SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
         setContentView(com.example.user.schachapp.R.layout.activity_statistics);
         TextView username = findViewById(R.id.usernameText);
@@ -26,6 +33,7 @@ public class StatisticsActivity extends AppCompatActivity {
         String allGames = sharedPrefs.getString("GesamtSpielAnzahl", "0");
         gewonnen.setText(wonGames);
         verloren.setText(sharedPrefs.getString("Verloren", "0"));
+        // calculates the winRate for the player
         float won = Integer.valueOf(wonGames);
         float all = Integer.valueOf(allGames);
         float winRate = Math.round((won / all) * 100);

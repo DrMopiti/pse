@@ -8,8 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * The type Login activity.
+ * This Activity opens a LoginActivity where the player can set his user name for the hole app.
+ * After setting his user name, the player stays logged in all the time.
+ */
 public class LoginActivity extends AppCompatActivity {
-    EditText userName;
+
+    private EditText userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         Button login = findViewById(R.id.login_button);
         userName = findViewById(R.id.userName);
 
+        // clickListenerto sign in and change to the MainMenuActivity
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,6 +33,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Wehn Login is clicked the player goes into the MainMenuActivity. The username stays stored local.
+     */
     public void loginClicked() {
         if (userName.getText().length() > 0) {
             Intent intent = new Intent(this, MainMenuActivity.class);

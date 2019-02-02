@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * The type Lost activity.
+ * This Activity opens a LostActivity when the player loses a game.
+ */
 public class LostActivity extends AppCompatActivity {
 
     private Button menuButton;
@@ -16,6 +20,7 @@ public class LostActivity extends AppCompatActivity {
 
         menuButton = findViewById(R.id.menü);
 
+        // clickListener to change to the MainMenuActivity.
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -24,6 +29,9 @@ public class LostActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * When menu is clicked, the player goes back to the MainMenuActivity.
+     */
     public void menuClicked() {
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);

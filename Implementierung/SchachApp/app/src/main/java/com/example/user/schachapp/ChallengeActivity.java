@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * The type Challenge activity.
+ * This Activity is to challenge other players.
+ */
 public class ChallengeActivity extends AppCompatActivity {
     private ClientSocket cs;
     private String challengedPlayer;
@@ -17,6 +21,7 @@ public class ChallengeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // stores different things.
         sharedPrefs = getSharedPreferences("chessApp", 0);
         setContentView(R.layout.activity_challenge);
         TextView username = findViewById(R.id.userName);
@@ -24,7 +29,7 @@ public class ChallengeActivity extends AppCompatActivity {
         String user = sharedPrefs.getString("Username", "");
         cs = new ClientSocket(user);
 
-        //get data from previous activity when item of listview is clicked using intent
+        //get data from previous activity when item of listview is clicked using intent.
         Intent intent = getIntent();
         challengedPlayer = intent.getStringExtra("clickedPlayer");
         username.setText(challengedPlayer);
@@ -36,6 +41,7 @@ public class ChallengeActivity extends AppCompatActivity {
 
         Button buttonChallenge = findViewById(R.id.challengeButton);
 
+        // clickListener for challenging other player
         buttonChallenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +50,11 @@ public class ChallengeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Challenge is clickable, when player is online.
+     * When the player is online, it changes in the BoardActivity and it counts allGames.
+     * When the player is offline, the button is not clickable.
+     */
     public void challengeClicked() {
         if (/*cs.isOnline(challengedPlayer)*/true) {
             SharedPreferences.Editor editor = sharedPrefs.edit();

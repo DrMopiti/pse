@@ -16,14 +16,39 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+/**
+ * The type Search player list view adapter.
+ * This class helps the SearchPlayerActivity.
+ */
 public class SearchPlayerListViewAdapter extends BaseAdapter{
+    /**
+     * The Cs.
+     */
     ClientSocket cs;
+    /**
+     * The M context.
+     */
     Context mContext;
+    /**
+     * The Inflater.
+     */
     LayoutInflater inflater;
+    /**
+     * The Modellist.
+     */
     List<String> modellist;
+    /**
+     * The Array list.
+     */
     ArrayList<String> arrayList;
 
-    //constructor
+    /**
+     * Instantiates a new Search player list view adapter.
+     *
+     * @param context   the context
+     * @param modellist the modellist where the user-names are.
+     */
+
     public SearchPlayerListViewAdapter(Context context, List<String> modellist) {
         mContext = context;
         this.modellist = modellist;
@@ -32,8 +57,14 @@ public class SearchPlayerListViewAdapter extends BaseAdapter{
         this.arrayList.addAll(modellist);
     }
 
+    /**
+     * The type View holder.
+     */
     public class ViewHolder{
-        TextView mTitleTv;
+        /**
+         * The M title tv.
+         */
+        private TextView mTitleTv;
     }
 
     @Override
@@ -74,10 +105,11 @@ public class SearchPlayerListViewAdapter extends BaseAdapter{
             @Override
             public void onClick(View view) {
 
+                // changes in ChallengeActivity, when a user-name is clicked.
                 Iterator<String> it = arrayList.iterator();
                 String player = "";
                 while (it.hasNext()) {
-                    //code later
+
                     player = it.next();
                     if (modellist.get(postition).equals(player)) {
                         Intent intent = new Intent(mContext, ChallengeActivity.class);
@@ -90,7 +122,11 @@ public class SearchPlayerListViewAdapter extends BaseAdapter{
         return view;
     }
 
-    //filter
+    /**
+     * A Filter that filters the user-names.
+     *
+     * @param charText the char text
+     */
     public void filter(String charText){
         charText = charText.toLowerCase(Locale.getDefault());
         modellist.clear();

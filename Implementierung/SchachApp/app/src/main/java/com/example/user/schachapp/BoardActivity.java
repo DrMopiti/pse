@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.media.Image;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +27,10 @@ import com.example.user.schachapp.chessLogic.Result;
 import java.util.List;
 
 
+/**
+ * The type Board activity.
+ * This Activity opens, when a player clicks the Button quick-match.
+ */
 public class BoardActivity extends AppCompatActivity {
     private Button buttonDraw, buttonGiveUp;
     private ImageView chessboard;
@@ -46,11 +49,13 @@ public class BoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(com.example.user.schachapp.R.layout.activity_board);
         chessboard = findViewById(R.id.chessboard);
+        // store.
         sharedPrefs = getSharedPreferences("chessApp", 0);
         editor = sharedPrefs.edit();
         cs = new ClientSocket(sharedPrefs.getString("Username", "noUserFound"));
         crp = new ChessRuleProvider();
 
+        // two-dimensional array for the chess-pieces.
         savedPieces[0][0] = findViewById(R.id.rook_black_1);
         savedPieces[1][0] = findViewById(R.id.knight_black_1);
         savedPieces[2][0] = findViewById(R.id.bishop_black_1);
@@ -93,6 +98,7 @@ public class BoardActivity extends AppCompatActivity {
 
         board = new BoardState("TB0000btSB0000bsLB0000blDB0000bdKB0000bkLB0000blSB0000bsTB0000bt##ttttt#0"/*boardString*/);
 
+        // runs through the array and moves the imageViews form the pieces to the positions that is set from the board.
         Piece p = null;
         ImageView pieceIV = null;
             for (int i = 0; i < savedPieces.length; i++) {
@@ -107,7 +113,7 @@ public class BoardActivity extends AppCompatActivity {
                 }
             }
 
-
+        // checks if there is an pawn-transformation and does it.
         Intent thisIntent = getIntent();
         if (thisIntent.getIntExtra("clickedFigure", 0) != 0) {
             int id = thisIntent.getIntExtra("clickedFigure", R.drawable.pawn_figure_white);
@@ -118,6 +124,7 @@ public class BoardActivity extends AppCompatActivity {
             }
         }
 
+        // checks if the other player has an los or an draw on the chessBoard and change to the appropriate Activity.
         if (crp.hasEnded(board)) {
             Result result = crp.getResult(board);
             String resultString = result.getResult();
@@ -138,6 +145,7 @@ public class BoardActivity extends AppCompatActivity {
             }
         }
 
+        // clickListeners to open an dialog.
         buttonDraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +169,7 @@ public class BoardActivity extends AppCompatActivity {
         });
     }
 
+    // when the draw button is clicked, then there opens an Dialog.
     private void drawClicked() {
         AlertDialog.Builder a_builder = new AlertDialog.Builder(BoardActivity.this);
         a_builder.setMessage("Willst du das Unentschieden annehmen?").setCancelable(false)
@@ -181,6 +190,7 @@ public class BoardActivity extends AppCompatActivity {
         draw.show();
     }
 
+    // when the giveUp button is clicked, then there opens an Dialog.
     private void giveUpClicked() {
         AlertDialog.Builder a_builder = new AlertDialog.Builder(BoardActivity.this);
         a_builder.setMessage("Willst du wirklich Aufgeben?").setCancelable(false)
@@ -201,23 +211,32 @@ public class BoardActivity extends AppCompatActivity {
         giveUp.show();
     }
 
-    // Board zeigt positionen an
+    /**
+     * Board clicked boolean.
+     * This method receives a MotionEvent and calculates the field on the chessboard, based on the touched pixels
+     *
+     * @param event the event that receives the touch on the display
+     * @return the boolean true
+     */
     public boolean boardClicked(MotionEvent event) {
-        int totalX = (int) event.getX(); // x-Koordinate der Berührung in Pixeln
+        int totalX = (int) event.getX(); // x-coordinate from the touch in pixel.
         int totalY = (int) event.getY();
-        int boardMetric = dm.widthPixels; // Breite des Displays in Pixeln
-        int chessX = (totalX * 8 ) / boardMetric; // berechnet das Schachbrettfeld
+        int boardMetric = dm.widthPixels; // width from the display in pixel.
+        int chessX = (totalX * 8 ) / boardMetric; // calculates the chess-board.
         int chessY = 7 - ((totalY * 8 ) / boardMetric);
         tileSelected(chessX, chessY);
         return true;
     }
 
-    // Methode um Figuren auf dem Board zu bewegen
+    // method to move the figures on the chessboard using ObjectAnimator.
     private void moveFigure(ImageView iv, Position targetPosition, int animationDuration) {
         float boardMetric = dm.widthPixels;
-        int targetPosXPixels = Math.round(targetPosition.getX() * boardMetric / 8); // Entfernung des Ziels vom linken Schachbrettrand in Pixeln
-        int targetPosYPixels = Math.round(targetPosition.getY() * boardMetric / 8); // Entfernung des Ziels vom oberen SChachbrettrand in Pixeln
-        int xTilesToMove = targetPosXPixels - iv.getLeft(); // Pixel die man sich bewegen will
+        // distance from the target counting from the left side of the chessboard in pixels.
+        int targetPosXPixels = Math.round(targetPosition.getX() * boardMetric / 8);
+        // distance from the target counting from the top side of the chessboard in pixels.
+        int targetPosYPixels = Math.round(targetPosition.getY() * boardMetric / 8);
+        // calculates the distance between the current position of the figure and its goal.
+        int xTilesToMove = targetPosXPixels - iv.getLeft();
         int yTilesToMove = chessboard.getBottom() - iv.getBottom() - targetPosYPixels;
         ObjectAnimator animationX = ObjectAnimator.ofFloat(iv, "translationX", xTilesToMove);
         ObjectAnimator animationY = ObjectAnimator.ofFloat(iv, "translationY", yTilesToMove);
@@ -227,6 +246,7 @@ public class BoardActivity extends AppCompatActivity {
         animationY.start();
     }
 
+    // checks if the player selected a figure or a goal and calls the corresponding method.
     private void tileSelected(int x, int y) {
         Position positionClicked = null;
         try {
@@ -245,11 +265,11 @@ public class BoardActivity extends AppCompatActivity {
         }
     }
 
+    // colors the selected piece and passes the possible moves of it to colorMoves().
     private void showPosition() {
          Piece selectedPiece = board.getPieceAt(startPos);
          if ((selectedPiece != null) && (pieces[startPos.getX()][startPos.getY()] != null)) {
              pieces[startPos.getX()][startPos.getY()].setColorFilter(Color.argb(100,0,0,255));
-             System.out.println(selectedPiece.toString() + " " + startPos.toString() + " " + board.getPieceAt(startPos).toString());
              List<Move> moves = selectedPiece.getMovement(startPos, board);
              if (moves.size() > 0) {
                  colorMoves(moves);
@@ -257,6 +277,7 @@ public class BoardActivity extends AppCompatActivity {
          }
     }
 
+    // checks if the chosen move is possible and then executes it. Then checks if the game has ended and calls clearColors().
     private void executeMove(Position goal) {
          Piece selectedPiece = board.getPieceAt(startPos);
          List<Move> moves = selectedPiece.getMovement(startPos, board);
@@ -264,6 +285,7 @@ public class BoardActivity extends AppCompatActivity {
          piece.setColorFilter(Color.argb(0,0,0,255));
          Move move = new Move(startPos, goal);
          if (movesContains(moves, move)) {
+             // checks if in this move a figure was captured and removes it.
              if (pieces[goal.getX()][goal.getY()] != null) {
                  pieces[goal.getX()][goal.getY()].setVisibility(ImageView.INVISIBLE);
              }
@@ -292,24 +314,27 @@ public class BoardActivity extends AppCompatActivity {
                 }
              }
          }
-        clearColores();
-        if ((selectedPiece.toString().toLowerCase().equals("b")) && (move.getGoal().getY() == 6)) {
+        clearColors();
+         // checks if there should happen a pawn-transformation.
+        if ((selectedPiece.toString().toLowerCase().equals("b")) && (move.getGoal().getY() == 7)) {
             Intent intent = new Intent(this, PawnActivity.class);
             startActivity(intent);
         }
     }
 
-    private void clearColores() {
+    // removes the coloring from the possible moves.
+    private void clearColors() {
         ImageView toDraw = findViewById(R.id.toDraw);
         Bitmap.Config conf = Bitmap.Config.ARGB_8888;
         Bitmap bmp = Bitmap.createBitmap(chessboard.getWidth(), chessboard.getHeight(), conf);
         toDraw.setImageBitmap(bmp);
     }
 
+    // colors all possible moves by drawing matching rectangles in another ImageView layer.
     private void colorMoves(List<Move> moves) {
         ImageView toDraw = findViewById(R.id.toDraw);
         Bitmap.Config conf = Bitmap.Config.ARGB_8888;
-        Bitmap bmp = Bitmap.createBitmap(chessboard.getWidth(), chessboard.getHeight(), conf); // this creates a MUTABLE bitmap
+        Bitmap bmp = Bitmap.createBitmap(chessboard.getWidth(), chessboard.getHeight(), conf);
         Canvas c = new Canvas(bmp);
         Paint p = new Paint();
         p.setColor(Color.argb(70,0,0,255));
@@ -317,13 +342,15 @@ public class BoardActivity extends AppCompatActivity {
         Position position = new Position(0, 0);
         for (int i = 0; i < moves.size(); i++) {
             position = moves.get(i).getGoal();
-            int targetPosXPixels = Math.round(position.getX() * boardMetric / 8); // Entfernung des Ziels vom linken Schachbrettrand in Pixeln
-            int targetPosYPixels = Math.round(position.getY() * boardMetric / 8); // Entfernung des Ziels vom oberen Schachbrettrand in Pixeln
+            // calculates the position in pixels, where the possible move has its goal.
+            int targetPosXPixels = Math.round(position.getX() * boardMetric / 8);
+            int targetPosYPixels = Math.round(position.getY() * boardMetric / 8);
             c.drawRect(targetPosXPixels + boardMetric / 8,boardMetric - (targetPosYPixels + boardMetric / 8),targetPosXPixels, boardMetric - targetPosYPixels,p);
         }
         toDraw.setImageBitmap(bmp);
     }
 
+    // returns the ImageView matching to the given string-representation.
     private ImageView getPieceIV(String pieceRepresentation) {
         ImageView pieceIV = null;
         switch (pieceRepresentation) {
@@ -349,6 +376,7 @@ public class BoardActivity extends AppCompatActivity {
         return pieceIV;
     }
 
+    // method to help the getPieceIV() method search, for all pieces, that exist more than one time.
     private ImageView getPieceFromPieces(String pieceRepresentation) {
         ImageView pieceIV = null;
         if (pieceRepresentation.equals("L")) {
@@ -407,6 +435,7 @@ public class BoardActivity extends AppCompatActivity {
         return pieceIV;
     }
 
+    // checks if the given list contains the given move
     private boolean movesContains(List<Move> moves, Move move) {
         for (int i = 0; i < moves.size(); i++) {
             if (moves.get(i).equals(move)) {
