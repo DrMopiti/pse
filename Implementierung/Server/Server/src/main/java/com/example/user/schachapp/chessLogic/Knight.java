@@ -12,6 +12,10 @@ public class Knight extends Piece {
     }
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
+        if (board == null) {
+            throw new NullPointerException("board or/and position can not be null");
+        }
+
         int [][] offsets = {{-2,-1},{-2,1},{-1,2},{1,2},{2,1},{2,-1},{1,-2},{-1,-2}};
         ArrayList<Position> possiblePositions = new ArrayList<Position>();
         List <Move> possibleMoves = new ArrayList<Move>();
@@ -24,7 +28,6 @@ public class Knight extends Piece {
             } catch (IllegalArgumentException e) {
                 e.getMessage();
             }
-
         }
 
         for (Iterator<Position> iterator = possiblePositions.iterator(); iterator.hasNext();){
