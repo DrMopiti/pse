@@ -49,9 +49,16 @@ public class ClientHandler{
 		 return SocketHandler.getPlayers();
 	}
 		 	
-	@RequestMapping("isonline/{player}")
+	@RequestMapping("/isonline/{player}")
 	public boolean isOnline(@PathVariable String player) {
 		 return SocketHandler.isOnline(player);	 		
+	}
+	
+	@RequestMapping("/hasgame/{player}")
+	public boolean hasGame(@PathVariable String player) {
+		DatabaseHandler handler = FirebaseHandler.getHandler();
+		Boolean hasGame = handler.hasActiveGame(player);
+		return hasGame;
 	}
 	       	 		 	
 	
