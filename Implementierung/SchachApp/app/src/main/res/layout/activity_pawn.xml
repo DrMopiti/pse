@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PawnActivity">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_holz_balken" />
+
+    <ImageView
+        android:id="@+id/backgroundButtons"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/background"
+        app:layout_constraintTop_toTopOf="@+id/background"
+        app:srcCompat="@drawable/button_bg_stroke" />
+
+    <Button
+        android:id="@+id/queenButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="240dp"
+        android:layout_marginBottom="180dp"
+        android:background="@drawable/queen_figure_white"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundButtons"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundButtons"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/backgroundButtons"
+        app:layout_constraintTop_toTopOf="@+id/backgroundButtons"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <Button
+        android:id="@+id/rookButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="180dp"
+        android:background="@drawable/rook_figure_white"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundButtons"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundButtons"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/backgroundButtons"
+        app:layout_constraintTop_toTopOf="@+id/backgroundButtons"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/bishopButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginEnd="240dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/bishop_figure_white"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundButtons"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundButtons"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="@+id/backgroundButtons"
+        app:layout_constraintTop_toTopOf="@+id/backgroundButtons"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <Button
+        android:id="@+id/knightButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/knight_figure_white"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundButtons"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundButtons"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="@+id/backgroundButtons"
+        app:layout_constraintTop_toTopOf="@+id/backgroundButtons"
+        app:layout_constraintVertical_bias="0.89" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Wähle eine Figur aus:"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundButtons"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundButtons"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/backgroundButtons"
+        app:layout_constraintTop_toTopOf="@+id/backgroundButtons"
+        app:layout_constraintVertical_bias="0.056" />
+
+</android.support.constraint.ConstraintLayout>
