@@ -9,6 +9,14 @@ import com.example.user.schachapp.chessLogic.MoveFactory;
 import com.example.user.schachapp.chessLogic.Position;
 import com.example.user.schachapp.chessLogic.RuleProvider;
 
+/**
+ * 
+ * @author Daniel Helmig
+ * The MoveHandler class checks if a move is legal, applies it
+ * and writes the new board in the database
+ * 
+ *
+ */
 public class MoveHandler {
 	private String player;
 	private String move;
@@ -17,7 +25,11 @@ public class MoveHandler {
 		this.player = player;
 		this.move = move;
 	}
-	
+	/**
+	 * Checks if the player that wants to send a move is actually in a game
+	 * If he is in a game, processMove checks if the move is valid
+	 * @return Returns "Success" if the operation was successful and other messages on failure
+	 */
 	public String processMove() {
 		String retString = "";
 		DatabaseHandler handler = FirebaseHandler.getHandler();
