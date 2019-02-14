@@ -16,13 +16,14 @@ public class BoardState {
     public BoardState(String string) {
         //splits the String in 4 Sectors: Pieces, Last Move, Booleans, Moves without Action
         String[] sectors = string.split("#");
-        if (sectors.length != 4) {
+        if (sectors.length != 4 && !sectors[0].matches("[TSLDKBtsldkb0]{64}")) {
             throw new IllegalArgumentException("String in wrong format");
         }
 
-        if (!validityOfPiecesOnBoard(sectors[0])) {
+      /*  if (!validityOfPiecesOnBoard(sectors[0])) {
             throw new IllegalArgumentException("String for pieces not 64 long or board is not correct");
         }
+        */
 
         //sets all Pieces and empty Positions
         String[] pieces = sectors[0].split("");
@@ -46,7 +47,7 @@ public class BoardState {
 
         //sets all Booleans
         String[] bools = sectors[2].split("");
-        if (bools.length != 5) {
+        if (!sectors[2].matches("[tf]{5}")) {
             throw new IllegalArgumentException("String for booleans not correct");
         }
         whiteToMove = bools[0].equals("t");
@@ -226,7 +227,7 @@ public class BoardState {
         return new BoardState(this.toString());
     }
 
-    private boolean validityOfPiecesOnBoard(String pieces) {
+   /* private boolean validityOfPiecesOnBoard(String pieces) {
 
         if (!pieces.matches("[TSLDKBtsldkb0]{64}")) {
            return false;
@@ -289,12 +290,13 @@ public class BoardState {
 
                }
             }
-        /*if (counterForBlackKing != 1 || counterForWhiteKing != 1 || counterForBlackBishop > 2 ||
+        if (counterForBlackKing != 1 || counterForWhiteKing != 1 || counterForBlackBishop > 2 ||
                 counterForWhiteBishop > 2 || counterForBlackKnight > 2 || counterForWhiteKnight > 2 ||
                 counterForBlackRook > 2 || counterForWhiteRook > 2 || counterForBlackPawn > 8 ||
                 counterForWhitePawn > 8 || counterForBlackQueen > 1 || counterForWhiteQueen > 1) {
             return false;
-        }*/
+        }
         return true;
     }
+    */
 }

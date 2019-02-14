@@ -7,7 +7,15 @@ public class ChessRuleProvider implements RuleProvider {
 
     @Override
     public BoardState getStartState() {
-        return new BoardState("TB0000btSB0000bsLB0000blDB0000bdKB0000bKLB0000blSB0000bsTB0000bt##ttttt#0");
+        return new BoardState("TB0000bt" +
+                "SB0000bs" +
+                "LB0000bl" +
+                "DB0000bd" +
+                "KB0000bk" +
+                "LB0000bl" +
+                "SB0000bs" +
+                "TB0000bt" +
+                "##ttttt#0");
     }
     
     @Override
@@ -78,7 +86,7 @@ public class ChessRuleProvider implements RuleProvider {
             int jumpOver = (move.getStart().getX() + move.getGoal().getX()) / 2;
             test2.applyMove(new Move(move.getStart(), new Position(jumpOver, move.getStart().getY())));
 
-            return (!isChecked(board.whiteToMove(), test1) && !isChecked(board.whiteToMove(), test2));
+            return (!isChecked(board.whiteToMove(), board) && !isChecked(board.whiteToMove(), test1) && !isChecked(board.whiteToMove(), test2));
         }
         BoardState test = board.clone();
         test.applyMove(move);
