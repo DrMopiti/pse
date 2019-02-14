@@ -41,11 +41,11 @@ public class SearchPlayerActivity extends AppCompatActivity {
 
         // a set, where all Player are.
         Set<String> players;
-        players = new HashSet<String>();//cs.getPlayers();
-        players.add("Ruki");
-        players.add("Tim");
-        players.add("Daniel");
-        players.add("Orkhan");
+        players = cs.getPlayers();//new HashSet<String>();
+       // players.add("Ruki");
+       // players.add("Tim");
+       // players.add("Daniel");
+       // players.add("Orkhan");
         Iterator<String> it = players.iterator();
 
         while (it.hasNext()) {

@@ -9,6 +9,16 @@ public class Rook extends Piece {
     public Rook(boolean isWhite) {
         super(isWhite, ROOK_VALUE, ROOK_CHAR);
     }
+
+    @Override
+    public String getImageName() {
+        if (isWhite) {
+            return "rook_figure_white";
+        } else {
+            return "rook_figure_black";
+        }
+    }
+
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
         List<Move> permittedMoves = new ArrayList<Move>();

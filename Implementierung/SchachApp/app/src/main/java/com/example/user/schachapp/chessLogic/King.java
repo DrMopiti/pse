@@ -10,6 +10,16 @@ public class King extends Piece {
     public King(boolean isWhite) {
         super(isWhite, KING_VALUE, KING_CHAR);
     }
+
+    @Override
+    public String getImageName() {
+        if (isWhite) {
+            return "king_figure_white";
+        } else {
+            return "king_figure_black";
+        }
+    }
+
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
         if (board == null) {

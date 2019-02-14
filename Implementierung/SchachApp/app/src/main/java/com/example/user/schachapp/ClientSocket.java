@@ -17,14 +17,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ClientSocket {
 
-    private String url = "ws://localhost:8080/";
+    private String url = "ws://sdq-pse-gruppe1.ipd.kit.edu/server/";
     private String user = "";
     private final ClientApi clientApi;
 
     public ClientSocket(String user) {
         this.user = user;
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:8080/")
+                .baseUrl("http://sdq-pse-gruppe1.ipd.kit.edu/server/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         clientApi = retrofit.create(ClientApi.class);
