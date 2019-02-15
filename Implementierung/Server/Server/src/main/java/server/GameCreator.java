@@ -2,7 +2,7 @@ package server;
 /**
  * 
  * @author Daniel Helmig
- *	The GameCreator class create new game entries in the database
+ *	The GameCreator class creates new game entries in the database
  */
 public class GameCreator {
 	private String whitePlayer;

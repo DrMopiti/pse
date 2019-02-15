@@ -38,6 +38,11 @@ public class ClientHandler{
 		 return newGame(white, black);
 	}
 	
+	/**
+	 * Calls delete() with parametes
+	 * @param player The player whose game should be deleted
+	 * @return Returns "Success" if the operation was successful and other messages on failure
+	 */
 	@RequestMapping("/delete/{player}")
 	public String deleteGame(@PathVariable String player) {
 		return delete(player);
