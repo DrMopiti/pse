@@ -27,6 +27,12 @@ public class BoardState {
         //sets all Pieces and empty Positions
         String[] pieces = sectors[0].split("");
 
+        if (pieces[0].equals("")) {
+            for (int i = 0; i < pieces.length - 1; i++) {
+                pieces[i] = pieces[i+1];
+            }
+        }
+
         tiles = new Tile[8][8];
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
@@ -46,8 +52,10 @@ public class BoardState {
 
         //sets all Booleans
         String[] bools = sectors[2].split("");
-        if (bools.length != 5) {
-            throw new IllegalArgumentException("String for booleans not correct");
+        if (bools[0].equals("")) {
+            for (int i = 0; i < bools.length - 1; i++) {
+                bools[i] = bools[i+1];
+            }
         }
         whiteToMove = bools[0].equals("t");
         whiteKingCastle = bools[1].equals("t");
