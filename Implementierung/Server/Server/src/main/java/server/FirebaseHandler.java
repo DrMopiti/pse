@@ -26,16 +26,32 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 
 
-
+/**
+ * 
+ * @author Daniel Helmig
+ * 
+ * The FirebaseHandler is an implementation of the abstract class DatabaseHandler.
+ * It connects, reads and writes to the Firebase database.
+ * Uses the pattern Singleton because only one database reference is needed and
+ * trying to get multiple references with the same name results in an error.
+ *
+ */
 public class FirebaseHandler implements DatabaseHandler {
 	
 	Firestore db = null;
 	
 	private static FirebaseHandler handler;
 	
+	/**
+	 * Constructor set to private
+	 */
 	private FirebaseHandler() {
 	}
 	
+	/**
+	 * Returns the Firebase handler with an established connection
+	 * @return Returns the handler
+	 */
 	public static FirebaseHandler getHandler() {
 		if (handler == null) {
 			handler = new FirebaseHandler();
@@ -44,6 +60,9 @@ public class FirebaseHandler implements DatabaseHandler {
 		return handler;
 	}
 	
+	/**
+	 * Reads the private Key and other data and connects to the database
+	 */
 	public void connect() {
 
 	// Use a service account
@@ -68,7 +87,9 @@ public class FirebaseHandler implements DatabaseHandler {
 	System.out.println("DEBUG: ESTABLISHED DATABASE CONNECTION");
 	}
 	
-	
+	/**
+	 * Creates a new document in the "games" collection
+	 */
 	@Override
 	public void newEntry(String whitePlayer, String blackPlayer) {
 		DocumentReference docRef = null;
@@ -93,7 +114,10 @@ public class FirebaseHandler implements DatabaseHandler {
 		System.out.println("DEBUG: CREATED NEW GAME");
 
 	}
-
+	
+	/**
+	 * Loads a document with the given string as a player
+	 */
 	@Override
 	public String loadGame(String player) {
 		String board = "";
@@ -127,6 +151,10 @@ public class FirebaseHandler implements DatabaseHandler {
 		return board;
 	}
 
+	
+	/**
+	 * Saves a document with both players and a board string
+	 */
 	@Override
 	public String saveGame(String player, String board) {
 		//asynchronously update doc, create the document if missing
@@ -139,7 +167,21 @@ public class FirebaseHandler implements DatabaseHandler {
 		return "Success";
 
 	}
+	
+	/**
+	 * Deletes a game document
+	 */
+	@Override 
+	public String deleteGame(String player) {
+		String otherPlayer = getOtherPlayer(player);
+		ApiFuture<WriteResult> result = db.collection("games")
+			.document(player+"-"+otherPlayer).delete();
+		return "Success";
+	}
 
+	/**
+	 * Gets the opponent of a player
+	 */
 	public String getOtherPlayer(String player) {
 		
 		String other = "";
@@ -172,7 +214,10 @@ public class FirebaseHandler implements DatabaseHandler {
 		}
 		return other;
 	}
-
+	
+	/**
+	 * Checks if a given player is in an active game
+	 */
 	@Override
 	public boolean hasActiveGame(String player) {
 		int occurrence = 0;

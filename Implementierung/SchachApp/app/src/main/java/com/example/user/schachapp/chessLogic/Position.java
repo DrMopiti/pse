@@ -10,6 +10,10 @@ public class Position {
             } else {
                 String alpha = "abcdefgh";
                 String[] coords = representation.split("");
+                if (coords[0] == "") {  //Strings can get split different on different devices
+                    coords[0] = coords[1];
+                    coords[1] = coords[2];
+                }
                 int y = Integer.parseInt(coords[1]);
                 this.x = alpha.indexOf(coords[0]);
                 this.y = y - 1;
