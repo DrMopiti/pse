@@ -37,7 +37,8 @@ public class SearchPlayerActivity extends AppCompatActivity {
     private ThreadHandler threadHandler = new ThreadHandler();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_player);
         sharedPrefs = getSharedPreferences("chessApp", 0);
         cs = new ClientSocket(sharedPrefs.getString("Username", ""));
@@ -45,6 +46,7 @@ public class SearchPlayerActivity extends AppCompatActivity {
         // Search-Bar-Title
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Spieler suchen");
+        listView = findViewById(R.id.listView);
 
 
         Retrofit retrofit = new Retrofit.Builder()
