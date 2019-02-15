@@ -10,7 +10,7 @@ public class Position {
             } else {
                 String alpha = "abcdefgh";
                 String[] coords = representation.split("");
-                if (coords[0] == "") {  //Strings can get split different on different devices
+                if (coords[0].equals("")) {  //Strings can get split different on different devices
                     coords[0] = coords[1];
                     coords[1] = coords[2];
                 }
