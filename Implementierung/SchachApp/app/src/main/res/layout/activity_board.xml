@@ -98,7 +98,7 @@
         app:srcCompat="@android:color/transparent" />
 
     <ImageView
-        android:id="@+id/rook_black_1"
+        android:id="@+id/figure_1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -115,11 +115,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/rook_figure_black" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/rook_black_2"
+        android:id="@+id/figure_2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -136,11 +135,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/rook_figure_black" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/knight_black_1"
+        android:id="@+id/figure_3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -157,11 +155,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bishop_figure_black" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/knight_black_2"
+        android:id="@+id/figure_4"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -178,11 +175,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bishop_figure_black" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/bishop_black_1"
+        android:id="@+id/figure_5"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -199,11 +195,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/knight_figure_black" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/bishop_black_2"
+        android:id="@+id/figure_6"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -220,11 +215,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/knight_figure_black" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/queen_black"
+        android:id="@+id/figure_7"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -241,11 +235,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/queen_figure_black" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/king_black"
+        android:id="@+id/figure_8"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -262,11 +255,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/king_figure_black" />
+        app:layout_constraintVertical_bias="0.0"/>
 
     <ImageView
-        android:id="@+id/pawn_black_1"
+        android:id="@+id/figure_9"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -283,11 +275,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_black" />
+        app:layout_constraintVertical_bias="0.0"/>
 
     <ImageView
-        android:id="@+id/pawn_black_2"
+        android:id="@+id/figure_10"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -304,11 +295,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_black" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/pawn_black_3"
+        android:id="@+id/figure_11"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -325,11 +315,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_black" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/pawn_black_4"
+        android:id="@+id/figure_12"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -346,11 +335,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_black" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/pawn_black_5"
+        android:id="@+id/figure_13"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -367,11 +355,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_black" />
+        app:layout_constraintVertical_bias="0.0"/>
 
     <ImageView
-        android:id="@+id/pawn_black_6"
+        android:id="@+id/figure_14"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -388,11 +375,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_black" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/pawn_black_7"
+        android:id="@+id/figure_15"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -409,11 +395,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_black" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/pawn_black_8"
+        android:id="@+id/figure_16"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -430,11 +415,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_black" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/pawn_white_1"
+        android:id="@+id/figure_17"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -451,11 +435,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/pawn_white_2"
+        android:id="@+id/figure_18"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -472,11 +455,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/pawn_white_3"
+        android:id="@+id/figure_19"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -493,11 +475,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/pawn_white_4"
+        android:id="@+id/figure_20"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -514,11 +495,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/pawn_white_5"
+        android:id="@+id/figure_21"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -535,11 +515,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/pawn_white_6"
+        android:id="@+id/figure_22"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -556,11 +535,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/pawn_white_7"
+        android:id="@+id/figure_23"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -577,11 +555,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/pawn_white_8"
+        android:id="@+id/figure_24"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -598,11 +575,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pawn_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/rook_white_1"
+        android:id="@+id/figure_25"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -619,11 +595,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/rook_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/rook_white_2"
+        android:id="@+id/figure_26"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -640,11 +615,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/rook_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/knight_white_1"
+        android:id="@+id/figure_27"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -661,11 +635,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bishop_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/knight_white_2"
+        android:id="@+id/figure_28"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -682,11 +655,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bishop_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/bishop_white_1"
+        android:id="@+id/figure_29"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -703,11 +675,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/knight_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/bishop_white_2"
+        android:id="@+id/figure_30"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -724,11 +695,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/knight_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/queen_white"
+        android:id="@+id/figure_31"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -745,11 +715,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/queen_figure_white" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/king_white"
+        android:id="@+id/figure_32"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
@@ -766,7 +735,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chessboard"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/king_figure_white" />
+        app:layout_constraintVertical_bias="0.0"/>
 
 </android.support.constraint.ConstraintLayout>
