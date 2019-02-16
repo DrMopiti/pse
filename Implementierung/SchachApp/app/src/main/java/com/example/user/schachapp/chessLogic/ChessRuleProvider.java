@@ -26,7 +26,7 @@ public class ChessRuleProvider implements RuleProvider {
     }
 
     /**
-     * Returns a list of legal moves for a piece on given position at given board.
+     * Returns a list of legal moves for a piece on a given position on a given board.
      * Uses the getPossibleMoves and the isAllowedMove method to determine if a piece is pinned.
      * @param position the position of the piece
      * @param board the board on which the piece stands
@@ -47,7 +47,7 @@ public class ChessRuleProvider implements RuleProvider {
     /**
      * Checks if a given move is legal on a given board.
      * Checks if the piece is on the correct position, if the correct player is to move,
-     * and then calculates the legal moves for the piece at given position and checks if they contain the given move
+     * and then calculates the legal moves for the piece at a given position and checks if they contain the given move
      * @param move the move to be checked if legal
      * @param board the board to calculate on
      * @return true if legal, false if not
@@ -87,7 +87,7 @@ public class ChessRuleProvider implements RuleProvider {
     /**
      * Returns the result of the game on the given board. If the game has not ended, it returns null.
      * @param board the board to calculate on
-     * @return the result of the game on given board, null if game has not ended
+     * @return the result of the game on the given board, null if the game has not ended
      */
     @Override
     public Result getResult(BoardState board) {
@@ -132,11 +132,11 @@ public class ChessRuleProvider implements RuleProvider {
     }
 
     /**
-     * Returns a list of possible moves (not considering if piece is pinned) for the piece at given position on given board.
-     * Uses the getMovement method of the piece at given position
+     * Returns a list of possible moves (not considering if piece is pinned) for the piece at the given position on the given board.
+     * Uses the getMovement method of the piece at the given position
      * @param position the pieces position
      * @param board the board to calculate on
-     * @return list of posiible moves
+     * @return list of possible moves
      */
     private List<Move> getPossibleMoves(Position position, BoardState board) {
         if (board.hasPieceAt(position)) {
@@ -146,7 +146,7 @@ public class ChessRuleProvider implements RuleProvider {
     }
 
     /**
-     * Checks if a player of given color is checked on the given board.
+     * Checks if a player of a given color is checked on the given board.
      * Does not care which player has to move next.
      * @param color the color of the player who can be checked, white = true, black = false
      * @param board the board to calculate on
@@ -179,7 +179,7 @@ public class ChessRuleProvider implements RuleProvider {
 
     /**
      * Checks if a given board has legal moves for the player who has to move.
-     * Checks for all pieces of this player if they have a legal move and returns true if so.
+     * Checks for all pieces of this player if they have a legal move and returns true if they do.
      * @param board the board to calculate on
      * @return true if the moving player has at least one legal move, false if not
      */
@@ -204,8 +204,8 @@ public class ChessRuleProvider implements RuleProvider {
     }
 
     /**
-     * Checks if the moving player is stale mated by checking is he has no legal moves left.
-     * Does not check if the player is checked, so this method should be used after chekcing for mate.
+     * Checks if the moving player is stale mated by checking if he has no legal moves left.
+     * Does not check if the player is checked, so this method should be used after checking for mate.
      * @param board the board to calculate on
      * @return true if the player is stale mated, false if not
      */

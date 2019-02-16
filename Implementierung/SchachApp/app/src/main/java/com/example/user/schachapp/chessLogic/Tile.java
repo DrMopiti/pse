@@ -30,7 +30,7 @@ public class Tile {
     }
 
     /**
-     * Sets this tiles piece to the given piece.
+     * Sets the piece of this tile to the given piece.
      * @param piece piece to be set on this tile
      */
     public void setPiece(Piece piece) {

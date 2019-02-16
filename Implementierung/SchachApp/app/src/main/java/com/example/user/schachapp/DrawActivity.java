@@ -18,7 +18,7 @@ public class DrawActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw);
 
-        menuButton = findViewById(R.id.menü);
+        menuButton = findViewById(R.id.menu);
 
         // clickListener to change to the MainMenuActivity.
         menuButton.setOnClickListener(new View.OnClickListener() {

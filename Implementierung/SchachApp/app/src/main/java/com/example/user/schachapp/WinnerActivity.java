@@ -18,7 +18,7 @@ public class WinnerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_winner);
 
-        menuButton = findViewById(R.id.menü);
+        menuButton = findViewById(R.id.menu);
 
         // clickListener to change to the MainMenuActivity.
         menuButton.setOnClickListener(new View.OnClickListener() {

@@ -7,8 +7,8 @@ public class EnPassant extends Move {
     Position removePawn;
 
     /**
-     * Creates the enPassant with its given start and goal.
-     * The removePawn position is calculated as it is unambiguously when the start and goal of the move is known.
+     * Creates the EnPassant with its given start and goal.
+     * The removePawn position is calculated as it is unambiguous when the start and goal of the move is known.
      * @param start start position of the pawn
      * @param goal goal position of the pawn
      */

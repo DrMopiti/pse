@@ -1,7 +1,7 @@
 package com.example.user.schachapp.chessLogic;
 
 /**
- * A result, consisting of two seperate strings.
+ * A result, consisting of two separate strings.
  */
 public class Result {
     private String reason;
@@ -10,7 +10,7 @@ public class Result {
     /**
      * Creates a result from the given strings
      * @param result the result itself
-     * @param reason a additional reason for the result
+     * @param reason an additional reason for the result
      */
     public Result(String result, String reason) {
         this.reason = reason;

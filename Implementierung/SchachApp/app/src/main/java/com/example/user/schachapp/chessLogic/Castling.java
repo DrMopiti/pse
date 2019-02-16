@@ -1,14 +1,14 @@
 package com.example.user.schachapp.chessLogic;
 
 /**
- * A castling which extends move and consists of start, goal, and a additional rook move
+ * A castling which extends move and consists of start, goal, and an additional rook move
  */
 public class Castling extends Move {
     private Move rookMove;
 
     /**
      * Creates the castling with its given start and goal.
-     * The rook move is calculated as it is unambiguously when the start and goal of the king is known.
+     * The rook move is calculated as it is unambiguous when the start and goal of the king is known.
      * @param start start position of the king
      * @param goal goal position of the king
      */

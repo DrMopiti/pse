@@ -5,7 +5,7 @@ import java.util.List;
 
 
 /**
- * Represents a chessboard with all necessary information to recreate a chessgame at a certain point.
+ * Represents a chessboard with all necessary information to recreate a chess game at any point.
  */
 public class BoardState {
     private Tile[][] tiles;
@@ -19,7 +19,7 @@ public class BoardState {
 
     /**
      * Sets all attributes of the board by splitting the given string several times.
-     * @param string a string which represents a boardState, has to be in a specific format
+     * @param string a string which represents a BoardState, has to be in a specific format
      */
     public BoardState(String string) {
         //splits the String in 4 Sectors: Pieces, Last Move, Booleans, Moves without Action
@@ -81,7 +81,7 @@ public class BoardState {
     }
 
     /**
-     * Applys a move on this board, updates all attributes and the tile-array.
+     * Applies a move on this board, updates all attributes and the tile array.
      * @param move the move to be applied
      */
     public void applyMove(Move move) {
@@ -149,16 +149,16 @@ public class BoardState {
     }
 
     /**
-     * Checks if there is a piece at given position.
+     * Checks if there is a piece at the given position.
      * @param position the position to be checked
-     * @return false if there is no piece, true if there is
+     * @return false if there is no piece, true if there is a piece
      */
     public boolean hasPieceAt(Position position) {
         return (tiles[position.getX()][position.getY()].getPiece() != null);
     }
 
     /**
-     * Returns the piece at given position.
+     * Returns the piece at the given position.
      * @param position the position from which the piece should be returned
      * @return null if there is no piece at given position
      */
@@ -167,7 +167,7 @@ public class BoardState {
     }
 
     /**
-     * Returns all pieces of given color as a list of their positions.
+     * Returns all pieces of the given color as a list of their positions.
      * @param white the color of the pieces to be returned, white = true, black = false
      * @return a list of positions
      */
@@ -260,7 +260,7 @@ public class BoardState {
 
     /**
      * Converts the whole boardState to a string, by representing each attribute by different chars.
-     * A clone of this board can be created by using this string in the constructor.     *
+     * A clone of this board can be created by using this string in the constructor.
      * @return the string to represent the boardState
      */
     public String toString() {

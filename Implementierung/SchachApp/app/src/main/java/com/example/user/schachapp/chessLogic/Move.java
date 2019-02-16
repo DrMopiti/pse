@@ -22,7 +22,7 @@ public class Move {
 
     /**
      *
-     * @return the moves start position
+     * @return the move's start position
      */
     public Position getStart() {
         return start;
@@ -30,14 +30,14 @@ public class Move {
 
     /**
      *
-     * @return the moves goal position
+     * @return the move's goal position
      */
     public Position getGoal() {
         return goal;
     }
 
     /**
-     * Converts the move to a string by using the string representation of its positions and seperating them with a -.
+     * Converts the move to a string by using the string representation of its positions and separating them with a -.
      * @return string representation of this move
      */
     @Override
