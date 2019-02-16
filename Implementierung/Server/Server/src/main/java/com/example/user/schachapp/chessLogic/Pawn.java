@@ -22,13 +22,24 @@ public class Pawn extends Piece {
 
         //korrigiert war nicht vollständig richtig
         //straight Pawn Moves
-        int limit = (yPos == base) ? yPos + 2 * dir : yPos + dir;
+     /*   int limit = (yPos == base) ? yPos + 2 * dir : yPos + dir;
         for (int j = yPos + dir ; isWhite ? j <= limit: j >= limit;) {
             Position tempPosition = new Position(xPos,j);
             if (!board.hasPieceAt(tempPosition)) {
                 possibleMoves.add(new Move(position, tempPosition));
             }
-            j = isWhite ? j++ : j--;
+            j = isWhite ? j + 1 : j - 1;
+        }*/
+
+        Position tempPosition = new Position(xPos, yPos + dir);
+        if (!board.hasPieceAt(tempPosition)) {
+            possibleMoves.add(new Move(position, tempPosition));
+            if (yPos == base) {
+                tempPosition = new Position(xPos, yPos + (2 * dir));
+                if (!board.hasPieceAt(tempPosition)) {
+                    possibleMoves.add(new Move(position, tempPosition));
+                }
+            }
         }
 
         //capturing Pawn Moves (diagonal)

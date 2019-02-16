@@ -3,14 +3,22 @@ package com.example.user.schachapp.chessLogic;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.http.HEAD;
-
 public class Queen extends Piece {
     private static final String QUEEN_CHAR = "D";
     private static final int QUEEN_VALUE = 9;
     public Queen(boolean isWhite) {
         super(isWhite, QUEEN_VALUE, QUEEN_CHAR);
     }
+
+    @Override
+    public String getImageName() {
+        if (isWhite) {
+            return "queen_figure_white";
+        } else {
+            return "queen_figure_black";
+        }
+    }
+
     @Override
     public  List<Move> getMovement(Position position, BoardState board) {
 

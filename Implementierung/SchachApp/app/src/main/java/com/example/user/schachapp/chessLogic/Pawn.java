@@ -9,6 +9,16 @@ public class Pawn extends Piece {
     public Pawn(boolean isWhite) {
         super(isWhite, PAWN_VALUE, PAWN_CHAR);
     }
+
+    @Override
+    public String getImageName() {
+        if (isWhite) {
+            return "pawn_figure_white";
+        } else {
+            return "pawn_figure_black";
+        }
+    }
+
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
 

@@ -9,6 +9,16 @@ public class Bishop extends Piece {
     public Bishop(boolean isWhite) {
         super(isWhite, BISHOP_VALUE, BISHOP_CHAR);
     }
+
+    @Override
+    public String getImageName() {
+        if (isWhite) {
+            return "bishop_figure_white";
+        } else {
+            return "bishop_figure_black";
+        }
+    }
+
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
         if (board == null) {

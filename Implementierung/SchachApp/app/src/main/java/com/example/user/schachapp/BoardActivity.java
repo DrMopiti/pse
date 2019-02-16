@@ -96,7 +96,7 @@ public class BoardActivity extends AppCompatActivity {
 
         //String boardString = cs.requestBoard(sharedPrefs.getString("Username", "noUserFound"));
 
-        board = new BoardState("TB0000btSB0000bsLB0000blDB0000bdKB0000bkLB0000blSB0000bsTB0000bt##ttttt#0"/*boardString*/);
+        board = crp.getStartState();
 
         // runs through the array and moves the imageViews form the pieces to the positions that is set from the board.
         Piece p = null;
@@ -270,7 +270,7 @@ public class BoardActivity extends AppCompatActivity {
          Piece selectedPiece = board.getPieceAt(startPos);
          if ((selectedPiece != null) && (pieces[startPos.getX()][startPos.getY()] != null)) {
              pieces[startPos.getX()][startPos.getY()].setColorFilter(Color.argb(100,0,0,255));
-             List<Move> moves = selectedPiece.getMovement(startPos, board);
+             List<Move> moves = crp.getLegalMoves(startPos, board);
              if (moves.size() > 0) {
                  colorMoves(moves);
              }
@@ -280,7 +280,7 @@ public class BoardActivity extends AppCompatActivity {
     // checks if the chosen move is possible and then executes it. Then checks if the game has ended and calls clearColors().
     private void executeMove(Position goal) {
          Piece selectedPiece = board.getPieceAt(startPos);
-         List<Move> moves = selectedPiece.getMovement(startPos, board);
+         List<Move> moves = crp.getLegalMoves(startPos, board);
          ImageView piece = pieces[startPos.getX()][startPos.getY()];
          piece.setColorFilter(Color.argb(0,0,0,255));
          Move move = new Move(startPos, goal);

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import org.springframework.core.io.ClassPathResource;
+
 import com.example.user.schachapp.chessLogic.BoardState;
 import com.example.user.schachapp.chessLogic.ChessRuleProvider;
 import com.example.user.schachapp.chessLogic.RuleProvider;
@@ -66,16 +68,15 @@ public class FirebaseHandler implements DatabaseHandler {
 	// Use a service account
 	InputStream serviceAccount = null;
 	try {
-		serviceAccount = new FileInputStream("serviceAccount.json");
-	} catch (FileNotFoundException e) {
-		e.printStackTrace();
-		System.out.println("DEBUG: ERROR WHILE READING SERVICE ACCOUNT JSON");
-	}
+		serviceAccount = new ClassPathResource("serviceAccount.json").getInputStream();
+	} catch (IOException e1) {
+		e1.printStackTrace();
+	}	
 	GoogleCredentials credentials = null;
 	try {
 		credentials = GoogleCredentials.fromStream(serviceAccount);
-	} catch (IOException e) {
-		e.printStackTrace();
+	} catch (IOException e2) {
+		e2.printStackTrace();
 		System.out.println("DEBUG: ERROR WHILE SETTING CREDENTIALS");
 	}
 	FirebaseOptions options = new FirebaseOptions.Builder()
@@ -110,7 +111,7 @@ public class FirebaseHandler implements DatabaseHandler {
 		data.put("blackPlayer", blackPlayer);
 
 		ApiFuture<WriteResult> result = docRef.set(data);
-		//System.out.println("DEBUG: CREATED NEW GAME");
+		System.out.println("DEBUG: CREATED NEW GAME");
 
 	}
 	
@@ -228,7 +229,7 @@ public class FirebaseHandler implements DatabaseHandler {
 			querySnapshot = query.get();
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
-			//System.out.println("DEBUG: ERROR WHILE GETTING QUERY");
+			System.out.println("DEBUG: ERROR WHILE GETTING QUERY");
 			occurrence++; //assume the player already is in a game
 		}
 		List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();

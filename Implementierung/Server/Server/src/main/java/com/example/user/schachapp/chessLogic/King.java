@@ -12,6 +12,9 @@ public class King extends Piece {
     }
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
+        if (board == null) {
+            throw new NullPointerException("board can not be null");
+        }
 
         int [][] offsets = {{-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,-1},{1,0},{1,1}};
         ArrayList<Position> possiblePositions = new ArrayList<Position>();

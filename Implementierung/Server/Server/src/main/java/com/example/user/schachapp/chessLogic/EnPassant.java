@@ -15,12 +15,4 @@ public class EnPassant extends Move {
     public String toString() {
         return (start.toString() + "-" + goal.toString() + "-E");
     }
-
-    public boolean equals(Move compareTo) {
-        if (compareTo instanceof EnPassant == false){
-            return false;
-        }
-
-        return (start.equals(compareTo.getStart()) && goal.equals(compareTo.getGoal()));
-    }
 }

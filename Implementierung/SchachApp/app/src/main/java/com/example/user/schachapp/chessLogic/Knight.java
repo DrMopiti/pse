@@ -10,6 +10,16 @@ public class Knight extends Piece {
     public Knight(boolean isWhite) {
         super(isWhite, KNIGHT_VALUE, KNIGHT_CHAR);
     }
+
+    @Override
+    public String getImageName() {
+        if (isWhite) {
+            return "knight_figure_white";
+        } else {
+            return "knight_figure_black";
+        }
+    }
+
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
         if (board == null) {
