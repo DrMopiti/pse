@@ -1,0 +1,42 @@
+\documentclass[parskip=full]{scrartcl}
+\usepackage[utf8]{inputenc} % use utf8 file encoding for TeX sources 
+
+\usepackage[T1]{fontenc} % avoid garbled Unicode text in pdf 
+\usepackage[german]{babel} % german hyphenation, quotes, etc 
+\usepackage{hyperref} % detailed hyperlink/pdf configuration
+\usepackage{graphicx}
+\usepackage[toc]{glossaries}
+\usepackage{caption}
+\usepackage{pdfpages}
+\hypersetup{ % ‘texdoc hyperref‘ for options 
+	pdftitle={Entwurf}, %
+	bookmarks=true,%
+}
+\usepackage{csquotes} % provides \enquote{} macro for "quotes"
+\usepackage{enumitem}
+
+\begin{document}
+	\begin{titlepage}
+		
+		\centering
+		\vspace*{0.2\textheight}
+		{\Large Praxis der Softwareentwicklung}\\[\baselineskip]
+		\vspace{2cm}
+		{\Huge \textbf{Implementierungsbericht}}\\[\baselineskip]\par
+		\vspace{2cm}
+		{\LARGE Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev}\par		
+		\newpage	
+		\tableofcontents
+		\pagebreak
+		
+	\end{titlepage}
+	\section{Ablauf}
+	Implementiert wurde in zwei Gruppen, eine Server-Gruppe und eine App-Gruppe.
+	Die App-Gruppe bestand aus Rukiye Devran, Tim Groß und Orkhan Aliev.
+	Die Server-Gruppe bestand aus Daniel Helmig.
+	Es wurde weitgehend unabhängig voneinander implementiert mit einigen gemeinsamen Treffen um den Fortschritt zu begutachten und eventuelle Differenzen zwischen Komponenten zu beseitigen.
+	\section{Schwierigkeiten}
+		\subsection{Allgemein} 
+		\subsection{App}
+		\subsection{Server}
+\end{document}
