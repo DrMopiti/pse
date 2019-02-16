@@ -3,6 +3,9 @@ package com.example.user.schachapp.chessLogic;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * a rook
+ */
 public class Rook extends Piece {
     private static final String ROOK_CHAR = "T";
     private static final int ROOK_VALUE = 5;
@@ -10,6 +13,10 @@ public class Rook extends Piece {
         super(isWhite, ROOK_VALUE, ROOK_CHAR);
     }
 
+    /**
+     *
+     * @return filename for the image of this piece
+     */
     @Override
     public String getImageName() {
         if (isWhite) {
@@ -19,6 +26,13 @@ public class Rook extends Piece {
         }
     }
 
+    /**
+     * Calculates the movement of a piece on a given board for a given position and returns it as a list of moves.
+     * The method will not check if there is the correct on the given position, it will also ignore if the piece is pinned.
+     * @param position the position on which the piece stands
+     * @param board the board on which the movement should be calculated
+     * @return a list of moves
+     */
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
         List<Move> permittedMoves = new ArrayList<Move>();
