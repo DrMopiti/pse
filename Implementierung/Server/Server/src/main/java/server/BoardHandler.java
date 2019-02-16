@@ -8,7 +8,9 @@ package server;
 public class BoardHandler {
 	
 	private String player;
-	public BoardHandler(String player) {
+	private DatabaseHandler handler;
+	public BoardHandler(String player, DatabaseHandler handler) {
+		this.handler = handler;
 		this.player = player;
 	}
 	/**
@@ -17,7 +19,6 @@ public class BoardHandler {
 	 */
 	public String getBoard() {
 		String retString;
-		DatabaseHandler handler = FirebaseHandler.getHandler();
 		if (handler.hasActiveGame(player)) {
 			retString = handler.loadGame(player);
 		} else {

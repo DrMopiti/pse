@@ -131,7 +131,7 @@ public class ClientHandler{
 	  * @return Returns the board string on success and other messages if the operation failed
 	  */
 	 private static String board(String player) {
-		 BoardHandler handler = new BoardHandler(player);
+		 BoardHandler handler = new BoardHandler(player, FirebaseHandler.getHandler());
 		 String ifSuccess = handler.getBoard();
 		 return ifSuccess;
 	 }
