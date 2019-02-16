@@ -12,7 +12,7 @@ public class BoardState {
     private boolean blackKingCastle;
     private boolean blackQueenCastle;
     private int movesWithoutAction;
-
+    
     public BoardState(String string) {
         //splits the String in 4 Sectors: Pieces, Last Move, Booleans, Moves without Action
         String[] sectors = string.split("#");

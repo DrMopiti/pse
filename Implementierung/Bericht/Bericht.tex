@@ -41,8 +41,12 @@
 		\subsection{App}
 		\subsection{Server}
 		Ein Hindernis war die Umstellung von Javalin mit eingebettetem Server zu einem Web-Servlet. Diese Funktionalität ist neu in Javalin und hat zu viele Probleme verursacht, sodass der gesamte ClientHandler neu geschrieben wurde.
-		Diesmal mithilfe des Spring Frameworks.
+		Dieses mal mithilfe des Spring Frameworks.	
 		
 		Probleme gab es zudem beim Testen des Servers aufgrund nicht optimalen Entwurfs.
 		Die Klassen GameCreator, MoveHandler und BoardHandler bekamen als Parameter nur den/die Spieler beziehungsweise den Zug. Daher bekamen alle drei den DatabaseHandler direkt über die statische Methode getHandler. Dies erschwerte das Testen dieser Klassen ungemein und wurde gelöst indem der DatabaseHandler nun im Konstruktor übergeben wird.
+		
+		Generell erwies sich das Testen des Servers als schwierig, da sehr viele externe Bibliotheken verwendet wurden und viele statische Aufrufe gemacht werden.
+		
+		
 \end{document}

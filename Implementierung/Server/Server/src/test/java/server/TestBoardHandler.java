@@ -13,22 +13,29 @@ import org.junit.Assert;
  * 
  * @author Daniel Helmig
  * 
- * Useless test class
+ * Test class for BoardHandler
  * 
  */
 public class TestBoardHandler {
 	
 	
 	@Mock
-	DatabaseHandler handler = mock(FirebaseDummy.class);
+	DatabaseHandler handler = mock(FirebaseHandler.class);
 	
 	@InjectMocks
 	BoardHandler bh;
+	
+	/**
+	 * Setup
+	 */
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 	}
 	
+	/**
+	 * Player is in a game
+	 */
 	@Test
 	public void trueTest() {
 		bh = new BoardHandler("player", handler);
@@ -37,6 +44,9 @@ public class TestBoardHandler {
 		Assert.assertEquals("myBoardString", bh.getBoard());
 	}
 	
+	/**
+	 * Player is not in a game
+	 */
 	@Test
 	public void falseTest() {
 		bh = new BoardHandler("player", handler);

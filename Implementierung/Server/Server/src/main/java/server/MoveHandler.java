@@ -20,10 +20,12 @@ import com.example.user.schachapp.chessLogic.RuleProvider;
 public class MoveHandler {
 	private String player;
 	private String move;
+	private DatabaseHandler handler;
 	
-	public MoveHandler(String player, String move) {
+	public MoveHandler(String player, String move, DatabaseHandler handler) {
 		this.player = player;
 		this.move = move;
+		this.handler = handler;
 	}
 	/**
 	 * Checks if the player that wants to send a move is actually in a game
@@ -32,7 +34,6 @@ public class MoveHandler {
 	 */
 	public String processMove() {
 		String retString = "";
-		DatabaseHandler handler = FirebaseHandler.getHandler();
 		String boardString="";
 		if (handler.hasActiveGame(player)) {
 			boardString = handler.loadGame(player);

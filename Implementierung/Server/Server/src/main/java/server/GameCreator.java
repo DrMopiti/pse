@@ -7,11 +7,14 @@ package server;
 public class GameCreator {
 	private String whitePlayer;
 	private String blackPlayer;
+	private DatabaseHandler handler;
 	
-	public GameCreator(String whitePlayer, String blackPlayer) {
+	public GameCreator(String whitePlayer, String blackPlayer, DatabaseHandler handler) {
 		this.whitePlayer = whitePlayer;
 		this.blackPlayer = blackPlayer;
+		this.handler = handler;
 	}
+	
 	
 	/**
 	 * Checks if one player is already playing and creates a new game 
@@ -20,7 +23,6 @@ public class GameCreator {
 	 */
 	public String create() {
 		String retString;
-		DatabaseHandler handler = FirebaseHandler.getHandler();
 		boolean whiteActiveGame = handler.hasActiveGame(whitePlayer);
 		boolean blackActiveGame = handler.hasActiveGame(blackPlayer);
 		if (whiteActiveGame || blackActiveGame) {

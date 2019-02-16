@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.user.schachapp.chessLogic.ChessRuleProvider;
+
 /**
  * 
  * @author Daniel Helmig
@@ -39,7 +41,7 @@ public class ClientHandler{
 	}
 	
 	/**
-	 * Calls delete() with parametes
+	 * Calls delete() with parameters
 	 * @param player The player whose game should be deleted
 	 * @return Returns "Success" if the operation was successful and other messages on failure
 	 */
@@ -110,7 +112,7 @@ public class ClientHandler{
 	 * @return Returns "Success" if the operation was successful and other messages on failure
 	 */
 	 private static String newGame(String white, String black) {
-		 GameCreator creator = new GameCreator(white, black);
+		 GameCreator creator = new GameCreator(white, black, FirebaseHandler.getHandler());
 		 String ifSuccess = creator.create();
 		 return ifSuccess;
 	 }
@@ -120,7 +122,7 @@ public class ClientHandler{
 	  * @param player The player whose game should be deleted
 	  * @return Returns "Success" if the operation was successful and other messages on failure
 	  */
-	 private String delete(String player) {
+	 private static String delete(String player) {
 		 DatabaseHandler handler = FirebaseHandler.getHandler();
 		 return handler.deleteGame(player);
 	 }
@@ -143,7 +145,7 @@ public class ClientHandler{
 	  * @return	Returns "Success" if the operation was successful and other messages on failure
 	  */
 	 private static String move(String player, String move) {
-		 MoveHandler handler = new MoveHandler(player, move);
+		 MoveHandler handler = new MoveHandler(player, move, FirebaseHandler.getHandler());
 		 String ifSuccess = handler.processMove();
 		 return ifSuccess;
 	 }
