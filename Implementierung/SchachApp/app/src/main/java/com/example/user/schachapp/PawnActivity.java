@@ -14,11 +14,14 @@ import android.widget.Button;
 public class PawnActivity extends AppCompatActivity {
 
     private Button queenButton, rookButton, knightButton, bishopButton;
+    private String move;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pawn);
+        Intent thisIntent = getIntent();
+        move = thisIntent.getStringExtra("move");
 
         queenButton = findViewById(R.id.queenButton);
         rookButton = findViewById(R.id.rookButton);
@@ -61,6 +64,7 @@ public class PawnActivity extends AppCompatActivity {
     public void queenClicked() {
         Intent intent = new Intent(this, BoardActivity.class);
         intent.putExtra("clickedFigure", R.drawable.queen_figure_white);
+        intent.putExtra("move", move);
         startActivity(intent);
     }
 
@@ -70,6 +74,7 @@ public class PawnActivity extends AppCompatActivity {
     public void rookClicked() {
         Intent intent = new Intent(this, BoardActivity.class);
         intent.putExtra("clickedFigure", R.drawable.rook_figure_white);
+        intent.putExtra("move", move);
         startActivity(intent);
     }
 
@@ -79,6 +84,7 @@ public class PawnActivity extends AppCompatActivity {
     public void knightClicked() {
         Intent intent = new Intent(this, BoardActivity.class);
         intent.putExtra("clickedFigure", R.drawable.knight_figure_white);
+        intent.putExtra("move", move);
         startActivity(intent);
     }
 
@@ -88,6 +94,7 @@ public class PawnActivity extends AppCompatActivity {
     public void bishopClicked() {
         Intent intent = new Intent(this, BoardActivity.class);
         intent.putExtra("clickedFigure", R.drawable.bishop_figure_white);
+        intent.putExtra("move", move);
         startActivity(intent);
     }
 
