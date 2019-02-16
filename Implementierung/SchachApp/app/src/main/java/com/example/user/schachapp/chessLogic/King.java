@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * a king
+ */
 public class King extends Piece {
     private static final String KING_CHAR = "K";
     private static final int KING_VALUE = 0;
@@ -11,6 +14,10 @@ public class King extends Piece {
         super(isWhite, KING_VALUE, KING_CHAR);
     }
 
+    /**
+     *
+     * @return filename for the image of this piece
+     */
     @Override
     public String getImageName() {
         if (isWhite) {
@@ -20,6 +27,13 @@ public class King extends Piece {
         }
     }
 
+    /**
+     * Calculates the movement of a piece on a given board for a given position and returns it as a list of moves.
+     * The method will not check if there is the correct on the given position, it will also ignore if the piece is pinned.
+     * @param position the position on which the piece stands
+     * @param board the board on which the movement should be calculated
+     * @return a list of moves
+     */
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
         if (board == null) {

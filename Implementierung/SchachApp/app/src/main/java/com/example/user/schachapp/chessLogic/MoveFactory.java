@@ -1,6 +1,15 @@
 package com.example.user.schachapp.chessLogic;
 
+/**
+ * A factory that can create a certain type of move from a given string
+ */
 public class MoveFactory {
+    /**
+     * Checks the given string for correctness and creates the correct move from it.
+     * The toString method of the created move should return the given string.
+     * @param moveString the string representation of the move to be created
+     * @return a move of a certain type matching the given string
+     */
     public static Move getMove(String moveString) {
         if (!moveString.contains("-") || moveString == null) {
             return null;

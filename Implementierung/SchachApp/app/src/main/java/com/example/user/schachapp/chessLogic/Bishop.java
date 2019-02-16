@@ -3,6 +3,9 @@ package com.example.user.schachapp.chessLogic;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * a bishop
+ */
 public class Bishop extends Piece {
     private static final String BISHOP_CHAR = "L";
     private static final int BISHOP_VALUE = 3;
@@ -10,6 +13,10 @@ public class Bishop extends Piece {
         super(isWhite, BISHOP_VALUE, BISHOP_CHAR);
     }
 
+    /**
+     *
+     * @return filename for the image of this piece
+     */
     @Override
     public String getImageName() {
         if (isWhite) {
@@ -19,6 +26,13 @@ public class Bishop extends Piece {
         }
     }
 
+    /**
+     * Calculates the movement of a piece on a given board for a given position and returns it as a list of moves.
+     * The method will not check if there is the correct on the given position, it will also ignore if the piece is pinned.
+     * @param position the position on which the piece stands
+     * @param board the board on which the movement should be calculated
+     * @return a list of moves
+     */
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
         if (board == null) {
