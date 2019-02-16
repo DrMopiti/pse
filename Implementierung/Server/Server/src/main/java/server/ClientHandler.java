@@ -84,17 +84,12 @@ public class ClientHandler{
 	public Set<String> getPlayers() {
 		 return SocketHandler.getPlayers();
 	}
-<<<<<<< HEAD
 
-=======
->>>>>>> e48fd542c252e7ecc74e090dfabb574ef67fcef0
-	
 	/**
 	 * Returns true if a player is online
 	 * @param player The player to be checked
 	 * @return Returns true if the player is online and else if he isn't
-	 */
-		 	
+	 */		 	
 	@RequestMapping("/isonline/{player}")
 	public boolean isOnline(@PathVariable String player) {
 		 return SocketHandler.isOnline(player);	 		
