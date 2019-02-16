@@ -40,21 +40,21 @@ public class Pawn extends Piece {
             }
             j = isWhite ? j + 1 : j - 1;
         }*/
-
-        Position tempPosition = new Position(xPos, yPos + dir);
-        if (!board.hasPieceAt(tempPosition)) {
-            possibleMoves.add(new Move(position, tempPosition));
-            if (yPos == base) {
-                tempPosition = new Position(xPos, yPos + (2 * dir));
-                if (!board.hasPieceAt(tempPosition)) {
-                    possibleMoves.add(new Move(position, tempPosition));
-                }
-            }
-        }
-
+    if( yPos + dir < 8 && yPos + dir >= 0) {
+         Position tempPosition = new Position(xPos, yPos + dir);
+         if (!board.hasPieceAt(tempPosition)) {
+             possibleMoves.add(new Move(position, tempPosition));
+               if (yPos == base) {
+                    tempPosition = new Position(xPos, yPos + (2 * dir));
+                 if (!board.hasPieceAt(tempPosition)) {
+                     possibleMoves.add(new Move(position, tempPosition));
+                   }
+              }
+         }
+    }
         //capturing Pawn Moves (diagonal)
 
-            if (xPos - dir >= 0 && xPos - dir <= 7) {
+            if (xPos - dir >= 0 && xPos - dir <= 7 && yPos + dir >= 0 && yPos + dir <= 7) {
                 Position diagPosLeft = new Position(xPos - dir, yPos + dir);
                 if (board.hasPieceAt(diagPosLeft) && (board.getPieceAt(diagPosLeft).isWhite() != this.isWhite)) {
                     possibleMoves.add(new Move(position, diagPosLeft));
@@ -62,7 +62,7 @@ public class Pawn extends Piece {
             }
 
                 // Kleine Fehler behoben
-            if(xPos + dir >= 0 && xPos + dir <= 7) {
+            if(xPos + dir >= 0 && xPos + dir <= 7 && yPos + dir >= 0 && yPos + dir <= 7) {
                 Position diagPosRight = new Position(xPos + dir, yPos + dir);
                 if (board.hasPieceAt(diagPosRight) && (board.getPieceAt(diagPosRight).isWhite() != this.isWhite)) {
                     possibleMoves.add(new Move(position, diagPosRight));

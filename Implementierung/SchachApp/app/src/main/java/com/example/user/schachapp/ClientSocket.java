@@ -11,6 +11,7 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.java_websocket.drafts.Draft_6455;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -20,6 +21,9 @@ public class ClientSocket {
     private String url = "ws://sdq-pse-gruppe1.ipd.kit.edu/server/";
     private String user = "";
     private final ClientApi clientApi;
+    private final ThreadHandler threadHandler = new ThreadHandler();
+
+
 
     public ClientSocket(String user) {
         this.user = user;
@@ -84,15 +88,20 @@ public class ClientSocket {
     }
 
     public String requestBoard(String user) {
-        Call<String> boardCall = clientApi.getBoard(user);
-        Response response = null;
-        try {
-            response = boardCall.execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String board = response.body().toString();
-        return board;
+        final StringAnswer ret = new StringAnswer();
+        Call<String> call = clientApi.getBoard(user);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                 ret.setAnswer(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+        return ret.getAnswer();
     }
 
     public String newGame(String whitePlayer, String blackPlayer) {
@@ -145,6 +154,10 @@ public class ClientSocket {
         } else {
             return false;
         }
+    }
+
+    public interface SuccessCallback {
+        void notifySuccessful(String message);
     }
 
 

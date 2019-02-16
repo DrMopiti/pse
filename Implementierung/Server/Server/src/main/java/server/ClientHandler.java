@@ -38,6 +38,11 @@ public class ClientHandler{
 		 return newGame(white, black);
 	}
 	
+	/**
+	 * Calls delete() with parametes
+	 * @param player The player whose game should be deleted
+	 * @return Returns "Success" if the operation was successful and other messages on failure
+	 */
 	@RequestMapping("/delete/{player}")
 	public String deleteGame(@PathVariable String player) {
 		return delete(player);
@@ -79,7 +84,10 @@ public class ClientHandler{
 	public Set<String> getPlayers() {
 		 return SocketHandler.getPlayers();
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> e48fd542c252e7ecc74e090dfabb574ef67fcef0
 	
 	/**
 	 * Returns true if a player is online

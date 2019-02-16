@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,7 +35,7 @@ import java.util.List;
 public class BoardActivity extends AppCompatActivity {
     private Button buttonDraw, buttonGiveUp;
     private ImageView chessboard;
-    private ImageView[][] savedPieces = new ImageView[8][8];
+    private ImageView[] savedPieces = new ImageView[32];
     private ImageView[][] pieces = new ImageView[8][8];
     private DisplayMetrics dm;
     private Position startPos = null;
@@ -53,71 +54,69 @@ public class BoardActivity extends AppCompatActivity {
         sharedPrefs = getSharedPreferences("chessApp", 0);
         editor = sharedPrefs.edit();
         cs = new ClientSocket(sharedPrefs.getString("Username", "noUserFound"));
+        cs.connectToWS();
         crp = new ChessRuleProvider();
 
         // two-dimensional array for the chess-pieces.
-        savedPieces[0][0] = findViewById(R.id.rook_black_1);
-        savedPieces[1][0] = findViewById(R.id.knight_black_1);
-        savedPieces[2][0] = findViewById(R.id.bishop_black_1);
-        savedPieces[3][0] = findViewById(R.id.queen_black);
-        savedPieces[4][0] = findViewById(R.id.king_black);
-        savedPieces[5][0] = findViewById(R.id.bishop_black_2);
-        savedPieces[6][0] = findViewById(R.id.knight_black_2);
-        savedPieces[7][0] = findViewById(R.id.rook_black_2);
-        savedPieces[0][1] = findViewById(R.id.pawn_black_1);
-        savedPieces[1][1] = findViewById(R.id.pawn_black_2);
-        savedPieces[2][1] = findViewById(R.id.pawn_black_3);
-        savedPieces[3][1] = findViewById(R.id.pawn_black_4);
-        savedPieces[4][1] = findViewById(R.id.pawn_black_5);
-        savedPieces[5][1] = findViewById(R.id.pawn_black_6);
-        savedPieces[6][1] = findViewById(R.id.pawn_black_7);
-        savedPieces[7][1] = findViewById(R.id.pawn_black_8);
-        savedPieces[0][6] = findViewById(R.id.pawn_white_1);
-        savedPieces[1][6] = findViewById(R.id.pawn_white_2);
-        savedPieces[2][6] = findViewById(R.id.pawn_white_3);
-        savedPieces[3][6] = findViewById(R.id.pawn_white_4);
-        savedPieces[4][6] = findViewById(R.id.pawn_white_5);
-        savedPieces[5][6] = findViewById(R.id.pawn_white_6);
-        savedPieces[6][6] = findViewById(R.id.pawn_white_7);
-        savedPieces[7][6] = findViewById(R.id.pawn_white_8);
-        savedPieces[0][7] = findViewById(R.id.rook_white_1);
-        savedPieces[1][7] = findViewById(R.id.knight_white_1);
-        savedPieces[2][7] = findViewById(R.id.bishop_white_1);
-        savedPieces[4][7] = findViewById(R.id.king_white);
-        savedPieces[3][7] = findViewById(R.id.queen_white);
-        savedPieces[5][7] = findViewById(R.id.bishop_white_2);
-        savedPieces[6][7] = findViewById(R.id.knight_white_2);
-        savedPieces[7][7] = findViewById(R.id.rook_white_2);
+        savedPieces[0] = findViewById(R.id.figure_1);
+        savedPieces[1] = findViewById(R.id.figure_3);
+        savedPieces[2] = findViewById(R.id.figure_5);
+        savedPieces[3] = findViewById(R.id.figure_7);
+        savedPieces[4] = findViewById(R.id.figure_8);
+        savedPieces[5] = findViewById(R.id.figure_6);
+        savedPieces[6] = findViewById(R.id.figure_4);
+        savedPieces[7] = findViewById(R.id.figure_2);
+        savedPieces[8] = findViewById(R.id.figure_9);
+        savedPieces[9] = findViewById(R.id.figure_10);
+        savedPieces[10] = findViewById(R.id.figure_11);
+        savedPieces[11] = findViewById(R.id.figure_12);
+        savedPieces[12] = findViewById(R.id.figure_13);
+        savedPieces[13] = findViewById(R.id.figure_14);
+        savedPieces[14] = findViewById(R.id.figure_15);
+        savedPieces[15] = findViewById(R.id.figure_16);
+        savedPieces[16] = findViewById(R.id.figure_17);
+        savedPieces[17] = findViewById(R.id.figure_18);
+        savedPieces[18] = findViewById(R.id.figure_19);
+        savedPieces[19] = findViewById(R.id.figure_20);
+        savedPieces[20] = findViewById(R.id.figure_21);
+        savedPieces[21] = findViewById(R.id.figure_22);
+        savedPieces[22] = findViewById(R.id.figure_23);
+        savedPieces[23] = findViewById(R.id.figure_24);
+        savedPieces[24] = findViewById(R.id.figure_25);
+        savedPieces[25] = findViewById(R.id.figure_27);
+        savedPieces[26] = findViewById(R.id.figure_29);
+        savedPieces[27] = findViewById(R.id.figure_32);
+        savedPieces[28] = findViewById(R.id.figure_31);
+        savedPieces[29] = findViewById(R.id.figure_30);
+        savedPieces[30] = findViewById(R.id.figure_28);
+        savedPieces[31] = findViewById(R.id.figure_26);
 
         dm = getResources().getDisplayMetrics();
 
         buttonDraw = findViewById(com.example.user.schachapp.R.id.buttonDraw);
         buttonGiveUp = findViewById(com.example.user.schachapp.R.id.buttonGiveUp);
 
-        //String boardString = cs.requestBoard(sharedPrefs.getString("Username", "noUserFound"));
+        String boardString = "TB0000bt" +
+                "SB0000bs" +
+                "LB0000bl" +
+                "DB0000bd" +
+                "KB0000bk" +
+                "LB0000bl" +
+                "SB0000bs" +
+                "TB0000bt" +
+                "##ttttt#0";//cs.requestBoard(sharedPrefs.getString("Username", "noUserFound"));
 
-        board = crp.getStartState();
 
-        // runs through the array and moves the imageViews form the pieces to the positions that is set from the board.
-        Piece p = null;
-        ImageView pieceIV = null;
-            for (int i = 0; i < savedPieces.length; i++) {
-                for (int j = 0; j < savedPieces[i].length; j++) {
-                    p = board.getPieceAt(new Position(i,j));
-                    if (p != null) {
-                        pieceIV = getPieceIV(p.toString());
-                        moveFigure(pieceIV, new Position(i,j), 0);
-                        pieces[i][j] = pieceIV;
-                        pieceIV.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
+        board = new BoardState(boardString);
+
+
+        paintBoard(board);
 
         // checks if there is an pawn-transformation and does it.
         Intent thisIntent = getIntent();
         if (thisIntent.getIntExtra("clickedFigure", 0) != 0) {
             int id = thisIntent.getIntExtra("clickedFigure", R.drawable.pawn_figure_white);
-            for (int i = 0; i < savedPieces.length; i++) {
+            for (int i = 0; i < pieces.length; i++) {
                 if (board.getPieceAt(new Position(i,7)).toString().equals("B")) {
                     pieces[i][7].setImageResource(id);
                 }
@@ -218,7 +217,7 @@ public class BoardActivity extends AppCompatActivity {
      * @param event the event that receives the touch on the display
      * @return the boolean true
      */
-    public boolean boardClicked(MotionEvent event) {
+    private boolean boardClicked(MotionEvent event) {
         int totalX = (int) event.getX(); // x-coordinate from the touch in pixel.
         int totalY = (int) event.getY();
         int boardMetric = dm.widthPixels; // width from the display in pixel.
@@ -244,6 +243,14 @@ public class BoardActivity extends AppCompatActivity {
         animationY.setDuration(animationDuration);
         animationX.start();
         animationY.start();
+        // sets the right size for the figures
+        ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) iv.getLayoutParams();
+        lp.bottomMargin = 0;
+        lp.leftMargin = 0;
+        lp.rightMargin = 0;
+        lp.topMargin = Math.round((boardMetric * 7) / 8);
+        lp.setMarginEnd(360);
+        lp.setMarginStart(0);
     }
 
     // checks if the player selected a figure or a goal and calls the corresponding method.
@@ -353,84 +360,47 @@ public class BoardActivity extends AppCompatActivity {
     // returns the ImageView matching to the given string-representation.
     private ImageView getPieceIV(String pieceRepresentation) {
         ImageView pieceIV = null;
+        for (int i = 0; pieceIV == null; i++) {
+            pieceIV = savedPieces[i];
+            savedPieces[i] = null;
+        }
         switch (pieceRepresentation) {
             case "K":
-                pieceIV = savedPieces[4][7];
-                savedPieces[4][7] = null;
+                pieceIV.setImageResource(R.drawable.king_figure_white);
                 break;
             case "k":
-                pieceIV = savedPieces[4][0];
-                savedPieces[4][0] = null;
+                pieceIV.setImageResource(R.drawable.king_figure_black);
                 break;
             case "D":
-                pieceIV = savedPieces[3][7];
-                savedPieces[3][7] = null;
+                pieceIV.setImageResource(R.drawable.queen_figure_white);
                 break;
             case "d":
-                pieceIV = savedPieces[3][0];
-                savedPieces[3][0] = null;
+                pieceIV.setImageResource(R.drawable.queen_figure_black);
                 break;
-            default:
-                pieceIV = getPieceFromPieces(pieceRepresentation);
-        }
-        return pieceIV;
-    }
-
-    // method to help the getPieceIV() method search, for all pieces, that exist more than one time.
-    private ImageView getPieceFromPieces(String pieceRepresentation) {
-        ImageView pieceIV = null;
-        if (pieceRepresentation.equals("L")) {
-                pieceIV = savedPieces[2][7];
-                savedPieces[2][7] = null;
-                if (pieceIV == null) {
-                    pieceIV = savedPieces[5][7];
-                    savedPieces[5][7] = null;
-                }
-        } else if (pieceRepresentation.equals("l")) {
-            pieceIV = savedPieces[2][0];
-            savedPieces[2][0] = null;
-            if (pieceIV == null) {
-                pieceIV = savedPieces[5][0];
-                savedPieces[5][0] = null;
-            }
-        } else if (pieceRepresentation.equals("S")) {
-            pieceIV = savedPieces[1][7];
-            savedPieces[1][7] = null;
-            if (pieceIV == null) {
-                pieceIV = savedPieces[6][7];
-                savedPieces[6][7] = null;
-            }
-        } else if (pieceRepresentation.equals("s")) {
-            pieceIV = savedPieces[1][0];
-            savedPieces[1][0] = null;
-            if (pieceIV == null) {
-                pieceIV = savedPieces[6][0];
-                savedPieces[6][0] = null;
-            }
-        } else if (pieceRepresentation.equals("B")) {
-            for (int i = 0; pieceIV == null; i++) {
-                pieceIV = savedPieces[i][6];
-                savedPieces[i][6] = null;
-            }
-        } else if (pieceRepresentation.equals("b")) {
-            for (int i = 0; pieceIV == null; i++) {
-                pieceIV = savedPieces[i][1];
-                savedPieces[i][1] = null;
-            }
-        } else if (pieceRepresentation.equals("T")) {
-            pieceIV = savedPieces[0][7];
-            savedPieces[0][7] = null;
-            if (pieceIV == null) {
-                pieceIV = savedPieces[7][7];
-                savedPieces[7][7] = null;
-            }
-        } else if (pieceRepresentation.equals("t")) {
-            pieceIV = savedPieces[0][0];
-            savedPieces[0][0] = null;
-            if (pieceIV == null) {
-                pieceIV = savedPieces[7][0];
-                savedPieces[7][0] = null;
-            }
+            case "L":
+                pieceIV.setImageResource(R.drawable.knight_figure_white);
+                break;
+            case "l":
+                pieceIV.setImageResource(R.drawable.knight_figure_black);
+                break;
+            case "S":
+                pieceIV.setImageResource(R.drawable.bishop_figure_white);
+                break;
+            case "s":
+                pieceIV.setImageResource(R.drawable.bishop_figure_black);
+                break;
+            case "T":
+                pieceIV.setImageResource(R.drawable.rook_figure_white);
+                break;
+            case "t":
+                pieceIV.setImageResource(R.drawable.rook_figure_black);
+                break;
+            case "B":
+                pieceIV.setImageResource(R.drawable.pawn_figure_white);
+                break;
+            case "b":
+                pieceIV.setImageResource(R.drawable.pawn_figure_black);
+                break;
         }
         return pieceIV;
     }
@@ -443,5 +413,22 @@ public class BoardActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    private void paintBoard(BoardState board) {
+        // runs through the array and moves the imageViews form the pieces to the positions that is set from the board.
+        Piece p = null;
+        ImageView pieceIV = null;
+        for (int i = 0; i < pieces.length; i++) {
+            for (int j = 0; j < pieces[i].length; j++) {
+                p = board.getPieceAt(new Position(i,j));
+                if (p != null) {
+                    pieceIV = getPieceIV(p.toString());
+                    moveFigure(pieceIV, new Position(i,j), 0);
+                    pieces[i][j] = pieceIV;
+                    pieceIV.setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 }
