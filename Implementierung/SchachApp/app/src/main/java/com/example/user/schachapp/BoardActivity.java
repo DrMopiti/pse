@@ -21,8 +21,11 @@ import android.widget.ImageView;
 import com.example.user.schachapp.chessLogic.BoardState;
 import com.example.user.schachapp.chessLogic.ChessRuleProvider;
 import com.example.user.schachapp.chessLogic.Move;
+import com.example.user.schachapp.chessLogic.MoveFactory;
 import com.example.user.schachapp.chessLogic.Piece;
+import com.example.user.schachapp.chessLogic.PieceFactory;
 import com.example.user.schachapp.chessLogic.Position;
+import com.example.user.schachapp.chessLogic.Promotion;
 import com.example.user.schachapp.chessLogic.Result;
 
 import java.util.List;
@@ -106,21 +109,35 @@ public class BoardActivity extends AppCompatActivity {
                 "TB0000bt" +
                 "##ttttt#0";//cs.requestBoard(sharedPrefs.getString("Username", "noUserFound"));
 
-
         board = new BoardState(boardString);
-
-
-        paintBoard(board);
 
         // checks if there is an pawn-transformation and does it.
         Intent thisIntent = getIntent();
         if (thisIntent.getIntExtra("clickedFigure", 0) != 0) {
+            Piece piece = null;
             int id = thisIntent.getIntExtra("clickedFigure", R.drawable.pawn_figure_white);
-            for (int i = 0; i < pieces.length; i++) {
-                if (board.getPieceAt(new Position(i,7)).toString().equals("B")) {
-                    pieces[i][7].setImageResource(id);
-                }
+            String move = thisIntent.getStringExtra("move");
+            switch (id) {
+                case R.drawable.queen_figure_white:
+                    move += "-" + "D";
+                    break;
+                case R.drawable.rook_figure_white:
+                    move += "-" + "T";
+                    break;
+                case R.drawable.knight_figure_white:
+                    move += "-" + "S";
+                    break;
+                case R.drawable.bishop_figure_white:
+                    move += "-" + "L";
+                    break;
             }
+            Move theMove = MoveFactory.getMove(move);
+            board.applyMove(theMove);
+            //cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move.toString());
+            paintBoard(board);
+            pieces[theMove.getGoal().getX()][7].setImageResource(id);
+        } else {
+            paintBoard(board);
         }
 
         // checks if the other player has an los or an draw on the chessBoard and change to the appropriate Activity.
@@ -164,7 +181,6 @@ public class BoardActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 return boardClicked(event);
             }
-
         });
     }
 
@@ -277,7 +293,7 @@ public class BoardActivity extends AppCompatActivity {
          Piece selectedPiece = board.getPieceAt(startPos);
          if ((selectedPiece != null) && (pieces[startPos.getX()][startPos.getY()] != null)) {
              pieces[startPos.getX()][startPos.getY()].setColorFilter(Color.argb(100,0,0,255));
-             List<Move> moves = crp.getLegalMoves(startPos, board);
+             List<Move> moves = selectedPiece.getMovement(startPos, board);
              if (moves.size() > 0) {
                  colorMoves(moves);
              }
@@ -286,8 +302,9 @@ public class BoardActivity extends AppCompatActivity {
 
     // checks if the chosen move is possible and then executes it. Then checks if the game has ended and calls clearColors().
     private void executeMove(Position goal) {
+         clearColors();
          Piece selectedPiece = board.getPieceAt(startPos);
-         List<Move> moves = crp.getLegalMoves(startPos, board);
+         List<Move> moves = selectedPiece.getMovement(startPos, board);
          ImageView piece = pieces[startPos.getX()][startPos.getY()];
          piece.setColorFilter(Color.argb(0,0,0,255));
          Move move = new Move(startPos, goal);
@@ -299,6 +316,12 @@ public class BoardActivity extends AppCompatActivity {
              moveFigure(piece, goal, 500);
              pieces[goal.getX()][goal.getY()] = piece;
              pieces[startPos.getX()][startPos.getY()] = null;
+             // checks if there should happen a pawn-transformation.
+             if ((selectedPiece.toString().toLowerCase().equals("b")) && (move.getGoal().getY() == 7)) {
+                 Intent intent = new Intent(this, PawnActivity.class);
+                 intent.putExtra("move", move.toString());
+                 startActivity(intent);
+             }
              board.applyMove(move);
              //cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move.toString());
              if (crp.hasEnded(board)) {
@@ -321,12 +344,6 @@ public class BoardActivity extends AppCompatActivity {
                 }
              }
          }
-        clearColors();
-         // checks if there should happen a pawn-transformation.
-        if ((selectedPiece.toString().toLowerCase().equals("b")) && (move.getGoal().getY() == 7)) {
-            Intent intent = new Intent(this, PawnActivity.class);
-            startActivity(intent);
-        }
     }
 
     // removes the coloring from the possible moves.
