@@ -395,16 +395,16 @@ public class BoardActivity extends AppCompatActivity {
                 pieceIV.setImageResource(R.drawable.queen_figure_black);
                 break;
             case "L":
-                pieceIV.setImageResource(R.drawable.knight_figure_white);
-                break;
-            case "l":
-                pieceIV.setImageResource(R.drawable.knight_figure_black);
-                break;
-            case "S":
                 pieceIV.setImageResource(R.drawable.bishop_figure_white);
                 break;
-            case "s":
+            case "l":
                 pieceIV.setImageResource(R.drawable.bishop_figure_black);
+                break;
+            case "S":
+                pieceIV.setImageResource(R.drawable.knight_figure_white);
+                break;
+            case "s":
+                pieceIV.setImageResource(R.drawable.knight_figure_black);
                 break;
             case "T":
                 pieceIV.setImageResource(R.drawable.rook_figure_white);
