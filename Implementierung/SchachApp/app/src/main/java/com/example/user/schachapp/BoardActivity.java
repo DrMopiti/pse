@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.Image;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.user.schachapp.chessLogic.BoardState;
+import com.example.user.schachapp.chessLogic.Castling;
 import com.example.user.schachapp.chessLogic.ChessRuleProvider;
+import com.example.user.schachapp.chessLogic.EnPassant;
 import com.example.user.schachapp.chessLogic.Move;
 import com.example.user.schachapp.chessLogic.MoveFactory;
 import com.example.user.schachapp.chessLogic.Piece;
@@ -326,8 +329,8 @@ public class BoardActivity extends AppCompatActivity {
          List<Move> moves = crp.getLegalMoves(startPos, board);
          ImageView piece = findViewById(pieces[startPos.getX()][startPos.getY()]);
          piece.setColorFilter(Color.argb(0,0,0,255));
-         Move move = new Move(startPos, goal);
-         if (movesContains(moves, move)) {
+         Move move = getMoveByGoal(moves, goal);
+         if (move != null) {
              // checks if in this move a figure was captured and removes it.
              if (pieces[goal.getX()][goal.getY()] != 0) {
                  findViewById(pieces[goal.getX()][goal.getY()]).setVisibility(ImageView.INVISIBLE);
@@ -335,6 +338,21 @@ public class BoardActivity extends AppCompatActivity {
              moveFigure(piece, goal, 500);
              pieces[goal.getX()][goal.getY()] = pieces[startPos.getX()][startPos.getY()];
              pieces[startPos.getX()][startPos.getY()] = 0;
+
+             if (move instanceof Castling) {
+                 Position rookStart = ((Castling) move).getRookMove().getStart();
+                 Position rookGoal = ((Castling) move).getRookMove().getGoal();
+                 ImageView rook = findViewById(pieces[rookStart.getX()][rookStart.getY()]);
+                 moveFigure(rook, rookGoal, 500);
+                 pieces[rookGoal.getX()][rookGoal.getY()] = pieces[rookStart.getX()][rookStart.getY()];
+                 pieces[rookStart.getX()][rookStart.getY()] = 0;
+             }
+
+             if(move instanceof EnPassant) {
+                 Position removePawn = ((EnPassant) move).getRemovePawn();
+                 findViewById(pieces[removePawn.getX()][removePawn.getY()]).setVisibility(ImageView.INVISIBLE);
+                 pieces[removePawn.getX()][removePawn.getY()] = 0;
+             }
              // checks if there should happen a pawn-transformation of white.
              if ((selectedPiece.toString().toLowerCase().equals("b")) && (move.getGoal().getY() == 7)) {
                  Intent intent = new Intent(this, WhitePawnActivity.class);
@@ -459,6 +477,15 @@ public class BoardActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    private Move getMoveByGoal(List<Move> moves, Position goal) {
+        for(Move m: moves) {
+            if (m.getGoal().equals(goal)) {
+                return m;
+            }
+        }
+        return null;
     }
 
     /**
