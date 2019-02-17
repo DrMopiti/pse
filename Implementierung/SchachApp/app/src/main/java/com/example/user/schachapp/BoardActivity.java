@@ -277,8 +277,8 @@ public class BoardActivity extends AppCompatActivity {
         } catch (IllegalArgumentException e) {
 
         }
-        if (/*board.whiteToMove()*/true && positionClicked != null) {
-            if ((startPos == null) && (board.getPieceAt(positionClicked) != null) && (board.getPieceAt(positionClicked).isWhite())) {
+        if (positionClicked != null) {
+            if ((startPos == null) && (board.getPieceAt(positionClicked) != null) && (board.getPieceAt(positionClicked).isWhite() == board.whiteToMove())) {
                 startPos = positionClicked;
                 showPosition();
             } else if ((startPos != null) && (!startPos.equals(positionClicked))){
@@ -293,7 +293,7 @@ public class BoardActivity extends AppCompatActivity {
          Piece selectedPiece = board.getPieceAt(startPos);
          if ((selectedPiece != null) && (pieces[startPos.getX()][startPos.getY()] != null)) {
              pieces[startPos.getX()][startPos.getY()].setColorFilter(Color.argb(100,0,0,255));
-             List<Move> moves = selectedPiece.getMovement(startPos, board);
+             List<Move> moves =crp.getLegalMoves(startPos, board);
              if (moves.size() > 0) {
                  colorMoves(moves);
              }
@@ -304,7 +304,7 @@ public class BoardActivity extends AppCompatActivity {
     private void executeMove(Position goal) {
          clearColors();
          Piece selectedPiece = board.getPieceAt(startPos);
-         List<Move> moves = selectedPiece.getMovement(startPos, board);
+         List<Move> moves = crp.getLegalMoves(startPos, board);
          ImageView piece = pieces[startPos.getX()][startPos.getY()];
          piece.setColorFilter(Color.argb(0,0,0,255));
          Move move = new Move(startPos, goal);
