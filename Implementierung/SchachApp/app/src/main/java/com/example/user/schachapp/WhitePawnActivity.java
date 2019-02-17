@@ -104,4 +104,8 @@ public class WhitePawnActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }

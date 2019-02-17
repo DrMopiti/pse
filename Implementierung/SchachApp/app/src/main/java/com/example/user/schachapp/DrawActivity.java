@@ -36,4 +36,9 @@ public class DrawActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

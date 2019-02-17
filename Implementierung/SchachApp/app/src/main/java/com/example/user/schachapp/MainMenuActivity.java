@@ -24,6 +24,12 @@ public class MainMenuActivity extends AppCompatActivity {
         // Looks if a user names is stored.
         sharedPrefs = getSharedPreferences("chessApp", 0);
         editor = sharedPrefs.edit();
+        /*editor.remove("GesamtSpielAnzahl");
+        editor.remove("Verloren");
+        editor.remove("Gewonnen");
+        editor.remove("Unentschieden");
+        editor.remove("Username");
+        editor.commit();*/
         if (sharedPrefs.getString("Username", "").length() < 1) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -89,5 +95,10 @@ public class MainMenuActivity extends AppCompatActivity {
     public void statisticsClicked() {
         Intent intent = new Intent(this, StatisticsActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
