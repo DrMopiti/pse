@@ -290,7 +290,7 @@ public class BoardActivity extends AppCompatActivity {
          if ((selectedPiece != null) && (pieces[startPos.getX()][startPos.getY()] != 0)) {
              ImageView iv = findViewById(pieces[startPos.getX()][startPos.getY()]);
              iv.setColorFilter(Color.argb(100,0,0,255));
-             List<Move> moves = selectedPiece.getMovement(startPos, board);
+             List<Move> moves = crp.getLegalMoves(startPos, board);
              if (moves.size() > 0) {
                  colorMoves(moves);
              }
@@ -301,7 +301,7 @@ public class BoardActivity extends AppCompatActivity {
     private void executeMove(Position goal) {
          clearColors();
          Piece selectedPiece = board.getPieceAt(startPos);
-         List<Move> moves = selectedPiece.getMovement(startPos, board);
+         List<Move> moves = crp.getLegalMoves(startPos, board);
          ImageView piece = findViewById(pieces[startPos.getX()][startPos.getY()]);
          piece.setColorFilter(Color.argb(0,0,0,255));
          Move move = new Move(startPos, goal);
@@ -392,16 +392,16 @@ public class BoardActivity extends AppCompatActivity {
                 pieceIV.setImageResource(R.drawable.queen_figure_black);
                 break;
             case "L":
-                pieceIV.setImageResource(R.drawable.knight_figure_white);
-                break;
-            case "l":
-                pieceIV.setImageResource(R.drawable.knight_figure_black);
-                break;
-            case "S":
                 pieceIV.setImageResource(R.drawable.bishop_figure_white);
                 break;
-            case "s":
+            case "l":
                 pieceIV.setImageResource(R.drawable.bishop_figure_black);
+                break;
+            case "S":
+                pieceIV.setImageResource(R.drawable.knight_figure_white);
+                break;
+            case "s":
+                pieceIV.setImageResource(R.drawable.knight_figure_black);
                 break;
             case "T":
                 pieceIV.setImageResource(R.drawable.rook_figure_white);
