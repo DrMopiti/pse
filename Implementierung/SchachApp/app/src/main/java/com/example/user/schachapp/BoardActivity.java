@@ -471,16 +471,6 @@ public class BoardActivity extends AppCompatActivity {
         return pieceIV;
     }
 
-    // checks if the given list contains the given move
-    private boolean movesContains(List<Move> moves, Move move) {
-        for (int i = 0; i < moves.size(); i++) {
-            if (moves.get(i).equals(move)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private Move getMoveByGoal(List<Move> moves, Position goal) {
         for(Move m: moves) {
             if (m.getGoal().equals(goal)) {
