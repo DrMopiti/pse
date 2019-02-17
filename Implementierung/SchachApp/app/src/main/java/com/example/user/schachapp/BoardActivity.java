@@ -156,25 +156,7 @@ public class BoardActivity extends AppCompatActivity {
 
         // checks if the other player has an los or an draw on the chessBoard and change to the appropriate Activity.
         if (crp.hasEnded(board)) {
-            Result result = crp.getResult(board);
-            String resultString = result.getResult();
-            if (resultString.charAt(2) == '1') {
-                int loses = sharedPrefs.getInt("Verloren", 0);
-                loses++;
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putInt("Verloren", loses);
-                editor.commit();
-                Intent intent = new Intent(this, LostActivity.class);
-                startActivity(intent);
-            } else if (resultString.charAt(2) == '5') {
-                int draws = sharedPrefs.getInt("Unentschieden", 0);
-                draws++;
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putInt("Unentschieden", draws);
-                editor.commit();
-                Intent intent = new Intent(this, DrawActivity.class);
-                startActivity(intent);
-            }
+            getResult();
         }
 
         // clickListeners to open an dialog.
@@ -374,29 +356,9 @@ public class BoardActivity extends AppCompatActivity {
                  //cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move.toString());
              }
              if (crp.hasEnded(board)) {
-                Result result = crp.getResult(board);
-                String resultString = result.getResult();
-                if (resultString.charAt(2) == '0') {
-                    SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
-                    int wins = sharedPrefs.getInt("Gewonnen", 0);
-                    wins++;
-                    SharedPreferences.Editor editor = sharedPrefs.edit();
-                    editor.putInt("Gewonnen", wins);
-                    editor.commit();
-                    Intent intent = new Intent(this, WinnerActivity.class);
-                    startActivity(intent);
-                } else if (resultString.charAt(2) == '5') {
-                    SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
-                    int draws = sharedPrefs.getInt("Unentschieden", 0);
-                    draws++;
-                    SharedPreferences.Editor editor = sharedPrefs.edit();
-                    editor.putInt("Unentschieden", draws);
-                    editor.commit();
-                    Intent intent = new Intent(this, DrawActivity.class);
-                    startActivity(intent);
-                }
+                getResult();
              }
-         }
+        }
     }
 
     // removes the coloring from the possible moves.
@@ -504,6 +466,38 @@ public class BoardActivity extends AppCompatActivity {
                     }
                 }
             }
+        }
+    }
+
+    private void getResult() {
+        Result result = crp.getResult(board);
+        String resultString = result.getResult();
+        SharedPreferences sharedPrefs = getSharedPreferences("chessapp", 0);
+        if (resultString.charAt(2) == '1') {
+            int loses = sharedPrefs.getInt("Verloren", 0);
+            loses++;
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putInt("Verloren", loses);
+            editor.commit();
+            Intent intent = new Intent(this, LostActivity.class);
+            startActivity(intent);
+        } else if (resultString.charAt(2) == '5') {
+            int draws = sharedPrefs.getInt("Unentschieden", 0);
+            draws++;
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putInt("Unentschieden", draws);
+            editor.commit();
+            Intent intent = new Intent(this, DrawActivity.class);
+            startActivity(intent);
+        } else if (resultString.charAt(2) == '0') {
+            sharedPrefs = getSharedPreferences("chessApp", 0);
+            int wins = sharedPrefs.getInt("Gewonnen", 0);
+            wins++;
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putInt("Gewonnen", wins);
+            editor.commit();
+            Intent intent = new Intent(this, WinnerActivity.class);
+            startActivity(intent);
         }
     }
 
