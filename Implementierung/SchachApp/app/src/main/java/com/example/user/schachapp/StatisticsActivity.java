@@ -36,7 +36,7 @@ public class StatisticsActivity extends AppCompatActivity {
         // calculates the winRate for the player
         float won = Integer.valueOf(wonGames);
         float all = Integer.valueOf(allGames);
-        float winRate = Math.round((won / all) * 100);
+        float winRate = Math.round((won / all) * 10000);
         winRate = winRate / 100;
         gewinnrate.setText(String.valueOf(winRate) + " %");
         unentschieden.setText(String.valueOf(sharedPrefs.getInt("Unentschieden", 0)));
