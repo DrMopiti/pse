@@ -24,4 +24,7 @@ public interface ClientApi {
 
     @GET("delete/{player}")
     Call<String> deleteGame(@Path("player")String player);
+
+    @GET("hasgame/{player")
+    Call<Boolean> hasGame(@Path("player") String player);
 }
