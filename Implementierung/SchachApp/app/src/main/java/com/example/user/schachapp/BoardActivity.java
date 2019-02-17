@@ -23,9 +23,7 @@ import com.example.user.schachapp.chessLogic.ChessRuleProvider;
 import com.example.user.schachapp.chessLogic.Move;
 import com.example.user.schachapp.chessLogic.MoveFactory;
 import com.example.user.schachapp.chessLogic.Piece;
-import com.example.user.schachapp.chessLogic.PieceFactory;
 import com.example.user.schachapp.chessLogic.Position;
-import com.example.user.schachapp.chessLogic.Promotion;
 import com.example.user.schachapp.chessLogic.Result;
 
 import java.util.List;
@@ -38,13 +36,11 @@ import java.util.List;
 public class BoardActivity extends AppCompatActivity {
     private Button buttonDraw, buttonGiveUp;
     private ImageView chessboard;
-    private ImageView[] savedPieces = new ImageView[32];
-    private ImageView[][] pieces = new ImageView[8][8];
+    private int[] savedPieces = new int[32];
+    private int[][] pieces = new int[8][8];
     private DisplayMetrics dm;
     private Position startPos = null;
     private BoardState board;
-    private SharedPreferences sharedPrefs;
-    private SharedPreferences.Editor editor;
     private ChessRuleProvider crp;
     private ClientSocket cs;
 
@@ -52,49 +48,46 @@ public class BoardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.example.user.schachapp.R.layout.activity_board);
+        dm = getResources().getDisplayMetrics();
         chessboard = findViewById(R.id.chessboard);
-        // store.
-        sharedPrefs = getSharedPreferences("chessApp", 0);
-        editor = sharedPrefs.edit();
+        SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
         cs = new ClientSocket(sharedPrefs.getString("Username", "noUserFound"));
         cs.connectToWS();
         crp = new ChessRuleProvider();
 
-        // two-dimensional array for the chess-pieces.
-        savedPieces[0] = findViewById(R.id.figure_1);
-        savedPieces[1] = findViewById(R.id.figure_3);
-        savedPieces[2] = findViewById(R.id.figure_5);
-        savedPieces[3] = findViewById(R.id.figure_7);
-        savedPieces[4] = findViewById(R.id.figure_8);
-        savedPieces[5] = findViewById(R.id.figure_6);
-        savedPieces[6] = findViewById(R.id.figure_4);
-        savedPieces[7] = findViewById(R.id.figure_2);
-        savedPieces[8] = findViewById(R.id.figure_9);
-        savedPieces[9] = findViewById(R.id.figure_10);
-        savedPieces[10] = findViewById(R.id.figure_11);
-        savedPieces[11] = findViewById(R.id.figure_12);
-        savedPieces[12] = findViewById(R.id.figure_13);
-        savedPieces[13] = findViewById(R.id.figure_14);
-        savedPieces[14] = findViewById(R.id.figure_15);
-        savedPieces[15] = findViewById(R.id.figure_16);
-        savedPieces[16] = findViewById(R.id.figure_17);
-        savedPieces[17] = findViewById(R.id.figure_18);
-        savedPieces[18] = findViewById(R.id.figure_19);
-        savedPieces[19] = findViewById(R.id.figure_20);
-        savedPieces[20] = findViewById(R.id.figure_21);
-        savedPieces[21] = findViewById(R.id.figure_22);
-        savedPieces[22] = findViewById(R.id.figure_23);
-        savedPieces[23] = findViewById(R.id.figure_24);
-        savedPieces[24] = findViewById(R.id.figure_25);
-        savedPieces[25] = findViewById(R.id.figure_27);
-        savedPieces[26] = findViewById(R.id.figure_29);
-        savedPieces[27] = findViewById(R.id.figure_32);
-        savedPieces[28] = findViewById(R.id.figure_31);
-        savedPieces[29] = findViewById(R.id.figure_30);
-        savedPieces[30] = findViewById(R.id.figure_28);
-        savedPieces[31] = findViewById(R.id.figure_26);
-
-        dm = getResources().getDisplayMetrics();
+        // one-dimensional array for the chess-pieces.
+        savedPieces[0] = R.id.figure_1;
+        savedPieces[1] = R.id.figure_2;
+        savedPieces[2] = R.id.figure_3;
+        savedPieces[3] = R.id.figure_4;
+        savedPieces[4] = R.id.figure_5;
+        savedPieces[5] = R.id.figure_6;
+        savedPieces[6] = R.id.figure_7;
+        savedPieces[7] = R.id.figure_8;
+        savedPieces[8] = R.id.figure_9;
+        savedPieces[9] = R.id.figure_10;
+        savedPieces[10] = R.id.figure_11;
+        savedPieces[11] = R.id.figure_12;
+        savedPieces[12] = R.id.figure_13;
+        savedPieces[13] = R.id.figure_14;
+        savedPieces[14] = R.id.figure_15;
+        savedPieces[15] = R.id.figure_16;
+        savedPieces[16] = R.id.figure_17;
+        savedPieces[17] = R.id.figure_18;
+        savedPieces[18] = R.id.figure_19;
+        savedPieces[19] = R.id.figure_20;
+        savedPieces[20] = R.id.figure_21;
+        savedPieces[21] = R.id.figure_22;
+        savedPieces[22] = R.id.figure_23;
+        savedPieces[23] = R.id.figure_24;
+        savedPieces[24] = R.id.figure_25;
+        savedPieces[25] = R.id.figure_26;
+        savedPieces[26] = R.id.figure_27;
+        savedPieces[27] = R.id.figure_28;
+        savedPieces[28] = R.id.figure_29;
+        savedPieces[29] = R.id.figure_30;
+        savedPieces[30] = R.id.figure_31;
+        savedPieces[31] = R.id.figure_32;
 
         buttonDraw = findViewById(com.example.user.schachapp.R.id.buttonDraw);
         buttonGiveUp = findViewById(com.example.user.schachapp.R.id.buttonGiveUp);
@@ -135,7 +128,8 @@ public class BoardActivity extends AppCompatActivity {
             board.applyMove(theMove);
             //cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move.toString());
             paintBoard(board);
-            pieces[theMove.getGoal().getX()][7].setImageResource(id);
+            ImageView iv = findViewById(pieces[theMove.getGoal().getX()][7]);
+            iv.setImageResource(id);
         } else {
             paintBoard(board);
         }
@@ -147,6 +141,7 @@ public class BoardActivity extends AppCompatActivity {
             if (resultString.charAt(2) == '1') {
                 int loses = Integer.valueOf(sharedPrefs.getString("Verloren", "0"));
                 loses++;
+                SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("Verloren", String.valueOf(loses));
                 editor.commit();
                 Intent intent = new Intent(this, LostActivity.class);
@@ -154,6 +149,7 @@ public class BoardActivity extends AppCompatActivity {
             } else if (resultString.charAt(2) == '5') {
                 int draws = Integer.valueOf(sharedPrefs.getString("Unentschieden", "0"));
                 draws++;
+                SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("Unentschieden", String.valueOf(draws));
                 editor.commit();
                 Intent intent = new Intent(this, DrawActivity.class);
@@ -277,8 +273,8 @@ public class BoardActivity extends AppCompatActivity {
         } catch (IllegalArgumentException e) {
 
         }
-        if (positionClicked != null) {
-            if ((startPos == null) && (board.getPieceAt(positionClicked) != null) && (board.getPieceAt(positionClicked).isWhite() == board.whiteToMove())) {
+        if (/*board.whiteToMove()*/true && positionClicked != null) {
+            if ((startPos == null) && (board.getPieceAt(positionClicked) != null) && (board.getPieceAt(positionClicked).isWhite())) {
                 startPos = positionClicked;
                 showPosition();
             } else if ((startPos != null) && (!startPos.equals(positionClicked))){
@@ -291,9 +287,10 @@ public class BoardActivity extends AppCompatActivity {
     // colors the selected piece and passes the possible moves of it to colorMoves().
     private void showPosition() {
          Piece selectedPiece = board.getPieceAt(startPos);
-         if ((selectedPiece != null) && (pieces[startPos.getX()][startPos.getY()] != null)) {
-             pieces[startPos.getX()][startPos.getY()].setColorFilter(Color.argb(100,0,0,255));
-             List<Move> moves =crp.getLegalMoves(startPos, board);
+         if ((selectedPiece != null) && (pieces[startPos.getX()][startPos.getY()] != 0)) {
+             ImageView iv = findViewById(pieces[startPos.getX()][startPos.getY()]);
+             iv.setColorFilter(Color.argb(100,0,0,255));
+             List<Move> moves = selectedPiece.getMovement(startPos, board);
              if (moves.size() > 0) {
                  colorMoves(moves);
              }
@@ -304,21 +301,21 @@ public class BoardActivity extends AppCompatActivity {
     private void executeMove(Position goal) {
          clearColors();
          Piece selectedPiece = board.getPieceAt(startPos);
-         List<Move> moves = crp.getLegalMoves(startPos, board);
-         ImageView piece = pieces[startPos.getX()][startPos.getY()];
+         List<Move> moves = selectedPiece.getMovement(startPos, board);
+         ImageView piece = findViewById(pieces[startPos.getX()][startPos.getY()]);
          piece.setColorFilter(Color.argb(0,0,0,255));
          Move move = new Move(startPos, goal);
          if (movesContains(moves, move)) {
              // checks if in this move a figure was captured and removes it.
-             if (pieces[goal.getX()][goal.getY()] != null) {
-                 pieces[goal.getX()][goal.getY()].setVisibility(ImageView.INVISIBLE);
+             if (pieces[goal.getX()][goal.getY()] != 0) {
+                 findViewById(pieces[goal.getX()][goal.getY()]).setVisibility(ImageView.INVISIBLE);
              }
              moveFigure(piece, goal, 500);
-             pieces[goal.getX()][goal.getY()] = piece;
-             pieces[startPos.getX()][startPos.getY()] = null;
+             pieces[goal.getX()][goal.getY()] = pieces[startPos.getX()][startPos.getY()];
+             pieces[startPos.getX()][startPos.getY()] = 0;
              // checks if there should happen a pawn-transformation.
              if ((selectedPiece.toString().toLowerCase().equals("b")) && (move.getGoal().getY() == 7)) {
-                 Intent intent = new Intent(this, PawnActivity.class);
+                 Intent intent = new Intent(this, WhitePawnActivity.class);
                  intent.putExtra("move", move.toString());
                  startActivity(intent);
              }
@@ -328,15 +325,19 @@ public class BoardActivity extends AppCompatActivity {
                 Result result = crp.getResult(board);
                 String resultString = result.getResult();
                 if (resultString.charAt(2) == '0') {
+                    SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
                     int wins = Integer.valueOf(sharedPrefs.getString("Gewonnen", "0"));
                     wins++;
+                    SharedPreferences.Editor editor = sharedPrefs.edit();
                     editor.putString("Gewonnen", String.valueOf(wins));
                     editor.commit();
                     Intent intent = new Intent(this, WinnerActivity.class);
                     startActivity(intent);
                 } else if (resultString.charAt(2) == '5') {
+                    SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
                     int draws = Integer.valueOf(sharedPrefs.getString("Unentschieden", "0"));
                     draws++;
+                    SharedPreferences.Editor editor = sharedPrefs.edit();
                     editor.putString("Unentschieden", String.valueOf(draws));
                     editor.commit();
                     Intent intent = new Intent(this, DrawActivity.class);
@@ -375,12 +376,8 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     // returns the ImageView matching to the given string-representation.
-    private ImageView getPieceIV(String pieceRepresentation) {
-        ImageView pieceIV = null;
-        for (int i = 0; pieceIV == null; i++) {
-            pieceIV = savedPieces[i];
-            savedPieces[i] = null;
-        }
+    private ImageView getPieceIV(String pieceRepresentation, int ivCounter) {
+        ImageView pieceIV = findViewById(savedPieces[ivCounter]);
         switch (pieceRepresentation) {
             case "K":
                 pieceIV.setImageResource(R.drawable.king_figure_white);
@@ -395,16 +392,16 @@ public class BoardActivity extends AppCompatActivity {
                 pieceIV.setImageResource(R.drawable.queen_figure_black);
                 break;
             case "L":
-                pieceIV.setImageResource(R.drawable.bishop_figure_white);
-                break;
-            case "l":
-                pieceIV.setImageResource(R.drawable.bishop_figure_black);
-                break;
-            case "S":
                 pieceIV.setImageResource(R.drawable.knight_figure_white);
                 break;
-            case "s":
+            case "l":
                 pieceIV.setImageResource(R.drawable.knight_figure_black);
+                break;
+            case "S":
+                pieceIV.setImageResource(R.drawable.bishop_figure_white);
+                break;
+            case "s":
+                pieceIV.setImageResource(R.drawable.bishop_figure_black);
                 break;
             case "T":
                 pieceIV.setImageResource(R.drawable.rook_figure_white);
@@ -432,18 +429,24 @@ public class BoardActivity extends AppCompatActivity {
         return false;
     }
 
-    private void paintBoard(BoardState board) {
-        // runs through the array and moves the imageViews form the pieces to the positions that is set from the board.
+    /**
+     * runs through the array and moves the imageViews form the pieces to the positions that is set from the board.
+     *
+     * @param board to be painted
+     */
+    public void paintBoard(BoardState board) {
         Piece p = null;
         ImageView pieceIV = null;
+        int ivCounter = 0;
         for (int i = 0; i < pieces.length; i++) {
             for (int j = 0; j < pieces[i].length; j++) {
                 p = board.getPieceAt(new Position(i,j));
                 if (p != null) {
-                    pieceIV = getPieceIV(p.toString());
+                    pieceIV = getPieceIV(p.toString(), ivCounter);
                     moveFigure(pieceIV, new Position(i,j), 0);
-                    pieces[i][j] = pieceIV;
+                    pieces[i][j] = pieceIV.getId();
                     pieceIV.setVisibility(View.VISIBLE);
+                    ivCounter++;
                 }
             }
         }
