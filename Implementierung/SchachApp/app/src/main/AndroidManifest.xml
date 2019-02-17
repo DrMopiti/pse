@@ -32,7 +32,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BoardActivity" />
+        <activity android:name=".BoardActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".SearchPlayerActivity" />
         <activity android:name=".StatisticsActivity" />
     </application>
