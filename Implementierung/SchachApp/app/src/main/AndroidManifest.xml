@@ -16,7 +16,8 @@
         android:largeHeap="true"
         android:hardwareAccelerated="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".PawnActivity"></activity>
+        <activity android:name=".BlackPawnActivity"></activity>
+        <activity android:name=".WhitePawnActivity" />
         <activity android:name=".DrawActivity" />
         <activity android:name=".LostActivity" />
         <activity android:name=".ChallengeActivity" />
