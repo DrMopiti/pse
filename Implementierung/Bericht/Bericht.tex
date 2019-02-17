@@ -105,5 +105,18 @@
 		
 		\end{description}
 		\subsection{Server}
-		
+		\subsubsection{Hinzugefügte/Entfernte Klassen}
+		\begin{description}
+			\item[SocketHandler und WebSocketConfig] Beide Klassen ergaben sich aus der implementierung mit \href{https://spring.io/}{Spring}.		
+		\end{description}
+		\subsubsection{Hinzugefügte/Entfernte/Veränderte Methoden}
+		\begin{description}
+			\item[ClientHandler] Der ClientHandler wurde um folgende REST-Schnittstellen erweitert:
+			\begin{itemize}
+				\item \textbf{/delete/player:} Um ein Spiel aus der Datenbank zu löschen
+				\item \textbf{/players:} Um alle Spieler seit Server Start abzufragen
+				\item \textbf{/isonline/player:} Um abzufragen ob ein Spieler online ist
+				\item \textbf{/hasgame/player:} Um abzufragen ob ein Spieler bereits in einem Spiel ist
+			\end{itemize}
+		\end{description}
 \end{document}
