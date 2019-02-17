@@ -31,19 +31,22 @@
 		
 	\end{titlepage}
 	\section{Ablauf}
-	Implementiert wurde in zwei Gruppen, eine Server-Gruppe und eine App-Gruppe.
-	Die App-Gruppe bestand aus Rukiye Devran, Tim Groß und Orkhan Aliev.
-	Die Server-Gruppe bestand aus Daniel Helmig.
-	Es wurde weitgehend unabhängig voneinander implementiert mit einigen gemeinsamen Treffen um den Fortschritt zu begutachten und eventuelle Differenzen zwischen Komponenten zu beseitigen.
+	Es wurde weitgehend unabhängig voneinander implementiert mit einigen gemeinsamen Treffen um den Fortschritt zu begutachten und eventuelle Differenzen zwischen Komponenten zu beseitigen. 
+Es gab im ins gesamten drei Komponenten: Die Schachlogik, Server und Benutzeroberfläche.
+Die Schachlogik von Tim Groß, der Server von Daniel Helmig und Benutzeroberfläche wurde von Rukiye Devran implementiert. Orkhan Aliev hat bei der Schachlogik und bei dem Server mitgeholfen, da diese aufwändig waren.
+
 	\section{Schwierigkeiten}
 		\subsection{Allgemein} 
 		Teilweise gab es Unstimmigkeiten zwischen den verschiedenen Komponenten Benutzeroberfläche, Schachlogik und Server, bei denen nicht ganz klar war welche Funktionalität bereit gestellt wird und was im Laufe der Implementierung geändert werden musste und somit nicht mehr zur Verfügung steht. 
-		\subsection{Benutzeroberfläche}		
+		
+		\subsection{Benutzeroberfläche}	Zum einen war es sehr schwierig die Berechnungen auf dem Display zu implementieren, da man für eine gegebene Pixel-Position abhängig von der Größe des Displays und der Position des Schachbrettes die richtige Kachel berechnen musste. 
+Außerdem war es kompliziert mit den vielen ImageView auf dem Schachbrett umzugehen, da man im Layout alles richtig constrainten und die Attribute korrekt festlegen musste, damit anschließend bei der Ausrichtung auf dem Schachbrett alles funktionierte.
+Desweiteren war es umfangreicher als erwartet die Bauerntransformation zu gestalten.
+Es war auch sehr schwierig das Funktionsprinzip der benutzen Grafikeinheiten zu verstehen, da diese teilweise sehr abstrakt und kompliziert sind. 
+Allgemein gesagt, war es umfangreicher und komplizierter die Benutzeroberfläche zu implementieren, da mehr Funktionalität als erwartet in der Benutzeroberfläche vonnnöten war. 
+	
 		\subsection{Schachlogik}
 		Im Laufe der Implementierung erwiesen sich einige Klassen als überflüssig. Andere Funktionalitäten fehlten im Entwurf und mussten zusätzlich implementiert werden.
-		
-		
-		
 		
 		\subsection{Server}
 		Ein Hindernis war die Umstellung von Javalin mit eingebettetem Server zu einem Web-Servlet. Diese Funktionalität ist neu in Javalin und hat zu viele Probleme verursacht, sodass der gesamte ClientHandler neu geschrieben wurde.
@@ -56,6 +59,25 @@
 		\section{Veränderungen am Entwurf}
 		
 		\subsection{Benutzeroberfläche}	
+		
+		Der GUI-Entwurf wurde soweit übernommen, jedoch gab es auch einige Veränderung: \\
+		Zusätzlich zu der \textbf{BoardActivity}, \textbf{MainMenuActivity}, \textbf{StatisticsActivity} und \textbf{SearchPlayerActivity} kam noch weitere Activities dazu: \\
+Für die Bauern-Transformation wurde noch eine \textbf{PawnActivity} erstellt, die meisten Dialoge die im Entwurfsheft standen wurden alle in Activities umgewandelt, d.h. es gibt jetzt eine \textbf{ChallengeActivity}, \textbf{DrawActivity}, \textbf{LoginActivity}, \textbf{LostActivity}, \textbf{WinnerActivity}. \\ Zusätzlich zu der \textbf{SearchPlayerActivity} wurde eine Hilfsklasse \textbf{SearchPlayerListViewAdapter} erstellt.\\
+In der BoardActivity kamen noch zusätzliche Methoden hinzu: 
+\begin{description}
+\item[- boardClicked(MotionEvent event):]\hfill \\ Wenn das Schachbrett angeklickt wird, berechnet die Mehtode die angetippte Kachel.
+\item[- moveFigure(ImageView iv, Position targetPosition, int animationDuration):]\hfill \\  Bewegt die Figuren auf dem Schachbrett.\\
+\item[- clearColors():]\hfill \\ Entfernt die Färbung von dem möglichen Zug.
+\item[- colorMoves(List<Move> moves):]\hfill \\ Färbt alle möglichen Züge ein, indem eine Bitmap benutz wird.
+\item[- ImageView getPieceIV(String pieceRepresentation, int ivCounter):]\hfill \\ Sucht ein unbenutztes ImageView und ordnet diesem das Bild der angefragten Figur zu und gibt es dann zurück.
+\item[- paintBoard(BoardState board):]\hfill \\ Bewegt die ImageViews mit den entsprechenden Bildern auf die von einem übergebenen BoardState vorgegebenen Felder. \\ 
+\\
+Die \textbf{SearchPlayerActivity} wurde komplett geändert. \\
+Es gibt eine Methode onCreateOptionsMenu, welche eine Liste generiert und von der Hilfsklasse SearchPlayerListViewAdapter einen Filter von der Mehtode filter() bekommt.\\
+In der \textbf{StatisticsActivity} wurde keine Methode verwendet. In dieser Klasse werden die Daten nicht wie Anfangs geplant auf dem Server gespeichert, sondern lokal auf dem Smartphone gespeichert. \\
+Bei der \textbf{LoginActivity} speichert man nur den Spielernamen lokale auf dem Smartphone. Die Google-Anmeldung wurde verworfen, da der Spieler die Möglichkeit haben soll, einen eignen Spielernamen zu wählen und wir  selber eine Anmeldung gestalten wollten.
+\end{description}
+
 			
 		\subsection{Schachlogik}
 		
@@ -105,18 +127,5 @@
 		
 		\end{description}
 		\subsection{Server}
-		\subsubsection{Hinzugefügte/Entfernte Klassen}
-		\begin{description}
-			\item[SocketHandler und WebSocketConfig] Beide Klassen ergaben sich aus der implementierung mit \href{https://spring.io/}{Spring}.		
-		\end{description}
-		\subsubsection{Hinzugefügte/Entfernte/Veränderte Methoden}
-		\begin{description}
-			\item[ClientHandler] Der ClientHandler wurde um folgende REST-Schnittstellen erweitert:
-			\begin{itemize}
-				\item \textbf{/delete/player:} Um ein Spiel aus der Datenbank zu löschen
-				\item \textbf{/players:} Um alle Spieler seit Server Start abzufragen
-				\item \textbf{/isonline/player:} Um abzufragen ob ein Spieler online ist
-				\item \textbf{/hasgame/player:} Um abzufragen ob ein Spieler bereits in einem Spiel ist
-			\end{itemize}
-		\end{description}
+		
 \end{document}
