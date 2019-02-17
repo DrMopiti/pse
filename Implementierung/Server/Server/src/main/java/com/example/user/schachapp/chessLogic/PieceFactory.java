@@ -1,6 +1,16 @@
 package com.example.user.schachapp.chessLogic;
 
+/**
+ * A factory that can create a certain type of piece from a given string
+ */
 public class PieceFactory {
+
+    /**
+     * Creates the correct piece with correct color from the given string.
+     * The toString method of the created piece should return the given string.
+     * @param pieceRepresentation the string representation of the piece to be created
+     * @return a piece of a certain type matching the given string
+     */
     public static Piece getPiece(String pieceRepresentation) {
         switch (pieceRepresentation) {
             case "K":

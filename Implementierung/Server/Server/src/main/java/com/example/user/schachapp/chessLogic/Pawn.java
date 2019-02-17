@@ -3,12 +3,36 @@ package com.example.user.schachapp.chessLogic;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * a pawn
+ */
 public class Pawn extends Piece {
     private static final String PAWN_CHAR = "B";
     private static final int PAWN_VALUE = 1;
     public Pawn(boolean isWhite) {
         super(isWhite, PAWN_VALUE, PAWN_CHAR);
     }
+
+    /**
+     *
+     * @return filename for the image of this piece
+     */
+    @Override
+    public String getImageName() {
+        if (isWhite) {
+            return "pawn_figure_white";
+        } else {
+            return "pawn_figure_black";
+        }
+    }
+
+    /**
+     * Calculates the movement of a piece on a given board for a given position and returns it as a list of moves.
+     * The method will not check if there is the correct on the given position, it will also ignore if the piece is pinned.
+     * @param position the position on which the piece stands
+     * @param board the board on which the movement should be calculated
+     * @return a list of moves
+     */
     @Override
     public List<Move> getMovement(Position position, BoardState board) {
 
@@ -30,21 +54,21 @@ public class Pawn extends Piece {
             }
             j = isWhite ? j + 1 : j - 1;
         }*/
-
-        Position tempPosition = new Position(xPos, yPos + dir);
-        if (!board.hasPieceAt(tempPosition)) {
-            possibleMoves.add(new Move(position, tempPosition));
-            if (yPos == base) {
-                tempPosition = new Position(xPos, yPos + (2 * dir));
-                if (!board.hasPieceAt(tempPosition)) {
-                    possibleMoves.add(new Move(position, tempPosition));
-                }
-            }
-        }
-
+    if( yPos + dir < 8 && yPos + dir >= 0) {
+         Position tempPosition = new Position(xPos, yPos + dir);
+         if (!board.hasPieceAt(tempPosition)) {
+             possibleMoves.add(new Move(position, tempPosition));
+               if (yPos == base) {
+                    tempPosition = new Position(xPos, yPos + (2 * dir));
+                 if (!board.hasPieceAt(tempPosition)) {
+                     possibleMoves.add(new Move(position, tempPosition));
+                   }
+              }
+         }
+    }
         //capturing Pawn Moves (diagonal)
 
-            if (xPos - dir >= 0 && xPos - dir <= 7) {
+            if (xPos - dir >= 0 && xPos - dir <= 7 && yPos + dir >= 0 && yPos + dir <= 7) {
                 Position diagPosLeft = new Position(xPos - dir, yPos + dir);
                 if (board.hasPieceAt(diagPosLeft) && (board.getPieceAt(diagPosLeft).isWhite() != this.isWhite)) {
                     possibleMoves.add(new Move(position, diagPosLeft));
@@ -52,7 +76,7 @@ public class Pawn extends Piece {
             }
 
                 // Kleine Fehler behoben
-            if(xPos + dir >= 0 && xPos + dir <= 7) {
+            if(xPos + dir >= 0 && xPos + dir <= 7 && yPos + dir >= 0 && yPos + dir <= 7) {
                 Position diagPosRight = new Position(xPos + dir, yPos + dir);
                 if (board.hasPieceAt(diagPosRight) && (board.getPieceAt(diagPosRight).isWhite() != this.isWhite)) {
                     possibleMoves.add(new Move(position, diagPosRight));

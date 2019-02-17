@@ -3,6 +3,10 @@ package com.example.user.schachapp.chessLogic;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Represents a chessboard with all necessary information to recreate a chess game at any point.
+ */
 public class BoardState {
     private Tile[][] tiles;
     private Move lastMove;
@@ -12,20 +16,31 @@ public class BoardState {
     private boolean blackKingCastle;
     private boolean blackQueenCastle;
     private int movesWithoutAction;
-    
+
+    /**
+     * Sets all attributes of the board by splitting the given string several times.
+     * @param string a string which represents a BoardState, has to be in a specific format
+     */
     public BoardState(String string) {
         //splits the String in 4 Sectors: Pieces, Last Move, Booleans, Moves without Action
         String[] sectors = string.split("#");
-        if (sectors.length != 4) {
+        if (sectors.length != 4 && !sectors[0].matches("[TSLDKBtsldkb0]{64}")) {
             throw new IllegalArgumentException("String in wrong format");
         }
 
-        if (!validityOfPiecesOnBoard(sectors[0])) {
+      /*  if (!validityOfPiecesOnBoard(sectors[0])) {
             throw new IllegalArgumentException("String for pieces not 64 long or board is not correct");
         }
+        */
 
         //sets all Pieces and empty Positions
         String[] pieces = sectors[0].split("");
+
+        if (pieces[0].equals("")) {
+            for (int i = 0; i < pieces.length - 1; i++) {
+                pieces[i] = pieces[i+1];
+            }
+        }
 
         tiles = new Tile[8][8];
         for (int i = 0; i <= 7; i++) {
@@ -46,8 +61,10 @@ public class BoardState {
 
         //sets all Booleans
         String[] bools = sectors[2].split("");
-        if (bools.length != 5) {
-            throw new IllegalArgumentException("String for booleans not correct");
+        if (bools[0].equals("")) {
+            for (int i = 0; i < bools.length - 1; i++) {
+                bools[i] = bools[i+1];
+            }
         }
         whiteToMove = bools[0].equals("t");
         whiteKingCastle = bools[1].equals("t");
@@ -63,6 +80,10 @@ public class BoardState {
         }
     }
 
+    /**
+     * Applies a move on this board, updates all attributes and the tile array.
+     * @param move the move to be applied
+     */
     public void applyMove(Move move) {
         int startX = move.getStart().getX();
         int startY = move.getStart().getY();
@@ -127,14 +148,29 @@ public class BoardState {
         }
     }
 
+    /**
+     * Checks if there is a piece at the given position.
+     * @param position the position to be checked
+     * @return false if there is no piece, true if there is a piece
+     */
     public boolean hasPieceAt(Position position) {
         return (tiles[position.getX()][position.getY()].getPiece() != null);
     }
 
+    /**
+     * Returns the piece at the given position.
+     * @param position the position from which the piece should be returned
+     * @return null if there is no piece at given position
+     */
     public Piece getPieceAt(Position position) {
         return tiles[position.getX()][position.getY()].getPiece(); //getPiece already returns null if tile is empty
     }
 
+    /**
+     * Returns all pieces of the given color as a list of their positions.
+     * @param white the color of the pieces to be returned, white = true, black = false
+     * @return a list of positions
+     */
     public List<Position> getPiecesOfColor(boolean white) {
         List<Position> pieces = new ArrayList<>();
         Position temp;
@@ -149,6 +185,12 @@ public class BoardState {
         return pieces;
     }
 
+    /**
+     * Returns the position of the king of the given color.
+     * If there are multiple kings on the board(should not be possible) the method just returns one of them.
+     * @param white the color of the king, white = true, black = false
+     * @return the position of the king
+     */
     public Position getKingOfColor(boolean white) {
         for (int i = 0; i <= 7; i++) {
             for (int h = 0; h <= 7; h++) {
@@ -160,34 +202,67 @@ public class BoardState {
         return null;
     }
 
+    /**
+     *
+     * @return the last move on this board, null if it just started
+     */
     public Move getLastMove() {
         return lastMove;
     }
 
+    /**
+     *
+     * @return true if it is white to move, false if black
+     */
     public boolean whiteToMove() {
         return whiteToMove;
     }
 
+    /**
+     *
+     * @return if white can castle on king side
+     */
     public boolean canWhiteKingCastle() {
         return whiteKingCastle;
     }
 
+    /**
+     *
+     * @return if white can castle on queen side
+     */
     public boolean canWhiteQueenCastle() {
         return whiteQueenCastle;
     }
 
+    /**
+     *
+     * @return if black can castle on king side
+     */
     public boolean canBlackKingCastle() {
         return blackKingCastle;
     }
 
+    /**
+     *
+     * @return if black can castle on queen side
+     */
     public boolean canBlackQueenCastle() {
         return blackQueenCastle;
     }
 
+    /**
+     *
+     * @return number of moves in a row with no piece captured and no pawn moved
+     */
     public int getMovesWithoutAction() {
         return movesWithoutAction;
     }
 
+    /**
+     * Converts the whole boardState to a string, by representing each attribute by different chars.
+     * A clone of this board can be created by using this string in the constructor.
+     * @return the string to represent the boardState
+     */
     public String toString() {
 
         //converts the board to String
@@ -222,11 +297,15 @@ public class BoardState {
         return pieces + "#" + move + "#" + bools + "#" + noAction;
     }
 
+    /**
+     * Clones the board by converting it to a string and back.
+     * @return a clone of this board
+     */
     public BoardState clone() {
         return new BoardState(this.toString());
     }
 
-    private boolean validityOfPiecesOnBoard(String pieces) {
+   /* private boolean validityOfPiecesOnBoard(String pieces) {
 
         if (!pieces.matches("[TSLDKBtsldkb0]{64}")) {
            return false;
@@ -289,12 +368,13 @@ public class BoardState {
 
                }
             }
-        /*if (counterForBlackKing != 1 || counterForWhiteKing != 1 || counterForBlackBishop > 2 ||
+        if (counterForBlackKing != 1 || counterForWhiteKing != 1 || counterForBlackBishop > 2 ||
                 counterForWhiteBishop > 2 || counterForBlackKnight > 2 || counterForWhiteKnight > 2 ||
                 counterForBlackRook > 2 || counterForWhiteRook > 2 || counterForBlackPawn > 8 ||
                 counterForWhitePawn > 8 || counterForBlackQueen > 1 || counterForWhiteQueen > 1) {
             return false;
-        }*/
+        }
         return true;
     }
+    */
 }
