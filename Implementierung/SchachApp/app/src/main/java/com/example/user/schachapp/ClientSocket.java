@@ -1,6 +1,8 @@
 package com.example.user.schachapp;
 
 
+import android.support.annotation.WorkerThread;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -87,6 +89,7 @@ public class ClientSocket {
 
     }
 
+    @WorkerThread
     public String requestBoard(String user) {
         final StringAnswer ret = new StringAnswer();
         Call<String> call = clientApi.getBoard(user);
@@ -104,6 +107,7 @@ public class ClientSocket {
         return ret.getAnswer();
     }
 
+    @WorkerThread
     public String newGame(String whitePlayer, String blackPlayer) {
         Call<String> ifSuccessCall = clientApi.newGame(whitePlayer, blackPlayer);
         Response response = null;
@@ -116,6 +120,7 @@ public class ClientSocket {
         return ifSuccess;
     }
 
+    @WorkerThread
     public String sendMove(String user, String move) {
         Call<String> ifSuccessCall = clientApi.sendMove(user, move);
         Response response = null;
@@ -128,6 +133,7 @@ public class ClientSocket {
         return ifSuccess;
     }
 
+    @WorkerThread
     public Set<String> getPlayers() {
         Call<Set<String>> playerSetCall = clientApi.getPlayers();
         Response response = null;
@@ -140,6 +146,7 @@ public class ClientSocket {
         return playerSet;
     }
 
+    @WorkerThread
     public boolean isOnline(String player) {
         Call<Boolean> isOnlineCall = clientApi.isOnline(player);
         Response response = null;
@@ -156,9 +163,6 @@ public class ClientSocket {
         }
     }
 
-    public interface SuccessCallback {
-        void notifySuccessful(String message);
-    }
 
 
 

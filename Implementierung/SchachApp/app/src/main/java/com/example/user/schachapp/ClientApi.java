@@ -21,4 +21,7 @@ public interface ClientApi {
 
     @GET("isonline/{player}")
     Call<Boolean> isOnline(@Path("player") String player);
+
+    @GET("delete/{player}")
+    Call<String> deleteGame(@Path("player")String player);
 }
