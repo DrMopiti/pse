@@ -206,7 +206,8 @@ public class BoardActivity extends AppCompatActivity {
                 .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
+                        Intent intent = new Intent(BoardActivity.this, DrawActivity.class);
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton("Nein", new DialogInterface.OnClickListener() {
@@ -227,7 +228,8 @@ public class BoardActivity extends AppCompatActivity {
                 .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
+                        Intent intent = new Intent(BoardActivity.this, LostActivity.class);
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton("Nein", new DialogInterface.OnClickListener() {
