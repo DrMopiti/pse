@@ -58,12 +58,13 @@ public class ChallengeActivity extends AppCompatActivity {
     public void challengeClicked() {
         if (/*cs.isOnline(challengedPlayer)*/true) {
             SharedPreferences.Editor editor = sharedPrefs.edit();
-            int allGames = Integer.valueOf(sharedPrefs.getString("GesamtSpielAnzahl", "0"));
+            int allGames = sharedPrefs.getInt("GesamtSpielAnzahl", 0);
             allGames++;
-            editor.putString("GesamtSpielAnzahl", String.valueOf(allGames));
+            editor.putInt("GesamtSpielAnzahl", allGames);
             editor.commit();
             //cs.newGame(sharedPrefs.getString("Username", ""), challengedPlayer);
             Intent intent = new Intent(this, BoardActivity.class);
+            intent.putExtra("isOnlineGame", true);
             startActivity(intent);
         }
     }

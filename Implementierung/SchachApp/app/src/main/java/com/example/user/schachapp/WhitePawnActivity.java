@@ -15,6 +15,7 @@ public class WhitePawnActivity extends AppCompatActivity {
 
     private Button queenButton, rookButton, knightButton, bishopButton;
     private String move;
+    private String board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         setContentView(R.layout.activity_white_pawn);
         Intent thisIntent = getIntent();
         move = thisIntent.getStringExtra("move");
+        board = thisIntent.getStringExtra("board");
 
         queenButton = findViewById(R.id.queenButton);
         rookButton = findViewById(R.id.rookButton);
@@ -65,6 +67,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BoardActivity.class);
         intent.putExtra("clickedFigure", R.drawable.queen_figure_white);
         intent.putExtra("move", move);
+        intent.putExtra("board", board);
         startActivity(intent);
     }
 
@@ -75,6 +78,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BoardActivity.class);
         intent.putExtra("clickedFigure", R.drawable.rook_figure_white);
         intent.putExtra("move", move);
+        intent.putExtra("board", board);
         startActivity(intent);
     }
 
@@ -85,6 +89,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BoardActivity.class);
         intent.putExtra("clickedFigure", R.drawable.knight_figure_white);
         intent.putExtra("move", move);
+        intent.putExtra("board", board);
         startActivity(intent);
     }
 
@@ -95,6 +100,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BoardActivity.class);
         intent.putExtra("clickedFigure", R.drawable.bishop_figure_white);
         intent.putExtra("move", move);
+        intent.putExtra("board", board);
         startActivity(intent);
     }
 

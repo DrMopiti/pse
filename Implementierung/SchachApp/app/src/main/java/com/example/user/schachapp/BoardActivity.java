@@ -43,6 +43,7 @@ public class BoardActivity extends AppCompatActivity {
     private BoardState board;
     private ChessRuleProvider crp;
     private ClientSocket cs;
+    private boolean isOnlineGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,20 +93,21 @@ public class BoardActivity extends AppCompatActivity {
         buttonDraw = findViewById(com.example.user.schachapp.R.id.buttonDraw);
         buttonGiveUp = findViewById(com.example.user.schachapp.R.id.buttonGiveUp);
 
-        String boardString = "TB0000bt" +
-                "SB0000bs" +
-                "LB0000bl" +
-                "DB0000bd" +
-                "KB0000bk" +
-                "LB0000bl" +
-                "SB0000bs" +
-                "TB0000bt" +
-                "##ttttt#0";//cs.requestBoard(sharedPrefs.getString("Username", "noUserFound"));
+        Intent thisIntent = getIntent();
+        isOnlineGame = thisIntent.getBooleanExtra("isOnlineGame", false);
 
-        board = new BoardState(boardString);
+        if (isOnlineGame) {
+            //cs.requestBoard(sharedPrefs.getString("Username", "noUserFound"));
+        } else {
+            if (thisIntent.getStringExtra("board") != null) {
+                board = new BoardState(thisIntent.getStringExtra("board"));
+            } else {
+                board = crp.getStartState();
+            }
+        }
+
 
         // checks if there is an pawn-transformation and does it.
-        Intent thisIntent = getIntent();
         if (thisIntent.getIntExtra("clickedFigure", 0) != 0) {
             Piece piece = null;
             int id = thisIntent.getIntExtra("clickedFigure", R.drawable.pawn_figure_white);
@@ -123,12 +125,26 @@ public class BoardActivity extends AppCompatActivity {
                 case R.drawable.bishop_figure_white:
                     move += "-" + "L";
                     break;
+                case R.drawable.queen_figure_black:
+                    move += "-" + "d";
+                    break;
+                case R.drawable.rook_figure_black:
+                    move += "-" + "t";
+                    break;
+                case R.drawable.knight_figure_black:
+                    move += "-" + "s";
+                    break;
+                case R.drawable.bishop_figure_black:
+                    move += "-" + "l";
+                    break;
             }
             Move theMove = MoveFactory.getMove(move);
             board.applyMove(theMove);
-            //cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move.toString());
+            if (isOnlineGame) {
+                //cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move.toString());
+            }
             paintBoard(board);
-            ImageView iv = findViewById(pieces[theMove.getGoal().getX()][7]);
+            ImageView iv = findViewById(pieces[theMove.getGoal().getX()][theMove.getGoal().getY()]);
             iv.setImageResource(id);
         } else {
             paintBoard(board);
@@ -139,18 +155,18 @@ public class BoardActivity extends AppCompatActivity {
             Result result = crp.getResult(board);
             String resultString = result.getResult();
             if (resultString.charAt(2) == '1') {
-                int loses = Integer.valueOf(sharedPrefs.getString("Verloren", "0"));
+                int loses = sharedPrefs.getInt("Verloren", 0);
                 loses++;
                 SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString("Verloren", String.valueOf(loses));
+                editor.putInt("Verloren", loses);
                 editor.commit();
                 Intent intent = new Intent(this, LostActivity.class);
                 startActivity(intent);
             } else if (resultString.charAt(2) == '5') {
-                int draws = Integer.valueOf(sharedPrefs.getString("Unentschieden", "0"));
+                int draws = sharedPrefs.getInt("Unentschieden", 0);
                 draws++;
                 SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString("Unentschieden", String.valueOf(draws));
+                editor.putInt("Unentschieden", draws);
                 editor.commit();
                 Intent intent = new Intent(this, DrawActivity.class);
                 startActivity(intent);
@@ -273,13 +289,19 @@ public class BoardActivity extends AppCompatActivity {
         } catch (IllegalArgumentException e) {
 
         }
-        if (/*board.whiteToMove()*/true && positionClicked != null) {
-            if ((startPos == null) && (board.getPieceAt(positionClicked) != null) && (board.getPieceAt(positionClicked).isWhite())) {
-                startPos = positionClicked;
-                showPosition();
-            } else if ((startPos != null) && (!startPos.equals(positionClicked))){
-                executeMove(positionClicked);
-                startPos = null;
+        if (isOnlineGame) {
+            if (!board.whiteToMove()) {
+                return;
+            }
+        } else {
+            if (positionClicked != null) {
+                if ((startPos == null) && (board.getPieceAt(positionClicked) != null) && (board.getPieceAt(positionClicked).isWhite() == board.whiteToMove())) {
+                    startPos = positionClicked;
+                    showPosition();
+                } else if ((startPos != null) && (!startPos.equals(positionClicked))) {
+                    executeMove(positionClicked);
+                    startPos = null;
+                }
             }
         }
     }
@@ -313,32 +335,42 @@ public class BoardActivity extends AppCompatActivity {
              moveFigure(piece, goal, 500);
              pieces[goal.getX()][goal.getY()] = pieces[startPos.getX()][startPos.getY()];
              pieces[startPos.getX()][startPos.getY()] = 0;
-             // checks if there should happen a pawn-transformation.
+             // checks if there should happen a pawn-transformation of white.
              if ((selectedPiece.toString().toLowerCase().equals("b")) && (move.getGoal().getY() == 7)) {
                  Intent intent = new Intent(this, WhitePawnActivity.class);
                  intent.putExtra("move", move.toString());
+                 intent.putExtra("board", board.toString());
+                 startActivity(intent);
+             }
+             // checks if there should happen a pawn-transformation of black.
+             if ((selectedPiece.toString().toLowerCase().equals("b")) && (move.getGoal().getY() == 0)) {
+                 Intent intent = new Intent(this, BlackPawnActivity.class);
+                 intent.putExtra("move", move.toString());
+                 intent.putExtra("board", board.toString());
                  startActivity(intent);
              }
              board.applyMove(move);
-             //cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move.toString());
+             if (isOnlineGame) {
+                 //cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move.toString());
+             }
              if (crp.hasEnded(board)) {
                 Result result = crp.getResult(board);
                 String resultString = result.getResult();
                 if (resultString.charAt(2) == '0') {
                     SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
-                    int wins = Integer.valueOf(sharedPrefs.getString("Gewonnen", "0"));
+                    int wins = sharedPrefs.getInt("Gewonnen", 0);
                     wins++;
                     SharedPreferences.Editor editor = sharedPrefs.edit();
-                    editor.putString("Gewonnen", String.valueOf(wins));
+                    editor.putInt("Gewonnen", wins);
                     editor.commit();
                     Intent intent = new Intent(this, WinnerActivity.class);
                     startActivity(intent);
                 } else if (resultString.charAt(2) == '5') {
                     SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
-                    int draws = Integer.valueOf(sharedPrefs.getString("Unentschieden", "0"));
+                    int draws = sharedPrefs.getInt("Unentschieden", 0);
                     draws++;
                     SharedPreferences.Editor editor = sharedPrefs.edit();
-                    editor.putString("Unentschieden", String.valueOf(draws));
+                    editor.putInt("Unentschieden", draws);
                     editor.commit();
                     Intent intent = new Intent(this, DrawActivity.class);
                     startActivity(intent);
@@ -447,8 +479,51 @@ public class BoardActivity extends AppCompatActivity {
                     pieces[i][j] = pieceIV.getId();
                     pieceIV.setVisibility(View.VISIBLE);
                     ivCounter++;
+                    if (!isOnlineGame && !p.isWhite()) {
+                        pieceIV.setRotation(180);
+                    }
                 }
             }
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onRestoreInstanceState (Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
     }
 }
