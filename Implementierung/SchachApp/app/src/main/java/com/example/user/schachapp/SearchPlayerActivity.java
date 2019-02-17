@@ -30,7 +30,6 @@ public class SearchPlayerActivity extends AppCompatActivity {
 
     private ListView listView;
     private SearchPlayerListViewAdapter adapter;
-    private String[] title;
     private ArrayList<String> arrayList = new ArrayList<String>();
     private ClientSocket cs;
     private SharedPreferences sharedPrefs;
@@ -72,30 +71,10 @@ public class SearchPlayerActivity extends AppCompatActivity {
                 arrayList.add("Tim");
                 arrayList.add("Daniel");
                 arrayList.add("Orkhan");
-                listView.setAdapter(new SearchPlayerListViewAdapter(SearchPlayerActivity.this, arrayList));
+                adapter = new SearchPlayerListViewAdapter(SearchPlayerActivity.this, arrayList);
+                listView.setAdapter(adapter);
             }
         });
-        // a set, where all Player are.
-       // Set<String> players;
-       // players = cs.getPlayers();//new HashSet<String>();
-       // players.add("Ruki");
-       // players.add("Tim");
-       // players.add("Daniel");
-       // players.add("Orkhan");
-      /*
-        Iterator<String> it = players.iterator();
-
-        while (it.hasNext()) {
-            arrayList.add(it.next());
-        }
-
-        listView = findViewById(R.id.listView);
-
-        //pass results to listViewAdapter class
-        adapter = new SearchPlayerListViewAdapter(this, arrayList);
-
-        //bind the adapter to the listview
-        listView.setAdapter(adapter);*/
     }
 
     // generates the list and gets form the ListViewAdapter the filter.

@@ -29,9 +29,6 @@ public class MainMenuActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        //SharedPreferences.Editor editor = sharedPrefs.edit();
-        //editor.putString(VAL_KEY, "");
-        //editor.commit();
         setContentView(com.example.user.schachapp.R.layout.activity_main_menu);
         buttonQuickMatch = findViewById(com.example.user.schachapp.R.id.buttonQuickMatch);
         buttonSearchPlayer = findViewById(com.example.user.schachapp.R.id.buttonSearchPlayer);
@@ -69,11 +66,12 @@ public class MainMenuActivity extends AppCompatActivity {
      * Also it stores allGames in the StatisticsActivity.
      */
     public void quickMatchClicked() {
-        int allGames = Integer.valueOf(sharedPrefs.getString("GesamtSpielAnzahl", "0"));
+        int allGames = sharedPrefs.getInt("GesamtSpielAnzahl", 0);
         allGames++;
-        editor.putString("GesamtSpielAnzahl", String.valueOf(allGames));
+        editor.putInt("GesamtSpielAnzahl", allGames);
         editor.commit();
         Intent intent = new Intent(this, BoardActivity.class);
+        intent.putExtra("isOnlineGame", false);
         startActivity(intent);
     }
 

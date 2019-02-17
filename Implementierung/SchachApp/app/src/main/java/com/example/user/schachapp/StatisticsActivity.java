@@ -29,17 +29,17 @@ public class StatisticsActivity extends AppCompatActivity {
         TextView gesamtSpielZahl = findViewById(R.id.gesamtspielanzahlZahl);
 
         username.setText(sharedPrefs.getString("Username", ""));
-        String wonGames = sharedPrefs.getString("Gewonnen", "0");
-        String allGames = sharedPrefs.getString("GesamtSpielAnzahl", "0");
+        int wonGames = sharedPrefs.getInt("Gewonnen", 0);
+        int allGames = sharedPrefs.getInt("GesamtSpielAnzahl", 0);
         gewonnen.setText(wonGames);
-        verloren.setText(sharedPrefs.getString("Verloren", "0"));
+        verloren.setText(sharedPrefs.getInt("Verloren", 0));
         // calculates the winRate for the player
         float won = Integer.valueOf(wonGames);
         float all = Integer.valueOf(allGames);
         float winRate = Math.round((won / all) * 100);
         winRate = winRate / 100;
         gewinnrate.setText(String.valueOf(winRate) + " %");
-        unentschieden.setText(sharedPrefs.getString("Unentschieden", "0"));
+        unentschieden.setText(sharedPrefs.getInt("Unentschieden", 0));
         gesamtSpielZahl.setText(allGames);
     }
 }
