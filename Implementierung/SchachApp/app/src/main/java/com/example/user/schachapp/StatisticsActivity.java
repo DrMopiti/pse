@@ -31,15 +31,15 @@ public class StatisticsActivity extends AppCompatActivity {
         username.setText(sharedPrefs.getString("Username", ""));
         int wonGames = sharedPrefs.getInt("Gewonnen", 0);
         int allGames = sharedPrefs.getInt("GesamtSpielAnzahl", 0);
-        gewonnen.setText(wonGames);
-        verloren.setText(sharedPrefs.getInt("Verloren", 0));
+        gewonnen.setText(String.valueOf(wonGames));
+        verloren.setText(String.valueOf(sharedPrefs.getInt("Verloren", 0)));
         // calculates the winRate for the player
         float won = Integer.valueOf(wonGames);
         float all = Integer.valueOf(allGames);
         float winRate = Math.round((won / all) * 100);
         winRate = winRate / 100;
         gewinnrate.setText(String.valueOf(winRate) + " %");
-        unentschieden.setText(sharedPrefs.getInt("Unentschieden", 0));
-        gesamtSpielZahl.setText(allGames);
+        unentschieden.setText(String.valueOf(sharedPrefs.getInt("Unentschieden", 0)));
+        gesamtSpielZahl.setText(String.valueOf(allGames));
     }
 }
