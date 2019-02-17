@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.java_websocket.drafts.Draft_6455;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -44,6 +44,7 @@ public class ClientSocket {
         return this.url;
     }
 
+    @WorkerThread
     public void connectToWS() {
         WebSocketClient mWs;
         try {
@@ -91,20 +92,16 @@ public class ClientSocket {
 
     @WorkerThread
     public String requestBoard(String user) {
-        final StringAnswer ret = new StringAnswer();
-        Call<String> call = clientApi.getBoard(user);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                 ret.setAnswer(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
-        return ret.getAnswer();
+        Call<String> ifSuccessCall = clientApi.getBoard(user);
+        Response response = null;
+        try {
+            response = ifSuccessCall.execute();
+            String ifSuccess = response.body().toString();
+            return ifSuccess;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error";
+        }
     }
 
     @WorkerThread
@@ -113,11 +110,13 @@ public class ClientSocket {
         Response response = null;
         try {
             response = ifSuccessCall.execute();
+            String ifSuccess = response.body().toString();
+            return ifSuccess;
         } catch (IOException e) {
             e.printStackTrace();
+            return "Error";
         }
-        String ifSuccess = response.body().toString();
-        return ifSuccess;
+
     }
 
     @WorkerThread
@@ -126,11 +125,13 @@ public class ClientSocket {
         Response response = null;
         try {
             response = ifSuccessCall.execute();
+            String ifSuccess = response.body().toString();
+            return ifSuccess;
         } catch (IOException e) {
             e.printStackTrace();
+            return "Error";
         }
-        String ifSuccess = response.body().toString();
-        return ifSuccess;
+
     }
 
     @WorkerThread
@@ -139,11 +140,14 @@ public class ClientSocket {
         Response response = null;
         try {
             response = playerSetCall.execute();
+            Set<String> playerSet = ((Set<String>) response.body());
+            return playerSet;
         } catch (IOException e) {
             e.printStackTrace();
+            return new TreeSet<>();
+
         }
-        Set<String> playerSet = ((Set<String>) response.body());
-        return playerSet;
+
     }
 
     @WorkerThread
@@ -152,13 +156,49 @@ public class ClientSocket {
         Response response = null;
         try {
             response = isOnlineCall.execute();
+            String boolString = response.body().toString();
+            if (boolString.equals("true")) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
-        String boolString = response.body().toString();
-        if (boolString.equals("true")) {
-            return true;
-        } else {
+
+    }
+
+    @WorkerThread
+    public String delete(String player) {
+        Call<String> deleteCall = clientApi.deleteGame(player);
+        Response response = null;
+        try {
+            response = deleteCall.execute();
+            String ifSuccess = response.body().toString();
+            return ifSuccess;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error";
+        }
+
+    }
+
+
+    @WorkerThread
+    public boolean hasGame(String player) {
+        Call<Boolean> hasGameCall = clientApi.hasGame(player);
+        Response response = null;
+        try {
+            response = hasGameCall.execute();
+            String boolString = response.body().toString();
+            if (boolString.equals("true")) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
