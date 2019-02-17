@@ -55,7 +55,9 @@ public class BoardActivity extends AppCompatActivity {
         chessboard = findViewById(R.id.chessboard);
         SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
         cs = new ClientSocket(sharedPrefs.getString("Username", "noUserFound"));
-        cs.connectToWS();
+        if (isOnlineGame) {
+            //cs.connectToWS();
+        }
         crp = new ChessRuleProvider();
 
         // one-dimensional array for the chess-pieces.
