@@ -1,0 +1,33 @@
+\documentclass[parskip=full]{scrartcl}
+\usepackage[utf8]{inputenc} % use utf8 file encoding for TeX sources 
+
+\usepackage[T1]{fontenc} % avoid garbled Unicode text in pdf 
+\usepackage[german]{babel} % german hyphenation, quotes, etc 
+\usepackage{hyperref} % detailed hyperlink/pdf configuration
+\usepackage{graphicx}
+\usepackage[toc]{glossaries}
+\usepackage{caption}
+\usepackage{pdfpages}
+\hypersetup{ % ‘texdoc hyperref‘ for options 
+	pdftitle={Entwurf}, %
+	bookmarks=true,%
+}
+\usepackage{csquotes} % provides \enquote{} macro for "quotes"
+\usepackage{enumitem}
+
+\begin{document}
+	\begin{titlepage}
+		
+		\centering
+		\vspace*{0.2\textheight}
+		{\Large Praxis der Softwareentwicklung}\\[\baselineskip]
+		\vspace{2cm}
+		{\Huge \textbf{Qualitätssicherung}}\\[\baselineskip]\par
+		\vspace{2cm}
+		{\LARGE Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev}\par		
+		\newpage	
+		\tableofcontents
+		\pagebreak
+		
+	\end{titlepage}
+\end{document}
