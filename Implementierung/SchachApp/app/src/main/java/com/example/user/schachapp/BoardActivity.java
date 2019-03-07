@@ -119,7 +119,6 @@ public class BoardActivity extends AppCompatActivity {
                     board = new BoardState(cs.requestBoard(sharedPrefs.getString("Username", "noUserFound")));
                 }
             });
-            System.out.println("hiiiiiii");
         } else {
             if (thisIntent.getStringExtra("board") != null) {
                 board = new BoardState(thisIntent.getStringExtra("board"));

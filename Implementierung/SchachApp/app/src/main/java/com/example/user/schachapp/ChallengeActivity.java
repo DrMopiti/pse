@@ -62,7 +62,19 @@ public class ChallengeActivity extends AppCompatActivity {
             allGames++;
             editor.putInt("GesamtSpielAnzahl", allGames);
             editor.commit();
-            //cs.newGame(sharedPrefs.getString("Username", ""), challengedPlayer);
+            ThreadHandler th = new ThreadHandler();
+            th.runInBackground(new Runnable() {
+                @Override
+                public void run() {
+                    SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
+                    String hi = cs.newGame(sharedPrefs.getString("Username", ""), challengedPlayer);
+                }
+            });
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Intent intent = new Intent(this, BoardActivity.class);
             intent.putExtra("isOnlineGame", true);
             startActivity(intent);
