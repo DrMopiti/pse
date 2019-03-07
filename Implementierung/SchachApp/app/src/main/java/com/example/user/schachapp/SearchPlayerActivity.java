@@ -41,7 +41,15 @@ public class SearchPlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_player);
         sharedPrefs = getSharedPreferences("chessApp", 0);
         cs = new ClientSocket(sharedPrefs.getString("Username", ""));
-        cs.connectToWS();
+        ThreadHandler th = new ThreadHandler();
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                cs.connectToWS();
+            }
+        };
+        th.runInForeground(r);
+
         // Search-Bar-Title
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Spieler suchen");

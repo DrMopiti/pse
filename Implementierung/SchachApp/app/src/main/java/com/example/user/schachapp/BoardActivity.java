@@ -1,6 +1,7 @@
 package com.example.user.schachapp;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -43,6 +44,7 @@ public class BoardActivity extends AppCompatActivity {
     private DisplayMetrics dm;
     private Position startPos = null;
     private BoardState board;
+    private String move;
     private ChessRuleProvider crp;
     private ClientSocket cs;
     private boolean isOnlineGame;
@@ -56,8 +58,16 @@ public class BoardActivity extends AppCompatActivity {
         SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
         cs = new ClientSocket(sharedPrefs.getString("Username", "noUserFound"));
         if (isOnlineGame) {
-            //cs.connectToWS();
+            ThreadHandler th = new ThreadHandler();
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    cs.connectToWS();
+                }
+            };
+            th.runInBackground(r);
         }
+
         crp = new ChessRuleProvider();
 
         // one-dimensional array for the chess-pieces.
@@ -101,7 +111,15 @@ public class BoardActivity extends AppCompatActivity {
         isOnlineGame = thisIntent.getBooleanExtra("isOnlineGame", false);
 
         if (isOnlineGame) {
-            //cs.requestBoard(sharedPrefs.getString("Username", "noUserFound"));
+            ThreadHandler th = new ThreadHandler();
+            th.runInBackground(new Runnable() {
+                @Override
+                public void run() {
+                    SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
+                    board = new BoardState(cs.requestBoard(sharedPrefs.getString("Username", "noUserFound")));
+                }
+            });
+            System.out.println("hiiiiiii");
         } else {
             if (thisIntent.getStringExtra("board") != null) {
                 board = new BoardState(thisIntent.getStringExtra("board"));
@@ -110,12 +128,11 @@ public class BoardActivity extends AppCompatActivity {
             }
         }
 
-
         // checks if there is an pawn-transformation and does it.
         if (thisIntent.getIntExtra("clickedFigure", 0) != 0) {
             Piece piece = null;
             int id = thisIntent.getIntExtra("clickedFigure", R.drawable.pawn_figure_white);
-            String move = thisIntent.getStringExtra("move");
+            move = thisIntent.getStringExtra("move");
             switch (id) {
                 case R.drawable.queen_figure_white:
                     move += "-" + "D";
@@ -145,41 +162,49 @@ public class BoardActivity extends AppCompatActivity {
             Move theMove = MoveFactory.getMove(move);
             board.applyMove(theMove);
             if (isOnlineGame) {
-                //cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move.toString());
+                ThreadHandler th = new ThreadHandler();
+                th.runInBackground(new Runnable() {
+                    @Override
+                    public void run() {
+                        SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
+                        cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move);
+                    }
+                });
+                move = "";
+                paintBoard(board);
+                ImageView iv = findViewById(pieces[theMove.getGoal().getX()][theMove.getGoal().getY()]);
+                iv.setImageResource(id);
+            } else {
+                paintBoard(board);
             }
-            paintBoard(board);
-            ImageView iv = findViewById(pieces[theMove.getGoal().getX()][theMove.getGoal().getY()]);
-            iv.setImageResource(id);
-        } else {
-            paintBoard(board);
+
+            // checks if the other player has an los or an draw on the chessBoard and change to the appropriate Activity.
+            if (crp.hasEnded(board)) {
+                getResult();
+            }
+
+            // clickListeners to open an dialog.
+            buttonDraw.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    drawClicked();
+                }
+            });
+
+            buttonGiveUp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    giveUpClicked();
+                }
+            });
+
+            chessboard.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return boardClicked(event);
+                }
+            });
         }
-
-        // checks if the other player has an los or an draw on the chessBoard and change to the appropriate Activity.
-        if (crp.hasEnded(board)) {
-            getResult();
-        }
-
-        // clickListeners to open an dialog.
-        buttonDraw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawClicked();
-            }
-        });
-
-        buttonGiveUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                giveUpClicked();
-            }
-        });
-
-        chessboard.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return boardClicked(event);
-            }
-        });
     }
 
     // when the draw button is clicked, then there opens an Dialog.
@@ -314,8 +339,8 @@ public class BoardActivity extends AppCompatActivity {
          List<Move> moves = crp.getLegalMoves(startPos, board);
          ImageView piece = findViewById(pieces[startPos.getX()][startPos.getY()]);
          piece.setColorFilter(Color.argb(0,0,0,255));
-        Move move = getMoveByGoal(moves, goal);
-        if (move != null) {
+        Move theMove = getMoveByGoal(moves, goal);
+        if (theMove != null) {
              // checks if in this move a figure was captured and removes it.
              if (pieces[goal.getX()][goal.getY()] != 0) {
                  findViewById(pieces[goal.getX()][goal.getY()]).setVisibility(ImageView.INVISIBLE);
@@ -323,37 +348,46 @@ public class BoardActivity extends AppCompatActivity {
              moveFigure(piece, goal, 500);
              pieces[goal.getX()][goal.getY()] = pieces[startPos.getX()][startPos.getY()];
              pieces[startPos.getX()][startPos.getY()] = 0;
-            if (move instanceof Castling) {
-                Position rookStart = ((Castling) move).getRookMove().getStart();
-                Position rookGoal = ((Castling) move).getRookMove().getGoal();
+            if (theMove instanceof Castling) {
+                Position rookStart = ((Castling) theMove).getRookMove().getStart();
+                Position rookGoal = ((Castling) theMove).getRookMove().getGoal();
                 ImageView rook = findViewById(pieces[rookStart.getX()][rookStart.getY()]);
                 moveFigure(rook, rookGoal, 500);
                 pieces[rookGoal.getX()][rookGoal.getY()] = pieces[rookStart.getX()][rookStart.getY()];
                 pieces[rookStart.getX()][rookStart.getY()] = 0;
             }
 
-            if (move instanceof EnPassant) {
-                Position removePawn = ((EnPassant) move).getRemovePawn();
+            if (theMove instanceof EnPassant) {
+                Position removePawn = ((EnPassant) theMove).getRemovePawn();
                 findViewById(pieces[removePawn.getX()][removePawn.getY()]).setVisibility(ImageView.INVISIBLE);
                 pieces[removePawn.getX()][removePawn.getY()] = 0;
             }
              // checks if there should happen a pawn-transformation of white.
-             if ((selectedPiece.toString().toLowerCase().equals("b")) && (move.getGoal().getY() == 7)) {
+             if ((selectedPiece.toString().toLowerCase().equals("b")) && (theMove.getGoal().getY() == 7)) {
                  Intent intent = new Intent(this, WhitePawnActivity.class);
-                 intent.putExtra("move", move.toString());
+                 intent.putExtra("move", theMove.toString());
                  intent.putExtra("board", board.toString());
                  startActivity(intent);
              }
              // checks if there should happen a pawn-transformation of black.
-             if ((selectedPiece.toString().toLowerCase().equals("b")) && (move.getGoal().getY() == 0)) {
+             if ((selectedPiece.toString().toLowerCase().equals("b")) && (theMove.getGoal().getY() == 0)) {
                  Intent intent = new Intent(this, BlackPawnActivity.class);
-                 intent.putExtra("move", move.toString());
+                 intent.putExtra("move", theMove.toString());
                  intent.putExtra("board", board.toString());
                  startActivity(intent);
              }
-             board.applyMove(move);
+             board.applyMove(theMove);
+             move = theMove.toString();
              if (isOnlineGame) {
-                 //cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move.toString());
+                 ThreadHandler th = new ThreadHandler();
+                 Runnable r = new Runnable() {
+                     @Override
+                     public void run() {
+                         SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
+                         cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move);
+                     }
+                 };
+                 th.runInBackground(r);
              }
              if (crp.hasEnded(board)) {
                 getResult();
