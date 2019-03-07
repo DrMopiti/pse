@@ -3,6 +3,9 @@ package com.example.user.schachapp;
 
 import android.support.annotation.WorkerThread;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -24,14 +27,14 @@ public class ClientSocket {
     private String user = "";
     private final ClientApi clientApi;
     private final ThreadHandler threadHandler = new ThreadHandler();
-
+    Gson gson = new GsonBuilder().setLenient().create();
 
 
     public ClientSocket(String user) {
         this.user = user;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://sdq-pse-gruppe1.ipd.kit.edu/server/")
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         clientApi = retrofit.create(ClientApi.class);
     }
