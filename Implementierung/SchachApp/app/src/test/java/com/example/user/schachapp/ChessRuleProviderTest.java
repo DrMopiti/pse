@@ -2,7 +2,9 @@ package com.example.user.schachapp;
 
 import com.example.user.schachapp.chessLogic.BoardState;
 import com.example.user.schachapp.chessLogic.ChessRuleProvider;
+import com.example.user.schachapp.chessLogic.MoveFactory;
 import com.example.user.schachapp.chessLogic.Position;
+import com.example.user.schachapp.chessLogic.Result;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -39,7 +41,7 @@ public class ChessRuleProviderTest {
     */
 
     @Test
-    public void legalMovesForE8(){
+    public void testLegalMoves(){
        BoardState testBoard = new BoardState("0B0000b0" +
                 "0LB00bl0" +
                 "0t000000" +
@@ -54,7 +56,34 @@ public class ChessRuleProviderTest {
         
     }
 
+    @Test
+    public void testStartState() {
+        BoardState testBoard = ruleProvider.getStartState();
+        assertEquals(testBoard.toString(), "TB0000btSB0000bsLB0000blDB0000bdKB0000bkLB0000blSB0000bsTB0000bt##ttttt#0");
+    }
 
+    @Test
+    public void testHasEnded() {
+        BoardState testBoard = ruleProvider.getStartState();
+        assertFalse(ruleProvider.hasEnded(testBoard));
+        testBoard.applyMove(MoveFactory.getMove("e2-e4"));
+        testBoard.applyMove(MoveFactory.getMove("e7-e5"));
+        testBoard.applyMove(MoveFactory.getMove("d1-h5"));
+        testBoard.applyMove(MoveFactory.getMove("e8-e7"));
+        testBoard.applyMove(MoveFactory.getMove("h5-e5"));
+        assertTrue(ruleProvider.hasEnded(testBoard));
+    }
 
-
+    @Test
+    public void testGetResult() {
+        BoardState testBoard = ruleProvider.getStartState();
+        assertNull(ruleProvider.getResult(testBoard));
+        testBoard.applyMove(MoveFactory.getMove("e2-e4"));
+        testBoard.applyMove(MoveFactory.getMove("e7-e5"));
+        testBoard.applyMove(MoveFactory.getMove("d1-h5"));
+        testBoard.applyMove(MoveFactory.getMove("e8-e7"));
+        testBoard.applyMove(MoveFactory.getMove("h5-e5"));
+        assertEquals(ruleProvider.getResult(testBoard).getResult(), "1:0");
+        assertEquals(ruleProvider.getResult(testBoard).getReason(), "Matt");
+    }
 }
