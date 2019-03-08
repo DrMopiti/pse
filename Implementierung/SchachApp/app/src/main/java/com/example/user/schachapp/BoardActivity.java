@@ -9,7 +9,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.StrictMode;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.user.schachapp.chessLogic.BoardState;
 import com.example.user.schachapp.chessLogic.Castling;
@@ -30,6 +33,7 @@ import com.example.user.schachapp.chessLogic.Position;
 import com.example.user.schachapp.chessLogic.Result;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -49,8 +53,16 @@ public class BoardActivity extends AppCompatActivity {
     private ClientSocket cs;
     private boolean isOnlineGame;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /**
+         * NICHT NACHMACHEN!!!!!
+         */
+       // StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+      //  StrictMode.setThreadPolicy(policy);
+
         super.onCreate(savedInstanceState);
         setContentView(com.example.user.schachapp.R.layout.activity_board);
         dm = getResources().getDisplayMetrics();
@@ -111,15 +123,17 @@ public class BoardActivity extends AppCompatActivity {
         isOnlineGame = thisIntent.getBooleanExtra("isOnlineGame", false);
 
         if (isOnlineGame) {
-            ThreadHandler th = new ThreadHandler();
-            th.runInBackground(new Runnable() {
-                @Override
-                public void run() {
-                    SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
-                    board = new BoardState(cs.requestBoard(sharedPrefs.getString("Username", "noUserFound")));
-                }
-            });
-        } else {
+			try {
+                String boardString = new GetBoardTask().execute(sharedPrefs.getString("Username", "")).get();
+                Toast.makeText(this, boardString, Toast.LENGTH_LONG).show();
+                System.out.println(boardString);
+
+                //board = new BoardState(boardString);
+                board = crp.getStartState();
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
+		} else {
             if (thisIntent.getStringExtra("board") != null) {
                 board = new BoardState(thisIntent.getStringExtra("board"));
             } else {
