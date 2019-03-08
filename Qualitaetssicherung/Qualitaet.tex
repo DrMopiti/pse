@@ -30,7 +30,8 @@
 		\pagebreak
 		
 	\end{titlepage}
-\section{Musskriterien}
+	\section{Kriterien}
+\subsection{Musskriterien}
 \begin{description}
 	\item[KM1010] \textbf{Schachregeln}
 	\begin{itemize}
@@ -69,6 +70,33 @@
 		\item Es können nur gültige Züge ausgeführt werden.
 	\end{itemize}
 \end{description}
-\section{Wunschkriterien}
+\subsection{Wunschkriterien}
+\begin{itemize}
+\item{\textbf{Account/Gastzugang:}} Für das Benutzen der App wird ein Account benötigt, welcher beim ersten Öffnen angelegt wird.
+\item{\textbf{Zwei Spieler auf einem Gerät:}} Wurde implementiert. Hierfür werden die schwarzen Figuren um 180 Grad gedreht dargestellt. \\
+\\
+Ansonsten wurden keine Wunschkriterien implementiert.
+\end{itemize}
 \section{Globale Testfälle}
+\section{Bugs}
+\begin{itemize}
+\item{\textbf{Online-Spielen:}}
+	\begin{itemize}
+	\item{\textbf{Symptom:}} Online-Spielen war nicht möglich.
+	\item{\textbf{Ursache:}} Serverkommunikation im gleichen Thread wie die restliche App laufen zu 	lassen führte zu Fehlern.
+	\item{\textbf{Behebung:}} Serverkommunikation in separate Threads auslagern.
+	\end{itemize}
+\item{\textbf{Spielersuche:}}
+	\begin{itemize}
+	\item{\textbf{Symptom:}}
+	\item{\textbf{Ursache:}}
+	\item{\textbf{Behebung:}}
+	\end{itemize}
+\item{\textbf{:}}
+	\begin{itemize}
+	\item{\textbf{Symptom:}}
+	\item{\textbf{Ursache:}}
+	\item{\textbf{Behebung:}}
+	\end{itemize}
+\end{itemize}
 \end{document}
