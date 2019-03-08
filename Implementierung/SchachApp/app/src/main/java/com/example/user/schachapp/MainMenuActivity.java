@@ -20,7 +20,6 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Looks if a user names is stored.
         sharedPrefs = getSharedPreferences("chessApp", 0);
         editor = sharedPrefs.edit();
