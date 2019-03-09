@@ -29,6 +29,7 @@ public class MainMenuActivity extends AppCompatActivity {
         editor.remove("Unentschieden");
         editor.remove("Username");
         editor.commit();*/
+        startService(new Intent(this, WebsocketService.class));
         if (sharedPrefs.getString("Username", "").length() < 1) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

@@ -2,19 +2,15 @@ package com.example.user.schachapp;
 
 
 import android.support.annotation.WorkerThread;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.handshake.ServerHandshake;
-import org.java_websocket.drafts.Draft_6455;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -23,74 +19,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ClientSocket {
 
-    private String url = "ws://sdq-pse-gruppe1.ipd.kit.edu/server/";
-    private String user = "";
     private final ClientApi clientApi;
-    private final ThreadHandler threadHandler = new ThreadHandler();
+
     Gson gson = new GsonBuilder().setLenient().create();
 
 
-    public ClientSocket(String user) {
-        this.user = user;
+    public ClientSocket() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://sdq-pse-gruppe1.ipd.kit.edu/server/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         clientApi = retrofit.create(ClientApi.class);
-    }
-
-    private String getUser() {
-        return this.user;
-    }
-
-    private String getUrl() {
-        return this.url;
-    }
-
-    @WorkerThread
-    public void connectToWS() {
-        WebSocketClient mWs;
-        try {
-            mWs = new WebSocketClient(new URI( getUrl() +"socket" ), new Draft_6455())
-            {
-                @Override
-                public void onMessage(String message) {
-                    String board = requestBoard(user);
-                }
-
-                @Override
-                public void onOpen(ServerHandshake handshake) {
-                    send(user);
-                }
-
-                @Override
-                public void onClose(int code, String reason, boolean remote) {
-                    try {
-                        Thread.sleep(5000);
-                        connectToWS();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onError(Exception ex) {
-                    try {
-                        Thread.sleep(5000);
-                        connectToWS();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            };
-
-            mWs.connect();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-
     }
 
     @WorkerThread

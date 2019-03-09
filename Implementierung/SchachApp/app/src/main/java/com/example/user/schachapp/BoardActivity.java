@@ -68,23 +68,10 @@ public class BoardActivity extends AppCompatActivity {
         dm = getResources().getDisplayMetrics();
         chessboard = findViewById(R.id.chessboard);
         SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
-        cs = new ClientSocket(sharedPrefs.getString("Username", "noUserFound"));
-        /*if (isOnlineGame) {
-            ThreadHandler th = new ThreadHandler();
-            Runnable r = new Runnable() {
-                @Override
-                public void run() {
-                    cs.connectToWS();
-                }
-            };
-            th.runInBackground(r);
-        }*/
+        cs = new ClientSocket();
         Intent thisIntent = getIntent();
         isOnlineGame = thisIntent.getBooleanExtra("isOnlineGame", false);
         isOnlineGame = false;
-        if (isOnlineGame) {
-        	cs.connectToWS();
-		}
 
         crp = new ChessRuleProvider();
 
