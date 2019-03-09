@@ -71,7 +71,7 @@ public class BoardActivity extends AppCompatActivity {
         cs = new ClientSocket();
         Intent thisIntent = getIntent();
         isOnlineGame = thisIntent.getBooleanExtra("isOnlineGame", false);
-        isOnlineGame = false;
+        //isOnlineGame = false;
 
         crp = new ChessRuleProvider();
 

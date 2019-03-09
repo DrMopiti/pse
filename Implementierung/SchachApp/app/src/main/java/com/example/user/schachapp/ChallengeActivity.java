@@ -30,8 +30,7 @@ public class ChallengeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_challenge);
         TextView username = findViewById(R.id.userName);
         TextView status = findViewById(R.id.status);
-        String user = sharedPrefs.getString("Username", "");
-        cs = new ClientSocket();
+
 
         //get data from previous activity when item of listview is clicked using intent.
         Intent intent = getIntent();
