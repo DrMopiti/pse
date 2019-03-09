@@ -34,10 +34,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Wehn Login is clicked the player goes into the MainMenuActivity. The username stays stored local.
+     * When Login is clicked the player goes into the MainMenuActivity. The username stays stored local.
      */
     public void loginClicked() {
-        if (userName.getText().length() > 0) {
+        String user = userName.getText().toString();
+        if ((user.length() > 0) && (user.length() <= 30)) {
             Intent intent = new Intent(this, MainMenuActivity.class);
             startActivity(intent);
             SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
