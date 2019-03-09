@@ -55,7 +55,7 @@
 		\begin{itemize}		
 			\item Login Seite: Der Nutzer vergibt sich hier selbstständig einen Nutzernamen.
 			
-			\item Hauptmenü: Hier kann der Nutzer ein Offline-Spiel starten, einen anderen Spieler heruasfordern oder seine Statistiken einsehen.
+			\item Hauptmenü: Hier kann der Nutzer ein Offline-Spiel starten, einen anderen Spieler herausfordern oder seine Statistiken einsehen.
 			
 			\item Statistik Seite: Der Nutzer kann seine Spielstatistiken einsehen.
 			
@@ -72,25 +72,81 @@
 \end{description}
 \subsection{Wunschkriterien}
 \begin{itemize}
-\item{\textbf{Account/Gastzugang:}} Für das Benutzen der App wird ein Account benötigt, welcher beim ersten Öffnen angelegt wird.
+\item{\textbf{Account/Gastzugang:}} Für das Benutzen der App wird ein Name benötigt, welcher beim ersten Öffnen eingegeben wird. 
 \item{\textbf{Zwei Spieler auf einem Gerät:}} Wurde implementiert. Hierfür werden die schwarzen Figuren um 180 Grad gedreht dargestellt. \\
 \\
 Ansonsten wurden keine Wunschkriterien implementiert.
 \end{itemize}
 \section{Globale Testfälle}
+\subsection{Benutzerfunktionen}
+\begin{description}
+	\item[T1010] \textbf{\textit{Anmelden: }} \\
+
+	\item[T1020]  \textbf{\textit{Gastzugang: }} 
+
+	\item[T1030] \textbf{\textit{Abmelden: }} 
+	
+	\item[T1040] \textbf{\textit{Anzeige des eigenen, persönlichen Profils: }} 
+	
+	\item[T1050] \textbf{\textit{Suche nach Benutzern anhand des Benutzernamens und Anzeigen der persönlichen Profile anderer Benutzer: }} 
+	
+	\item[T1060] \textbf{\textit{Multiplayer auf einem Gerät: }} 
+	
+	\subsection{Initialisierung}
+	\item[T2010] \textbf{\textit{Eröffnung eines Spieles: }} 
+
+	
+	\item[T2020] \textbf{\textit{Herausfordern und Spieleinstellungen bestimmen: }} 
+
+	
+	\item[T2030] \textbf{\textit{Annehmen einer Herausforderung: }} 
+
+	
+	\item[T2040] \textbf{\textit{Ablehnen einer Herausforderung: }} 
+
+	
+	\subsection{Spielverlauf}
+	\item[T3010] \textbf{\textit{Schachfiguren bewegen: }} 
+		
+	
+	\item[T3020] \textbf{\textit{Remis bieten: }} 
+
+	
+	\item[T3030] \textbf{\textit{Remis annehmen: }} 
+
+	
+	\item[T3040] \textbf{\textit{Remis ablehnen: }} 
+
+	
+	\item[T3050] \textbf{\textit{Aufgeben: }} 
+
+	
+	\item[T3060] \textbf{\textit{Rückkampf anbieten: }} 
+	\begin{description}
+		\item Nicht implementiert.
+	\end{description}
+	
+	\item[T3070] \textbf{\textit{Spiel speichern: }} 
+	\begin{description}
+		\item Nicht implementiert.
+	\end{description}
+	
+	
+\end{description}
+
 \section{Bugs}
 \begin{itemize}
 \item{\textbf{Online-Spielen:}}
 	\begin{itemize}
 	\item{\textbf{Symptom:}} Online-Spielen war nicht möglich.
-	\item{\textbf{Ursache:}} Serverkommunikation im gleichen Thread wie die restliche App laufen zu 	lassen führte zu Fehlern.
+	\item{\textbf{Ursache:}} Serverkommunikation im gleichen Thread wie die restliche App laufen zu 	lassen führte zu Fehlern. (NetworkOnMainThreadException)
 	\item{\textbf{Behebung:}} Serverkommunikation in separate Threads auslagern.
 	\end{itemize}
 \item{\textbf{Spielersuche:}}
 	\begin{itemize}
-	\item{\textbf{Symptom:}}
-	\item{\textbf{Ursache:}}
-	\item{\textbf{Behebung:}}
+	\item{\textbf{Symptom:}} Spielersuche nicht möglich.
+	\item{\textbf{Ursache:}} Netzwerkzugriff im UI-Thread verboten. (NetworkOnMainThreadException)
+	\item{\textbf{Behebung:}} Asynchrone Methode enqueue() mit Callback, statt synchroner Methode execute() verwendet.
 	\end{itemize}
 \item{\textbf{:}}
 	\begin{itemize}
