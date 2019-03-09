@@ -79,6 +79,9 @@ public class BoardActivity extends AppCompatActivity {
             };
             th.runInBackground(r);
         }*/
+        Intent thisIntent = getIntent();
+        isOnlineGame = thisIntent.getBooleanExtra("isOnlineGame", false);
+        isOnlineGame = false;
         if (isOnlineGame) {
         	cs.connectToWS();
 		}
@@ -121,9 +124,6 @@ public class BoardActivity extends AppCompatActivity {
 
         buttonDraw = findViewById(com.example.user.schachapp.R.id.buttonDraw);
         buttonGiveUp = findViewById(com.example.user.schachapp.R.id.buttonGiveUp);
-
-        Intent thisIntent = getIntent();
-        isOnlineGame = thisIntent.getBooleanExtra("isOnlineGame", false);
 
         if (isOnlineGame) {
 			try {
@@ -186,6 +186,7 @@ public class BoardActivity extends AppCompatActivity {
                         cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move);
                     }
                 });
+            }
                 move = "";
                 paintBoard(board);
                 ImageView iv = findViewById(pieces[theMove.getGoal().getX()][theMove.getGoal().getY()]);
@@ -220,7 +221,6 @@ public class BoardActivity extends AppCompatActivity {
                     return boardClicked(event);
                 }
             });
-        }
     }
 
     // when the draw button is clicked, then there opens an Dialog.
