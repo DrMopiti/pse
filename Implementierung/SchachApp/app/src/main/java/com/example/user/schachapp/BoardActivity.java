@@ -115,11 +115,11 @@ public class BoardActivity extends AppCompatActivity {
         if (isOnlineGame) {
 			try {
                 String boardString = new GetBoardTask().execute(sharedPrefs.getString("Username", "")).get();
-                Toast.makeText(this, boardString, Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, boardString, Toast.LENGTH_LONG).show();
                 System.out.println(boardString);
 
-                //board = new BoardState(boardString);
-                board = crp.getStartState();
+                board = new BoardState(boardString);
+               //board = crp.getStartState();
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
