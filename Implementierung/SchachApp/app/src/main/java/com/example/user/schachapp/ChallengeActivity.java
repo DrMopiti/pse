@@ -31,7 +31,7 @@ public class ChallengeActivity extends AppCompatActivity {
         TextView username = findViewById(R.id.userName);
         TextView status = findViewById(R.id.status);
         String user = sharedPrefs.getString("Username", "");
-        cs = new ClientSocket(user);
+        cs = new ClientSocket();
 
         //get data from previous activity when item of listview is clicked using intent.
         Intent intent = getIntent();
@@ -40,11 +40,13 @@ public class ChallengeActivity extends AppCompatActivity {
         Boolean online;
         try {
             online = new IsOnlineTask().execute(challengedPlayer).get();
+            System.out.println("1111    "+ online.toString());
            // Log.d("1adasdasd","111111sad");
 			//Toast.makeText(this, "111111" + "   " + online.toString(), Toast.LENGTH_LONG).show();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             online = false;
+            System.out.println("22222    " + online.toString());
           //  Log.d("22222aasdasd","222222sad");
           //  Toast.makeText(this, "22222", Toast.LENGTH_LONG).show();;
         }
@@ -72,27 +74,23 @@ public class ChallengeActivity extends AppCompatActivity {
      */
     public void challengeClicked() {
         try {
-            if (new IsOnlineTask().execute(challengedPlayer).get()) {
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                int allGames = sharedPrefs.getInt("GesamtSpielAnzahl", 0);
-                allGames++;
-                editor.putInt("GesamtSpielAnzahl", allGames);
-                editor.apply();
-                SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
-                String user = sharedPrefs.getString("Username", "");
-                new NewGameTask().execute(user, challengedPlayer);
-               /* ThreadHandler th = new ThreadHandler();
-                th.runInBackground(new Runnable() {
-                    @Override
-                    public void run() {
-                        SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
-                        String hi = cs.newGame(sharedPrefs.getString("Username", ""), challengedPlayer);
-                    }
-                });*/
-
-                Intent intent = new Intent(this, BoardActivity.class);
-                intent.putExtra("isOnlineGame", true);
-                startActivity(intent);
+            if (/*new IsOnlineTask().execute(challengedPlayer).get()*/ true) {
+                if (new HasGameTask().execute(challengedPlayer).get()) {
+                    Toast.makeText(this, "Spieler spielt bereits!", Toast.LENGTH_LONG).show();
+                } else {
+                    SharedPreferences.Editor editor = sharedPrefs.edit();
+                    int allGames = sharedPrefs.getInt("GesamtSpielAnzahl", 0);
+                    allGames++;
+                    editor.putInt("GesamtSpielAnzahl", allGames);
+                    editor.apply();
+                    SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
+                    String user = sharedPrefs.getString("Username", "");
+                    String success = new NewGameTask().execute(user, challengedPlayer).get();
+                    System.out.println("create:   " + success);
+                    Intent intent = new Intent(this, BoardActivity.class);
+                    intent.putExtra("isOnlineGame", true);
+                    startActivity(intent);
+                }
             }
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();

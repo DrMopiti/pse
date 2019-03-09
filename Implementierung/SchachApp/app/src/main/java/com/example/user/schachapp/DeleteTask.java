@@ -7,7 +7,7 @@ public class DeleteTask extends AsyncTask<String, Integer, String> {
 
 	@Override
 	protected String doInBackground(String... strings) {
-		ClientSocket cs = new ClientSocket(strings[0]);
+		ClientSocket cs = new ClientSocket();
 		return cs.delete(strings[0]);
 	}
 

@@ -23,12 +23,13 @@ public class MainMenuActivity extends AppCompatActivity {
         // Looks if a user names is stored.
         sharedPrefs = getSharedPreferences("chessApp", 0);
         editor = sharedPrefs.edit();
-        /*editor.remove("GesamtSpielAnzahl");
+       /* editor.remove("GesamtSpielAnzahl");
         editor.remove("Verloren");
         editor.remove("Gewonnen");
         editor.remove("Unentschieden");
         editor.remove("Username");
         editor.commit();*/
+        System.out.println("Service start");
         startService(new Intent(this, WebsocketService.class));
         if (sharedPrefs.getString("Username", "").length() < 1) {
             Intent intent = new Intent(this, LoginActivity.class);

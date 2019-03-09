@@ -7,7 +7,7 @@ public class HasGameTask extends AsyncTask<String, Integer, Boolean> {
 
 	@Override
 	protected Boolean doInBackground(String... strings) {
-		ClientSocket cs = new ClientSocket(strings[0]);
+		ClientSocket cs = new ClientSocket();
 		return cs.hasGame(strings[0]);
 	}
 }

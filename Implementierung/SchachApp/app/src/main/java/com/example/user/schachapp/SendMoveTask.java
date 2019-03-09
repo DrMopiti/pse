@@ -7,7 +7,7 @@ public class SendMoveTask extends AsyncTask<String, Integer, String> {
 
 	@Override
 	protected String doInBackground(String... strings) {
-		ClientSocket cs = new ClientSocket(strings[0]);
+		ClientSocket cs = new ClientSocket();
 		return cs.sendMove(strings[0], strings [1]);
 	}
 }

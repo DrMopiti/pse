@@ -7,7 +7,7 @@ public class GetBoardTask extends AsyncTask<String, Integer, String> {
 
 	@Override
 	protected String doInBackground(String... strings) {
-		ClientSocket cs = new ClientSocket(strings[0]);
+		ClientSocket cs = new ClientSocket();
 		return cs.requestBoard(strings[0]);
 	}
 }
