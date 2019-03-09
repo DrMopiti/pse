@@ -24,7 +24,7 @@ public class BoardState {
      */
     public BoardState(String string) {
         //splits the String in 4 Sectors: Pieces, Last Move, Booleans, Moves without Action
-        String[] sectors = string.split("#");
+        String[] sectors = string.split("X");
         System.out.println("sectors:    "+Arrays.deepToString(sectors));
         System.out.println(sectors.length);
         if (sectors.length != 4) {
@@ -299,7 +299,7 @@ public class BoardState {
         //converts movesWithoutAction
         String noAction = String.valueOf(movesWithoutAction);
 
-        return pieces + "#" + move + "#" + bools + "#" + noAction;
+        return pieces + "X" + move + "X" + bools + "X" + noAction;
     }
 
     /**
