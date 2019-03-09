@@ -22,7 +22,7 @@ public class ChessRuleProvider implements RuleProvider {
                 "LB0000bl" +
                 "SB0000bs" +
                 "TB0000bt" +
-                "##ttttt#0");
+                "XXtttttX0");
     }
 
     /**

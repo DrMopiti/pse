@@ -1,6 +1,7 @@
 package com.example.user.schachapp.chessLogic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -23,8 +24,12 @@ public class BoardState {
      */
     public BoardState(String string) {
         //splits the String in 4 Sectors: Pieces, Last Move, Booleans, Moves without Action
-        String[] sectors = string.split("#");
-        if (sectors.length != 4 && !sectors[0].matches("[TSLDKBtsldkb0]{64}")) {
+        String[] sectors = string.split("X");
+        System.out.println("sectors:    "+Arrays.deepToString(sectors));
+        System.out.println(sectors.length);
+        if (sectors.length != 4) {
+            throw new IllegalArgumentException("sectors.length is not 4");
+        } else if(!sectors[0].matches("[TSLDKBtsldkb0]{64}")) {
             throw new IllegalArgumentException("String in wrong format");
         }
 
@@ -294,7 +299,7 @@ public class BoardState {
         //converts movesWithoutAction
         String noAction = String.valueOf(movesWithoutAction);
 
-        return pieces + "#" + move + "#" + bools + "#" + noAction;
+        return pieces + "X" + move + "X" + bools + "X" + noAction;
     }
 
     /**
