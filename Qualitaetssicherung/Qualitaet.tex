@@ -41,6 +41,7 @@
 	\item[KM1020] \textbf{\textit{Einhaltung der Schachregeln}}
 	\begin{itemize}
 		\item Der Nutzer bekommt nur gültige Züge angezeigt und kann nur diese anwenden.
+		\item Dies wurde mit JUnit Testfällen für die Schachlogik und mehreren Testspielen verschiedener Testpersonen überprüft.
 	\end{itemize}
 	\item[KM1030] \textbf{\textit{Spielsuche}}
 	\begin{itemize}
@@ -93,7 +94,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 
 	\item[T1030] \textbf{\textit{Abmelden: }}
 	\begin{description}
-	\item Nicht implementiert, damit der Account gerätegebunden ist.
+	\item Nicht implementiert, damit der Account Gerät-gebunden ist.
 	\end{description}
 	
 	\item[T1040] \textbf{\textit{Anzeige des eigenen, persönlichen Profils: }} 
@@ -103,7 +104,8 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	
 	\item[T1050] \textbf{\textit{Suche nach Benutzern anhand des Benutzernamens und Anzeigen der persönlichen Profile anderer Benutzer: }} 
 	\begin{description}
-	\item Falls der Spieler nicht vorhanden ist wird keine Meldung angzeigt, dass er nicht vorhanden ist.  Er wird gar nicht in der Liste angezeigt und man muss einen anderen vorhandenen Spieler suchen. \\
+	\item Falls der Spieler nicht vorhanden ist wird keine Meldung angezeigt, dass er nicht vorhanden ist.  Er wird gar nicht in der Liste angezeigt und man muss einen anderen vorhandenen Spieler suchen. \\
+	\item Es werden alle Spieler seit Server Start aufgelistet.
 	\end{description}
 	
 	
@@ -116,14 +118,14 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\subsection{Initialisierung}
 	\item[T2010] \textbf{\textit{Eröffnung eines Spieles: }} 
 	\begin{description}
-	\item Der Button Sofortspiel erzeugt ein Offline-Spiel, wo zwei Spieler gegeneinader spielen können. Die Funktion des Herausforderns eines anderen Spielers funktioniert, indem man den Gegner sucht und herrausfordert.
+	\item Der Button Sofortspiel erzeugt ein Offline-Spiel, wo zwei Spieler gegeneinander spielen können. Die Funktion des Herausforderns eines anderen Spielers funktioniert, indem man den Gegner sucht und herausfordert.
 	\end{description}
 	
 
 	
 	\item[T2020] \textbf{\textit{Herausfordern und Spieleinstellungen bestimmen: }} 
 	\begin{description}
-	\item Gewünschte Farbe und Bedenkzeit wurde nicht implementiert.
+	\item Gewünschte Farbe und Bedenkzeit wurden nicht implementiert.
 	\end{description}
 	
 
