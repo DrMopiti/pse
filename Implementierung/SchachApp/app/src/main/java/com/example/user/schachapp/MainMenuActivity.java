@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * The type Main menu activity.
  * This Activity opens a MainMenuActivity.
@@ -43,6 +45,7 @@ public class MainMenuActivity extends AppCompatActivity {
         buttonQuickMatch = findViewById(com.example.user.schachapp.R.id.buttonQuickMatch);
         buttonSearchPlayer = findViewById(com.example.user.schachapp.R.id.buttonSearchPlayer);
         buttonStatistics = findViewById(com.example.user.schachapp.R.id.buttonStatistics);
+        buttonChallenged = findViewById(com.example.user.schachapp.R.id.lookChallenge);
 
         // clickListener to change in the BoardActivity.
         buttonQuickMatch.setOnClickListener(new View.OnClickListener() {
@@ -116,12 +119,20 @@ public class MainMenuActivity extends AppCompatActivity {
 
     public void challengedClicked() {
         AlertDialog.Builder a_builder = new AlertDialog.Builder(MainMenuActivity.this);
-        if (true){ //wenn ein spiel existiert für deisen spieler
-            a_builder.setMessage("Spiel mit" + "[Spielername]" + "beitreten?").setCancelable(false) //Spielername einsetzen
+        String name = sharedPrefs.getString("Username", "NoUser");
+        Boolean hasGame = false;
+        try {
+            hasGame = new HasGameTask().execute(name).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (hasGame){ //wenn ein spiel existiert für diesen spieler
+            a_builder.setMessage("Spiel beitreten?").setCancelable(false) //Spielername einsetzen
                     .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(MainMenuActivity.this, BoardActivity.class); //Spieldaten mitgeben
+                            Intent intent = new Intent(MainMenuActivity.this, BoardActivity.class);
+                            intent.putExtra("isOnlineGame", true);//Spieldaten mitgeben
                             startActivity(intent);
                         }
                     })
@@ -132,10 +143,10 @@ public class MainMenuActivity extends AppCompatActivity {
                         }
                     });
         } else { //sonst
-            a_builder.setMessage("Keine offene Herausforderung");
+            a_builder.setMessage("Keine offenes Spiel");
         }
         AlertDialog challenged = a_builder.create();
-        challenged.setTitle("Offene Herausforderung");
+        challenged.setTitle("Offenes Spiel");
         challenged.show();
     }
 }

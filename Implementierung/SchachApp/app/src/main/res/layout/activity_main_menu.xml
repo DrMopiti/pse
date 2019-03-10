@@ -123,7 +123,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_bg_stroke"
         android:padding="15dp"
-        android:text="Offene Challenge"
+        android:text="Offenes Spiel"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
