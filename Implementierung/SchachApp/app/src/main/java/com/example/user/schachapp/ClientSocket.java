@@ -112,6 +112,25 @@ public class ClientSocket {
     }
 
     @WorkerThread
+    public boolean amIWhite(String player) {
+        Call<Boolean> isOnlineCall = clientApi.amIWhite(player);
+        Response response = null;
+        try {
+            response = isOnlineCall.execute();
+            String boolString = response.body().toString();
+            if (boolString.equals("true")) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    @WorkerThread
     public String delete(String player) {
         Call<String> deleteCall = clientApi.deleteGame(player);
         Response response = null;

@@ -317,7 +317,7 @@ public class BoardActivity extends AppCompatActivity {
      * @return the boolean true
      */
     private boolean boardClicked(MotionEvent event) {
-        if (isOnlineGame && board.whiteToMove() != isWhite) {
+        /*if (isOnlineGame && board.whiteToMove() != isWhite) {
             SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
             try {
                 String boardString = new GetBoardTask().execute(sharedPrefs.getString("Username", "")).get();
@@ -327,7 +327,7 @@ public class BoardActivity extends AppCompatActivity {
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         int totalX = (int) event.getX(); // x-coordinate from the touch in pixel.
         int totalY = (int) event.getY();
         int boardMetric = dm.widthPixels; // width from the display in pixel.
