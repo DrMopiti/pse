@@ -172,7 +172,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 		\item Falls eine tote Stellung vorliegt
 		\item Wenn eine identische Stellung mit gleichen Zugmöglichkeiten und demselben Spieler am Zug mindestens zum dritten Mal auf dem Schachbrett entstanden ist 
 	\end{enumerate}
-	\item \textbf{Ergebnis: }
+	\item \textbf{Ergebnis: } Bei einem Patt oder nach 50 Zügen ohne Bauernbewegung/Figuren schlagen wird das Spiel mit unentschieden beendet.
 	
 	\item[F3070] \textbf{\textit{Rückkampf anbieten: }} Nachdem ein Spiel zu Ende gekommen ist, muss jeder Spieler den anderen Spieler einen Rückkampf anbieten können.	
 	\item \textbf{Ergebnis: } Es ist nicht möglich einen Rückkampf anzubieten.
@@ -201,16 +201,16 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item \textbf{Test-Art: } Entfällt.
 	
 	\item[NF1050] \textbf{\textit{Weiterleitung von Nachrichten: }} Die Weiterleitung und Überprüfung einzelner Züge soll auf dem Server nicht länger als 2 Sekunden dauern.
-	\item \textbf{Ergebnis: }
-	\item \textbf{Test-Art: }
+	\item \textbf{Ergebnis: } Längere Wartezeiten konnten bisher nicht festgestellt werden.
+	\item \textbf{Test-Art: } Benutzen der App zu Testzwecken.
 	
 	\item[NF1060] \textbf{\textit{Verlust von Paketen: }} Bei Übertragungen zwischen zwei Geräten sollen keine Pakete unbemerkt verloren gehen.
-	\item \textbf{Ergebnis: }
-	\item \textbf{Test-Art: }
+	\item \textbf{Ergebnis: } Bisher keine Paketverluste bemerkbar.
+	\item \textbf{Test-Art: } Benutzen der App zu Testzwecken.
 	
 	\item[NF1070] \textbf{\textit{Manipulation von Nachrichten: }} Nachrichten/Spielzüge sollen unverändert am Empfänger eintreffen. Sollten Änderungen vorgenommen worden sein, soll dies vom Empfänger erkannt werden können.
-	\item \textbf{Ergebnis: }
-	\item \textbf{Test-Art: }
+	\item \textbf{Ergebnis: } Es wird beim Empfänger nicht auf Korrektheit überprüft.
+	\item \textbf{Test-Art: } Entfällt.
 	
 	\item[NF1080] \textbf{\textit{Wartung: }} Der Server soll wartungsfrei und ohne Neustarts auskommen.
 	\item \textbf{Ergebnis: } In dieser vergleichsweise kurzen Zeitspanne wurde der Server nicht neu gestartet. Dieses Ergebnis liefert jedoch keine zuverlässige Aussage.
@@ -275,7 +275,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	
 	\item[T2030] \textbf{\textit{Annehmen einer Herausforderung: }} 
 	\begin{description}
-	\item Nicht implementiert.
+	\item Nicht implementiert, ein Spiel wird automatisch angenommen.
 	\end{description}
 
 	
@@ -294,7 +294,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 			
 	\item[T3020] \textbf{\textit{Remis bieten: }} 
 	\begin{description}
-	\item Nicht implementiert. Dialog taucht auf, aber beide Antwortmöglichkeiten haben keinen Effekt.
+	\item Wie gewünscht implementiert. Der Gegner erhält nach Aktualisieren ein Dialogfenster.
 	\end{description}
 
 	\item[T3030] \textbf{\textit{Remis annehmen: }}
@@ -304,12 +304,12 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	
 	\item[T3040] \textbf{\textit{Remis ablehnen: }}
 	\begin{description}
-	\item Nicht implementiert. Siehe [T3020].
+	\item Wie gewünscht implementiert. Bei Ablehnen wird das Fenster geschlossen und das Spiel läuft weiter.
 	\end{description}
 	
 	\item[T3050] \textbf{\textit{Aufgeben: }} 
 	\begin{description}
-	\item Nicht implementiert. Button leitet nur ins Hauptmenü weiter.
+	\item Wie gewünscht implementiert, das Spiel wird sofort beendet und der Gegner erhält nach aktualisieren eine Benachrichtigung.
 	\end{description}
 	
 	\item[T3060] \textbf{\textit{Rückkampf anbieten: }}
@@ -382,6 +382,13 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item{\textbf{Symptom:}} Bei Online-Spielen konnten die Figuren weder bewegt, noch gewählt werden.
 	\item{\textbf{Ursache:}} Fehlerhafte Abfragen bei Online-Spielen, die Spielerfarbe wurde nicht korrekt abgefragt, da diese nicht vorhanden war.
 	\item{\textbf{Behebung:}} Übergeben der Spielerfarbe beim Start eines Online-Spiels, entfernen falscher Abfragen.
+\end{itemize}
+
+\item{\textbf{Remis anbieten und Aufgeben funktionierten gar nicht:}}
+\begin{itemize}
+	\item{\textbf{Symptom:}} Bei Online-Spielen konnte weder Remis angeboten, noch aufgegeben werden.
+	\item{\textbf{Ursache:}} Keine Speicherung von Remisangeboten/Aufgaben im BoardState, sowie fehlende Benachrichtigungsmöglichkeit.
+	\item{\textbf{Behebung:}} Speicherung der genannten Anfragen in BoardState, abfragen beim Gegner zur Ausführung entsprechender Aktionen.
 \end{itemize}
 
 \end{itemize}
