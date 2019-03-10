@@ -1,7 +1,9 @@
 package com.example.user.schachapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +15,7 @@ import android.widget.Button;
  * The Player can choose between the buttons quick-match, search-player and statistics.
  */
 public class MainMenuActivity extends AppCompatActivity {
-    private Button buttonQuickMatch, buttonSearchPlayer, buttonStatistics;
+    private Button buttonQuickMatch, buttonSearchPlayer, buttonStatistics, buttonChallenged;
     private SharedPreferences sharedPrefs;
     private SharedPreferences.Editor editor;
     private Boolean nameSet = false;
@@ -67,6 +69,14 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        buttonChallenged.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                challengedClicked();
+
+            }
+        });
+
     }
 
     /**
@@ -102,5 +112,30 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+    }
+
+    public void challengedClicked() {
+        AlertDialog.Builder a_builder = new AlertDialog.Builder(MainMenuActivity.this);
+        if (spiel ist da){
+            a_builder.setMessage("Spiel mit" + spielername + "beitreten?").setCancelable(false)
+                    .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(MainMenuActivity.this, BoardActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("Nein", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+        } else {
+            a_builder.setMessage("Keine offene Herausforderung");
+        }
+        AlertDialog challenged = a_builder.create();
+        challenged.setTitle("Offene Herausforderung");
+        challenged.show();
     }
 }
