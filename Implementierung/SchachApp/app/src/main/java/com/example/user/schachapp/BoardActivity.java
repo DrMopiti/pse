@@ -311,8 +311,8 @@ public class BoardActivity extends AppCompatActivity {
             if (board.whiteToMove() != isWhite) {
                 return;
             }
-        } else {
-            if (positionClicked != null) {
+        }
+        if (positionClicked != null) {
                 if ((selectedPos == null) && (board.getPieceAt(positionClicked) != null) && (board.getPieceAt(positionClicked).isWhite() == board.whiteToMove())) {
                     selectedPos = positionClicked;
                     showPosition();
@@ -320,7 +320,6 @@ public class BoardActivity extends AppCompatActivity {
                     executeMove(positionClicked);
                     selectedPos = null;
                 }
-            }
         }
     }
 
