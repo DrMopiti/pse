@@ -69,6 +69,7 @@
 		\item Figuren können durch antippen ausgewählt werden.
 		\item Wird eine Figur angewählt, werden ihre gültigen Züge angezeigt.
 		\item Es können nur gültige Züge ausgeführt werden.
+		\item Die Zugberechnung wurde durch JUnit Tests überprüft, die korrekte Darstellung in mehreren Testspielen überprüft.
 	\end{itemize}
 \end{description}
 \subsection{Wunschkriterien}
@@ -112,6 +113,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item[T1060] \textbf{\textit{Multiplayer auf einem Gerät: }} 
 	\begin{description}
 	\item Der Button Multiplayer wurde in Sofortspiel umbenannt und die Figuren sind dementsprechend für die Spieler umgedreht.
+	Durch mehrere Testpersonen getestet.
 	\end{description}
 	
 	
@@ -193,7 +195,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\begin{itemize}
 	\item{\textbf{Symptom:}} Online-Spielen war nicht möglich.
 	\item{\textbf{Ursache:}} Serverkommunikation im gleichen Thread wie die restliche App laufen zu 	lassen führte zu Fehlern. (NetworkOnMainThreadException)
-	\item{\textbf{Behebung:}} Serverkommunikation in separate Threads auslagern. 
+	\item{\textbf{Behebung:}} Serverkommunikation mittels AsyncTask in separate Threads auslagern. 
 	\end{itemize}
 \item{\textbf{ Spielersuche:}} 
 	\begin{itemize} 
@@ -206,6 +208,12 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item{\textbf{Symptom:}} Weiß konnte nicht verlieren.
 	\item{\textbf{Ursache:}} Es wurde nicht abgefragt, ob nach einem Zug von schwarz das Spiel beendet war.
 	\item{\textbf{Behebung:}} Die Ergebnisabfrage wurde in eine extra Methode ausgelagert, die dann an den richtigen Stellen aufgerufen wird.
+	\end{itemize}
+\item{\textbf{Fehlerhafte Brettübertragung:}}
+	\begin{itemize}
+		\item{\textbf{Symptom:}} Der Brettstring wurde korrekt in der Datenbank gespeichert, kam aber abgeschnitten in der App an.
+		\item{\textbf{Ursache:}} Unbekannt.
+		\item{\textbf{Behebung:}} Die Trennung der einzelnen Bereiche im Brettstring mit dem Symbol \glqq X\grqq, statt \glqq \#\grqq \space vorgenommen.
 	\end{itemize}
 \end{itemize}
 \end{document}
