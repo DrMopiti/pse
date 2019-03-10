@@ -85,8 +85,8 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item[T1010] \textbf{\textit{Anmelden: }} 
 	\begin{description}
 	\item Wurde abgewandelt in eine lokale Anmeldung und der Button Anmelden wurde nicht implementiert, da kein Gastzugang implementiert wurde.
-	\end{description}
-	
+	Beim erstmaligen Start gibt der Nutzer einen selbst gewählten Namen ein.
+	\end{description}	
 
 	\item[T1020]  \textbf{\textit{Gastzugang: }} 
     \begin{description}
@@ -128,6 +128,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item[T2020] \textbf{\textit{Herausfordern und Spieleinstellungen bestimmen: }} 
 	\begin{description}
 	\item Gewünschte Farbe und Bedenkzeit wurden nicht implementiert.
+	\item Der Nutzer der einen anderen Nutzer herausfordert, bekommt weiß zugewiesen.
 	\end{description}
 	
 
@@ -215,5 +216,11 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 		\item{\textbf{Ursache:}} Unbekannt.
 		\item{\textbf{Behebung:}} Die Trennung der einzelnen Bereiche im Brettstring mit dem Symbol \glqq X\grqq, statt \glqq \#\grqq \space vorgenommen.
 	\end{itemize}
+\item{\textbf{Websocket Verbindung ohne Name:}}
+\begin{itemize}
+	\item{\textbf{Symptom:}} Der Nutzer meldet sich als NoUser beim Server.
+	\item{\textbf{Ursache:}} Die Verbindung wurde schon aufgebaut, bevor der Nutzer einen Namen eingegeben hat.
+	\item{\textbf{Behebung:}} Es wird überprüft ob der Nutzer schon einen Namen eingegeben hat.
+\end{itemize}
 \end{itemize}
 \end{document}
