@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -68,14 +69,18 @@ public class LoginActivity extends AppCompatActivity {
      * When Login is clicked the player goes into the MainMenuActivity. The username stays stored local.
      */
     public void loginClicked() {
-        String user = userName.getText().toString();
-        if ((user.length() > 0) && (user.length() <= 30)) {
-            Intent intent = new Intent(this, MainMenuActivity.class);
-            startActivity(intent);
-            SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString("Username", userName.getText().toString());
-            editor.commit();
+        if (userName.getError() != null) {
+            Toast.makeText(this, "Ungültiger Name", Toast.LENGTH_LONG).show();
+        } else {
+            String user = userName.getText().toString();
+            if ((user.length() > 0) && (user.length() <= 30)) {
+                Intent intent = new Intent(this, MainMenuActivity.class);
+                startActivity(intent);
+                SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString("Username", userName.getText().toString());
+                editor.commit();
+            }
         }
     }
 
