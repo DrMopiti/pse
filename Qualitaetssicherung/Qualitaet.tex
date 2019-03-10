@@ -35,7 +35,7 @@
 \begin{description}
 	\item[KM1010] \textbf{Schachregeln}
 	\begin{itemize}
-		\item Schachregeln sind implementiert mit Ausnahme eines Unentschiedens aufgrund von Materialmangels.
+		\item Schachregeln sind implementiert mit Ausnahme eines Unentschiedens aufgrund von Materialmangel.
 		\item Das Spielende wird erkannt. Die Korrektheit wurde mit JUnit Testfällen mit hoher Abdeckung überprüft.
 	\end{itemize}
 	\item[KM1020] \textbf{\textit{Einhaltung der Schachregeln}}
@@ -48,17 +48,17 @@
 		\item Die Spielsuche wurde im Vergleich zum Pflichtenheft abgeändert.
 		Der Button Sofortspiel startet ein Offline-Spiel auf einem Gerät. Die schwarzen Figuren werden hierbei auf den Kopf gedreht.
 		Durch klicken des Buttons Spielersuche, werden alle Spieler aufgelistet.
-		Wählt man einen Spieler an, sieht man dessen Online-Status und kann ihn, falls dieser Online ist, herausfordern. Der Spieler der auf "Herausfordern" klickt, bekommt die weißen Figuren zugewiesen.
+		Wählt man einen Spieler an, sieht man dessen Online-Status und kann ihn, falls dieser online ist, herausfordern. Der Spieler der auf "Herausfordern" klickt, bekommt die weißen Figuren zugewiesen.
 	\end{itemize}
 	\item[KM1040] \textbf{GUI}
 	\begin{itemize}
 		\item Die Oberfläche besteht aus:
 		\begin{itemize}		
-			\item Login Seite: Der Nutzer vergibt sich hier selbstständig einen Nutzernamen.
+			\item Login-Seite: Der Nutzer vergibt sich hier selbstständig einen Nutzernamen.
 			
 			\item Hauptmenü: Hier kann der Nutzer ein Offline-Spiel starten, einen anderen Spieler herausfordern oder seine Statistiken einsehen.
 			
-			\item Statistik Seite: Der Nutzer kann seine Spielstatistiken einsehen.
+			\item Statistik-Seite: Der Nutzer kann seine Spielstatistiken einsehen.
 			
 			\item Schachbrett: Hier kann der Nutzer in einer Partie seine Züge durchführen.
 			
@@ -96,26 +96,26 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item \textbf{Ergebnis: } Entfällt, wie in Testfall T1010 beschrieben.
 	
 	
-	\item [F1040] \textbf{\textit{Rangliste und eigene Statistiken anzeigen lassen: }} Mit einem Klick auf \textbf{\textit{Rangliste/Statistik }} ist der Benutzer in der Lage seine eigene Statistiken aufzurufen. Als Statistiken sieht der Benutzer folgende Angaben:
+	\item [F1040] \textbf{\textit{Rangliste und eigene Statistiken anzeigen lassen: }} Mit einem Klick auf \textbf{\textit{Rangliste/Statistik }} ist der Benutzer in der Lage seine eigenen Statistiken aufzurufen. Als Statistiken sieht der Benutzer folgende Angaben:
 	
 	\begin{itemize}
-		\item Anzahl Spiele
-		\item Anzahl gewonnene Spiele
-		\item Anzahl verlorene Spiele
+		\item Anzahl der Spiele
+		\item Anzahl der gewonnenen Spiele
+		\item Anzahl der verlorenen Spiele
 		\item Gewinnrate
-		\item Anzahl unentschiedene Spiele
+		\item Anzahl der unentschiedenen Spiele
 		\item Elo-Zahl		
 	\end{itemize}
 	\item \textbf{Ergebnis: } Bis auf die Elo-Zahl werden alle oben angegebenen Daten angezeigt.
 	
 	\item[F1050] \textbf{\textit{Suche nach Benutzern: }} Der Benutzer kann mit der Suchfunktion nach anderen Benutzern des Systems anhand ihres Benutzernamens suchen.
-	\item \textbf{Ergebnis: } Es werden alle Benutzer seit Server Start aufgelistet.
+	\item \textbf{Ergebnis: } Es werden alle Benutzer seit Server-Start aufgelistet.
 	
 	\item[F1060]  \textbf{\textit{Anzeigen der persönlichen Profile anderer Benutzer: }}
 	Der Benutzer kann sich die persönlichen Profile von anderen Benutzern anzeigen lassen, wobei er den Benutzernamen und die Statistiken sieht. Die anderen Benutzer können sich genauso sein Profil anzeigen lassen.
 	\item \textbf{Ergebnis: } Es ist nicht möglich sich Statistiken von anderen Spielern anzeigen zu lassen.
 	
-	\item[F1070] \textbf{\textit{Chatten: }} Spieler können während des Spiels miteinander chatten.	
+	\item[F1070] \textbf{\textit{Chatten: }} Spieler können während des Spieles miteinander chatten.	
 	\item \textbf{Ergebnis: } Nicht implementiert.
 	
 \end{description}
@@ -123,7 +123,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 \subsection{Initialisierung}
 \begin{description}
 	\hypertarget{F2010}{\item[F2010]}\textbf{\textit{Eröffnung eines Spieles: }} Der Benutzer kann Spiele erzeugen, ohne dabei einen anderen Benutzer als Gegner angeben zu müssen. Dann bekommt er vom System einen Gegner zugewiesen, der ebenfalls ein Spiel erzeugt hat. Die Farbe ist zufällig und es gibt eine feste Bedenkzeit von 15 Minuten für jeden Spieler.
-	\item \textbf{Ergebnis: } Der Nutzer kann Offline spielen, oder einen anderen Spieler für ein Online Spiel auswählen. Der Herausforderer bekommt weiß zugewiesen und es gibt keine Bedenkzeit.
+	\item \textbf{Ergebnis: } Der Nutzer kann offline spielen, oder einen anderen Spieler für ein Online-Spiel auswählen. Der Herausforderer bekommt weiß zugewiesen und es gibt keine Bedenkzeit.
 	
 	\item[F2020] \textbf{\textit{Herausfordern: }} Nachdem ein entsprechender Gegner ausgesucht wurde \textbf{\textit{F1050}} kann der Benutzer ihn zum Spiel herausfordern.
 	\item \textbf{Ergebnis: } Dies ist soweit möglich.
@@ -150,8 +150,8 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 
 \subsection{Spielverlauf} 
 \begin{description}
-	\item[F3010]\textbf{\textit{Schachfiguren bewegen: }}Der Benutzer kann während des Spiels, falls er an der Reihe ist, einen Zug seiner Wahl unter Beibehaltung der Schachregeln ausführen, wobei dem Benutzer alle erlaubte Züge  angezeigt werden.
-	\item \textbf{Ergebnis: } Es können nur den Regeln entsprechende Züge ausgeführt werden.
+	\item[F3010]\textbf{\textit{Schachfiguren bewegen: }}Der Benutzer kann während des Spieles, falls er an der Reihe ist, einen Zug seiner Wahl unter Beibehaltung der Schachregeln ausführen, wobei dem Benutzer alle erlaubte Züge  angezeigt werden.
+	\item \textbf{Ergebnis: } Der Testfall T3010 funktioniert wie vorgesehen. Der Benutzer kann, wenn er an der Reihe ist, eine Figur auswählen und die möglichen Zielfelder werden markiert. Dann kann der Benutzer eines dieser Felder auswählen und der Zug wird ausgeführt.
 	
 	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Ein Spieler der Remis anbieten möchte, tut dies, nachdem er einen Zug auf dem Schachbrett ausgeführt und nachdem seine Uhr angehalten und sich die des Gegners in Gang gesetzt hat.
 	\item \textbf{Ergebnis: } Es ist möglich ein Remis anzubieten.
@@ -194,7 +194,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	
 	\item[NF1030] \textbf{\textit{Ermittlung von Spielzügen: }} Die Ermittlung \hyperlink{F3010}{\textbf{\textit{F3010}}} an möglichen gültigen Zügen darf nicht länger als 0,1 Sekunden dauern.
 	\item \textbf{Ergebnis: } Aufgrund der kleinen Zeitspanne schwer zu testen, da die Reaktionsgeschwindigkeit Messfehler verursacht.
-	\item \textbf{Test-Art: } Zu verschiedenen Zeitpunkten eines Offline Spiels getestet und Zeit per Hand gemessen. Eventuell optische Erkennung des Displays besser geeignet.
+	\item \textbf{Test-Art: } Zu verschiedenen Zeitpunkten eines Offline-Spieles getestet und Zeit per Hand gemessen. Eventuell optische Erkennung des Displays besser geeignet.
 	
 	\item[NF1040] \textbf{\textit{Herausforderung: }} Falls ein Spieler herausgefordert wird, hat dieser zwei Minuten Zeit diese anzunehmen. Danach verfällt die Herausforderung. 
 	\item \textbf{Ergebnis: } Wird ein Spieler herausgefordert, wird die Herausforderung implizit akzeptiert.
@@ -381,7 +381,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 \begin{itemize}
 	\item{\textbf{Symptom:}} Bei Online-Spielen konnten die Figuren weder bewegt, noch gewählt werden.
 	\item{\textbf{Ursache:}} Fehlerhafte Abfragen bei Online-Spielen, die Spielerfarbe wurde nicht korrekt abgefragt, da diese nicht vorhanden war.
-	\item{\textbf{Behebung:}} Übergeben der Spielerfarbe beim Start eines Online-Spiels, entfernen falscher Abfragen.
+	\item{\textbf{Behebung:}} Übergeben der Spielerfarbe beim Start eines Online-Spieles, entfernen falscher Abfragen.
 \end{itemize}
 
 \item{\textbf{Remis anbieten und Aufgeben funktionierten gar nicht:}}
