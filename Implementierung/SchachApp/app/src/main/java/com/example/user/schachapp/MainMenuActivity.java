@@ -116,12 +116,12 @@ public class MainMenuActivity extends AppCompatActivity {
 
     public void challengedClicked() {
         AlertDialog.Builder a_builder = new AlertDialog.Builder(MainMenuActivity.this);
-        if (spiel ist da){
-            a_builder.setMessage("Spiel mit" + spielername + "beitreten?").setCancelable(false)
+        if (true){ //wenn ein spiel existiert für deisen spieler
+            a_builder.setMessage("Spiel mit" + "[Spielername]" + "beitreten?").setCancelable(false) //Spielername einsetzen
                     .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(MainMenuActivity.this, BoardActivity.class);
+                            Intent intent = new Intent(MainMenuActivity.this, BoardActivity.class); //Spieldaten mitgeben
                             startActivity(intent);
                         }
                     })
@@ -131,7 +131,7 @@ public class MainMenuActivity extends AppCompatActivity {
                             dialog.cancel();
                         }
                     });
-        } else {
+        } else { //sonst
             a_builder.setMessage("Keine offene Herausforderung");
         }
         AlertDialog challenged = a_builder.create();
