@@ -131,8 +131,9 @@ public class MainMenuActivity extends AppCompatActivity {
                     .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(MainMenuActivity.this, BoardActivity.class);
-                            intent.putExtra("isOnlineGame", true);//Spieldaten mitgeben
+                            Intent intent = new Intent(MainMenuActivity.this, BoardActivity.class); //Spieldaten mitgeben
+                            intent.putExtra("isOnlineGame", true);
+                            intent.putExtra("isWhite", false);
                             startActivity(intent);
                         }
                     })

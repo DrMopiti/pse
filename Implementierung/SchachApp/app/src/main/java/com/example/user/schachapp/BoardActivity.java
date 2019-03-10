@@ -52,6 +52,7 @@ public class BoardActivity extends AppCompatActivity {
     private ChessRuleProvider crp;
     private ClientSocket cs;
     private boolean isOnlineGame;
+    private boolean isWhite;
 
 
 
@@ -71,6 +72,7 @@ public class BoardActivity extends AppCompatActivity {
         cs = new ClientSocket();
         Intent thisIntent = getIntent();
         isOnlineGame = thisIntent.getBooleanExtra("isOnlineGame", false);
+        isWhite = thisIntent.getBooleanExtra("isWhite", true);
         //isOnlineGame = false;
 
         crp = new ChessRuleProvider();
@@ -306,7 +308,7 @@ public class BoardActivity extends AppCompatActivity {
 
         }
         if (isOnlineGame) {
-            if (!board.whiteToMove()) {
+            if (board.whiteToMove() != isWhite) {
                 return;
             }
         } else {

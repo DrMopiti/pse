@@ -95,6 +95,7 @@ public class ChallengeActivity extends AppCompatActivity {
                     System.out.println("create:   " + success);
                     Intent intent = new Intent(this, BoardActivity.class);
                     intent.putExtra("isOnlineGame", true);
+                    intent.putExtra("isWhite", true);
                     startActivity(intent);
                 }
             }
