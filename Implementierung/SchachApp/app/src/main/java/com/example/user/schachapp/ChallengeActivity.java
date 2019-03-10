@@ -73,7 +73,7 @@ public class ChallengeActivity extends AppCompatActivity {
      */
     public void challengeClicked() {
         try {
-            if (/*new IsOnlineTask().execute(challengedPlayer).get()*/ true) {
+            if (new IsOnlineTask().execute(challengedPlayer).get()) {
                 if (new HasGameTask().execute(challengedPlayer).get()) {
                     Toast.makeText(this, "Spieler spielt bereits!", Toast.LENGTH_LONG).show();
                 } else {
