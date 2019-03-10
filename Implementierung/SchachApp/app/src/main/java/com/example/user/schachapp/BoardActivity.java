@@ -323,6 +323,7 @@ public class BoardActivity extends AppCompatActivity {
                 String boardString = new GetBoardTask().execute(sharedPrefs.getString("Username", "")).get();
                 board = new BoardState(boardString);
                 checkForEnd(board);
+                paintBoard(board);
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
