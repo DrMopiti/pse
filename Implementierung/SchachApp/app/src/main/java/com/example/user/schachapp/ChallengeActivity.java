@@ -39,23 +39,21 @@ public class ChallengeActivity extends AppCompatActivity {
         Boolean online;
         try {
             online = new IsOnlineTask().execute(challengedPlayer).get();
-            System.out.println("1111    "+ online.toString());
-           // Log.d("1adasdasd","111111sad");
-			//Toast.makeText(this, "111111" + "   " + online.toString(), Toast.LENGTH_LONG).show();
+
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
-            online = false;
-            System.out.println("22222    " + online.toString());
-          //  Log.d("22222aasdasd","222222sad");
-          //  Toast.makeText(this, "22222", Toast.LENGTH_LONG).show();;
-        }
-        if (online) {
-            status.setText("online");
-        } else {
-            status.setText("offline");
+            online = false;          
         }
 
         Button buttonChallenge = findViewById(R.id.challengeButton);
+        if (online) {
+            status.setText("online");
+        } else {
+            buttonChallenge.setEnabled(false);
+            status.setText("offline");
+        }
+
+
 
         // clickListener for challenging other player
         buttonChallenge.setOnClickListener(new View.OnClickListener() {
