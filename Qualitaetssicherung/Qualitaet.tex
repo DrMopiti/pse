@@ -222,5 +222,13 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item{\textbf{Ursache:}} Die Verbindung wurde schon aufgebaut, bevor der Nutzer einen Namen eingegeben hat.
 	\item{\textbf{Behebung:}} Es wird überprüft ob der Nutzer schon einen Namen eingegeben hat.
 \end{itemize}
+
+\item{\textbf{Doppelte Namen:}}
+\begin{itemize}
+	\item{\textbf{Symptom:}} Kein Symptom.
+	\item{\textbf{Ursache:}} Es wurde nicht geprüft ob der eingegebene Name schon vergeben ist.
+	\item{\textbf{Behebung:}} Es wird überprüft ob der eingegebene Name schon vergeben ist und falls ja wird der Login mit diesem Namen unterbunden.
+\end{itemize}
+
 \end{itemize}
 \end{document}
