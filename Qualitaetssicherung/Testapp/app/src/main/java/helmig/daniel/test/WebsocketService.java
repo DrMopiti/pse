@@ -16,7 +16,7 @@ public class WebsocketService extends IntentService{
 
 	public static State state = State.DISCONNECTED;
 
-	private static final String url = "ws://sdq-pse-gruppe1.ipd.kit.edu/server/";
+	private static final String url = "wss://sdq-pse-gruppe1.ipd.kit.edu/server/";
 
 	private WebSocketClient mWs;
 
