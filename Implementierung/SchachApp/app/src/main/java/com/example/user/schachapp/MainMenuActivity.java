@@ -120,7 +120,7 @@ public class MainMenuActivity extends AppCompatActivity {
     public void challengedClicked() {
         AlertDialog.Builder a_builder = new AlertDialog.Builder(MainMenuActivity.this);
         String name = sharedPrefs.getString("Username", "NoUser");
-        Boolean hasGame = false;
+        boolean hasGame = false;
         try {
             hasGame = new HasGameTask().execute(name).get();
         } catch (ExecutionException | InterruptedException e) {
