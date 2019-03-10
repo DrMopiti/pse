@@ -79,7 +79,7 @@
 \\
 Ansonsten wurden keine Wunschkriterien implementiert.
 \end{itemize}
-	\section{Funktionelle Anforderungen}
+	\section{Funktionale Anforderungen}
 \subsection{Benutzerfunktionen}
 \begin{description}
 	\item[F1010] \textbf{\textit{Anmelden: }} Ein Android Nutzer der auch einen Google Account besitzt, kann sich auf der Hauptseite der App erfolgreich anmelden. Für die Anmeldung im System sind folgende Angaben erforderlich:
@@ -159,13 +159,23 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item \textbf{Ergebnis: } Die Erstellung braucht zwischen zwei und sechs Sekunden, je nach Internetverbindung.
 	\item \textbf{Test-Art: } Sechs manuelle Spielerstellungen, drei mit aktiver WLAN-Verbindung, drei mit mobiler Datenverbindung. Mit Stoppuhr gemessen.
 	\item[NF1030] \textbf{\textit{Ermittlung von Spielzügen: }} Die Ermittlung \hyperlink{F3010}{\textbf{\textit{F3010}}} an möglichen gültigen Zügen darf nicht länger als 0,1 Sekunden dauern.
-	\item \textbf{Ergebnis: } 
-	\item \textbf{Test-Art: } 
+	\item \textbf{Ergebnis: } Aufgrund der kleinen Zeitspanne schwer zu testen, da die Reaktionsgeschwindigkeit Messfehler verursacht.
+	\item \textbf{Test-Art: } Zu verschiedenen Zeitpunkten eines Offline Spiels getestet und Zeit per Hand gemessen. Eventuell optische Erkennung des Displays besser geeignet.
 	\item[NF1040] \textbf{\textit{Herausforderung: }} Falls ein Spieler herausgefordert wird, hat dieser zwei Minuten Zeit diese anzunehmen. Danach verfällt die Herausforderung. 
+	\item \textbf{Ergebnis: } Wird ein Spieler herausgefordert, wird die Herausforderung implizit akzeptiert.
+	\item \textbf{Test-Art: } Entfällt.
 	\item[NF1050] \textbf{\textit{Weiterleitung von Nachrichten: }} Die Weiterleitung und Überprüfung einzelner Züge soll auf dem Server nicht länger als 2 Sekunden dauern.
+	\item \textbf{Ergebnis: }
+	\item \textbf{Test-Art: }
 	\item[NF1060] \textbf{\textit{Verlust von Paketen: }} Bei Übertragungen zwischen zwei Geräten sollen keine Pakete unbemerkt verloren gehen.
+	\item \textbf{Ergebnis: }
+	\item \textbf{Test-Art: }
 	\item[NF1070] \textbf{\textit{Manipulation von Nachrichten: }} Nachrichten/Spielzüge sollen unverändert am Empfänger eintreffen. Sollten Änderungen vorgenommen worden sein, soll dies vom Empfänger erkannt werden können.
+	\item \textbf{Ergebnis: }
+	\item \textbf{Test-Art: }
 	\item[NF1080] \textbf{\textit{Wartung: }} Der Server soll wartungsfrei und ohne Neustarts auskommen.
+	\item \textbf{Ergebnis: } In dieser vergleichsweise kurzen Zeitspanne wurde der Server nicht neu gestartet. Dieses Ergebnis liefert jedoch keine zuverlässige Aussage.
+	\item \textbf{Test-Art: } Entfällt. Theoretisch mit regelmäßigen Ping Anfragen überprüfbar.
 	
 	
 \end{description}
