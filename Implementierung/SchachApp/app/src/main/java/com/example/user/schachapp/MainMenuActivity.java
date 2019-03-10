@@ -122,6 +122,8 @@ public class MainMenuActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(MainMenuActivity.this, BoardActivity.class); //Spieldaten mitgeben
+                            intent.putExtra("isOnlineGame", true);
+                            intent.putExtra("isWhite", false);
                             startActivity(intent);
                         }
                     })
