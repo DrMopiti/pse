@@ -17,6 +17,12 @@ public class BoardState {
     private boolean blackKingCastle;
     private boolean blackQueenCastle;
     private int movesWithoutAction;
+    private boolean online;
+    private boolean whiteSurrender;
+    private boolean blackSurrender;
+    private boolean whiteDrawOffer;
+    private boolean blackDrawOffer;
+    private boolean draw;
 
     /**
      * Sets all attributes of the board by splitting the given string several times.
@@ -76,6 +82,14 @@ public class BoardState {
         whiteQueenCastle = bools[2].equals("t");
         blackKingCastle = bools[3].equals("t");
         blackQueenCastle = bools[4].equals("t");
+        if(bools.length > 6) {
+            online = true;
+            whiteSurrender = bools[5].equals("t");
+            blackSurrender = bools[6].equals("t");
+            whiteDrawOffer = bools[7].equals("t");
+            blackDrawOffer = bools[8].equals("t");
+            draw = bools[9].equals("t");;
+        }
 
         //sets movesWithoutAction
         try {
@@ -296,6 +310,14 @@ public class BoardState {
         bools = bools + (blackKingCastle ? "t" : "f");
         bools = bools + (blackQueenCastle ? "t" : "f");
 
+        if (online) {
+            bools = bools + (whiteSurrender ? "t" : "f");
+            bools = bools + (blackSurrender ? "t" : "f");
+            bools = bools + (whiteDrawOffer ? "t" : "f");
+            bools = bools + (blackDrawOffer ? "t" : "f");
+            bools = bools + (draw ? "t" : "f");
+        }
+
         //converts movesWithoutAction
         String noAction = String.valueOf(movesWithoutAction);
 
@@ -308,6 +330,65 @@ public class BoardState {
      */
     public BoardState clone() {
         return new BoardState(this.toString());
+    }
+
+    public boolean hasWhiteSurrender() {
+        if (!online) {
+            return false;
+        }
+        return whiteSurrender;
+    }
+
+    public void setWhiteSurrender() {
+        whiteSurrender = true;
+    }
+
+    public boolean hasBlackSurrender() {
+        if (!online) {
+            return false;
+        }
+        return blackSurrender;
+    }
+
+    public void setBlackSurrender() {
+        blackSurrender = true;
+    }
+
+    public boolean isWhiteDrawOffer() {
+        if (!online) {
+            return false;
+        }
+        return whiteDrawOffer;
+    }
+
+    public void setWhiteDrawOffer(boolean whiteDrawOffer) {
+        this.whiteDrawOffer = whiteDrawOffer;
+    }
+
+    public boolean isBlackDrawOffer() {
+        if (!online) {
+            return false;
+        }
+        return blackDrawOffer;
+    }
+
+    public void setBlackDrawOffer(boolean blackDrawOffer) {
+        this.blackDrawOffer = blackDrawOffer;
+    }
+
+    public boolean isDraw() {
+        if (!online) {
+            return false;
+        }
+        return draw;
+    }
+
+    public void setDraw() {
+        draw = true;
+    }
+
+    public boolean isOnline() {
+        return online;
     }
 
    /* private boolean validityOfPiecesOnBoard(String pieces) {

@@ -81,6 +81,11 @@ public class ChessRuleProvider implements RuleProvider {
      */
     @Override
     public boolean hasEnded(BoardState board) {
+        if (board.isOnline()) {
+            if (board.hasWhiteSurrender() || board.hasBlackSurrender() || board.isDraw()) {
+                return true;
+            }
+        }
         return (isMate(board) || isStaleMate(board) || isDraw(board));
     }
 
@@ -91,6 +96,17 @@ public class ChessRuleProvider implements RuleProvider {
      */
     @Override
     public Result getResult(BoardState board) {
+        if (board.isOnline()) {
+            if (board.hasWhiteSurrender()) {
+                return new Result("0:1", "Aufgegeben");
+             }
+             if( board.hasBlackSurrender() ) {
+                 return new Result("1:0", "Aufgegeben");
+             }
+             if(board.isDraw()) {
+                 return new Result("0,5:0,5", "Remis");
+            }
+        }
         if(isMate(board)) {
             if(board.whiteToMove()) {
                 return new Result("0:1", "Matt");
