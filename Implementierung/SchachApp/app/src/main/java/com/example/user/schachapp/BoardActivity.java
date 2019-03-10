@@ -215,12 +215,20 @@ public class BoardActivity extends AppCompatActivity {
     // when the draw button is clicked, then there opens an Dialog.
     private void drawClicked() {
         AlertDialog.Builder a_builder = new AlertDialog.Builder(BoardActivity.this);
-        a_builder.setMessage("Willst du das Unentschieden annehmen?").setCancelable(false)
+        a_builder.setMessage("Willst du Unentschieden anbieten?").setCancelable(false)
                 .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(BoardActivity.this, DrawActivity.class);
-                        startActivity(intent);
+                        if (isOnlineGame) {
+                            if (isWhite) {
+                                board.setWhiteDrawOffer(true);
+                            } else {
+                                board.setBlackDrawOffer(true);
+                            }
+                        }
+                        dialog.cancel();
+                     //   Intent intent = new Intent(BoardActivity.this, DrawActivity.class);
+                     //   startActivity(intent);
                     }
                 })
                 .setNegativeButton("Nein", new DialogInterface.OnClickListener() {
@@ -241,6 +249,13 @@ public class BoardActivity extends AppCompatActivity {
                 .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if (isOnlineGame) {
+                            if (isWhite) {
+                                board.setWhiteSurrender();
+                            } else {
+                                board.setBlackSurrender();
+                            }
+                        }
                         Intent intent = new Intent(BoardActivity.this, LostActivity.class);
                         startActivity(intent);
                     }
