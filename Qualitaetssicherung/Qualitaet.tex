@@ -79,6 +79,97 @@
 \\
 Ansonsten wurden keine Wunschkriterien implementiert.
 \end{itemize}
+	\section{Funktionelle Anforderungen}
+\subsection{Benutzerfunktionen}
+\begin{description}
+	\item[F1010] \textbf{\textit{Anmelden: }} Ein Android Nutzer der auch einen Google Account besitzt, kann sich auf der Hauptseite der App erfolgreich anmelden. Für die Anmeldung im System sind folgende Angaben erforderlich:
+	\begin{itemize}
+		\item e-Mail Adresse, die mit dem Google Konto in Verbindung steht
+		\item Passwort des Google Kontos
+	\end{itemize}  
+	\item[F1020] \textbf{\textit{Gastzugang: }} Benutzer die keinen Google Account besitzen, können sich als Gast im System anmelden. Bei der Anmeldung wird ihnen ein eindeutiger Benutzername vom System zugewiesen. 
+	\item[F1030] \textbf{\textit{Abmelden: }} Benutzer, die sich bereits mit ihrem Google Account angemeldet haben, können sich wieder vom System abmelden.
+	
+	
+	\item [F1040] \textbf{\textit{Rangliste und eigene Statistiken anzeigen lassen: }} Mit einem klick auf \textbf{\textit{Rangliste/Statistik }} Button ist der Benutzer in der Lage seine eigene Statistiken angucken und die Rangliste durchblicken, wo alle Spieler sich befinden müssen. Als Statistiken sieht der Benutzer folgende Angaben:
+	
+	\begin{itemize}
+		\item Wie viele Spiele gespielt wurden
+		\item Wie viele Male gewonnen wurde
+		\item Wie viele Male verloren wurde
+		\item Gewinnrate
+		\item Wie viele Spiele unentschieden gespielt wurden
+		\item Elo-Zahl
+		
+	\end{itemize}
+	\item[F1050] \textbf{\textit{Suche nach Benutzern: }} Der Benutzer kann mit der Suchfunktion nach anderen Benutzern des Systems anhand ihres Benutzernamens suchen.
+	
+	\item[F1060]  \textbf{\textit{Anzeigen der persönlichen Profile anderer Benutzer: }}
+	Der Benutzer kann sich die persönlichen Profile von anderen Benutzern anzeigen lassen, wobei er den Benutzernamen und die Statistiken sieht. Die anderen Benutzer können sich genauso sein Profil anzeigen lassen.
+	\item[F1070] \textbf{\textit{Chatten: }} Spieler können während des Spiels miteinander chatten.	
+	
+\end{description}
+
+\subsection{Initialisierung}
+\begin{description}
+	\hypertarget{F2010}{\item[F2010]}\textbf{\textit{Eröffnung eines Spieles: }} Der Benutzer kann Spiele erzeugen, ohne dabei einen anderen Benutzer als Gegner angeben zu müssen. Dann bekommt er vom System einen Gegner zugewiesen, der ebenfalls ein Spiel erzeugt hat. Die Farbe ist zufällig und es gibt eine feste Bedenkzeit von 15 Minuten für jeden Spieler.
+	
+	\item[F2020] \textbf{\textit{Herausfordern: }} Nachdem ein entsprechender Gegner ausgesucht wurde \textbf{\textit{F1050}} kann der Benutzer ihn zum Spiel herausfordern.
+	\item [F2030] \textbf{\textit{Annehmen einer Herausforderung: }} Der Benutzer kann die Herausforderung zum Spiel \textbf{\textit{F2030}} annehmen.
+	\item [F2040] \textbf{\textit{Ablehnung einer Herausforderung: }} Der Benutzer kann die Herausforderung zum Spiel \textbf{\textit{F2030}} ablehnen.
+	
+	\item[F2050] \textbf{\textit{Spieleinstellungen bestimmen: }} Bei der Herausforderung einer bestimmten Person zum Spiel \textbf{\textit{F2020}} kann der Herausforderer folgende Spieleinstellungen aufstellen:
+	\begin{enumerate}
+		\item Bedenkzeit
+		\item Farbe
+	\end{enumerate}
+	\item[F2060] \textbf{\textit{Multiplayer auf einem Gerät: }}  Mit einer Multiplayer Funktion können zwei Spieler auf einem Gerät gegeneinander spielen.
+	
+	
+\end{description}
+
+
+\subsection{Spielverlauf} 
+\begin{description}
+	\item[F3010]\textbf{\textit{Schachfiguren bewegen: }}Der Benutzer kann während des Spiels, falls er an der Reihe ist, einen Zug seiner Wahl unter Beibehaltung der Schachregeln ausführen, wobei dem Benutzer alle erlaubte Züge  angezeigt werden.
+	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Ein Spieler der Remis anbieten möchte, tut dies, nachdem er einen Zug auf dem Schachbrett ausgeführt und nachdem seine Uhr angehalten und sich die des Gegners in Gang gesetzt hat.
+	\item[F3030] \textbf{\textit{Remis annehmen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{\textit{F3020}}, das Angebot annehmen.
+	
+	\item[F3040] \textbf{\textit{Remis ablehnen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{\textit{F3020}}, das Angebot ablehnen.
+	
+	\item[F3050] \textbf{\textit{Aufgeben: }} Während des Spiels kann jeder Spieler jederzeit aufgeben.
+	
+	\item[F3060] \textbf{\textit{Spiel beenden: }} Ein Spiel endet, falls einer von beiden Spielern den anderen Schachmatt gesetzt hat, ein Spieler aufgegeben hat, oder eine von unten gezählten Remis Situation auftritt:
+	\begin{enumerate}	    
+		\item Falls einer von beiden Spielern Remis angeboten und der andere Spieler das Angebot angenommen hat
+		\item Falls ein Patt auftritt
+		\item Falls eine tote Stellung vorliegt
+		\item Wenn eine identische Stellung mit gleichen Zugmöglichkeiten und demselben Spieler am Zug mindestens zum dritten Mal auf dem Schachbrett entstanden ist 
+	\end{enumerate}
+	\item[F3070] \textbf{\textit{Rückkampf anbieten: }} Nachdem ein Spiel zu Ende gekommen ist, muss jeder Spieler den anderen Spieler einen Rückkampf anbieten können.		
+	\item[F3080] \textbf{\textit{Spiel speichern: }}  Jeder Spieler kann schon beendete Spiele nach Spielende sofort auf dem Gerät speichern. 
+\end{description}
+	\section{Nichtfunktionale Anforderungen}
+\begin{description}
+	
+	\item[NF1010] \textbf{\textit{Start der App: }} Das Starten der App soll auf aktuellen Geräten maximal 3 Sekunden benötigen. 
+	\item \textbf{Ergebnis: } Die App braucht weniger als 3 Sekunden zum Start.
+	\item \textbf{Test-Art: } Zehnmaliger App Start mit einer variierender Anzahl an bereits geöffneten Apps. Manuell mit Stoppuhr gemessen.
+	\item[NF1020] \textbf{\textit{Spiel Erstellung: }} Der Erstellungsprozess \hyperlink{F2010}{\textbf{\textit{F2010}}} einer neuen Partie darf nicht länger als 5 Sekunden dauern.
+	\item \textbf{Ergebnis: } Die Erstellung braucht zwischen zwei und sechs Sekunden, je nach Internetverbindung.
+	\item \textbf{Test-Art: } Sechs manuelle Spielerstellungen, drei mit aktiver WLAN-Verbindung, drei mit mobiler Datenverbindung. Mit Stoppuhr gemessen.
+	\item[NF1030] \textbf{\textit{Ermittlung von Spielzügen: }} Die Ermittlung \hyperlink{F3010}{\textbf{\textit{F3010}}} an möglichen gültigen Zügen darf nicht länger als 0,1 Sekunden dauern.
+	\item \textbf{Ergebnis: } 
+	\item \textbf{Test-Art: } 
+	\item[NF1040] \textbf{\textit{Herausforderung: }} Falls ein Spieler herausgefordert wird, hat dieser zwei Minuten Zeit diese anzunehmen. Danach verfällt die Herausforderung. 
+	\item[NF1050] \textbf{\textit{Weiterleitung von Nachrichten: }} Die Weiterleitung und Überprüfung einzelner Züge soll auf dem Server nicht länger als 2 Sekunden dauern.
+	\item[NF1060] \textbf{\textit{Verlust von Paketen: }} Bei Übertragungen zwischen zwei Geräten sollen keine Pakete unbemerkt verloren gehen.
+	\item[NF1070] \textbf{\textit{Manipulation von Nachrichten: }} Nachrichten/Spielzüge sollen unverändert am Empfänger eintreffen. Sollten Änderungen vorgenommen worden sein, soll dies vom Empfänger erkannt werden können.
+	\item[NF1080] \textbf{\textit{Wartung: }} Der Server soll wartungsfrei und ohne Neustarts auskommen.
+	
+	
+\end{description}
+
 \section{Globale Testfälle}
 \subsection{Benutzerfunktionen}
 \begin{description}
@@ -106,7 +197,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item[T1050] \textbf{\textit{Suche nach Benutzern anhand des Benutzernamens und Anzeigen der persönlichen Profile anderer Benutzer: }} 
 	\begin{description}
 	\item Falls der Spieler nicht vorhanden ist wird keine Meldung angezeigt, dass er nicht vorhanden ist.  Er wird gar nicht in der Liste angezeigt und man muss einen anderen vorhandenen Spieler suchen. \\
-	\item Es werden alle Spieler seit Server Start aufgelistet.
+	\item Es werden alle Spieler seit Server Start aufgelistet, der Spieler selbst ausgenommen.
 	\end{description}
 	
 	
@@ -120,7 +211,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\subsection{Initialisierung}
 	\item[T2010] \textbf{\textit{Eröffnung eines Spieles: }} 
 	\begin{description}
-	\item Der Button Sofortspiel erzeugt ein Offline-Spiel, wo zwei Spieler gegeneinander spielen können. Die Funktion des Herausforderns eines anderen Spielers funktioniert, indem man den Gegner sucht und herausfordert.
+	\item Der Button Sofortspiel erzeugt ein Offline-Spiel, bei dem zwei Spieler auf einem Gerät gegeneinander spielen. Durch die Spieler-Suche bekommt man eine Liste aller Spieler und kann diese herausfordern, wenn weder der Spieler selber, noch der Gegner bereits in einem Spiel sind.
 	\end{description}
 	
 
@@ -149,33 +240,28 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	
 	\item[T3010] \textbf{\textit{Schachfiguren bewegen: }} 
 	\begin{description}
-	\item Funktioniert wie vorgesehen.
+	\item Funktioniert wie vorgesehen. Wurde mit mehreren Testpersonen getestet.
 	\end{description}
-		
-	
+			
 	\item[T3020] \textbf{\textit{Remis bieten: }} 
 	\begin{description}
-	\item Nicht implementiert.
+	\item Nicht implementiert. Dialog taucht auf, aber beide Antwortmöglichkeiten haben keinen Effekt.
 	\end{description}
 
-	
 	\item[T3030] \textbf{\textit{Remis annehmen: }}
 	\begin{description}
-	\item Nicht implementiert.
+	\item Nicht implementiert. Siehe [T3020].
 	\end{description}
-
 	
 	\item[T3040] \textbf{\textit{Remis ablehnen: }}
 	\begin{description}
-	\item Nicht implementiert.
+	\item Nicht implementiert. Siehe [T3020].
 	\end{description}
-
 	
 	\item[T3050] \textbf{\textit{Aufgeben: }} 
 	\begin{description}
-	\item Nicht implementiert.
+	\item Nicht implementiert. Button leitet nur ins Hauptmenü weiter.
 	\end{description}
-
 	
 	\item[T3060] \textbf{\textit{Rückkampf anbieten: }}
 	\begin{description}
