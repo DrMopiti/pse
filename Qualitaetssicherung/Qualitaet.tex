@@ -24,7 +24,7 @@
 		\vspace{2cm}
 		{\Huge \textbf{Qualitätssicherung}}\\[\baselineskip]\par
 		\vspace{2cm}
-		{\LARGE Tim Groß, Daniel Helmig}\par		
+		{\LARGE Daniel Helmig, Tim Groß}\par		
 		\newpage	
 		\tableofcontents
 		\pagebreak
@@ -35,13 +35,13 @@
 \begin{description}
 	\item[KM1010] \textbf{Schachregeln}
 	\begin{itemize}
-		\item Schachregeln sind implementiert mit Ausnahme eines Patts Aufgrund von Materialmangels.
-		\item Das Spielende wird erkannt.
+		\item Schachregeln sind implementiert mit Ausnahme eines Unentschiedens aufgrund von Materialmangels.
+		\item Das Spielende wird erkannt. Die Korrektheit wurde mit JUnit Testfällen mit hoher Abdeckung überprüft.
 	\end{itemize}
 	\item[KM1020] \textbf{\textit{Einhaltung der Schachregeln}}
 	\begin{itemize}
 		\item Der Nutzer bekommt nur gültige Züge angezeigt und kann nur diese anwenden.
-		\item Dies wurde mit JUnit Testfällen für die Schachlogik und mehreren Testspielen verschiedener Testpersonen überprüft.
+		\item Dies wurde mit JUnit Testfällen und mehreren Testspielen verschiedener Testpersonen überprüft.
 	\end{itemize}
 	\item[KM1030] \textbf{\textit{Spielsuche}}
 	\begin{itemize}
@@ -151,19 +151,19 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 \subsection{Spielverlauf} 
 \begin{description}
 	\item[F3010]\textbf{\textit{Schachfiguren bewegen: }}Der Benutzer kann während des Spiels, falls er an der Reihe ist, einen Zug seiner Wahl unter Beibehaltung der Schachregeln ausführen, wobei dem Benutzer alle erlaubte Züge  angezeigt werden.
-	\item \textbf{Ergebnis: } 
+	\item \textbf{Ergebnis: } Es können nur den Regeln entsprechende Züge ausgeführt werden.
 	
 	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Ein Spieler der Remis anbieten möchte, tut dies, nachdem er einen Zug auf dem Schachbrett ausgeführt und nachdem seine Uhr angehalten und sich die des Gegners in Gang gesetzt hat.
-	\item \textbf{Ergebnis: } Es ist nicht möglich ein Remis anzubieten.
+	\item \textbf{Ergebnis: } Es ist möglich ein Remis anzubieten.
 	
 	\item[F3030] \textbf{\textit{Remis annehmen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{\textit{F3020}}, das Angebot annehmen.
-	\item \textbf{Ergebnis: } Es ist nicht möglich ein Remis anzubieten.
+	\item \textbf{Ergebnis: } Es ist möglich ein Remis anzunehmen.
 	
 	\item[F3040] \textbf{\textit{Remis ablehnen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{\textit{F3020}}, das Angebot ablehnen.
-	\item \textbf{Ergebnis: } Es ist nicht möglich ein Remis anzubieten.	
+	\item \textbf{Ergebnis: } Es ist nicht möglich ein Remis abzulehnen.	
 	
 	\item[F3050] \textbf{\textit{Aufgeben: }} Während des Spiels kann jeder Spieler jederzeit aufgeben.
-	\item \textbf{Ergebnis: } Es ist nicht möglich aufzugeben.
+	\item \textbf{Ergebnis: } Es ist möglich aufzugeben.
 	
 	\item[F3060] \textbf{\textit{Spiel beenden: }} Ein Spiel endet, falls einer von beiden Spielern den anderen Schachmatt gesetzt hat, ein Spieler aufgegeben hat, oder eine von unten gezählten Remis Situation auftritt:
 	\begin{enumerate}	    
