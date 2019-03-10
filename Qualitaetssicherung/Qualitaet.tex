@@ -24,7 +24,7 @@
 		\vspace{2cm}
 		{\Huge \textbf{Qualitätssicherung}}\\[\baselineskip]\par
 		\vspace{2cm}
-		{\LARGE Rukiye Devran, Tim Groß, Daniel Helmig, Orkhan Aliev}\par		
+		{\LARGE Tim Groß, Daniel Helmig}\par		
 		\newpage	
 		\tableofcontents
 		\pagebreak
@@ -228,6 +228,13 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item{\textbf{Symptom:}} Kein Symptom.
 	\item{\textbf{Ursache:}} Es wurde nicht geprüft ob der eingegebene Name schon vergeben ist.
 	\item{\textbf{Behebung:}} Es wird überprüft ob der eingegebene Name schon vergeben ist und falls ja wird der Login mit diesem Namen unterbunden.
+\end{itemize}
+
+\item{\textbf{Herausfordern obwohl man bereits spielt:}}
+\begin{itemize}
+	\item{\textbf{Symptom:}} Der Nutzer bekam keine Meldung, falls er auf "Herausfordern" geklickt hat, aber bereits in einem Spiel war.
+	\item{\textbf{Ursache:}} Es wurde nicht geprüft ob man selber bereits in einem Spiel ist. Der Server hat diese ungültige Abfrage aber abgefangen und kein neues Spiel erstellt. 
+	\item{\textbf{Behebung:}} Der Nutzer wird nun benachrichtigt, wenn er sich bereits in einem Spiel befindet.
 \end{itemize}
 
 \end{itemize}
