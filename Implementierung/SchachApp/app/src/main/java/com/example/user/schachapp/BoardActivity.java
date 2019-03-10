@@ -271,6 +271,44 @@ public class BoardActivity extends AppCompatActivity {
         giveUp.show();
     }
 
+    private void checkForEnd(BoardState board) {
+        if (board.hasWhiteSurrender() && !isWhite) {
+            Intent intent = new Intent(BoardActivity.this, WinnerActivity.class);
+            startActivity(intent);
+        }
+        if (board.hasBlackSurrender() && isWhite) {
+            Intent intent = new Intent(BoardActivity.this, WinnerActivity.class);
+            startActivity(intent);
+        }
+        if ((board.isWhiteDrawOffer() && !isWhite) || (board.isBlackDrawOffer() && isWhite)) {
+            AlertDialog.Builder a_builder = new AlertDialog.Builder(BoardActivity.this);
+            a_builder.setMessage("Willst du das Unentschieden annehmen?").setCancelable(false)
+                    .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(BoardActivity.this, DrawActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("Nein", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            board.setBlackDrawOffer(false);
+            board.setWhiteDrawOffer(false);
+            board.setDraw();
+            AlertDialog draw = a_builder.create();
+            draw.setTitle("Unentschieden");
+            draw.show();
+        }
+
+        if (board.isDraw()) {
+            Intent intent = new Intent(BoardActivity.this, DrawActivity.class);
+            startActivity(intent);
+        }
+    }
     /**
      * Board clicked boolean.
      * This method receives a MotionEvent and calculates the field on the chessboard, based on the touched pixels
@@ -279,11 +317,12 @@ public class BoardActivity extends AppCompatActivity {
      * @return the boolean true
      */
     private boolean boardClicked(MotionEvent event) {
-        if (isOnlineGame) {
+        if (isOnlineGame && board.whiteToMove() != isWhite) {
             SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
             try {
                 String boardString = new GetBoardTask().execute(sharedPrefs.getString("Username", "")).get();
                 board = new BoardState(boardString);
+                checkForEnd(board);
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
