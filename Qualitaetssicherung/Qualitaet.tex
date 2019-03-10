@@ -372,5 +372,13 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item{\textbf{Behebung:}} Der Nutzer wird nun benachrichtigt, wenn er sich bereits in einem Spiel befindet.
 \end{itemize}
 
+
+\item{\textbf{Kein Ziehen beim Online-Spiel möglich:}}
+\begin{itemize}
+	\item{\textbf{Symptom:}} Bei Online-Spielen konnten die Figuren weder bewegt, noch gewählt werden.
+	\item{\textbf{Ursache:}} Fehlerhafte Abfragen bei Online-Spielen, die Spielerfarbe wurde nicht korrekt abgefragt, da diese nicht vorhanden war.
+	\item{\textbf{Behebung:}} Übergeben der Spielerfarbe beim Start eines Online-Spiels, entfernen falscher Abfragen.
+\end{itemize}
+
 \end{itemize}
 \end{document}
