@@ -46,7 +46,7 @@ public class BoardActivity extends AppCompatActivity {
     private int[] savedPieces = new int[32];
     private int[][] pieces = new int[8][8];
     private DisplayMetrics dm;
-    private Position startPos = null;
+    private Position selectedPos = null;
     private BoardState board;
     private String move;
     private ChessRuleProvider crp;
@@ -313,12 +313,12 @@ public class BoardActivity extends AppCompatActivity {
             }
         } else {
             if (positionClicked != null) {
-                if ((startPos == null) && (board.getPieceAt(positionClicked) != null) && (board.getPieceAt(positionClicked).isWhite() == board.whiteToMove())) {
-                    startPos = positionClicked;
+                if ((selectedPos == null) && (board.getPieceAt(positionClicked) != null) && (board.getPieceAt(positionClicked).isWhite() == board.whiteToMove())) {
+                    selectedPos = positionClicked;
                     showPosition();
-                } else if ((startPos != null) && (!startPos.equals(positionClicked))) {
+                } else if ((selectedPos != null) && (!selectedPos.equals(positionClicked))) {
                     executeMove(positionClicked);
-                    startPos = null;
+                    selectedPos = null;
                 }
             }
         }
@@ -326,11 +326,11 @@ public class BoardActivity extends AppCompatActivity {
 
     // colors the selected piece and passes the possible moves of it to colorMoves().
     private void showPosition() {
-         Piece selectedPiece = board.getPieceAt(startPos);
-         if ((selectedPiece != null) && (pieces[startPos.getX()][startPos.getY()] != 0)) {
-             ImageView iv = findViewById(pieces[startPos.getX()][startPos.getY()]);
+         Piece selectedPiece = board.getPieceAt(selectedPos);
+         if ((selectedPiece != null) && (pieces[selectedPos.getX()][selectedPos.getY()] != 0)) {
+             ImageView iv = findViewById(pieces[selectedPos.getX()][selectedPos.getY()]);
              iv.setColorFilter(Color.argb(100,0,0,255));
-             List<Move> moves = crp.getLegalMoves(startPos, board);
+             List<Move> moves = crp.getLegalMoves(selectedPos, board);
              if (moves.size() > 0) {
                  colorMoves(moves);
              }
@@ -340,9 +340,9 @@ public class BoardActivity extends AppCompatActivity {
     // checks if the chosen move is possible and then executes it. Then checks if the game has ended and calls clearColors().
     private void executeMove(Position goal) {
          clearColors();
-         Piece selectedPiece = board.getPieceAt(startPos);
-         List<Move> moves = crp.getLegalMoves(startPos, board);
-         ImageView piece = findViewById(pieces[startPos.getX()][startPos.getY()]);
+         Piece selectedPiece = board.getPieceAt(selectedPos);
+         List<Move> moves = crp.getLegalMoves(selectedPos, board);
+         ImageView piece = findViewById(pieces[selectedPos.getX()][selectedPos.getY()]);
          piece.setColorFilter(Color.argb(0,0,0,255));
         Move theMove = getMoveByGoal(moves, goal);
         if (theMove != null) {
@@ -351,8 +351,8 @@ public class BoardActivity extends AppCompatActivity {
                  findViewById(pieces[goal.getX()][goal.getY()]).setVisibility(ImageView.INVISIBLE);
              }
              moveFigure(piece, goal, 500);
-             pieces[goal.getX()][goal.getY()] = pieces[startPos.getX()][startPos.getY()];
-             pieces[startPos.getX()][startPos.getY()] = 0;
+             pieces[goal.getX()][goal.getY()] = pieces[selectedPos.getX()][selectedPos.getY()];
+             pieces[selectedPos.getX()][selectedPos.getY()] = 0;
             if (theMove instanceof Castling) {
                 Position rookStart = ((Castling) theMove).getRookMove().getStart();
                 Position rookGoal = ((Castling) theMove).getRookMove().getGoal();
