@@ -1,5 +1,6 @@
 package com.example.user.schachapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,7 @@ public class SearchPlayerActivity extends AppCompatActivity {
     private ArrayList<String> arrayList = new ArrayList<String>();
     private ClientSocket cs;
     private SharedPreferences sharedPrefs;
+    private String user;
     private ThreadHandler threadHandler = new ThreadHandler();
 
     @Override
@@ -40,7 +42,9 @@ public class SearchPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_player);
         sharedPrefs = getSharedPreferences("chessApp", 0);
-
+        user = sharedPrefs.getString("Username", "NoUser");
+        System.out.println("Service start");
+        startService(new Intent(this, WebsocketService.class));
         // Search-Bar-Title
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Spieler suchen");
@@ -58,6 +62,8 @@ public class SearchPlayerActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Set<String>> call, Response<Set<String>> response) {
                 if(response.isSuccessful()) {
+                    arrayList.remove(response.body().remove("NoUser"));
+                    arrayList.remove(response.body().remove(user));
                     arrayList.addAll(response.body());
                     listView.setAdapter(new SearchPlayerListViewAdapter(SearchPlayerActivity.this, arrayList));
                 }

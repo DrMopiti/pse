@@ -16,7 +16,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button buttonQuickMatch, buttonSearchPlayer, buttonStatistics;
     private SharedPreferences sharedPrefs;
     private SharedPreferences.Editor editor;
-
+    private Boolean nameSet = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +29,14 @@ public class MainMenuActivity extends AppCompatActivity {
         editor.remove("Unentschieden");
         editor.remove("Username");
         editor.commit();*/
-        System.out.println("Service start");
-        startService(new Intent(this, WebsocketService.class));
         if (sharedPrefs.getString("Username", "").length() < 1) {
+            nameSet = true;
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
-
+        if(nameSet) {
+            startService(new Intent(this, WebsocketService.class));
+        }
         setContentView(com.example.user.schachapp.R.layout.activity_main_menu);
         buttonQuickMatch = findViewById(com.example.user.schachapp.R.id.buttonQuickMatch);
         buttonSearchPlayer = findViewById(com.example.user.schachapp.R.id.buttonSearchPlayer);

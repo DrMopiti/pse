@@ -16,11 +16,11 @@ public class WebsocketService extends IntentService{
 
 	public static State state = State.DISCONNECTED;
 
-	private static final String url = "ws://sdq-pse-gruppe1.ipd.kit.edu/server/";
+	private static final String url = "wss://sdq-pse-gruppe1.ipd.kit.edu/server/socket";
+
+	//private static final String url = "ws://192.168.2.111:8080/socket";
 
 	private WebSocketClient mWs;
-
-	private final String user = getSharedPreferences("Username", 0).getString("Username", "NoUser");
 
 	public WebsocketService() {
 		super("WSService");
@@ -50,8 +50,9 @@ public class WebsocketService extends IntentService{
 
 	public void connectToWS() {
 		try {
+			String user = getSharedPreferences("chessApp", 0).getString("Username", "NoUser");
 			System.out.println("Bitconnect");
-			URI uri = new URI(getUrl()+"socket");
+			URI uri = new URI(getUrl());
 			System.out.println(uri);
 			mWs = new WSClient(uri, new Draft_6455(), user);
 			mWs.connect();
