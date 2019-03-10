@@ -333,24 +333,28 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item{\textbf{Ursache:}} Serverkommunikation im gleichen Thread wie die restliche App laufen zu 	lassen führte zu Fehlern. (NetworkOnMainThreadException)
 	\item{\textbf{Behebung:}} Serverkommunikation mittels AsyncTask in separate Threads auslagern. 
 	\end{itemize}
+
 \item{\textbf{ Spielersuche:}} 
 	\begin{itemize} 
 	\item{\textbf{Symptom:}} Spielersuche nicht möglich.
 	\item{\textbf{Ursache:}} Netzwerkzugriff im UI-Thread verboten. (NetworkOnMainThreadException)
 	\item{\textbf{Behebung:}} Asynchrone Methode enqueue() mit Callback, statt synchroner Methode execute() verwendet. 
 	\end{itemize}
+
 \item{\textbf{Verlieren von Weiß:}}
 	\begin{itemize}
 	\item{\textbf{Symptom:}} Weiß konnte nicht verlieren.
 	\item{\textbf{Ursache:}} Es wurde nicht abgefragt, ob nach einem Zug von schwarz das Spiel beendet war.
 	\item{\textbf{Behebung:}} Die Ergebnisabfrage wurde in eine extra Methode ausgelagert, die dann an den richtigen Stellen aufgerufen wird.
 	\end{itemize}
+
 \item{\textbf{Fehlerhafte Brettübertragung:}}
 	\begin{itemize}
 		\item{\textbf{Symptom:}} Der Brettstring wurde korrekt in der Datenbank gespeichert, kam aber abgeschnitten in der App an.
 		\item{\textbf{Ursache:}} Unbekannt.
 		\item{\textbf{Behebung:}} Die Trennung der einzelnen Bereiche im Brettstring mit dem Symbol \glqq X\grqq, statt \glqq \#\grqq \space vorgenommen.
 	\end{itemize}
+
 \item{\textbf{Websocket Verbindung ohne Name:}}
 \begin{itemize}
 	\item{\textbf{Symptom:}} Der Nutzer meldet sich als NoUser beim Server.
