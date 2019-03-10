@@ -87,43 +87,62 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 		\item e-Mail Adresse, die mit dem Google Konto in Verbindung steht
 		\item Passwort des Google Kontos
 	\end{itemize}  
-	\item[F1020] \textbf{\textit{Gastzugang: }} Benutzer die keinen Google Account besitzen, können sich als Gast im System anmelden. Bei der Anmeldung wird ihnen ein eindeutiger Benutzername vom System zugewiesen. 
+	\item \textbf{Ergebnis: } Abgeändert. Die Anmeldung erfolgt über einen vom Nutzer selbst gewählten Namen.
+
+	\item[F1020] \textbf{\textit{Gastzugang: }} Benutzer die keinen Google Account besitzen, können sich als Gast im System anmelden. Bei der Anmeldung wird ihnen ein eindeutiger Benutzername vom System zugewiesen.
+	\item \textbf{Ergebnis: } Entfällt, wie in Testfall T1010 beschrieben.
+	
 	\item[F1030] \textbf{\textit{Abmelden: }} Benutzer, die sich bereits mit ihrem Google Account angemeldet haben, können sich wieder vom System abmelden.
+	\item \textbf{Ergebnis: } Entfällt, wie in Testfall T1010 beschrieben.
 	
 	
-	\item [F1040] \textbf{\textit{Rangliste und eigene Statistiken anzeigen lassen: }} Mit einem klick auf \textbf{\textit{Rangliste/Statistik }} Button ist der Benutzer in der Lage seine eigene Statistiken angucken und die Rangliste durchblicken, wo alle Spieler sich befinden müssen. Als Statistiken sieht der Benutzer folgende Angaben:
+	\item [F1040] \textbf{\textit{Rangliste und eigene Statistiken anzeigen lassen: }} Mit einem Klick auf \textbf{\textit{Rangliste/Statistik }} ist der Benutzer in der Lage seine eigene Statistiken aufzurufen. Als Statistiken sieht der Benutzer folgende Angaben:
 	
 	\begin{itemize}
-		\item Wie viele Spiele gespielt wurden
-		\item Wie viele Male gewonnen wurde
-		\item Wie viele Male verloren wurde
+		\item Anzahl Spiele
+		\item Anzahl gewonnene Spiele
+		\item Anzahl verlorene Spiele
 		\item Gewinnrate
-		\item Wie viele Spiele unentschieden gespielt wurden
-		\item Elo-Zahl
-		
+		\item Anzahl unentschiedene Spiele
+		\item Elo-Zahl		
 	\end{itemize}
+	\item \textbf{Ergebnis: } Bis auf die Elo-Zahl werden alle oben angegebenen Daten angezeigt.
+	
 	\item[F1050] \textbf{\textit{Suche nach Benutzern: }} Der Benutzer kann mit der Suchfunktion nach anderen Benutzern des Systems anhand ihres Benutzernamens suchen.
+	\item \textbf{Ergebnis: } Es werden alle Benutzer seit Server Start aufgelistet.
 	
 	\item[F1060]  \textbf{\textit{Anzeigen der persönlichen Profile anderer Benutzer: }}
 	Der Benutzer kann sich die persönlichen Profile von anderen Benutzern anzeigen lassen, wobei er den Benutzernamen und die Statistiken sieht. Die anderen Benutzer können sich genauso sein Profil anzeigen lassen.
+	\item \textbf{Ergebnis: } Es ist nicht möglich sich Statistiken von anderen Spielern anzeigen zu lassen.
+	
 	\item[F1070] \textbf{\textit{Chatten: }} Spieler können während des Spiels miteinander chatten.	
+	\item \textbf{Ergebnis: } Nicht implementiert.
 	
 \end{description}
 
 \subsection{Initialisierung}
 \begin{description}
 	\hypertarget{F2010}{\item[F2010]}\textbf{\textit{Eröffnung eines Spieles: }} Der Benutzer kann Spiele erzeugen, ohne dabei einen anderen Benutzer als Gegner angeben zu müssen. Dann bekommt er vom System einen Gegner zugewiesen, der ebenfalls ein Spiel erzeugt hat. Die Farbe ist zufällig und es gibt eine feste Bedenkzeit von 15 Minuten für jeden Spieler.
+	\item \textbf{Ergebnis: } Der Nutzer kann Offline spielen, oder einen anderen Spieler für ein Online Spiel auswählen. Der Herausforderer bekommt weiß zugewiesen und es gibt keine Bedenkzeit.
 	
 	\item[F2020] \textbf{\textit{Herausfordern: }} Nachdem ein entsprechender Gegner ausgesucht wurde \textbf{\textit{F1050}} kann der Benutzer ihn zum Spiel herausfordern.
+	\item \textbf{Ergebnis: } Dies ist soweit möglich.
+	
 	\item [F2030] \textbf{\textit{Annehmen einer Herausforderung: }} Der Benutzer kann die Herausforderung zum Spiel \textbf{\textit{F2030}} annehmen.
+	\item \textbf{Ergebnis: } Die Herausforderung wird implizit angenommen.
 	\item [F2040] \textbf{\textit{Ablehnung einer Herausforderung: }} Der Benutzer kann die Herausforderung zum Spiel \textbf{\textit{F2030}} ablehnen.
+	\item \textbf{Ergebnis: } Die Herausforderung wird implizit angenommen.
 	
 	\item[F2050] \textbf{\textit{Spieleinstellungen bestimmen: }} Bei der Herausforderung einer bestimmten Person zum Spiel \textbf{\textit{F2020}} kann der Herausforderer folgende Spieleinstellungen aufstellen:
 	\begin{enumerate}
 		\item Bedenkzeit
 		\item Farbe
 	\end{enumerate}
+	\item \textbf{Ergebnis: } Es können keine weiteren Einstellungen vorgenommen werden.
+	
 	\item[F2060] \textbf{\textit{Multiplayer auf einem Gerät: }}  Mit einer Multiplayer Funktion können zwei Spieler auf einem Gerät gegeneinander spielen.
+	\item \textbf{Ergebnis: } Die Möglichkeit zu zweit auf einem Gerät zu spielen wurde implementiert.
+	\item \textbf{Test-Art: } Durch mehrere Testpersonen und Testspiele überprüft.
 	
 	
 \end{description}
@@ -132,12 +151,19 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 \subsection{Spielverlauf} 
 \begin{description}
 	\item[F3010]\textbf{\textit{Schachfiguren bewegen: }}Der Benutzer kann während des Spiels, falls er an der Reihe ist, einen Zug seiner Wahl unter Beibehaltung der Schachregeln ausführen, wobei dem Benutzer alle erlaubte Züge  angezeigt werden.
+	\item \textbf{Ergebnis: } 
+	
 	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Ein Spieler der Remis anbieten möchte, tut dies, nachdem er einen Zug auf dem Schachbrett ausgeführt und nachdem seine Uhr angehalten und sich die des Gegners in Gang gesetzt hat.
+	\item \textbf{Ergebnis: } Es ist nicht möglich ein Remis anzubieten.
+	
 	\item[F3030] \textbf{\textit{Remis annehmen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{\textit{F3020}}, das Angebot annehmen.
+	\item \textbf{Ergebnis: } Es ist nicht möglich ein Remis anzubieten.
 	
 	\item[F3040] \textbf{\textit{Remis ablehnen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{\textit{F3020}}, das Angebot ablehnen.
+	\item \textbf{Ergebnis: } Es ist nicht möglich ein Remis anzubieten.	
 	
 	\item[F3050] \textbf{\textit{Aufgeben: }} Während des Spiels kann jeder Spieler jederzeit aufgeben.
+	\item \textbf{Ergebnis: } Es ist nicht möglich aufzugeben.
 	
 	\item[F3060] \textbf{\textit{Spiel beenden: }} Ein Spiel endet, falls einer von beiden Spielern den anderen Schachmatt gesetzt hat, ein Spieler aufgegeben hat, oder eine von unten gezählten Remis Situation auftritt:
 	\begin{enumerate}	    
@@ -146,8 +172,14 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 		\item Falls eine tote Stellung vorliegt
 		\item Wenn eine identische Stellung mit gleichen Zugmöglichkeiten und demselben Spieler am Zug mindestens zum dritten Mal auf dem Schachbrett entstanden ist 
 	\end{enumerate}
-	\item[F3070] \textbf{\textit{Rückkampf anbieten: }} Nachdem ein Spiel zu Ende gekommen ist, muss jeder Spieler den anderen Spieler einen Rückkampf anbieten können.		
+	\item \textbf{Ergebnis: }
+	
+	\item[F3070] \textbf{\textit{Rückkampf anbieten: }} Nachdem ein Spiel zu Ende gekommen ist, muss jeder Spieler den anderen Spieler einen Rückkampf anbieten können.	
+	\item \textbf{Ergebnis: } Es ist nicht möglich einen Rückkampf anzubieten.
+		
 	\item[F3080] \textbf{\textit{Spiel speichern: }}  Jeder Spieler kann schon beendete Spiele nach Spielende sofort auf dem Gerät speichern. 
+	\item \textbf{Ergebnis: } Es ist nicht möglich eine beendete Partie zu speichern.
+	
 \end{description}
 	\section{Nichtfunktionale Anforderungen}
 \begin{description}
@@ -155,24 +187,31 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item[NF1010] \textbf{\textit{Start der App: }} Das Starten der App soll auf aktuellen Geräten maximal 3 Sekunden benötigen. 
 	\item \textbf{Ergebnis: } Die App braucht weniger als 3 Sekunden zum Start.
 	\item \textbf{Test-Art: } Zehnmaliger App Start mit einer variierender Anzahl an bereits geöffneten Apps. Manuell mit Stoppuhr gemessen.
+	
 	\item[NF1020] \textbf{\textit{Spiel Erstellung: }} Der Erstellungsprozess \hyperlink{F2010}{\textbf{\textit{F2010}}} einer neuen Partie darf nicht länger als 5 Sekunden dauern.
 	\item \textbf{Ergebnis: } Die Erstellung braucht zwischen zwei und sechs Sekunden, je nach Internetverbindung.
 	\item \textbf{Test-Art: } Sechs manuelle Spielerstellungen, drei mit aktiver WLAN-Verbindung, drei mit mobiler Datenverbindung. Mit Stoppuhr gemessen.
+	
 	\item[NF1030] \textbf{\textit{Ermittlung von Spielzügen: }} Die Ermittlung \hyperlink{F3010}{\textbf{\textit{F3010}}} an möglichen gültigen Zügen darf nicht länger als 0,1 Sekunden dauern.
 	\item \textbf{Ergebnis: } Aufgrund der kleinen Zeitspanne schwer zu testen, da die Reaktionsgeschwindigkeit Messfehler verursacht.
 	\item \textbf{Test-Art: } Zu verschiedenen Zeitpunkten eines Offline Spiels getestet und Zeit per Hand gemessen. Eventuell optische Erkennung des Displays besser geeignet.
+	
 	\item[NF1040] \textbf{\textit{Herausforderung: }} Falls ein Spieler herausgefordert wird, hat dieser zwei Minuten Zeit diese anzunehmen. Danach verfällt die Herausforderung. 
 	\item \textbf{Ergebnis: } Wird ein Spieler herausgefordert, wird die Herausforderung implizit akzeptiert.
 	\item \textbf{Test-Art: } Entfällt.
+	
 	\item[NF1050] \textbf{\textit{Weiterleitung von Nachrichten: }} Die Weiterleitung und Überprüfung einzelner Züge soll auf dem Server nicht länger als 2 Sekunden dauern.
 	\item \textbf{Ergebnis: }
 	\item \textbf{Test-Art: }
+	
 	\item[NF1060] \textbf{\textit{Verlust von Paketen: }} Bei Übertragungen zwischen zwei Geräten sollen keine Pakete unbemerkt verloren gehen.
 	\item \textbf{Ergebnis: }
 	\item \textbf{Test-Art: }
+	
 	\item[NF1070] \textbf{\textit{Manipulation von Nachrichten: }} Nachrichten/Spielzüge sollen unverändert am Empfänger eintreffen. Sollten Änderungen vorgenommen worden sein, soll dies vom Empfänger erkannt werden können.
 	\item \textbf{Ergebnis: }
 	\item \textbf{Test-Art: }
+	
 	\item[NF1080] \textbf{\textit{Wartung: }} Der Server soll wartungsfrei und ohne Neustarts auskommen.
 	\item \textbf{Ergebnis: } In dieser vergleichsweise kurzen Zeitspanne wurde der Server nicht neu gestartet. Dieses Ergebnis liefert jedoch keine zuverlässige Aussage.
 	\item \textbf{Test-Art: } Entfällt. Theoretisch mit regelmäßigen Ping Anfragen überprüfbar.
@@ -185,7 +224,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 \begin{description}
 	\item[T1010] \textbf{\textit{Anmelden: }} 
 	\begin{description}
-	\item Wurde abgewandelt in eine lokale Anmeldung und der Button Anmelden wurde nicht implementiert, da kein Gastzugang implementiert wurde.
+	\item Wurde abgewandelt in eine lokale Anmeldung und der Button Anmelden wurde nicht implementiert, da kein Gastzugang existiert.
 	Beim erstmaligen Start gibt der Nutzer einen selbst gewählten Namen ein.
 	\end{description}	
 
