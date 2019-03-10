@@ -48,7 +48,7 @@
 		\item Die Spielsuche wurde im Vergleich zum Pflichtenheft abgeändert.
 		Der Button Sofortspiel startet ein Offline-Spiel auf einem Gerät. Die schwarzen Figuren werden hierbei auf den Kopf gedreht.
 		Durch klicken des Buttons Spielersuche, werden alle Spieler aufgelistet.
-		Wählt man einen Spieler an, sieht man dessen Online-Status und kann ihn, falls dieser online ist, herausfordern. Der Spieler der auf "Herausfordern" klickt, bekommt die weißen Figuren zugewiesen.
+		Wählt man einen Spieler an, sieht man dessen Online-Status und kann ihn, falls dieser online ist, herausfordern. Der Spieler der auf Herausfordern klickt, bekommt die weißen Figuren zugewiesen.
 	\end{itemize}
 	\item[KM1040] \textbf{GUI}
 	\begin{itemize}
@@ -154,16 +154,16 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item \textbf{Ergebnis: } Der Testfall T3010 funktioniert wie vorgesehen. Der Benutzer kann, wenn er an der Reihe ist, eine Figur auswählen und die möglichen Zielfelder werden markiert. Dann kann der Benutzer eines dieser Felder auswählen und der Zug wird ausgeführt.
 	
 	\item[F3020] \textbf{\textit{Unentschieden(Remis) bieten: }} Ein Spieler der Remis anbieten möchte, tut dies, nachdem er einen Zug auf dem Schachbrett ausgeführt und nachdem seine Uhr angehalten und sich die des Gegners in Gang gesetzt hat.
-	\item \textbf{Ergebnis: } Es ist möglich ein Remis anzubieten.
+	\item \textbf{Ergebnis: } Es ist nicht möglich ein Remis anzubieten.
 	
 	\item[F3030] \textbf{\textit{Remis annehmen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{\textit{F3020}}, das Angebot annehmen.
-	\item \textbf{Ergebnis: } Es ist möglich ein Remis anzunehmen.
+	\item \textbf{Ergebnis: } Es ist nicht möglich ein Remis anzunehmen.
 	
 	\item[F3040] \textbf{\textit{Remis ablehnen: }} Der Benutzer kann, wenn ihm Unentschieden angeboten wurde \textbf{\textit{F3020}}, das Angebot ablehnen.
 	\item \textbf{Ergebnis: } Es ist nicht möglich ein Remis abzulehnen.	
 	
 	\item[F3050] \textbf{\textit{Aufgeben: }} Während des Spiels kann jeder Spieler jederzeit aufgeben.
-	\item \textbf{Ergebnis: } Es ist möglich aufzugeben.
+	\item \textbf{Ergebnis: } Es ist nicht möglich aufzugeben.
 	
 	\item[F3060] \textbf{\textit{Spiel beenden: }} Ein Spiel endet, falls einer von beiden Spielern den anderen Schachmatt gesetzt hat, ein Spieler aufgegeben hat, oder eine von unten gezählten Remis Situation auftritt:
 	\begin{enumerate}	    
@@ -294,7 +294,7 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 			
 	\item[T3020] \textbf{\textit{Remis bieten: }} 
 	\begin{description}
-	\item Wie gewünscht implementiert. Der Gegner erhält nach Aktualisieren ein Dialogfenster.
+	\item Nicht implementiert.
 	\end{description}
 
 	\item[T3030] \textbf{\textit{Remis annehmen: }}
@@ -304,12 +304,12 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	
 	\item[T3040] \textbf{\textit{Remis ablehnen: }}
 	\begin{description}
-	\item Wie gewünscht implementiert. Bei Ablehnen wird das Fenster geschlossen und das Spiel läuft weiter.
+	\item Nicht implementiert.
 	\end{description}
 	
 	\item[T3050] \textbf{\textit{Aufgeben: }} 
 	\begin{description}
-	\item Wie gewünscht implementiert, das Spiel wird sofort beendet und der Gegner erhält nach aktualisieren eine Benachrichtigung.
+	\item Nicht implementiert.
 	\end{description}
 	
 	\item[T3060] \textbf{\textit{Rückkampf anbieten: }}
@@ -389,6 +389,13 @@ Ansonsten wurden keine Wunschkriterien implementiert.
 	\item{\textbf{Symptom:}} Bei Online-Spielen konnte weder Remis angeboten, noch aufgegeben werden.
 	\item{\textbf{Ursache:}} Keine Speicherung von Remisangeboten/Aufgaben im BoardState, sowie fehlende Benachrichtigungsmöglichkeit.
 	\item{\textbf{Behebung:}} Speicherung der genannten Anfragen in BoardState, abfragen beim Gegner zur Ausführung entsprechender Aktionen.
+\end{itemize}
+
+\item{\textbf{Weiß kann bei Online-Spielen nicht ziehen:}}
+\begin{itemize}
+	\item{\textbf{Symptom:}} Bei Online-Spielen konnte der weiße Spieler nach dem ersten Zug nicht mehr ziehen, wenn das Brett neu geladen wird.
+	\item{\textbf{Ursache:}} Die Farbe beim Laden eines offenen Spiels wurde fest auf schwarz gesetzt.
+	\item{\textbf{Behebung:}} Hinzufügen einer Server-Abfrage, welche die eigene Farbe im aktuellen Spiel liefert; Übergeben des Parameters bei Erzeugen eines Brettes.
 \end{itemize}
 
 \end{itemize}
