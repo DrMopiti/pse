@@ -119,7 +119,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     public void challengedClicked() {
         AlertDialog.Builder a_builder = new AlertDialog.Builder(MainMenuActivity.this);
-        String name = sharedPrefs.getString("Username", "NoUser");
+        final String name = sharedPrefs.getString("Username", "NoUser");
         boolean hasGame = false;
         try {
             hasGame = new HasGameTask().execute(name).get();
@@ -131,9 +131,16 @@ public class MainMenuActivity extends AppCompatActivity {
                     .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            Boolean amIWhite;
+                            try {
+                                amIWhite = new AmIWhiteTask().execute(name).get();
+                            } catch (ExecutionException | InterruptedException e) {
+                                amIWhite = false;
+                                e.printStackTrace();
+                            }
                             Intent intent = new Intent(MainMenuActivity.this, BoardActivity.class); //Spieldaten mitgeben
                             intent.putExtra("isOnlineGame", true);
-                            intent.putExtra("isWhite", false);
+                            intent.putExtra("isWhite", amIWhite);
                             startActivity(intent);
                         }
                     })
