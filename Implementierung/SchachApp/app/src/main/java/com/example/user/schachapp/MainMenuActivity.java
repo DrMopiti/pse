@@ -144,7 +144,7 @@ public class MainMenuActivity extends AppCompatActivity {
                         }
                     });
         } else { //sonst
-            a_builder.setMessage("Keine offenes Spiel");
+            a_builder.setMessage("Kein offenes Spiel");
         }
         AlertDialog challenged = a_builder.create();
         challenged.setTitle("Offenes Spiel");
