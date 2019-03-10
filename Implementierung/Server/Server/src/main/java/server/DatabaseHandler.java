@@ -13,5 +13,6 @@ public interface DatabaseHandler {
 	 public String deleteGame(String player);
 	 public boolean hasActiveGame(String player);
 	 public String getOtherPlayer(String player);
+	 public Boolean amIWhite(String player);
 	 public void connect();
 }

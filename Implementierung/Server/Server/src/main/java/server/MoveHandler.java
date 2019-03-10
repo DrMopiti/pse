@@ -49,7 +49,12 @@ public class MoveHandler {
 			//System.out.println("DEBUG: ILLEGAL MOVE");
 			return "IllegalMove";
 		}
-		retString = handler.saveGame(player, board.toString());
+		if(board.whiteToMove()) {	
+			retString = handler.saveGame(handler.getOtherPlayer(player), board.toString());
+		} else {
+			retString = handler.saveGame(player, board.toString());	
+		}
+		
 		return retString;
 	}
 }

@@ -256,5 +256,38 @@ public class FirebaseHandler implements DatabaseHandler {
 		}
 		
 	}
+	
+	@Override
+	public Boolean amIWhite(String player) {
+		
+		Boolean amI = null;		
+		// asynchronously retrieve all users
+		ApiFuture<QuerySnapshot> query = db.collection("games").get();
+		// query.get() blocks on response
+		QuerySnapshot querySnapshot = null;
+		try {
+			querySnapshot = query.get();
+		} catch (InterruptedException | ExecutionException e) {
+			e.printStackTrace();
+			System.out.println("DEBUG: ERROR WHILE GETTING QUERY");
+			}
+		List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+		for (QueryDocumentSnapshot document : documents) {
+			String white = document.getString("whitePlayer");
+			String black = document.getString("blackPlayer");
+
+			System.out.println("DEBUG: CHECKING GAME " + document.getId() + " FOR PLAYER " + player);
+			System.out.println("DEBUG: PLAYER " + player);
+			if (white.equalsIgnoreCase(player)) {
+				System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
+				amI = true;
+			}
+			if (black.equalsIgnoreCase(player)) {
+				System.out.println("DEBUG: FOUND OCCURENCE OF " +  player);
+				amI = false;
+			}
+		}
+		return amI;
+	}
 
 }

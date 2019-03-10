@@ -102,7 +102,15 @@ public class ClientHandler{
 		DatabaseHandler handler = FirebaseHandler.getHandler();
 		Boolean hasGame = handler.hasActiveGame(player);
 		return hasGame;
-	}
+	} 
+	
+	@RequestMapping("amiwhite/{player}")
+	public Boolean amIWhite(@PathVariable String player) {
+		 DatabaseHandler handler = FirebaseHandler.getHandler();
+		 Boolean white = handler.amIWhite(player);
+		 return white;
+	 }
+	
 	       	 		 	
 	
 	/**
@@ -149,6 +157,8 @@ public class ClientHandler{
 		 String ifSuccess = handler.processMove();
 		 return ifSuccess;
 	 }
+	 
+	
 }
 
 	
