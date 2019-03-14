@@ -35,7 +35,7 @@ public class KingTest {
                 "0BS00bd0" +
                 "0B000b00" +
                 "Tb00b0L0" +
-                "##tttft#0");
+                "XXtttftX0");
 
         secondBoard = new BoardState("TB0000bt" +
                 "0B000b0s" +
@@ -45,7 +45,7 @@ public class KingTest {
                 "0B000000" +
                 "0B0DS000" +
                 "TB00bl0t" +
-                "##tffft#0");
+                "XXtffftX0");
     }
 
 
@@ -84,7 +84,7 @@ public class KingTest {
                 "L0B0l0b0" +
                 "S00B00b0" +
                 "T00B0sbt" +
-                "##ttttt#0");
+                "XXtttttX0");
 
         List<Move> possibleMoves = blackKing.getMovement(new Position("e8"), board);
         assertTrue(possibleMoves.toString().equals("[e8-d7, e8-d8, e8-e7, e8-f8, e8-g8-C, e8-c8-C]"));
@@ -100,7 +100,7 @@ public class KingTest {
                 "L0B0l0b0" +
                 "S00B00b0" +
                 "T00B0sbt" +
-                "##tfftt#0");
+                "XXtffttX0");
 
         List<Move> possibleMoves = whiteKing.getMovement(new Position("e1"), board);
         assertTrue(possibleMoves.toString().equals("[e1-d1, e1-d2, e1-f2]"));

@@ -30,7 +30,7 @@ public class QueenTest {
                 "LB0B0sbl" +
                 "SB00b000" +
                 "TB0000bt" +
-                "##ttttt#0");
+                "XXtttttX0");
         secondBoardState = new BoardState("0B0000b0" +
                 "0B0000b0" +
                 "K000D00k" +
@@ -39,7 +39,7 @@ public class QueenTest {
                 "00000sb0" +
                 "SL0b0000" +
                 "TB0L0b0T" +
-                "##ttttt#0");
+                "XXtttttX0");
     }
 
 

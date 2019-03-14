@@ -33,7 +33,7 @@ public class KnightTest {
                 "LB0Dl0bl" +
                 "0B0s00b0" +
                 "TB00b00t" +
-                "##tfftt#0");
+                "XXtffttX0");
     }
 
     @Test

@@ -46,12 +46,6 @@ public abstract class Piece {
     }
 
     /**
-     *
-     * @return filename for the image of this piece
-     */
-    public abstract String getImageName();
-
-    /**
      * Calculates the movement of a piece on a given board for a given position and returns it as a list of moves.
      * The method will not check if there is the correct on the given position, it will also ignore if the piece is pinned.
      * @param position the position on which the piece stands

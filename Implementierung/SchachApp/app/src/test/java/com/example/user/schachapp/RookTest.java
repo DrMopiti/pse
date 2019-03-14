@@ -32,7 +32,7 @@ public class RookTest {
                 "L00B0sbt" +
                 "SB00b00k" +
                 "000B0lb0" +
-                "##ttttt#0");
+                "XXtttttX0");
     }
 
     @Test

@@ -13,18 +13,6 @@ public class Queen extends Piece {
         super(isWhite, QUEEN_VALUE, QUEEN_CHAR);
     }
 
-    /**
-     *
-     * @return filename for the image of this piece
-     */
-    @Override
-    public String getImageName() {
-        if (isWhite) {
-            return "queen_figure_white";
-        } else {
-            return "queen_figure_black";
-        }
-    }
 
     /**
      * Calculates the movement of a piece on a given board for a given position and returns it as a list of moves.

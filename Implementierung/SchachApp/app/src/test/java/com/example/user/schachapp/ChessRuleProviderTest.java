@@ -30,7 +30,7 @@ public class ChessRuleProviderTest {
                 "T0000000" +
                 "KB000000" +
                 "0B0000Bt" +
-                "##tfftf#0");
+                "XXtfftfX0");
     }
 
   /*  @Test
@@ -50,7 +50,7 @@ public class ChessRuleProviderTest {
                 "00000000" +
                 "KB000000" +
                 "0B00L00t" +
-                "#d1-h5#ffftf#0");
+                "Xd1-h5XffftfX0");
 
         assertEquals("[e8-d7, e8-d8, e8-f8]",ruleProvider.getLegalMoves(new Position("e8"),testBoard).toString());
         
@@ -59,7 +59,7 @@ public class ChessRuleProviderTest {
     @Test
     public void testStartState() {
         BoardState testBoard = ruleProvider.getStartState();
-        assertEquals(testBoard.toString(), "TB0000btSB0000bsLB0000blDB0000bdKB0000bkLB0000blSB0000bsTB0000bt##ttttt#0");
+        assertEquals(testBoard.toString(), "TB0000btSB0000bsLB0000blDB0000bdKB0000bkLB0000blSB0000bsTB0000btXXtttttX0");
     }
 
     @Test

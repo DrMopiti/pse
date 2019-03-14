@@ -13,18 +13,6 @@ public class Pawn extends Piece {
         super(isWhite, PAWN_VALUE, PAWN_CHAR);
     }
 
-    /**
-     *
-     * @return filename for the image of this piece
-     */
-    @Override
-    public String getImageName() {
-        if (isWhite) {
-            return "pawn_figure_white";
-        } else {
-            return "pawn_figure_black";
-        }
-    }
 
     /**
      * Calculates the movement of a piece on a given board for a given position and returns it as a list of moves.

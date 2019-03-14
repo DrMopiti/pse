@@ -14,19 +14,6 @@ public class Bishop extends Piece {
     }
 
     /**
-     *  Returns the image name
-     * @return filename for the image of this piece
-     */
-    @Override
-    public String getImageName() {
-        if (isWhite) {
-            return "bishop_figure_white";
-        } else {
-            return "bishop_figure_black";
-        }
-    }
-
-    /**
      * Calculates the movement of a piece on a given board for a given position and returns it as a list of moves.
      * The method will not check if there is the correct piece on the given position, it will also ignore if the piece is pinned.
      * @param position the position on which the piece is located

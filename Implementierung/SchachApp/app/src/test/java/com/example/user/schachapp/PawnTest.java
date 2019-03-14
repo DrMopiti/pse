@@ -38,7 +38,7 @@ public class PawnTest {
                 "00Slbs0t" +
                 "0B0000bk" +
                 "TB0000b0" +
-                "##ttttt#0");
+                "XXtttttX0");
 
         boardState2 = new BoardState("T00B00bt" +
                 "0B0s00b0" +
@@ -48,7 +48,7 @@ public class PawnTest {
                 "00S0bs0t" +
                 "0B0000bk" +
                 "TB0000b0" +
-                "##ttttt#0");
+                "XXtttttX0");
 
         boardEnPassant = new BoardState("TB0000bt" +
                 "S000B0bs" +
@@ -58,7 +58,7 @@ public class PawnTest {
                 "LB0000bl" +
                 "SB0000bs" +
                 "TB0000bt" +
-                "##ttttt#0");
+                "XXtttttX0");
 
     }
 
@@ -126,7 +126,7 @@ public class PawnTest {
                 "LB0000bl" +
                 "SB0000bs" +
                 "TB0000bt" +
-                "##ttttt#0");
+                "XXtttttX0");
 
         BoardState spy = Mockito.spy(boardForBlackEnPassant);
         Move lastMove = new Move(new Position("a2"), new Position("a4"));
@@ -147,7 +147,7 @@ public class PawnTest {
                 "LB0000bl" +
                 "SB0000bs" +
                 "TB0000bt" +
-                "##ttttt#0");
+                "XXtttttX0");
 
         BoardState spy = Mockito.spy(boardForWhiteEnPassant);
         Move lastMove = new Move(new Position("b7"), new Position("b5"));

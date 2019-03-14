@@ -14,18 +14,6 @@ public class Knight extends Piece {
         super(isWhite, KNIGHT_VALUE, KNIGHT_CHAR);
     }
 
-    /**
-     *
-     * @return filename for the image of this piece
-     */
-    @Override
-    public String getImageName() {
-        if (isWhite) {
-            return "knight_figure_white";
-        } else {
-            return "knight_figure_black";
-        }
-    }
 
     /**
      * Calculates the movement of a piece on a given board for a given position and returns it as a list of moves.

@@ -44,7 +44,7 @@ public class PieceTest {
                 "LB0000bl" +
                 "SB0000bs" +
                 "TB0000bt" +
-                "##ttttt#0");
+                "XXtttttX0");
         List<Move> movement = piece.getMovement(new Position("d1"), board);
         assertTrue(movement.toString().equals("[]"));
     }

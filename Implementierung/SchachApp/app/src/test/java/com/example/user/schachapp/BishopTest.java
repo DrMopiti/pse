@@ -30,7 +30,7 @@ public class BishopTest {
                 "0B0L00bt" +
                 "0B00000k" +
                 "TB0b00b0" +
-                "##ttttt#0");
+                "XXtttttX0");
     }
 
 
@@ -74,7 +74,7 @@ public class BishopTest {
                 "L0B0l0b0" +
                 "S00B00b0" +
                 "T00B0sbt" +
-                "##ttttt#0");
+                "XXtttttX0");
         List<Move> possibleMoves = whiteBishop.getMovement(new Position("e3"), board);
         assertEquals("[e3-f4, e3-g5, e3-h6, e3-d2, e3-f2]",possibleMoves.toString());
     }
