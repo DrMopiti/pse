@@ -628,6 +628,7 @@ public class BoardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        this.recreate();
 
     }
 
