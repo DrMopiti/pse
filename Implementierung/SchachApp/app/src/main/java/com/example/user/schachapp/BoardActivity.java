@@ -2,8 +2,11 @@ package com.example.user.schachapp;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,6 +15,7 @@ import android.graphics.Paint;
 import android.os.StrictMode;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,7 +57,6 @@ public class BoardActivity extends AppCompatActivity {
     private ClientSocket cs;
     private boolean isOnlineGame;
     private boolean isWhite;
-
 
 
     @Override
@@ -628,8 +631,9 @@ public class BoardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        this.recreate();
-
+        if (isOnlineGame) {
+            this.recreate();
+        }
     }
 
     @Override
