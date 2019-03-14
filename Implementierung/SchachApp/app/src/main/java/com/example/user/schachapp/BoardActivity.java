@@ -41,7 +41,7 @@ import java.util.concurrent.ExecutionException;
  * This Activity opens, when a player clicks the Button quick-match.
  */
 public class BoardActivity extends AppCompatActivity {
-    private Button buttonDraw, buttonGiveUp;
+    private Button buttonDraw, buttonGiveUp, buttonBack;
     private ImageView chessboard;
     private int[] savedPieces = new int[32];
     private int[][] pieces = new int[8][8];
@@ -113,6 +113,7 @@ public class BoardActivity extends AppCompatActivity {
 
         buttonDraw = findViewById(com.example.user.schachapp.R.id.buttonDraw);
         buttonGiveUp = findViewById(com.example.user.schachapp.R.id.buttonGiveUp);
+        buttonBack = findViewById(R.id.buttonBack);
 
         if (isOnlineGame) {
 			try {
@@ -204,6 +205,13 @@ public class BoardActivity extends AppCompatActivity {
                 }
             });
 
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backClicked();
+            }
+        });
+
             chessboard.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -212,6 +220,11 @@ public class BoardActivity extends AppCompatActivity {
             });
     }
 
+
+    private void backClicked() {
+        Intent intent = new Intent(this, MainMenuActivity.class);
+        startActivity(intent);
+    }
     // when the draw button is clicked, then there opens an Dialog.
     private void drawClicked() {
         AlertDialog.Builder a_builder = new AlertDialog.Builder(BoardActivity.this);
