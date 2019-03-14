@@ -1,6 +1,7 @@
 package com.example.user.schachapp;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 
 import org.java_websocket.client.WebSocketClient;
@@ -21,9 +22,10 @@ public class WebsocketService extends IntentService{
 	//private static final String url = "ws://192.168.2.111:8080/socket";
 
 	private WebSocketClient mWs;
-
+	private Context context;
 	public WebsocketService() {
 		super("WSService");
+		this.context = getApplicationContext();
 	}
 
 	@Override
@@ -54,7 +56,7 @@ public class WebsocketService extends IntentService{
 			System.out.println("Bitconnect");
 			URI uri = new URI(getUrl());
 			System.out.println(uri);
-			mWs = new WSClient(uri, new Draft_6455(), user);
+			mWs = new WSClient(uri, new Draft_6455(), user, context);
 			mWs.connect();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
