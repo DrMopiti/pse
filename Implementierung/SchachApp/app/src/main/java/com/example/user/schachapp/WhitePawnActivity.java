@@ -68,6 +68,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         intent.putExtra("clickedFigure", R.drawable.queen_figure_white);
         intent.putExtra("move", move);
         intent.putExtra("board", board);
+        intent.putExtra("isOnlineGame", true);
         startActivity(intent);
     }
 
@@ -79,6 +80,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         intent.putExtra("clickedFigure", R.drawable.rook_figure_white);
         intent.putExtra("move", move);
         intent.putExtra("board", board);
+        intent.putExtra("isOnlineGame", true);
         startActivity(intent);
     }
 
@@ -90,6 +92,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         intent.putExtra("clickedFigure", R.drawable.knight_figure_white);
         intent.putExtra("move", move);
         intent.putExtra("board", board);
+        intent.putExtra("isOnlineGame", true);
         startActivity(intent);
     }
 
@@ -101,6 +104,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         intent.putExtra("clickedFigure", R.drawable.bishop_figure_white);
         intent.putExtra("move", move);
         intent.putExtra("board", board);
+        intent.putExtra("isOnlineGame", true);
         startActivity(intent);
     }
 
