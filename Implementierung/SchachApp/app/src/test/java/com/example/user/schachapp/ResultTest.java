@@ -8,10 +8,10 @@ import static org.junit.Assert.*;
 
 
 public class ResultTest {
-    Result result;
+    static Result result;
 
     @BeforeClass
-    public void setResult() {
+    public static void setResult() {
         result = new Result("1:0", "Matt");
     }
 
