@@ -10,6 +10,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -50,6 +52,13 @@ public class SearchPlayerActivity extends AppCompatActivity {
         actionBar.setTitle("Spieler suchen");
         listView = findViewById(R.id.listView);
 
+        Button buttonBack = findViewById(R.id.buttonBack);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backClicked();
+            }
+        });
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://sdq-pse-gruppe1.ipd.kit.edu/server/")
@@ -80,6 +89,11 @@ public class SearchPlayerActivity extends AppCompatActivity {
                 listView.setAdapter(adapter);
             }
         });
+    }
+
+    private void backClicked() {
+        Intent intent = new Intent(this, MainMenuActivity.class);
+        startActivity(intent);
     }
 
     // generates the list and gets form the ListViewAdapter the filter.

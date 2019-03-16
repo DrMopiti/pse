@@ -48,6 +48,7 @@ public class ChallengeActivity extends AppCompatActivity {
             online = false;          
         }
 
+        Button buttonBack = findViewById(R.id.buttonBack);
         Button buttonChallenge = findViewById(R.id.challengeButton);
         if (online) {
             status.setText("online");
@@ -56,8 +57,12 @@ public class ChallengeActivity extends AppCompatActivity {
             status.setText("offline");
         }
 
-
-
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backClicked();
+            }
+        });
         // clickListener for challenging other player
         buttonChallenge.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +72,10 @@ public class ChallengeActivity extends AppCompatActivity {
         });
     }
 
+    private void backClicked() {
+        Intent intent = new Intent(this, SearchPlayerActivity.class);
+        startActivity(intent);
+    }
     /**
      * Challenge is clickable, when player is online.
      * When the player is online, it changes in the BoardActivity and it counts allGames.

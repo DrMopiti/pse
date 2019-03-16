@@ -1,8 +1,11 @@
 package com.example.user.schachapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -41,5 +44,17 @@ public class StatisticsActivity extends AppCompatActivity {
         gewinnrate.setText(String.valueOf(winRate) + " %");
         unentschieden.setText(String.valueOf(sharedPrefs.getInt("Unentschieden", 0)));
         gesamtSpielZahl.setText(String.valueOf(allGames));
+        Button buttonBack = findViewById(R.id.buttonBack);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backClicked();
+            }
+        });
+    }
+
+    private void backClicked() {
+        Intent intent = new Intent(this, MainMenuActivity.class);
+        startActivity(intent);
     }
 }
