@@ -626,9 +626,18 @@ public class BoardActivity extends AppCompatActivity {
                     editor.putInt("Gewonnen", wins);
                     editor.commit();
                 }
+                if(isWhite) {
+                    Intent intent = new Intent(this, LostActivity.class);
+                    startActivity(intent);
+                    return;
+                } else {
+                    Intent intent = new Intent(this, WinnerActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+
             }
-            Intent intent = new Intent(this, LostActivity.class);
-            startActivity(intent);
+
 
         } else if (resultString.charAt(2) == '5') {
             if (isOnlineGame) {
@@ -656,9 +665,17 @@ public class BoardActivity extends AppCompatActivity {
                     editor.putInt("Verloren", loses);
                     editor.commit();
                 }
+                if(isWhite) {
+                    Intent intent = new Intent(this, WinnerActivity.class);
+                    startActivity(intent);
+                    return;
+                } else {
+                    Intent intent = new Intent(this, LostActivity.class);
+                    startActivity(intent);
+                    return;
+                }
             }
-            Intent intent = new Intent(this, WinnerActivity.class);
-            startActivity(intent);
+
         }
     }
 
