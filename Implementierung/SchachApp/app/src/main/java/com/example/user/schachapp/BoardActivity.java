@@ -467,6 +467,7 @@ public class BoardActivity extends AppCompatActivity {
                  intent.putExtra("board", board.toString());
                  intent.putExtra( "isOnlineGame", isOnlineGame);
                  startActivity(intent);
+                 return;
              }
              // checks if there should happen a pawn-transformation of black.
              if ((selectedPiece.toString().toLowerCase().equals("b")) && (theMove.getGoal().getY() == 0)) {
@@ -475,19 +476,13 @@ public class BoardActivity extends AppCompatActivity {
                  intent.putExtra("board", board.toString());
 				 intent.putExtra("isOnlineGame", isOnlineGame);
                  startActivity(intent);
+                 return;
              }
              board.applyMove(theMove);
              move = theMove.toString();
              if (isOnlineGame) {
-                 ThreadHandler th = new ThreadHandler();
-                 Runnable r = new Runnable() {
-                     @Override
-                     public void run() {
-                         SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
-                         cs.sendMove(sharedPrefs.getString("Username", "NoUser"), move);
-                     }
-                 };
-                 th.runInBackground(r);
+                 SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
+                 new SendMoveTask().execute(sharedPrefs.getString("Username", "NoUser"), move);
              }
              if (crp.hasEnded(board)) {
                 getResult();
