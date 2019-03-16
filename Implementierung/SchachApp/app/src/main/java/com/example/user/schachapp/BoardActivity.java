@@ -584,6 +584,8 @@ public class BoardActivity extends AppCompatActivity {
         int ivCounter = 0;
         for (int i = 0; i < pieces.length; i++) {
             for (int j = 0; j < pieces[i].length; j++) {
+                ImageView delete = findViewById(pieces[i][j]);
+                delete.setVisibility(View.INVISIBLE);
                 p = board.getPieceAt(new Position(i,j));
                 if (p != null) {
                     pieceIV = getPieceIV(p.toString(), ivCounter);
