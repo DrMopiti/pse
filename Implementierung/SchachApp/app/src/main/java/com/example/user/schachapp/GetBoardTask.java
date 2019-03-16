@@ -9,7 +9,6 @@ public class GetBoardTask extends AsyncTask<String, Integer, String> {
 	protected String doInBackground(String... strings) {
 		ClientSocket cs = new ClientSocket();
 		String board = cs.requestBoard(strings[0]);
-		System.out.println("cs board:   " + board);
 		return board;
 	}
 }

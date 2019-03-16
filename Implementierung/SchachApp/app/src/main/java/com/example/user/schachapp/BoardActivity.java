@@ -12,6 +12,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.os.StrictMode;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
@@ -20,6 +23,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -57,6 +61,20 @@ public class BoardActivity extends AppCompatActivity {
     private ClientSocket cs;
     private boolean isOnlineGame;
     private boolean isWhite;
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String message = intent.getStringExtra("message");
+            try {
+                BoardState boardState = new BoardState(message);
+                paintBoard(boardState);
+                System.out.println(isWhite);
+            } catch (IllegalArgumentException e) {
+                Toast.makeText(getApplicationContext(), "Update failed", Toast.LENGTH_LONG).show();
+            }
+
+        }
+    };
 
 
     @Override
@@ -66,7 +84,7 @@ public class BoardActivity extends AppCompatActivity {
          */
        // StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
       //  StrictMode.setThreadPolicy(policy);
-
+        startService(new Intent(this, WebsocketService.class));
         super.onCreate(savedInstanceState);
         setContentView(com.example.user.schachapp.R.layout.activity_board);
         dm = getResources().getDisplayMetrics();
@@ -77,6 +95,9 @@ public class BoardActivity extends AppCompatActivity {
         isOnlineGame = thisIntent.getBooleanExtra("isOnlineGame", false);
         isWhite = thisIntent.getBooleanExtra("isWhite", true);
         //isOnlineGame = false;
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("move"));
+
 
         crp = new ChessRuleProvider();
 
@@ -468,7 +489,7 @@ public class BoardActivity extends AppCompatActivity {
                      @Override
                      public void run() {
                          SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
-                         cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move);
+                         cs.sendMove(sharedPrefs.getString("Username", "NoUser"), move);
                      }
                  };
                  th.runInBackground(r);
@@ -676,6 +697,7 @@ public class BoardActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
         super.onDestroy();
     }
 

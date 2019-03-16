@@ -16,19 +16,17 @@ import static okhttp3.internal.Internal.instance;
 public class WSClient extends WebSocketClient {
 
 	private String user;
-	private Context context;
 
-	public WSClient(URI serverUri, Draft protocolDraft, String user, Context context) {
+
+	public WSClient(URI serverUri, Draft protocolDraft, String user) {
 		super(serverUri, protocolDraft);
 		this.user = user;
-		this.context = context;
 	}
 
 	@Override
 	public void onMessage(String message) {
-		Activity applicationContext = (Activity) context.getApplicationContext();
-		applicationContext.recreate();
-		System.out.println("STUFF");
+		System.out.println("Received server mess");
+		WebsocketService.setState(WebsocketService.State.MOVE);
 	}
 
 	@Override

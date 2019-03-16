@@ -31,8 +31,6 @@ public class BoardState {
     public BoardState(String string) {
         //splits the String in 4 Sectors: Pieces, Last Move, Booleans, Moves without Action
         String[] sectors = string.split("X");
-        System.out.println("sectors:    "+Arrays.deepToString(sectors));
-        System.out.println(sectors.length);
         if (sectors.length != 4) {
             throw new IllegalArgumentException("sectors.length is not 4");
         } else if(!sectors[0].matches("[TSLDKBtsldkb0]{64}")) {
