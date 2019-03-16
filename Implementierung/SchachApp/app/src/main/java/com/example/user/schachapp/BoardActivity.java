@@ -192,14 +192,7 @@ public class BoardActivity extends AppCompatActivity {
             Move theMove = MoveFactory.getMove(move);
             board.applyMove(theMove);
             if (isOnlineGame) {
-                ThreadHandler th = new ThreadHandler();
-                th.runInBackground(new Runnable() {
-                    @Override
-                    public void run() {
-                        SharedPreferences sharedPrefs = getSharedPreferences("chessApp", 0);
-                        cs.sendMove(sharedPrefs.getString("Username", "noUserFound"), move);
-                    }
-                });
+               new SendMoveTask().execute(sharedPrefs.getString("Username", ""),move);
             }
                 move = "";
                 paintBoard(board);
@@ -472,6 +465,7 @@ public class BoardActivity extends AppCompatActivity {
                  Intent intent = new Intent(this, WhitePawnActivity.class);
                  intent.putExtra("move", theMove.toString());
                  intent.putExtra("board", board.toString());
+                 intent.putExtra( "isOnlineGame", isOnlineGame);
                  startActivity(intent);
              }
              // checks if there should happen a pawn-transformation of black.
@@ -479,6 +473,7 @@ public class BoardActivity extends AppCompatActivity {
                  Intent intent = new Intent(this, BlackPawnActivity.class);
                  intent.putExtra("move", theMove.toString());
                  intent.putExtra("board", board.toString());
+				 intent.putExtra("isOnlineGame", isOnlineGame);
                  startActivity(intent);
              }
              board.applyMove(theMove);

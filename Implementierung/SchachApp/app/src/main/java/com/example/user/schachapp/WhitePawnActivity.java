@@ -16,6 +16,7 @@ public class WhitePawnActivity extends AppCompatActivity {
     private Button queenButton, rookButton, knightButton, bishopButton;
     private String move;
     private String board;
+    private Boolean online;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         Intent thisIntent = getIntent();
         move = thisIntent.getStringExtra("move");
         board = thisIntent.getStringExtra("board");
+        online = thisIntent.getBooleanExtra("isOnlineGame", false);
 
         queenButton = findViewById(R.id.queenButton);
         rookButton = findViewById(R.id.rookButton);
@@ -68,7 +70,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         intent.putExtra("clickedFigure", R.drawable.queen_figure_white);
         intent.putExtra("move", move);
         intent.putExtra("board", board);
-        intent.putExtra("isOnlineGame", true);
+        intent.putExtra("isOnlineGame", online);
         startActivity(intent);
     }
 
@@ -80,7 +82,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         intent.putExtra("clickedFigure", R.drawable.rook_figure_white);
         intent.putExtra("move", move);
         intent.putExtra("board", board);
-        intent.putExtra("isOnlineGame", true);
+        intent.putExtra("isOnlineGame", online);
         startActivity(intent);
     }
 
@@ -92,7 +94,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         intent.putExtra("clickedFigure", R.drawable.knight_figure_white);
         intent.putExtra("move", move);
         intent.putExtra("board", board);
-        intent.putExtra("isOnlineGame", true);
+        intent.putExtra("isOnlineGame", online);
         startActivity(intent);
     }
 
@@ -104,7 +106,7 @@ public class WhitePawnActivity extends AppCompatActivity {
         intent.putExtra("clickedFigure", R.drawable.bishop_figure_white);
         intent.putExtra("move", move);
         intent.putExtra("board", board);
-        intent.putExtra("isOnlineGame", true);
+        intent.putExtra("isOnlineGame", online);
         startActivity(intent);
     }
 

@@ -79,7 +79,7 @@ public class WebsocketService extends IntentService{
 
 	private void sendMessage()  {
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
