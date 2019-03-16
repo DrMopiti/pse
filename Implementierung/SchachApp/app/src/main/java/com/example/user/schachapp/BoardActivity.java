@@ -604,7 +604,7 @@ public class BoardActivity extends AppCompatActivity {
         }
         if (crp.hasEnded(board)) {
             String name = getSharedPreferences("chessApp", 0).getString("Username","NoUser");
-            Boolean shouldDelete;
+            Boolean shouldDelete = false;
             Boolean amWhite = null;
             try {
                 amWhite = new AmIWhiteTask().execute(name).get();
@@ -612,18 +612,8 @@ public class BoardActivity extends AppCompatActivity {
                 e.printStackTrace();
                 return;
             }
-            if(amWhite) {
-                if(board.whiteToMove()) {
-                    shouldDelete = true;
-                } else {
-                    shouldDelete = false;
-                }
-            } else {
-                if(board.whiteToMove()) {
-                    shouldDelete = false;
-                } else {
-                    shouldDelete = true;
-                }
+            if(amWhite == board.whiteToMove()) {
+                shouldDelete = true;
             }
             if (shouldDelete) {
                 new DeleteTask().execute(name);
