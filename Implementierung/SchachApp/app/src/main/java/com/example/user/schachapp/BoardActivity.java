@@ -603,6 +603,7 @@ public class BoardActivity extends AppCompatActivity {
             }
         }
         if (crp.hasEnded(board)) {
+            new DeleteTask().execute(getSharedPreferences("chessApp", 0).getString("Username", "NoUser"));
             getResult();
         }
     }
