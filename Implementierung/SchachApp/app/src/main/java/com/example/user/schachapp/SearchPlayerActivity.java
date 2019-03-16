@@ -74,7 +74,8 @@ public class SearchPlayerActivity extends AppCompatActivity {
                     arrayList.remove(response.body().remove("NoUser"));
                     arrayList.remove(response.body().remove(user));
                     arrayList.addAll(response.body());
-                    listView.setAdapter(new SearchPlayerListViewAdapter(SearchPlayerActivity.this, arrayList));
+                    adapter = new SearchPlayerListViewAdapter(SearchPlayerActivity.this, arrayList);
+                    listView.setAdapter(adapter);
                 }
             }
 
