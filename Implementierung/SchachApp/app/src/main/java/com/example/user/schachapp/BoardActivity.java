@@ -600,6 +600,9 @@ public class BoardActivity extends AppCompatActivity {
                 }
             }
         }
+        if (crp.hasEnded(board)) {
+            getResult();
+        }
     }
 
     private void getResult() {
