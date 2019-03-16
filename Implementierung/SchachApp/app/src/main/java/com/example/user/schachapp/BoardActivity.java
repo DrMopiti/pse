@@ -582,11 +582,13 @@ public class BoardActivity extends AppCompatActivity {
         Piece p = null;
         ImageView pieceIV = null;
         int ivCounter = 0;
+        for (int i = 0; i < savedPieces.length; i++) {
+            if (savedPieces[i] != 0) {
+                findViewById(savedPieces[i]).setVisibility(View.INVISIBLE);
+            }
+        }
         for (int i = 0; i < pieces.length; i++) {
             for (int j = 0; j < pieces[i].length; j++) {
-                if (pieces[i][j] != 0) {
-                    findViewById(pieces[i][j]).setVisibility(View.INVISIBLE);
-                }
                 p = board.getPieceAt(new Position(i,j));
                 if (p != null) {
                     pieceIV = getPieceIV(p.toString(), ivCounter);
