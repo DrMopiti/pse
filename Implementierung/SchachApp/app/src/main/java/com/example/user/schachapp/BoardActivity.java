@@ -611,72 +611,77 @@ public class BoardActivity extends AppCompatActivity {
         Result result = crp.getResult(board);
         String resultString = result.getResult();
         SharedPreferences sharedPrefs = getSharedPreferences("chessapp", 0);
-        if (resultString.charAt(2) == '1') {
-            if (isOnlineGame) {
+        if (isOnlineGame) {
+            if (resultString.charAt(2) == '1') {
                 if (isWhite) {
                     int loses = sharedPrefs.getInt("Verloren", 0);
                     loses++;
                     SharedPreferences.Editor editor = sharedPrefs.edit();
                     editor.putInt("Verloren", loses);
                     editor.commit();
+                    Intent intent = new Intent(this, LostActivity.class);
+                    startActivity(intent);
+                    return;
                 } else {
                     int wins = sharedPrefs.getInt("Gewonnen", 0);
                     wins++;
                     SharedPreferences.Editor editor = sharedPrefs.edit();
                     editor.putInt("Gewonnen", wins);
                     editor.commit();
-                }
-                if(isWhite) {
-                    Intent intent = new Intent(this, LostActivity.class);
-                    startActivity(intent);
-                    return;
-                } else {
                     Intent intent = new Intent(this, WinnerActivity.class);
                     startActivity(intent);
                     return;
                 }
+<<<<<<< HEAD
+            } else if (resultString.charAt(2) == '5') {
 
+=======
             }
 
 
         } else if (resultString.charAt(2) == '5') {
             if (isOnlineGame) {
+>>>>>>> 62452772c0a4d028ec2db59e7c441bc67d3cda62
                 int draws = sharedPrefs.getInt("Unentschieden", 0);
                 draws++;
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putInt("Unentschieden", draws);
                 editor.commit();
-            }
-            Intent intent = new Intent(this, DrawActivity.class);
-            startActivity(intent);
+                Intent intent = new Intent(this, DrawActivity.class);
+                startActivity(intent);
 
-        } else if (resultString.charAt(2) == '0') {
-            if (isOnlineGame) {
+            } else if (resultString.charAt(2) == '0') {
                 if (isWhite) {
                     int wins = sharedPrefs.getInt("Gewonnen", 0);
                     wins++;
                     SharedPreferences.Editor editor = sharedPrefs.edit();
                     editor.putInt("Gewonnen", wins);
                     editor.commit();
+                    Intent intent = new Intent(this, WinnerActivity.class);
+                    startActivity(intent);
+                    return;
                 } else {
                     int loses = sharedPrefs.getInt("Verloren", 0);
                     loses++;
                     SharedPreferences.Editor editor = sharedPrefs.edit();
                     editor.putInt("Verloren", loses);
                     editor.commit();
-                }
-                if(isWhite) {
-                    Intent intent = new Intent(this, WinnerActivity.class);
-                    startActivity(intent);
-                    return;
-                } else {
                     Intent intent = new Intent(this, LostActivity.class);
                     startActivity(intent);
                     return;
                 }
-            }
+<<<<<<< HEAD
 
+            }
+        } else {
+            Intent intent = new Intent(this, OfflineEndActivity.class);
+            intent.putExtra("result", resultString);
+            startActivity(intent);
+=======
+            }
+>>>>>>> 62452772c0a4d028ec2db59e7c441bc67d3cda62
         }
+
     }
 
     @Override
