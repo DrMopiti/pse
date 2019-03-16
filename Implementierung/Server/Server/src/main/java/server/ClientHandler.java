@@ -69,13 +69,14 @@ public class ClientHandler{
 	@RequestMapping("/move/{player}/{move}")
 	public String sendMove(@PathVariable String player, @PathVariable String move) {
 		DatabaseHandler handler = FirebaseHandler.getHandler();
+		String ret = move(player, move);
 	    String otherPlayer = handler.getOtherPlayer(player);
 	    try {
 			SocketHandler.sendMessageTo(otherPlayer);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-			return move(player, move);
+		return ret;
 	}
 	
 	/**

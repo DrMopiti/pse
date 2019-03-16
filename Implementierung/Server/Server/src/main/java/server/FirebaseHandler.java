@@ -161,9 +161,11 @@ public class FirebaseHandler implements DatabaseHandler {
 		String otherPlayer = getOtherPlayer(player);
 		Map<String, Object> update = new HashMap<>();
 		update.put("board", board);
-		ApiFuture<WriteResult> reuslt = db.collection("games")
-			.document(player+"-"+otherPlayer)
+		ApiFuture<WriteResult> reuslt =  db.collection("games")
+			.document(player+"-"+otherPlayer)			
 		    .set(update, SetOptions.merge());
+		
+			
 		return "Success";
 
 	}
@@ -174,8 +176,14 @@ public class FirebaseHandler implements DatabaseHandler {
 	@Override 
 	public String deleteGame(String player) {
 		String otherPlayer = getOtherPlayer(player);
-		ApiFuture<WriteResult> result = db.collection("games")
-			.document(player+"-"+otherPlayer).delete();
+		if (amIWhite(player)) {
+			ApiFuture<WriteResult> result = db.collection("games")
+				.document(player+"-"+otherPlayer).delete();
+		} else {
+			ApiFuture<WriteResult> result = db.collection("games")
+					.document(otherPlayer+"-"+player).delete();
+		}
+		
 		return "Success";
 	}
 
