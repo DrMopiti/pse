@@ -603,7 +603,31 @@ public class BoardActivity extends AppCompatActivity {
             }
         }
         if (crp.hasEnded(board)) {
-            new DeleteTask().execute(getSharedPreferences("chessApp", 0).getString("Username", "NoUser"));
+            String name = getSharedPreferences("chessApp", 0).getString("Username","NoUser");
+            Boolean shouldDelete;
+            Boolean amWhite = null;
+            try {
+                amWhite = new AmIWhiteTask().execute(name).get();
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+                return;
+            }
+            if(amWhite) {
+                if(board.whiteToMove()) {
+                    shouldDelete = true;
+                } else {
+                    shouldDelete = false;
+                }
+            } else {
+                if(board.whiteToMove()) {
+                    shouldDelete = false;
+                } else {
+                    shouldDelete = true;
+                }
+            }
+            if (shouldDelete) {
+                new DeleteTask().execute(name);
+            }
             getResult();
         }
     }
