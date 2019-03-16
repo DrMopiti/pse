@@ -588,6 +588,7 @@ public class BoardActivity extends AppCompatActivity {
      * @param board to be painted
      */
     public void paintBoard(BoardState board) {
+        this.board = board;
         Piece p = null;
         ImageView pieceIV = null;
         int ivCounter = 0;
